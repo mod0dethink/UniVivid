@@ -2,14 +2,13 @@ package main
 
 import (
     "github.com/gin-gonic/gin"
+    "univivid/backend/api"
+    "univivid/backend/auth"
 )
 
 func main() {
     r := gin.Default()
-    r.GET("/hello", func(c *gin.Context) {
-        c.JSON(200, gin.H{
-            "message": "Hello, World!",
-        })
-    })
+    api.RegisterRoutes(r)
+    auth.RegisterRoutes(r)
     r.Run() // デフォルトポートは8080番
 }
