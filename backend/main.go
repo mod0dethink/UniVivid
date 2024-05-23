@@ -1,9 +1,13 @@
 package main
 
-import "fmt"
+import (
+    "github.com/gin-gonic/gin"
+)
 
 func main() {
-    fmt.Println("hello world")
+    r := gin.Default()
+    r.GET("/hello", func(c *gin.Context) {
+        c.String(200, "Hello, World!")
+    })
+    r.Run() // デフォルトポートは8080番
 }
-
-
