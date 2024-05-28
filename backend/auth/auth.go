@@ -49,7 +49,7 @@ func loginHandler(c *gin.Context) {
 	}
 
 	if err := c.BindJSON(&request); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なリクエストです"})
 		return
 	}
 
@@ -57,16 +57,16 @@ func loginHandler(c *gin.Context) {
 	err := DB.QueryRow("SELECT password FROM users WHERE username = ?", request.Username).Scan(&storedPassword)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid username or password"})
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "ユーザー名またはパスワードが間違っています"})
 		} else {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
 		}
 		return
 	}
 
 	// パスワードの比較
 	if err := bcrypt.CompareHashAndPassword([]byte(storedPassword), []byte(request.Password)); err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid username or password"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "ユーザー名またはパスワードが間違っています"})
 		return
 	}
 
@@ -74,11 +74,11 @@ func loginHandler(c *gin.Context) {
 	session := sessions.Default(c)
 	session.Set("username", request.Username)
 	if err := session.Save(); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save session"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "セッションの保存に失敗しました"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Logged in!"})
+	c.JSON(http.StatusOK, gin.H{"message": "ログインしました！"})
 }
 
 func registerHandler(c *gin.Context) {
@@ -88,24 +88,24 @@ func registerHandler(c *gin.Context) {
 	}
 
 	if err := c.BindJSON(&request); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なリクエストです"})
 		return
 	}
 
 	// パスワードのハッシュ化
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(request.Password), bcrypt.DefaultCost)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to hash password"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "パスワードのハッシュ化に失敗しました"})
 		return
 	}
 
 	_, err = DB.Exec("INSERT INTO users (username, password) VALUES (?, ?)", request.Username, string(hashedPassword))
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Account created!"})
+	c.JSON(http.StatusOK, gin.H{"message": "アカウントが作成されました！"})
 }
 
 func userInfoHandler(c *gin.Context) {
@@ -118,7 +118,7 @@ func userInfoHandler(c *gin.Context) {
 		}
 
 		if err := c.BindJSON(&request); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+			c.JSON(http.StatusBadRequest, gin.H{"error": "無効なリクエストです"})
 			return
 		}
 
@@ -126,15 +126,15 @@ func userInfoHandler(c *gin.Context) {
 		err := DB.QueryRow("SELECT password FROM users WHERE username = ?", request.Username).Scan(&storedPassword)
 		if err != nil {
 			if err == sql.ErrNoRows {
-				c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid username or password"})
+				c.JSON(http.StatusUnauthorized, gin.H{"error": "ユーザー名またはパスワードが間違っています"})
 			} else {
-				c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
+				c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
 			}
 			return
 		}
 
 		if request.Password != storedPassword {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid username or password"})
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "ユーザー名またはパスワードが間違っています"})
 			return
 		}
 
@@ -142,10 +142,10 @@ func userInfoHandler(c *gin.Context) {
 		session := sessions.Default(c)
 		session.Set("username", request.Username)
 		if err := session.Save(); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save session"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "セッションの保存に失敗しました"})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"message": "Logged in!"})
+		c.JSON(http.StatusOK, gin.H{"message": "ログインしました！"})
 	}
 }
