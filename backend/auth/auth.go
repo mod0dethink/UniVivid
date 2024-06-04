@@ -39,7 +39,6 @@ func RegisterRoutes(r *gin.Engine) {
 
 	r.POST("/auth/login", loginHandler)
 	r.POST("/auth/register", registerHandler)
-	r.GET("/auth/userinfo", userInfoHandler)
 }
 
 func loginHandler(c *gin.Context) {
@@ -106,46 +105,4 @@ func registerHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "アカウントが作成されました！"})
-}
-
-func userInfoHandler(c *gin.Context) {
-	session := sessions.Default(c)
-	username := session.Get("username")
-	if username == nil {
-		var request struct {
-			Username string `json:"username"`
-			Password string `json:"password"`
-		}
-
-		if err := c.BindJSON(&request); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "無効なリクエストです"})
-			return
-		}
-
-		var storedPassword string
-		err := DB.QueryRow("SELECT password FROM users WHERE username = ?", request.Username).Scan(&storedPassword)
-		if err != nil {
-			if err == sql.ErrNoRows {
-				c.JSON(http.StatusUnauthorized, gin.H{"error": "ユーザー名またはパスワードが間違っています"})
-			} else {
-				c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
-			}
-			return
-		}
-
-		if request.Password != storedPassword {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "ユーザー名またはパスワードが間違っています"})
-			return
-		}
-
-		// セッションの開始
-		session := sessions.Default(c)
-		session.Set("username", request.Username)
-		if err := session.Save(); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "セッションの保存に失敗しました"})
-			return
-		}
-
-		c.JSON(http.StatusOK, gin.H{"message": "ログインしました！"})
-	}
 }
