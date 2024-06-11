@@ -22,11 +22,11 @@ function WelcomeComponent() {
         </div>
 
         <Link
-          to="/createaccount"
+          to="/login"
           className="link-btn flex flex-col items-center w-full py-10"
         >
           <div className="inner-text">
-            <p className="font-black">Login</p>
+            <p className="font-black ">Login</p>
           </div>
 
           <div className="w-1/2 justify-end flex">
@@ -37,7 +37,7 @@ function WelcomeComponent() {
         </Link>
 
         <Link
-          to="/login"
+          to="/entitiyselection"
           className="link-btn flex flex-col items-center w-full py-10"
         >
           <div className="font-black inner-text">NewAccount</div>
