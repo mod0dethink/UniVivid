@@ -11,7 +11,11 @@ import CategoryComponent from './components/CategoryComponent'
 import WelcomeComponent from './components/WelcomeComponent'
 import EntitySelection from './components/EntitySelection'
 
-import UserHome from './userComponets/UserHome'
+import UniversityHome from './universityComponents/UniversityHome'
+import UniversitySettingsPage from './universityComponents/UniversitySettingsPage'
+import UserSettingsPage from './userComponents/UserSettingsPage'
+
+import UserHome from './userComponents/UserHome'
 import './assets/scripts/animation'
 
 const App = () => {
@@ -27,6 +31,13 @@ const App = () => {
         <Route path="/entitiyselection" element={<EntitySelection />} />
 
         <Route path="/userhome" element={<UserHome />} />
+        <Route path="/universityhome" element={<UniversityHome />} />
+
+        <Route path="/usersettingpsage" element={<UserSettingsPage />} />
+        <Route
+          path="/universitysettingspage"
+          element={<UniversitySettingsPage />}
+        />
       </Routes>
     </Router>
   )

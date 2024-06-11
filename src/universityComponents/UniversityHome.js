@@ -1,5 +1,6 @@
 import React from 'react'
 import Door from '../assets/images/door.png'
+import { Link } from 'react-router-dom'
 
 import '../assets/styles/Dimensions.css'
 
@@ -18,7 +19,7 @@ function UniversityHome() {
         <div>
           <p>マイページ</p>
           <div className="py-3"></div>
-          <p>ユーザー設定</p>
+          <Link to="/universitysettingspage">ユーザー設定</Link>
         </div>
         <div></div>
         <div className="py-[50px]">
