@@ -27,7 +27,7 @@ function EntitySelection() {
             to="/createaccount"
             className="flex-1 w-1/3 min-w-[150px] w-[25vw] max-w-[500px]"
           >
-            <div className="border border-solid border-[#164863] rounded-[50%]">
+            <div className="bg-scale-hover border border-solid border-[#164863] rounded-[50%]">
               <img src={PenImg} alt="pen" />
             </div>
             <p className="text-center font-bold">個人として使用</p>
@@ -37,7 +37,7 @@ function EntitySelection() {
             to="/createschoolaccount"
             className="flex-1 w-1/3 min-w-[150px] w-[25vw] max-w-[500px]"
           >
-            <div className="border border-solid border-[#164863] rounded-[50%]">
+            <div className="bg-scale-hover border border-solid border-[#164863] rounded-[50%]">
               <img src={TeacherImg} alt="teacher" />
             </div>
             <p className="text-center font-bold">学校として使用</p>

@@ -11,3 +11,11 @@
 .link-btn:hover .inner-text {
   transform: scale(1.5);
 }
+
+.bg-scale-hover {
+  transition: 0.5s;
+}
+.bg-scale-hover:hover {
+  background-color: aliceblue;
+  transform: scale(1.1);
+}
