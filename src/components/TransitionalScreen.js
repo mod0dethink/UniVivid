@@ -26,6 +26,11 @@ function TransitionalScreen() {
           <div className="content">ようこそ</div>
         </Link>
       </section>
+      <section className="section-nav">
+        <Link to="/userhome">
+          <div className="content">userhome</div>
+        </Link>
+      </section>
     </div>
   )
 }

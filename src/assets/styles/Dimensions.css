@@ -24,3 +24,17 @@
   height: 20px;
   border-radius: 50px;
 }
+
+.login-face {
+  background-color: #164863;
+  height: 45px;
+  width: 45px;
+  border-radius: 50px 50px;
+}
+
+.login-body {
+  background-color: #164863;
+  height: 35px;
+  width: 90px;
+  border-radius: 50% 50% 0 0;
+}
