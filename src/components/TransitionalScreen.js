@@ -7,7 +7,7 @@ function TransitionalScreen() {
     <div>
       <section className="section-nav">管理用画面</section>
       <section className="section-nav">
-        <Link to="/login-component">
+        <Link to="/login">
           <div className="content">ログイン画面</div>
         </Link>
       </section>

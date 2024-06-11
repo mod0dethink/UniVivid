@@ -14,7 +14,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<TransitionalScreen />} />
-        <Route path="/login-component" element={<LoginComponent />} />
+        <Route path="/login" element={<LoginComponent />} />
         <Route path="/createaccount" element={<CreateAccount />} />
         <Route path="/category" element={<CategoryComponent />} />
         <Route path="/welcome" element={<WelcomeComponent />} />
