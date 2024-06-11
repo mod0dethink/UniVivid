@@ -1,0 +1,13 @@
+.section-nav {
+  text-align: center;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+.content {
+  width: 10em;
+  height: 5em;
+  background-color: hsl(0, 0%, 37%);
+  color: rgb(175, 255, 255);
+}
