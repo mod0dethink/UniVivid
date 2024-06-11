@@ -1,11 +1,12 @@
 import React from 'react';
+import LoginComponent from "./components/LoginComponent";
+import CreateAccount from "./components/CreateAccount";
+import CategoryComponent from "./components/CategoryComponent";
 
 function App() {
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold underline">
-        Hello world.
-      </h1>
+      <CategoryComponent/>
     </div>
   );
 }
