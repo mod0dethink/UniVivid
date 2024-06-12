@@ -52,24 +52,24 @@ function ArticleInfomation() {
         <section className="space-y-3">
           <div className="space-y-2">
             <p className="text-[#164863] font-bold text-[1.5em]">場所:</p>
-            <p>大阪</p>
+            <input type="text" />
           </div>
 
           <div className="space-y-2">
             <p className="text-[#164863] font-bold text-[1.5em]">日程:</p>
-            <p>2024/08/06</p>
+            <input type="text" />
           </div>
           <div className="space-y-2">
             <p className="text-[#164863] font-bold text-[1.5em]">時間:</p>
-            <p>14時</p>
+            <input type="text" />
           </div>
           <div className="space-y-2">
             <p className="text-[#164863] font-bold text-[1.5em]">ジャンル:</p>
-            <p>IT</p>
+            <input type="text" />
           </div>
           <div className="space-y-2">
             <p className="text-[#164863] font-bold text-[1.5em]">キーワード:</p>
-            <p>瀬那大学</p>
+            <input type="text" />
 
             <div className="border-triangle"></div>
           </div>
@@ -100,7 +100,7 @@ function ArticleInfomation() {
 //一覧
 function ArticleList() {
   return (
-    <div className="flex space-y-5 justify-center mx-[65vw] pt-[101px] text-center">
+    <div className="flex space-y-5 justify-center pt-[101px] text-center">
       <div className="pt-[50px] space-y-10">
         <div
           className="pt-[20px] space-y-10 flex flex-col gradient-vontainer h-[158px] w-[55vw] max-w-[800px]"
@@ -250,5 +250,5 @@ function ArticleList() {
     </div>
   )
 }
-export default Article
+export default ArticleList
 export { UniHeader, ArticleInfomation, ArticleList }

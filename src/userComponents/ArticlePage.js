@@ -10,7 +10,7 @@ function ArticlePage() {
       <section>
         <UniHeader />
       </section>
-      <section className="">
+      <section className=" mx-[65vw]">
         <ArticleInfomation />
         <ArticleList />
       </section>
