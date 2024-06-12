@@ -38,3 +38,8 @@
   width: 90px;
   border-radius: 50% 50% 0 0;
 }
+.border-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+}

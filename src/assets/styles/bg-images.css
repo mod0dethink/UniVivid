@@ -3,3 +3,29 @@
   border: none;
   background-image: url('../images/pen.png');
 }
+
+.gradient-vontainer {
+  position: relative;
+  height: 158px;
+  width: 55vw;
+  max-width: 800px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.gradient-vontainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.438),
+    #000000
+  );
+  z-index: 1;
+  border-radius: inherit;
+}

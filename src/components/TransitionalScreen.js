@@ -46,6 +46,17 @@ function TransitionalScreen() {
           <div className="content">universitysettingpsage</div>
         </Link>
       </section>
+      <section className="section-nav">
+        <Link to="/article">
+          <div className="content">articlelist</div>
+        </Link>
+      </section>
+
+      <section className="section-nav">
+        <Link to="/articlepage">
+          <div className="content">アーティクルのview</div>
+        </Link>
+      </section>
     </div>
   )
 }
