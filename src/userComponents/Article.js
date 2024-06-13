@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/bg-images.css'

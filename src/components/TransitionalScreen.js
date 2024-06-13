@@ -57,6 +57,12 @@ function TransitionalScreen() {
           <div className="content">アーティクルのview</div>
         </Link>
       </section>
+
+      <section className="section-nav">
+        <Link to="/entitiyselection">
+          <div className="content">entitiyselectionのview</div>
+        </Link>
+      </section>
     </div>
   )
 }

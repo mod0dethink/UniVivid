@@ -1,5 +1,6 @@
 import React from 'react'
 import '../assets/styles/UnivividStyle.css'
+import { Unifooter, EmptyHeader } from '../components/ComponentMaterial'
 
 function LoginComponent() {
   return (
@@ -33,7 +34,7 @@ function LoginComponent() {
         </div>
       </section>
 
-      <section className="margin-section">　　　　　　</section>
+      <Unifooter />
     </div>
   )
 }

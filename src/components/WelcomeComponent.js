@@ -1,26 +1,27 @@
+//libraryのインポート
 import React from 'react'
+import { Link } from 'react-router-dom'
+//アセットのインポート
 import '../assets/styles/UnivividStyle.css'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/Animations.css'
-
-import { Link } from 'react-router-dom'
+//componentのインポート
+import { UnivividHeader, Unifooter } from './ComponentMaterial'
 
 function WelcomeComponent() {
   return (
     <div className="h-screen flex flex-col justify-between">
-      <section className="w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
-        <div>
-          <span className="text-6xl">U</span>
-          <span className="text-3xl">ni</span>
-          <span className="text-6xl">V</span>
-          <span className="text-3xl">ivid</span>
-        </div>
+      {/*header*/}
+      <section>
+        <UnivividHeader />
       </section>
+
+      {/*main*/}
       <section className="flex flex-col items-center justify-center sw-screen h-full">
         <div className="h-1/5 text-3xl">
           <p className="font-black">ようこそ、UniVividへ！</p>
         </div>
-
+        {/*ログイン画面へ*/}
         <Link
           to="/login"
           className="link-btn flex flex-col items-center w-full py-10"
@@ -36,6 +37,7 @@ function WelcomeComponent() {
           </div>
         </Link>
 
+        {/*アカウント作成画面へ*/}
         <Link
           to="/entitiyselection"
           className="link-btn flex flex-col items-center w-full py-10"
@@ -48,8 +50,10 @@ function WelcomeComponent() {
           </div>
         </Link>
       </section>
-      <section className="w-screen bg-[#427d9d] text-white text-6xl text-center font-bold py-5">
-        <div>　　　</div>
+
+      {/*footer*/}
+      <section className="">
+        <Unifooter />
       </section>
     </div>
   )
