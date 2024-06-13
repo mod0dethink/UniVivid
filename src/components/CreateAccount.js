@@ -1,5 +1,6 @@
 import React from 'react'
 import '../assets/styles/UnivividStyle.css'
+import { EmptyHeader, Unifooter } from './LayoutComponent'
 
 function CreateAccount() {
   return (

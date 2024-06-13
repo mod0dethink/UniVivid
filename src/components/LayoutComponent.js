@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function EmptyHeader() {
   return (
     <section className="-z-[-2] fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
-      <div></div>
+      <div>　　　</div>
     </section>
   )
 }
