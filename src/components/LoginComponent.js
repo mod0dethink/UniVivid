@@ -1,6 +1,6 @@
 import React from 'react'
 import '../assets/styles/UnivividStyle.css'
-import { Unifooter, EmptyHeader } from '../components/ComponentMaterial'
+import { Unifooter, EmptyHeader } from '../components/LayoutComponent'
 
 function LoginComponent() {
   return (
