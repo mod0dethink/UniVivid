@@ -6,14 +6,14 @@ import '../assets/styles/UnivividStyle.css'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/Animations.css'
 //componentのインポート
-import { UnivividHeader, Unifooter } from './LayoutComponent'
+import { UnivividHeader, Unifooter, Logotext } from './LayoutComponent'
 
 function WelcomeComponent() {
   return (
     <div className="h-screen flex flex-col justify-between">
       {/*header*/}
       <section>
-        <UnivividHeader />
+        <UnivividHeader title={<Logotext />} />
       </section>
 
       {/*main*/}
