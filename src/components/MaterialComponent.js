@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
 
-function UserMenu() {
+function UserMenu(itemData) {
   return (
     <aside className="aside flex-grow-[1] min-w-[300px] bg-[#427D9D] content-center flex flex-col items-center justify-between text-[#ffffff] text-2xl">
       <div className="text-center pt-[50px]">
@@ -11,7 +11,7 @@ function UserMenu() {
           <div className="py-1.5"></div>
           <div className="login-body "></div>
         </div>
-        <div>user_name</div>
+        <div>{itemData.username}</div>
       </div>
       <div>
         <p>マイページ</p>
@@ -36,4 +36,34 @@ function RootUrl(itemData) {
   )
 }
 
-export { UserMenu, RootUrl }
+function UserIcon() {}
+
+function UserSettingValue() {
+  return (
+    <section className="w-[60vw] , text-left text-[#427D9D] space-y-5 max-w-[800px]">
+      <div className="space-y-3">
+        <p>ユーザー名</p>
+        <input
+          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
+          type="text"
+        />
+      </div>
+      <div className="space-y-3">
+        <p>メールアドレス</p>
+        <input
+          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
+          type="email"
+        />
+      </div>
+      <div className="space-y-3">
+        <p>パスワード</p>
+        <input
+          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
+          type="password"
+        />
+      </div>
+    </section>
+  )
+}
+
+export { UserMenu, RootUrl, UserSettingValue }

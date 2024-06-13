@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import ImportImg from '../assets/images/imgImport.png'
 import ReturnImg from '../assets/images/return.png'
+import { UserSettingValue } from '../components/MaterialComponent'
 import '../assets/styles/Dimensions.css'
 
 function UserSettingsPage() {
@@ -61,29 +62,7 @@ function UserSettingsPage() {
             />
           </div>
         </section>
-        <section className="w-[60vw] , text-left text-[#427D9D] space-y-5 max-w-[800px]">
-          <div className="space-y-3">
-            <p>ユーザー名</p>
-            <input
-              className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-              type="text"
-            />
-          </div>
-          <div className="space-y-3">
-            <p>メールアドレス</p>
-            <input
-              className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-              type="email"
-            />
-          </div>
-          <div className="space-y-3">
-            <p>パスワード</p>
-            <input
-              className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-              type="password"
-            />
-          </div>
-        </section>
+        <UserSettingValue />
         <section>
           <button
             type="submit"
