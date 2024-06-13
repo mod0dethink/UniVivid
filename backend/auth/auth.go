@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
@@ -30,15 +31,27 @@ func setupDB() {
 	}
 }
 
-func RegisterRoutes(r *gin.Engine) {
-	setupDB()
+func RegisterRoutes() {
+	r := gin.Default()
 
-	// セッションミドルウェアの設定
+	// CORSミドルウェアの設定
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
+		AllowCredentials: true,
+	}))
+
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
 
-	r.POST("/auth/login", loginHandler)
 	r.POST("/auth/register", registerHandler)
+	r.POST("/auth/login", loginHandler)
+
+	setupDB()
+	defer DB.Close()
+
+	r.Run(":8080")
 }
 
 func loginHandler(c *gin.Context) {
