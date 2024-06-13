@@ -1,11 +1,36 @@
+import React from 'react'
+import Door from '../assets/images/door.png'
+import { Link } from 'react-router-dom'
+import { UserMenu, RootUrl } from '../components/MaterialComponent'
+
+import '../assets/styles/Dimensions.css'
+
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import ImportImg from '../assets/images/imgImport.png'
 import ReturnImg from '../assets/images/return.png'
-import { InputField, UserSettingValue } from '../components/MaterialComponent'
+import { UserSettingValue } from '../components/MaterialComponent'
 import '../assets/styles/Dimensions.css'
+import UserSettingsPage from '../userComponents/UserSettingsPage'
+
+function UserHome() {
+  const Door1 = Door
+  let UserImgPath = './images/test.png'
+  let username = '瀬那'
+  return (
+    <div className="flex w-[100vw] h-screen">
+      <UserMenu username={username} />
+      <section className="main flex-grow-[7] flex content-center  h-screen ">
+        <div className="flex flex-col justify-center space-y-20 w-[100%] text-center items-center ">
+          <RootUrl name={Door1} text={'動画へ'} />
+          <RootUrl name={Door1} text={'記事一覧へ'} />
+        </div>
+      </section>
+    </div>
+  )
+}
 
 function UserSettingsPage() {
   const fileInputRef = useRef(null)
@@ -123,5 +148,3 @@ function UserSettingsPage() {
     </div>
   )
 }
-
-export default UserSettingsPage

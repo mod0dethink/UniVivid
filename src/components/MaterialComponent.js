@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
+import PropTypes from 'prop-types'
 
 function UserMenu(itemData) {
   return (
@@ -114,4 +115,34 @@ function UniversSettingValue() {
     </section>
   )
 }
-export { UserMenu, RootUrl, UserSettingValue, UniversSettingValue }
+
+/*onChange 要素
+            <p>ユーザー名</p>
+                        <p>メールアドレス</p>
+                                    <p>パスワード</p>
+(e) => setUsername(e.target.value)
+(e) => setEmail(e.target.value)
+(e) => setPassword(e.target.value)
+
+    value={username}
+                value={email}
+                              value={password}
+
+
+*/
+
+function InputField(InputData) {
+  return (
+    <div className="space-y-3">
+      <p>{InputData.label}</p>
+      <input
+        className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
+        type={InputData.type}
+        value={InputData.value}
+        onChange={InputData.onChange}
+      />
+    </div>
+  )
+}
+
+export { UserMenu, RootUrl, UserSettingValue, UniversSettingValue, InputField }
