@@ -10,6 +10,6 @@ import (
 func main() {
 	r := gin.Default()
 	api.RegisterRoutes(r)
-	auth.RegisterRoutes()
+	auth.RegisterRoutes(r)
 	r.Run() // デフォルトポートは8080番
 }

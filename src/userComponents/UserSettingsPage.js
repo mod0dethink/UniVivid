@@ -1,5 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 import ImportImg from '../assets/images/imgImport.png'
 import ReturnImg from '../assets/images/return.png'
@@ -7,6 +8,9 @@ import '../assets/styles/Dimensions.css'
 
 function UserSettingsPage() {
   const fileInputRef = useRef(null)
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleButtonClick = () => {
     fileInputRef.current.click()
@@ -19,9 +23,25 @@ function UserSettingsPage() {
       console.log('Selected file:', file)
     }
   }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    try {
+      const response = await axios.put('http://localhost:8080/auth/profile', {
+        type: 'user', // ここは大学用のコンポーネントでuniversityに変える
+        mailaddress: email,
+        username: username,
+        password: password,
+      }, { withCredentials: true }) // withCredentials を追加
+      alert(response.data.message)
+    } catch (error) {
+      alert(error.response.data.error)
+    }
+  }
+
   return (
     <div>
-      <form className="items-center flex flex-col justify-around text-center h-screen">
+      <form className="items-center flex flex-col justify-around text-center h-screen" onSubmit={handleSubmit}>
         <section className="flex justify-between w-[100vw]">
           <Link to="/userhome" className="return-btn">
             <img className="w-[60px]" src={ReturnImg} alt="ReturnImg" />
@@ -67,6 +87,8 @@ function UserSettingsPage() {
             <input
               className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
               type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="space-y-3">
@@ -74,6 +96,8 @@ function UserSettingsPage() {
             <input
               className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="space-y-3">
@@ -81,6 +105,8 @@ function UserSettingsPage() {
             <input
               className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
         </section>
