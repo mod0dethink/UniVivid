@@ -66,4 +66,52 @@ function UserSettingValue() {
   )
 }
 
-export { UserMenu, RootUrl, UserSettingValue }
+function UniversSettingValue() {
+  return (
+    <section className="w-[60vw] , text-left text-[#427D9D] space-y-5 max-w-[800px]">
+      <div className="space-y-2">
+        <p>ユーザー名</p>
+        <input
+          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
+          type="text"
+        />
+      </div>
+      <div className="space-y-2">
+        <p>メールアドレス</p>
+        <input
+          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
+          type="email"
+        />
+      </div>
+      <div className="space-y-2">
+        <p>パスワード</p>
+        <input
+          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
+          type="password"
+        />
+      </div>
+      <div className="space-y-2">
+        <p>学校名</p>
+        <input
+          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
+          type="password"
+        />
+      </div>
+      <div className="space-y-2">
+        <p>大学URL</p>
+        <input
+          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
+          type="password"
+        />
+      </div>
+      <div className="space-y-2">
+        <p>寄付ページURL</p>
+        <input
+          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
+          type="password"
+        />
+      </div>
+    </section>
+  )
+}
+export { UserMenu, RootUrl, UserSettingValue, UniversSettingValue }

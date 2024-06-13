@@ -1,7 +1,19 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../assets/styles/UnivividStyle.css';
 import { Unifooter, EmptyHeader } from '../components/LayoutComponent';
+=======
+import React from 'react'
+import '../assets/styles/UnivividStyle.css'
+import {
+  Unifooter,
+  EmptyHeader,
+  UnivividHeader,
+} from '../components/LayoutComponent'
+
+import { LoginForm } from './GateMaterial'
+>>>>>>> feature/onodera
 
 function LoginComponent() {
   const [email, setEmail] = useState('');
@@ -23,11 +35,10 @@ function LoginComponent() {
   };
 
   return (
-    <div className="from-container">
-      <section className="margin-section ">
-        <div>login</div>
-      </section>
+    <div className="h-screen flex flex-col justify-between">
+      <UnivividHeader title="ログイン" />
 
+<<<<<<< HEAD
       <section className="from-background">
         <div className="from-nav">
           <form>
@@ -82,6 +93,9 @@ function LoginComponent() {
           </form>
         </div>
       </section>
+=======
+      <LoginForm />
+>>>>>>> feature/onodera
 
       <Unifooter />
     </div>
