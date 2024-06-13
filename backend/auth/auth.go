@@ -43,8 +43,9 @@ func RegisterRoutes(r *gin.Engine) {
 
 func loginHandler(c *gin.Context) {
 	var request struct {
-		Username string `json:"username"`
-		Password string `json:"password"`
+		Type        string `json:"type"` // "user" または "university"
+		MailAddress string `json:"mailaddress"`
+		Password    string `json:"password"`
 	}
 
 	if err := c.BindJSON(&request); err != nil {
@@ -53,10 +54,21 @@ func loginHandler(c *gin.Context) {
 	}
 
 	var storedPassword string
-	err := DB.QueryRow("SELECT password FROM users WHERE username = ?", request.Username).Scan(&storedPassword)
+	var query string
+
+	if request.Type == "user" {
+		query = "SELECT password FROM USER WHERE Mail_Address = ?"
+	} else if request.Type == "university" {
+		query = "SELECT password FROM UNIVERSITY WHERE Mail_Address = ?"
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なアカウントタイプです"})
+		return
+	}
+
+	err := DB.QueryRow(query, request.MailAddress).Scan(&storedPassword)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "ユーザー名またはパスワードが間違っています"})
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "メールアドレスまたはパスワードが間違っています"})
 		} else {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
 		}
@@ -65,13 +77,13 @@ func loginHandler(c *gin.Context) {
 
 	// パスワードの比較
 	if err := bcrypt.CompareHashAndPassword([]byte(storedPassword), []byte(request.Password)); err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "ユーザー名またはパスワードが間違っています"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "メールアドレスまたはパスワードが間違っています"})
 		return
 	}
 
 	// セッションの開始
 	session := sessions.Default(c)
-	session.Set("username", request.Username)
+	session.Set("mailaddress", request.MailAddress)
 	if err := session.Save(); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "セッションの保存に失敗しました"})
 		return
@@ -82,8 +94,14 @@ func loginHandler(c *gin.Context) {
 
 func registerHandler(c *gin.Context) {
 	var request struct {
-		Username string `json:"username"`
-		Password string `json:"password"`
+		Type        string `json:"type"` // "user" または "university"
+		Username    string `json:"username"`
+		MailAddress string `json:"mailaddress"`
+		Password    string `json:"password"`
+		UnivName    string `json:"univname,omitempty"`  // 大学の場合のみ
+		InfoName    string `json:"infoname,omitempty"`  // 大学の場合のみ
+		UnivURL     string `json:"univurl,omitempty"`   // 大学の場合のみ
+		DonateURL   string `json:"donateurl,omitempty"` // 大学の場合のみ
 	}
 
 	if err := c.BindJSON(&request); err != nil {
@@ -98,11 +116,21 @@ func registerHandler(c *gin.Context) {
 		return
 	}
 
-	_, err = DB.Exec("INSERT INTO users (username, password) VALUES (?, ?)", request.Username, string(hashedPassword))
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
-		return
+	if request.Type == "user" {
+		_, err = DB.Exec("INSERT INTO USER (Mail_Address, User_Name, Password) VALUES (?, ?, ?)", request.MailAddress, request.Username, string(hashedPassword))
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"message": "ユーザーアカウントが作成されました！"})
+	} else if request.Type == "university" {
+		_, err = DB.Exec("INSERT INTO UNIVERSITY (Mail_Address, Password, Univ_Name, info_name, Univ_URL, donate_URL) VALUES (?, ?, ?, ?, ?, ?)", request.MailAddress, string(hashedPassword), request.UnivName, request.InfoName, request.UnivURL, request.DonateURL)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"message": "大学アカウントが作成されました！"})
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なアカウントタイプです"})
 	}
-
-	c.JSON(http.StatusOK, gin.H{"message": "アカウントが作成されました！"})
 }
