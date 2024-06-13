@@ -197,9 +197,9 @@ func profileEditHandler(c *gin.Context) {
 	// ユーザータイプに基づいて更新クエリを実行
 	var err error
 	if request.Type == "user" {
-		_, err = DB.Exec("UPDATE USER SET User_Name = ?, Mail_Address = ?, Password = ? WHERE Mail_Address = ?", request.Username, request.MailAddress, string(hashedPassword), mailAddress)
+		_, err = DB.Exec("UPDATE USER SET User_Name = ?, Mail_Address = ?, Password = ? WHERE Mail_Address = ?", request.Username, request.MailAddress, string(hashedPassword), mailAddress) // mailAddress を使用
 	} else if request.Type == "university" {
-		_, err = DB.Exec("UPDATE UNIVERSITY SET Univ_Name = ?, info_name = ?, Univ_URL = ?, donate_URL = ? WHERE Mail_Address = ?", request.UnivName, request.InfoName, request.UnivURL, request.DonateURL, mailAddress)
+		_, err = DB.Exec("UPDATE UNIVERSITY SET Univ_Name = ?, info_name = ?, Univ_URL = ?, donate_URL = ? WHERE Mail_Address = ?", request.UnivName, request.InfoName, request.UnivURL, request.DonateURL, mailAddress) // mailAddress を使用
 	} else {
 		log.Println("無効なアカウントタイプ:", request.Type)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なアカウントタイプです"})
