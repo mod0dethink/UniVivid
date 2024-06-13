@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../assets/styles/UnivividStyle.css';
+import { EmptyHeader, Unifooter } from './LayoutComponent'
 
 function CreateAccount() {
   const [formData, setFormData] = useState({

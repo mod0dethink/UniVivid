@@ -6,7 +6,7 @@ import '../assets/styles/UnivividStyle.css'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/Animations.css'
 //componentのインポート
-import { UnivividHeader, Unifooter } from './ComponentMaterial'
+import { UnivividHeader, Unifooter } from './LayoutComponent'
 
 function WelcomeComponent() {
   return (

@@ -6,17 +6,13 @@ import '../assets/styles/Animations.css'
 import { Link } from 'react-router-dom'
 import PenImg from '../assets/images/pen.png'
 import TeacherImg from '../assets/images/teacher.png'
+import { UnivividHeader, Unifooter } from './LayoutComponent'
 
 function EntitySelection() {
   return (
     <div className="h-screen flex flex-col justify-between">
-      <section className="w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
-        <div>
-          <span className="text-6xl">U</span>
-          <span className="text-3xl">ni</span>
-          <span className="text-6xl">V</span>
-          <span className="text-3xl">ivid</span>
-        </div>
+      <section>
+        <UnivividHeader />
       </section>
       <section className="flex flex-col items-center justify-center sw-screen h-full bg-[#FFFEF8]">
         <div>
@@ -44,8 +40,8 @@ function EntitySelection() {
           </Link>
         </div>
       </section>
-      <section className="w-screen bg-[#427d9d] text-white text-6xl text-center font-bold py-5">
-        <div>　　　</div>
+      <section>
+        <Unifooter />
       </section>
     </div>
   )
