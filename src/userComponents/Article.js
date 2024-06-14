@@ -4,16 +4,41 @@ import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/bg-images.css'
 
+import { ArticlePart } from '../components/MaterialComponent'
+
 import Pen from '../assets/images/pen.png'
 import BgImg from '../assets/images/IMG_4007.jpg'
 import Ticon from '../assets/images/hougaku.jpg'
 import Lok from '../assets/images/lock_back.png'
 import Ticon2 from '../assets/images/English.jpg'
 
-function Article() {
+/*PartData
+BgImg
+Ticon
+name
+title
+date
+ */
+
+function tes(PartData) {
   return (
-    <div className="">
-      <section></section>
+    <div
+      className="pt-[20px] space-y-10 flex flex-col gradient-vontainer h-[158px] w-[55vw] max-w-[800px]"
+      style={{
+        background: `url(${PartData.BgImg}) center center no-repeat`,
+        backgroundSize: `cover`,
+      }}
+    >
+      <div className="space-x-2   flex pl-[20px] text-left items-center">
+        <div>
+          <img className="w-[50px] h-[50px]" src={PartData.Ticon} alt="ticon" />
+        </div>
+        <div className="font-bold">{PartData.name}</div>
+      </div>
+      <div className="items-end -z-[-1] text-[white] flex justify-between mx-[15px]">
+        <div className="font-bold text-[2em]">{PartData.title}</div>
+        <div>{PartData.date}</div>
+      </div>
     </div>
   )
 }
@@ -103,6 +128,7 @@ function ArticleList() {
   return (
     <div className="flex space-y-5 justify-center pt-[101px] text-center">
       <div className="pt-[50px] space-y-10">
+        <ArticlePart />
         <div
           className="pt-[20px] space-y-10 flex flex-col gradient-vontainer h-[158px] w-[55vw] max-w-[800px]"
           style={{

@@ -41,83 +41,6 @@ function RootUrl(itemData) {
   )
 }
 
-function UserSettingValue() {
-  return (
-    <section className="w-[60vw] , text-left text-[#427D9D] space-y-5 max-w-[800px]">
-      <div className="space-y-3">
-        <p>ユーザー名</p>
-        <input
-          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-          type="text"
-        />
-      </div>
-      <div className="space-y-3">
-        <p>メールアドレス</p>
-        <input
-          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-          type="email"
-        />
-      </div>
-      <div className="space-y-3">
-        <p>パスワード</p>
-        <input
-          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-          type="password"
-        />
-      </div>
-    </section>
-  )
-}
-
-function UniversSettingValue() {
-  return (
-    <section className="w-[60vw] , text-left text-[#427D9D] space-y-5 max-w-[800px]">
-      <div className="space-y-2">
-        <p>ユーザー名</p>
-        <input
-          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-          type="text"
-        />
-      </div>
-      <div className="space-y-2">
-        <p>メールアドレス</p>
-        <input
-          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-          type="email"
-        />
-      </div>
-      <div className="space-y-2">
-        <p>パスワード</p>
-        <input
-          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-          type="password"
-        />
-      </div>
-      <div className="space-y-2">
-        <p>学校名</p>
-        <input
-          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-          type="password"
-        />
-      </div>
-      <div className="space-y-2">
-        <p>大学URL</p>
-        <input
-          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-          type="password"
-        />
-      </div>
-      <div className="space-y-2">
-        <p>寄付ページURL</p>
-        <input
-          className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
-          type="password"
-        />
-      </div>
-    </section>
-  )
-}
-
 /*onChange 要素
             <p>ユーザー名</p>
                         <p>メールアドレス</p>
@@ -212,12 +135,34 @@ function SaveBtn() {
   )
 }
 
+function ArticlePart(PartData) {
+  return (
+    <div
+      className="pt-[20px] space-y-10 flex flex-col gradient-vontainer h-[158px] w-[55vw] max-w-[800px]"
+      style={{
+        background: `url(${PartData.BgImg}) center center no-repeat`,
+        backgroundSize: `cover`,
+      }}
+    >
+      <div className="space-x-2   flex pl-[20px] text-left items-center">
+        <div>
+          <img className="w-[50px] h-[50px]" src={PartData.Ticon} alt="ticon" />
+        </div>
+        <div className="font-bold">{PartData.name}</div>
+      </div>
+      <div className="items-end -z-[-1] text-[white] flex justify-between mx-[15px]">
+        <div className="font-bold text-[2em]">{PartData.title}</div>
+        <div>{PartData.date}</div>
+      </div>
+    </div>
+  )
+}
+
 export {
   UserMenu,
   RootUrl,
-  UserSettingValue,
-  UniversSettingValue,
   InputField,
   ProfileImageEditor,
   SaveBtn,
+  ArticlePart,
 }

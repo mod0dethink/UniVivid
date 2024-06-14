@@ -49,13 +49,13 @@ function TransitionalScreen() {
       </section>
 
       <section className="section-nav">
-        <Link to="/articlepage">
+        <Link to="/unisetting">
           <div className="content">アーティクルのview</div>
         </Link>
       </section>
 
       <section className="section-nav">
-        <Link to="/entitiyselection">
+        <Link to="/unihome">
           <div className="content">entitiyselectionのview</div>
         </Link>
       </section>
