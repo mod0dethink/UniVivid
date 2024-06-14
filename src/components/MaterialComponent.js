@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
 //import PropTypes from 'prop-types'
+import ImportImg from '../assets/images/imgImport.png'
 
 function UserMenu(itemData) {
   return (
     <aside className="aside flex-grow-[1] min-w-[300px] bg-[#427D9D] content-center flex flex-col items-center justify-between text-[#ffffff] text-2xl">
       <div className="text-center pt-[50px]">
-        <div className="rounded-full bg-[#D9D9D9] w-[160px] h-[160px] flex flex-col items-center justify-center">
-          <div className="login-face"></div>
-          <div className="py-1.5"></div>
-          <div className="login-body "></div>
-        </div>
+        <div
+          className="rounded-full bg-[#D9D9D9] w-[160px] h-[160px] flex flex-col items-center justify-center"
+          style={{
+            backgroundImage: `url(${itemData.Pimage})`,
+            backgroundSize: `cover`,
+            backgroundPosition: `center center`,
+          }}
+        ></div>
         <div>{itemData.username}</div>
       </div>
       <div>
         <p>マイページ</p>
         <div className="py-3"></div>
-        <Link to="/usersettingpsage">ユーザー設定</Link>
+        <Link to={itemData.linkpath}>ユーザー設定</Link>
       </div>
       <div></div>
       <div className="py-[50px]">
@@ -143,4 +147,77 @@ function InputField(InputData) {
   )
 }
 
-export { UserMenu, RootUrl, UserSettingValue, UniversSettingValue, InputField }
+function ProfileImageEditor(itemData) {
+  const fileInputRef = useRef(null)
+  const handleButtonClick = () => {
+    fileInputRef.current.click()
+  }
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0]
+    if (file) {
+      // ファイルの処理（例：サーバーにアップロード）
+      console.log('Selected file:', file)
+    }
+  }
+
+  return (
+    <section className="">
+      <div
+        className="relative rounded-full  w-[160px] h-[160px] flex flex-col items-center justify-center"
+        style={{
+          backgroundImage: `url(${itemData.Pimage})`,
+          backgroundSize: `cover`,
+          backgroundPosition: `center center`,
+        }}
+      >
+        <button
+          className="absolute inset-0 overflow-auto"
+          onClick={handleButtonClick}
+          style={{
+            border: 'none',
+            background: 'none',
+            padding: 0,
+            cursor: 'pointer',
+          }}
+        >
+          <img
+            className="absolute bottom-0 right-0 w-[60px] "
+            src={ImportImg} // 適切な画像URLに変更
+            alt="Click to upload"
+          />
+        </button>
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          style={{ display: 'none' }} // 完全に非表示にする
+          onChange={handleFileChange}
+        />
+      </div>
+    </section>
+  )
+}
+
+function SaveBtn() {
+  return (
+    <section>
+      <button
+        type="submit"
+        className="bg-[#D9D9D9] text-[1.5em] font-bold w-[7em] h-[2em]"
+      >
+        編集を保存
+      </button>
+    </section>
+  )
+}
+
+export {
+  UserMenu,
+  RootUrl,
+  UserSettingValue,
+  UniversSettingValue,
+  InputField,
+  ProfileImageEditor,
+  SaveBtn,
+}
