@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 
 function UserMenu(itemData) {
   return (
@@ -36,8 +36,6 @@ function RootUrl(itemData) {
     </div>
   )
 }
-
-function UserIcon() {}
 
 function UserSettingValue() {
   return (

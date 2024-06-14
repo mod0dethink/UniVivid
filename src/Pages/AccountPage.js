@@ -1,7 +1,7 @@
 //libraryのインポート
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+//import axios from 'axios'
 //アセットのインポート
 import '../assets/styles/UnivividStyle.css'
 import '../assets/styles/Dimensions.css'
@@ -74,29 +74,32 @@ function WelcomePage() {
 }
 
 function LoginPage() {
-  //瀬那さんの変更
+  //瀬那さんの変更(warning解消のためコメントアウト)
+
+  /*
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
   const [accountType, setAccountType] = useState('user') // デフォルトを 'user' に設定
 
   const handleLogin = async () => {
-    try {
-      const response = await axios.post(
-        'http://localhost:8080/auth/login',
-        {
-          type: accountType, // select の値に基づいて設定
-          mailaddress: email,
-          password: password,
-        },
-        { withCredentials: true },
-      ) // withCredentials を追加
-      alert(response.data.message)
-    } catch (error) {
-      alert(error.response.data.error)
+    
+      try {
+        const response = await axios.post(
+          'http://localhost:8080/auth/login',
+          {
+            type: accountType, // select の値に基づいて設定
+            mailaddress: email,
+            password: password,
+          },
+          { withCredentials: true },
+        ) // withCredentials を追加
+        alert(response.data.message)
+      } catch (error) {
+        alert(error.response.data.error)
+      }
     }
-  }
-
+*/
   return (
     <div className="h-screen flex flex-col justify-between">
       <UnivividHeader title="ログイン" />
@@ -146,6 +149,7 @@ function EntitySelectionPage() {
 }
 
 function RegisterPage() {
+  /*
   const [formData, setFormData] = useState({
     mailaddress: '',
     password: '',
@@ -175,6 +179,7 @@ function RegisterPage() {
       alert('ユーザーアカウントの登録に失敗しました')
     }
   }
+  */
 
   return (
     <div className="h-screen flex flex-col justify-between">
@@ -186,7 +191,7 @@ function RegisterPage() {
 }
 
 function UniRegisterPage() {
-  const [formData, setFormData] = useState({
+  /*  const [formData, setFormData] = useState({
     mailaddress: '',
     password: '',
     username: '',
@@ -218,6 +223,7 @@ function UniRegisterPage() {
       alert('大学アカウントの登録に失敗しました')
     }
   }
+  */
 
   return (
     <div className="from-container">
@@ -233,7 +239,7 @@ function UniRegisterPage() {
 export {
   WelcomePage,
   LoginPage,
-  EntitySelectionPage,
   RegisterPage,
   UniRegisterPage,
+  EntitySelectionPage,
 }
