@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import ReturnImg from '../assets/images/return.png'
 //ヘッダー
 function Logotext() {
   return (
@@ -32,4 +33,18 @@ function Unifooter() {
     </section>
   )
 }
-export { UnivividHeader, Unifooter, EmptyHeader, Logotext }
+
+function WhiteHeader(headerdata) {
+  return (
+    <section className="flex justify-between w-[100vw]">
+      <Link to={headerdata.retunrpath} className="return-btn">
+        <img className="w-[60px]" src={ReturnImg} alt="ReturnImg" />
+      </Link>
+      <div>
+        <p className="text-[#164863] text-[30px] font-bold">ユーザー設定</p>
+      </div>
+      <div>　　　</div>
+    </section>
+  )
+}
+export { UnivividHeader, Unifooter, EmptyHeader, Logotext, WhiteHeader }
