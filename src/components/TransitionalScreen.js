@@ -63,6 +63,12 @@ function TransitionalScreen() {
           <div className="content">entitiyselectionのview</div>
         </Link>
       </section>
+
+      <section className="section-nav">
+        <Link to="/welcompage">
+          <div className="content">welcomePage</div>
+        </Link>
+      </section>
     </div>
   )
 }

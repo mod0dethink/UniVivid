@@ -16,6 +16,7 @@ import UserSettingsPage from './userComponents/UserSettingsPage'
 import ArticlePage from './userComponents/ArticlePage'
 import Article from './userComponents/Article'
 import UserHome from './userComponents/UserHome'
+import WelcomPage from './Pages/WelcomPage'
 //assetのインポート
 import './assets/scripts/animation'
 
@@ -57,6 +58,10 @@ const App = () => {
           path="/universitysettingspage"
           element={<UniversitySettingsPage />}
         />
+
+        {/*登録完了画面*/}
+        <Route path="/welcompage" element={<WelcomPage/>} />
+
       </Routes>
     </Router>
   )
