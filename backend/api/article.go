@@ -8,7 +8,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func RegisterRoutes(r *gin.Engine) {
+func RegisterArticleRoutes(r *gin.Engine) {
 	r.POST("/api/seminar", createSeminar)
 }
 
