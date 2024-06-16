@@ -11,16 +11,7 @@ function TransitionalScreen() {
           <div className="content">ログイン画面</div>
         </Link>
       </section>
-      <section className="section-nav">
-        <Link to="/createaccount">
-          <div className="content">新規登録画面</div>
-        </Link>
-      </section>
-      <section className="section-nav">
-        <Link to="/category">
-          <div className="content">カテゴリー画面</div>
-        </Link>
-      </section>
+
       <section className="section-nav">
         <Link to="/welcome">
           <div className="content">ようこそ</div>
@@ -33,30 +24,13 @@ function TransitionalScreen() {
       </section>
 
       <section className="section-nav">
-        <Link to="/universityhome">
+        <Link to="/unihome">
           <div className="content">univershome</div>
-        </Link>
-      </section>
-      <section className="section-nav">
-        <Link to="/universitysettingspage">
-          <div className="content">universitysettingpsage</div>
         </Link>
       </section>
       <section className="section-nav">
         <Link to="/article">
           <div className="content">articlelist</div>
-        </Link>
-      </section>
-
-      <section className="section-nav">
-        <Link to="/unisetting">
-          <div className="content">アーティクルのview</div>
-        </Link>
-      </section>
-
-      <section className="section-nav">
-        <Link to="/unihome">
-          <div className="content">entitiyselectionのview</div>
         </Link>
       </section>
     </div>

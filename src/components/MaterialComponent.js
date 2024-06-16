@@ -19,9 +19,9 @@ function UserMenu(itemData) {
         <div>{itemData.username}</div>
       </div>
       <div>
-        <p>マイページ</p>
+        <Link to={itemData.mypagepath}>マイページ</Link>
         <div className="py-3"></div>
-        <Link to={itemData.linkpath}>ユーザー設定</Link>
+        <Link to={itemData.settingpath}>ユーザー設定</Link>
       </div>
       <div></div>
       <div className="py-[50px]">
@@ -33,11 +33,14 @@ function UserMenu(itemData) {
 
 function RootUrl(itemData) {
   return (
-    <div className="flex justify-around items-center bg-[#D9D9D9] w-[80%] h-[196px] max-w-[700px] rounded-[20px] border border-solid border-[#9BBEC8] border-[5px]">
+    <Link
+      to={itemData.linkpath}
+      className="flex justify-around items-center bg-[#D9D9D9] w-[80%] h-[196px] max-w-[700px] rounded-[20px] border border-solid border-[#9BBEC8] border-[5px]"
+    >
       <p className="text-[#164863] text-[36px] font-bold">{itemData.text}</p>
       <img className="w-[150px] -z-[-1]" src={itemData.name} alt="door" />
       <div className="absolute border-t border-dotted border-[#9BBEC8] border-[10px] w-[55vw] max-w-[700px] top-[70%]"></div>
-    </div>
+    </Link>
   )
 }
 
@@ -135,6 +138,73 @@ function SaveBtn() {
   )
 }
 
+function ReturnBtn(pathData) {
+  return (
+    <Link to={pathData.linkpath} className="flex items-center pb-[50px]">
+      <div className="text-[#ffffff] bg-[#164863] rounded-[50px] w-[40px] h-[40px] font-bold text-center content-center">
+        <p>&#12296;</p>
+      </div>
+
+      <p className="pl-[20px] font-bold text-[#164863] text-[30px]">ホームへ</p>
+    </Link>
+  )
+}
+
+//詳細
+function ArticleSearch(pathData) {
+  return (
+    <aside className="fixed top-[200px] left-[20px]">
+      <ReturnBtn linkpath={pathData.linkpath} />
+      <div className="bg-[#9BBEC822] flex flex-col justify-center items-left pl-[25px]  h-[35em] w-[30vw] max-w-[400px] border-b-[4px] border-t-[4px] border-[#427D9D] border-solid">
+        <section className="space-y-3">
+          <div className="space-y-2">
+            <p className="text-[#164863] font-bold text-[1.5em]">場所:</p>
+            <input type="text" />
+          </div>
+
+          <div className="space-y-2">
+            <p className="text-[#164863] font-bold text-[1.5em]">日程:</p>
+            <input type="text" />
+          </div>
+          <div className="space-y-2">
+            <p className="text-[#164863] font-bold text-[1.5em]">時間:</p>
+            <input type="text" />
+          </div>
+          <div className="space-y-2">
+            <p className="text-[#164863] font-bold text-[1.5em]">ジャンル:</p>
+            <input type="text" />
+          </div>
+          <div className="space-y-2">
+            <p className="text-[#164863] font-bold text-[1.5em]">キーワード:</p>
+            <input type="text" />
+
+            <div className="border-triangle"></div>
+          </div>
+        </section>
+        <section className="pt-[20px]">
+          <form className="flex justify-around">
+            <div className="flex justify-center">
+              <p className="text-[1.5em] text-[#164863] font-bold">開講済</p>
+              <input
+                className="rounded-[50px] border-solid border-[2px] w-[25px]"
+                type="checkbox"
+                id="check"
+              />
+            </div>
+            <div>
+              <button className="text-center text-[1.5em] bg-[#427D9D] text-[#ffffff] w-[5em] rounded-[10px]">
+                検索
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+      <div></div>
+    </aside>
+  )
+}
+
+//講座バー
 function ArticlePart(PartData) {
   return (
     <div
@@ -148,7 +218,7 @@ function ArticlePart(PartData) {
         <div>
           <img className="w-[50px] h-[50px]" src={PartData.Ticon} alt="ticon" />
         </div>
-        <div className="font-bold">{PartData.name}</div>
+        <div className="font-bold">{PartData.groupname}</div>
       </div>
       <div className="items-end -z-[-1] text-[white] flex justify-between mx-[15px]">
         <div className="font-bold text-[2em]">{PartData.title}</div>
@@ -158,6 +228,10 @@ function ArticlePart(PartData) {
   )
 }
 
+function BoxMenu() {
+  return
+}
+
 export {
   UserMenu,
   RootUrl,
@@ -165,4 +239,6 @@ export {
   ProfileImageEditor,
   SaveBtn,
   ArticlePart,
+  ArticleSearch,
+  BoxMenu,
 }

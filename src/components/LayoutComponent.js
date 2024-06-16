@@ -1,15 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ReturnImg from '../assets/images/return.png'
+//テスト用
+import Pen from '../assets/images/pen.png'
+
 //ヘッダー
 function Logotext() {
   return (
-    <div>
+    <section className="-z-[-2] text-[60px] fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
       <span className="text-6xl">U</span>
       <span className="text-3xl">ni</span>
       <span className="text-6xl">V</span>
       <span className="text-3xl">ivid</span>
-    </div>
+    </section>
   )
 }
 function EmptyHeader() {
@@ -47,4 +50,33 @@ function WhiteHeader(headerdata) {
     </section>
   )
 }
-export { UnivividHeader, Unifooter, EmptyHeader, Logotext, WhiteHeader }
+function UserHeader(itemData) {
+  return (
+    <section className="-z-[-2] fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
+      <div>
+        <span className="text-6xl">U</span>
+        <span className="text-3xl">ni</span>
+        <span className="text-6xl">V</span>
+        <span className="text-3xl">ivid</span>
+      </div>
+      <section className="absolute left-[5vw] top-[20px]">
+        <div
+          className="relative rounded-full w-[160px] h-[160px] flex flex-col items-center justify-center"
+          style={{
+            background: `url(${itemData.iconpath}) center center no-repeat`,
+            backgroundSize: `cover`,
+          }}
+        ></div>
+      </section>
+    </section>
+  )
+}
+
+export {
+  UnivividHeader,
+  Unifooter,
+  EmptyHeader,
+  Logotext,
+  WhiteHeader,
+  UserHeader,
+}
