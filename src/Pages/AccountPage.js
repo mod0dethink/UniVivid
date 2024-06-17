@@ -22,6 +22,7 @@ import {
   CreateUniAccountForm,
 } from '../components/RegisterMaterial'
 
+//初期画面
 function WelcomePage() {
   return (
     <div className="h-screen flex flex-col justify-between">
@@ -73,6 +74,7 @@ function WelcomePage() {
   )
 }
 
+//ログインフォーム
 function LoginPage() {
   //瀬那さんの変更(warning解消のためコメントアウト)
 
@@ -102,24 +104,31 @@ function LoginPage() {
 */
   return (
     <div className="h-screen flex flex-col justify-between">
+      {/*header*/}
       <UnivividHeader title="ログイン" />
+      {/*name:email,password,username*/}
       <LoginForm />
+      {/*footer*/}
       <Unifooter />
     </div>
   )
 }
 
+//職種選択画面
 function EntitySelectionPage() {
   return (
     <div className="h-screen flex flex-col justify-between">
       <section>
+        {/*header*/}
         <UnivividHeader title={<Logotext />} />
       </section>
       <section className="flex flex-col items-center justify-center sw-screen h-full bg-[#FFFEF8]">
+        {/*---個人or学校---*/}
         <div>
           <p>使用目的はどちらですか？</p>
         </div>
         <div className="flex">
+          {/*個人*/}
           <Link
             to="/register"
             className="flex-1 w-1/3 min-w-[150px] w-[25vw] max-w-[500px]"
@@ -129,7 +138,9 @@ function EntitySelectionPage() {
             </div>
             <p className="text-center font-bold">個人として使用</p>
           </Link>
+          {/*Margin*/}
           <div className="px-[5vw]"></div>
+          {/*学校*/}
           <Link
             to="/uniregister"
             className="flex-1 w-1/3 min-w-[150px] w-[25vw] max-w-[500px]"
@@ -141,6 +152,7 @@ function EntitySelectionPage() {
           </Link>
         </div>
       </section>
+      {/*---footer---*/}
       <section>
         <Unifooter />
       </section>
@@ -148,6 +160,7 @@ function EntitySelectionPage() {
   )
 }
 
+/*-----個人のアカウント登録フォーム-----*/
 function RegisterPage() {
   /*
   const [formData, setFormData] = useState({
@@ -183,13 +196,17 @@ function RegisterPage() {
 
   return (
     <div className="h-screen flex flex-col justify-between">
+      {/*Header*/}
       <UnivividHeader title="新規登録" />
+      {/*入力フォーム*/}
       <CreateAccountForm />
+      {/*footer*/}
       <Unifooter />
     </div>
   )
 }
 
+/*-----学校用登録フォーム-----*/
 function UniRegisterPage() {
   /*  const [formData, setFormData] = useState({
     mailaddress: '',
@@ -227,10 +244,11 @@ function UniRegisterPage() {
 
   return (
     <div className="from-container">
+      {/*header*/}
       <UnivividHeader title="新規登録" />
-
+      {/*登録フォーム*/}
       <CreateUniAccountForm />
-
+      {/*footer*/}
       <Unifooter />
     </div>
   )

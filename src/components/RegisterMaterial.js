@@ -8,7 +8,7 @@ function LoginForm() {
         <from>
           <div>
             <p>メールアドレス</p>
-            <input type="emaile" name="emaile" placeholder="aaa" />
+            <input type="emaile" name="email" placeholder="aaa" />
           </div>
 
           <div>

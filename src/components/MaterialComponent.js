@@ -4,6 +4,7 @@ import '../assets/styles/Dimensions.css'
 //import PropTypes from 'prop-types'
 import ImportImg from '../assets/images/imgImport.png'
 
+//asideのユーザーメニュー
 function UserMenu(itemData) {
   return (
     <aside className="aside flex-grow-[1] min-w-[300px] bg-[#427D9D] content-center flex flex-col items-center justify-between text-[#ffffff] text-2xl">
@@ -31,6 +32,7 @@ function UserMenu(itemData) {
   )
 }
 
+//link
 function RootUrl(itemData) {
   return (
     <Link
@@ -59,6 +61,7 @@ function RootUrl(itemData) {
 
 */
 
+//フォーム入力用のinput
 function InputField(InputData) {
   return (
     <div className="space-y-3">
@@ -73,6 +76,7 @@ function InputField(InputData) {
   )
 }
 
+//変更可能なProfile画像
 function ProfileImageEditor(itemData) {
   const fileInputRef = useRef(null)
   const handleButtonClick = () => {
@@ -125,6 +129,7 @@ function ProfileImageEditor(itemData) {
   )
 }
 
+//変更内容を保存するbtn
 function SaveBtn() {
   return (
     <section>
@@ -138,6 +143,7 @@ function SaveBtn() {
   )
 }
 
+//前のページに戻るボタン
 function ReturnBtn(pathData) {
   return (
     <Link to={pathData.linkpath} className="flex items-center pb-[50px]">
@@ -154,6 +160,7 @@ function ReturnBtn(pathData) {
 function ArticleSearch(pathData) {
   return (
     <aside className="fixed top-[200px] left-[20px]">
+      {/*前のページに戻るボタン*/}
       <ReturnBtn linkpath={pathData.linkpath} />
       <div className="bg-[#9BBEC822] flex flex-col justify-center items-left pl-[25px]  h-[35em] w-[30vw] max-w-[400px] border-b-[4px] border-t-[4px] border-[#427D9D] border-solid">
         <section className="space-y-3">
@@ -228,6 +235,7 @@ function ArticlePart(PartData) {
   )
 }
 
+//Boxメニュー
 function BoxMenu(itemData) {
   return (
     <td className="MenuBoxShadow max-w-[350px] max-h-[350px] w-[25vw] h-[25vw] bg-[#9BBEC8] text-[white] flex items-center justify-center rounded-[5px] font-bold text-[2vw]">

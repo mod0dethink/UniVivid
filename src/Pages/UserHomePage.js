@@ -1,7 +1,8 @@
+//必要なlibraryをインポート
 import React, { useRef, useState } from 'react'
+import axios from 'axios'
 
-import Door from '../assets/images/door.png'
-import { Link } from 'react-router-dom'
+//componentをインポート
 import {
   UserMenu,
   RootUrl,
@@ -19,61 +20,49 @@ import {
   Logotext,
 } from '../components/LayoutComponent'
 
+//必要なアセットをインポート
+import Imagepng from '../assets/images/IMG_4007.jpg'
+import Door from '../assets/images/door.png'
+
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/bg-images.css'
-
-import axios from 'axios'
-
-import ImportImg from '../assets/images/imgImport.png'
-import ReturnImg from '../assets/images/return.png'
-import Imagepng from '../assets/images/IMG_4007.jpg'
-import '../assets/styles/Dimensions.css'
 //テスト用
-import Pen from '../assets/images/pen.png'
 import BgImg from '../assets/images/IMG_4007.jpg'
 import Lok from '../assets/images/lock_back.png'
 import Ticon2 from '../assets/images/English.jpg'
-/*
-path変数一覧
-  Pimage=プロフィール画像
- */
-let ProImg = Imagepng
-let linkpath = '/usersetting'
-let returnpath = '/userhome'
 
+/*------ユーザーのデータ変数------*/
+let username = '瀬那' //ログインアカウントのユーザーネーム
+let ProImg = Imagepng //プロフィール画像
+/*------Linkパス------*/
+let settinglinkpath = '/usersetting' //ユーザーメニュー画面へのLinkパス
+let returnpath = '/userhome' //戻るボタンのLinkパス
+let mypagepath = '/usermypage' //マイページのLinkパス
+let articlepath = '/userarticlelist' //記事一覧へのLinkパス
+
+//ユーザーのホーム画面
 function UserHomePage() {
-  const Door1 = Door
-  let UserImgPath = './images/test.png'
-  let username = '瀬那'
-
   return (
     <div className="flex w-[100vw] h-screen">
+      {/*ユーザーのメニュー*/}
       <UserMenu
         username={username}
-        settingpath={linkpath}
-        mypagepath={'/usermypage'}
+        settingpath={settinglinkpath}
+        mypagepath={mypagepath}
         Pimage={ProImg}
       />
+      {/*記事メニュー*/}
       <section className="main flex-grow-[7] flex content-center  h-screen ">
         <div className="flex flex-col justify-center space-y-20 w-[100%] text-center items-center ">
-          <RootUrl name={Door1} text={'動画へ'} />
-          <RootUrl
-            name={Door1}
-            text={'記事一覧へ'}
-            linkpath={'/userarticlelist'}
-          />
+          <RootUrl name={Door} text={'動画へ'} linkpath="" />
+          <RootUrl name={Door} text={'記事一覧へ'} linkpath={articlepath} />
         </div>
       </section>
     </div>
   )
 }
 
-{
-  /* 
-  設定変数一覧
-  returnpath=戻るボタンのパス
-  */
-}
+//セッティングページ
 function UserSettingsPage() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -104,9 +93,12 @@ function UserSettingsPage() {
         className="items-center flex flex-col justify-around text-center h-screen"
         onSubmit={handleSubmit}
       >
+        {/*header*/}
         <WhiteHeader retunrpath={returnpath} />
+        {/*変更可能なプロフィール画像*/}
         <ProfileImageEditor Pimage={ProImg} />
 
+        {/*セッティングフォーム*/}
         <section className="w-[60vw] , text-left text-[#427D9D] space-y-5 max-w-[800px]">
           <InputField
             label="ユーザー名"
@@ -127,18 +119,23 @@ function UserSettingsPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </section>
+        {/*submitボタン*/}
         <SaveBtn />
       </form>
     </div>
   )
 }
 
+//記事一覧
 function UserArticleList() {
   return (
     <div>
+      {/*header*/}
       <section>
         <UserHeader iconpath={ProImg} />
       </section>
+
+      {/*リスト*/}
       <section className=" mx-[65vw]">
         <ArticleSearch linkpath={'/userhome'} />
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
@@ -173,12 +170,15 @@ function UserArticleList() {
   )
 }
 
+//マイページ
 function UserMyPage() {
   return (
     <div className="flex flex-col h-screen w-[100vw] justify-center">
+      {/*header*/}
       <section>
         <UserHeader iconpath={ProImg} />
       </section>
+      {/*マイページメニュー*/}
       <section className="flex w-full h-full pt-[101px] text-[#fff] text-center items-center justify-around overflow-x-auto">
         <table className="w-[100%]">
           <tr className="flex justify-around">
