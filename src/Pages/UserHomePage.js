@@ -175,15 +175,18 @@ function UserArticleList() {
 
 function UserMyPage() {
   return (
-    <div className="flex h-screen items-start overflow-hidden">
+    <div className="flex flex-col h-screen w-[100vw] justify-center">
       <section>
         <UserHeader iconpath={ProImg} />
       </section>
-      <section className="flex h-full pt-[101px] text-[#000] bg-[#000000] justify-center items-center overflow-auto whitespace-nowrap">
-        <div className="w-[300px] h-[300px] bg-[#fff] m-5">text</div>
-        <div className="w-[300px] h-[300px] bg-[#fff] m-5">text</div>
-        <div className="w-[300px] h-[300px] bg-[#fff] m-5">text</div>
-        <div className="w-[300px] h-[300px] bg-[#fff] m-5">text</div>
+      <section className="flex w-full h-full pt-[101px] text-[#fff] text-center items-center justify-around overflow-x-auto">
+        <table className="w-[100%]">
+          <tr className="flex justify-around">
+            <BoxMenu text="受講履歴一覧" />
+            <BoxMenu text={'お気に入り\nいいねしたノート'} />
+            <BoxMenu text={'アップロードノート一覧'} />
+          </tr>
+        </table>
       </section>
     </div>
   )

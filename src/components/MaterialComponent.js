@@ -228,8 +228,12 @@ function ArticlePart(PartData) {
   )
 }
 
-function BoxMenu() {
-  return
+function BoxMenu(itemData) {
+  return (
+    <td className="MenuBoxShadow max-w-[350px] max-h-[350px] w-[25vw] h-[25vw] bg-[#9BBEC8] text-[white] flex items-center justify-center rounded-[5px] font-bold text-[2vw]">
+      {itemData.text}
+    </td>
+  )
 }
 
 export {
