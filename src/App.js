@@ -17,6 +17,9 @@ import {
   UserSettingsPage,
   UserArticleList,
   UserMyPage,
+  ArticleHistoryPage,
+  UpNoteListPage,
+  FavoriteListPage,
 } from './Pages/UserHomePage'
 import { UniHomePage, UniSettingsPage } from './Pages/UniHomePage'
 
@@ -34,7 +37,10 @@ const App = () => {
         <Route path="/userhome" element={<UserHomePage />} />
         <Route path="/usersetting" element={<UserSettingsPage />} />
         <Route path="/userarticlelist" element={<UserArticleList />} />
-        <Route path="usermypage" element={<UserMyPage />} />
+        <Route path="/usermypage" element={<UserMyPage />} />
+        <Route path="/articlehistory" element={<ArticleHistoryPage />} />
+        <Route path="/upnotelist" element={<UpNoteListPage />} />
+        <Route path="/favoritelist" element={<FavoriteListPage />} />
 
         {/*Uni*/}
         <Route path="/unihome" element={<UniHomePage />} />

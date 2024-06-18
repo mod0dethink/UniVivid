@@ -12,12 +12,15 @@ import {
   ArticleSearch,
   ArticlePart,
   BoxMenu,
+  ReturnBtn,
+  WhiteReturnBtn,
 } from '../components/MaterialComponent'
 import {
   WhiteHeader,
   UserHeader,
   EmptyHeader,
   Logotext,
+  UnivividHeader,
 } from '../components/LayoutComponent'
 
 //必要なアセットをインポート
@@ -178,18 +181,162 @@ function UserMyPage() {
       <section>
         <UserHeader iconpath={ProImg} />
       </section>
+      <section className="pt-[201px] pl-[10vw]">
+        <ReturnBtn />
+      </section>
       {/*マイページメニュー*/}
-      <section className="flex w-full h-full pt-[101px] text-[#fff] text-center items-center justify-around overflow-x-auto">
+      <section className="w-full h-full pt-[50px] text-[#fff] text-center items-center justify-around overflow-x-auto">
         <table className="w-[100%]">
           <tr className="flex justify-around">
-            <BoxMenu text="受講履歴一覧" />
-            <BoxMenu text={'お気に入り\nいいねしたノート'} />
-            <BoxMenu text={'アップロードノート一覧'} />
+            <BoxMenu text="受講履歴一覧" linkpath="/articlehistory" />
+            <BoxMenu
+              text={'お気に入り\nいいねしたノート'}
+              linkpath="/favoritelist"
+            />
+            <BoxMenu text={'アップロードノート一覧'} linkpath="/upnotelist" />
           </tr>
         </table>
       </section>
     </div>
   )
 }
+/*マイページからの遷移先以下三つ*/
 
-export { UserHomePage, UserSettingsPage, UserArticleList, UserMyPage }
+//受講履歴一覧
+function ArticleHistoryPage() {
+  return (
+    <div>
+      <UnivividHeader title="受講履歴一覧" />
+
+      <section className="absolute -z-[-3] top-[15px] left-[15px]">
+        <WhiteReturnBtn linkpath="/usermypage" />
+      </section>
+      <section>
+        <div className="flex space-y-5 justify-center pt-[101px] text-center">
+          <div className="pt-[50px] space-y-10">
+            {/*
+          <ArticlePart
+          BgImg={Lok} メインの背景画像
+          Ticon={Ticon2} 団体のアイコン画像
+          groupname={'ECC comp'} 団体名
+          title={'ポートレート講座'} 講座名
+          date={'2024/08/29'} 当日の日付
+        />
+        */}
+            <ArticlePart
+              BgImg={BgImg}
+              Ticon={Ticon2}
+              groupname={'ECC Artist'}
+              title={'ポートレート講座'}
+              date={'2002/06/24'}
+            />
+            <ArticlePart
+              BgImg={Lok}
+              Ticon={Ticon2}
+              groupname={'ECC comp'}
+              title={'ポートレート講座'}
+              date={'2024/08/29'}
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+function UpNoteListPage() {
+  return (
+    <div>
+      <UnivividHeader title="アップロードしたノート一覧" />
+
+      <section className="absolute -z-[-3] top-[15px] left-[15px]">
+        <WhiteReturnBtn linkpath="/usermypage" />
+      </section>
+      <section>
+        <div className="flex space-y-5 justify-center pt-[101px] text-center">
+          <div className="pt-[50px] space-y-10">
+            {/*
+        <ArticlePart
+        BgImg={Lok} メインの背景画像
+        Ticon={Ticon2} 団体のアイコン画像
+        groupname={'ECC comp'} 団体名
+        title={'ポートレート講座'} 講座名
+        date={'2024/08/29'} 当日の日付
+      />
+      */}
+            <ArticlePart
+              BgImg={BgImg}
+              Ticon={Ticon2}
+              groupname={'ECC Artist'}
+              title={'ポートレート講座'}
+              date={'2002/06/24'}
+            />
+            <ArticlePart
+              BgImg={Lok}
+              Ticon={Ticon2}
+              groupname={'ECC comp'}
+              title={'ポートレート講座'}
+              date={'2024/08/29'}
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+function FavoriteListPage() {
+  return (
+    <div className="flex flex-col items-center">
+      <UnivividHeader title="お気に入り" />
+      <section className="absolute -z-[-3] top-[15px] left-[15px]">
+        <WhiteReturnBtn linkpath="/usermypage" />
+      </section>
+      <section className="pt-[151px] flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
+        <button className="border-b-[2px] border-[#229DF6] w-[15vw]">
+          講義
+        </button>
+        <button className="border-b-[2px] border-[#229DF6] w-[15vw]">
+          ノート
+        </button>
+      </section>
+      <section>
+        <div className="flex space-y-5 justify-center text-center">
+          <div className="pt-[50px] space-y-10">
+            {/*
+        <ArticlePart
+        BgImg={Lok} メインの背景画像
+        Ticon={Ticon2} 団体のアイコン画像
+        groupname={'ECC comp'} 団体名
+        title={'ポートレート講座'} 講座名
+        date={'2024/08/29'} 当日の日付
+      />
+      */}
+            <ArticlePart
+              BgImg={BgImg}
+              Ticon={Ticon2}
+              groupname={'ECC Artist'}
+              title={'ポートレート講座'}
+              date={'2002/06/24'}
+            />
+            <ArticlePart
+              BgImg={Lok}
+              Ticon={Ticon2}
+              groupname={'ECC comp'}
+              title={'ポートレート講座'}
+              date={'2024/08/29'}
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+export {
+  UserHomePage,
+  UserSettingsPage,
+  UserArticleList,
+  UserMyPage,
+  ArticleHistoryPage,
+  UpNoteListPage,
+  FavoriteListPage,
+}
