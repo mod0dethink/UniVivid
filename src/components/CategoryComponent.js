@@ -13,15 +13,16 @@ import ImageHou from '../assets/images/hougaku.jpg'
 
 function CategoryComponent() {
   return (
-    <div className=" m-32 mt-16">
+    <div className=" m-32 mt-16 mb-4">
       <section className="mb-8">
-        <div>
-          <img 
+        <div className="pt-4">
+          <img
             src={ImageRet}
-            className="w-12 h-12 absolute top-0 left-0"
+            className="w-12 h-12 absolute top-4 left-6"
             alt="矢印"
           />
         </div>
+
         <div className="absolute w-14 h-14 left-10 top-5"></div>
 
         <div className="text-3xl font-bold text-center text-[#164863]">
@@ -31,7 +32,7 @@ function CategoryComponent() {
 
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-10">
         <div className="relative">
-          <p className="text-white text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
+          <p className="text-white text-4xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
             #医療
           </p>
 
@@ -49,7 +50,7 @@ function CategoryComponent() {
         </div>
 
         <div className="relative">
-          <p className="text-white text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
+          <p className="text-white text-4xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
             #英語
           </p>
           <article className="row-span-2 bg-white hover:bg-white rounded-md shadow-md hover:shadow-lg transition-shadow overflow-hidden">
@@ -66,7 +67,7 @@ function CategoryComponent() {
         </div>
 
         <div className="relative">
-          <p className="text-white text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
+          <p className="text-white text-4xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
             #IT
           </p>
           <article className="row-span-2 bg-white hover:bg-white rounded-md shadow-md hover:shadow-lg transition-shadow overflow-hidden">
@@ -83,7 +84,7 @@ function CategoryComponent() {
         </div>
 
         <div className="relative">
-          <p className="text-white text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
+          <p className="text-white text-4xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
             #物理学
           </p>
           <article className="row-span-2 bg-white hover:bg-white rounded-md shadow-md hover:shadow-lg transition-shadow overflow-hidden">
@@ -100,7 +101,7 @@ function CategoryComponent() {
         </div>
 
         <div className="relative">
-          <p className="text-white text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
+          <p className="text-white text-4xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
             #生物学
           </p>
           <article className="row-span-2 bg-white hover:bg-white rounded-md shadow-md hover:shadow-lg transition-shadow overflow-hidden">
@@ -117,7 +118,7 @@ function CategoryComponent() {
         </div>
 
         <div className="relative">
-          <p className="text-white text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
+          <p className="text-white text-4xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
             #機械学
           </p>
           <article className="row-span-2 bg-white hover:bg-white rounded-md shadow-md hover:shadow-lg transition-shadow overflow-hidden">
@@ -134,7 +135,7 @@ function CategoryComponent() {
         </div>
 
         <div className="relative">
-          <p className="text-white text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
+          <p className="text-white text-4xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
             #環境学
           </p>
           <article className="row-span-2 bg-white hover:bg-white rounded-md shadow-md hover:shadow-lg transition-shadow overflow-hidden">
@@ -151,7 +152,7 @@ function CategoryComponent() {
         </div>
 
         <div className="relative">
-          <p className="text-white text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
+          <p className="text-white text-4xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
             #哲学
           </p>
           <article className="row-span-2 bg-white hover:bg-white rounded-md shadow-md hover:shadow-lg transition-shadow overflow-hidden">
@@ -168,7 +169,7 @@ function CategoryComponent() {
         </div>
 
         <div className="relative">
-          <p className="text-white text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
+          <p className="text-white text-4xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
             #法学
           </p>
           <article className="row-span-2 bg-white hover:bg-white rounded-md shadow-md hover:shadow-lg transition-shadow overflow-hidden">
@@ -186,7 +187,7 @@ function CategoryComponent() {
       </section>
 
       <section>
-        <div className="text-2xl text-right text-blue-300 font-bold">
+        <div className="text-2xl text-right text-[#9BBEC8] font-bold">
           next&gt;&gt;
         </div>
       </section>
