@@ -1,5 +1,6 @@
 import React from 'react'
 
+import ImageRet from '../assets/images/return.png'
 import ImageMed from '../assets/images/iryou.jpg'
 import ImageEng from '../assets/images/English.jpg'
 import ImageIt from '../assets/images/IT.jpg'
@@ -14,6 +15,13 @@ function CategoryComponent() {
   return (
     <div className=" m-32 mt-16">
       <section className="mb-8">
+        <div>
+          <img 
+            src={ImageRet}
+            className="w-12 h-12 absolute top-0 left-0"
+            alt="矢印"
+          />
+        </div>
         <div className="absolute w-14 h-14 left-10 top-5"></div>
 
         <div className="text-3xl font-bold text-center text-[#164863]">
