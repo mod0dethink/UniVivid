@@ -17,6 +17,8 @@ import ArticlePage from './userComponents/ArticlePage'
 import Article from './userComponents/Article'
 import UserHome from './userComponents/UserHome'
 import WelcomPage from './Pages/WelcomPage'
+import OneLecturePage from './Pages/OneLecturePage'
+
 //assetのインポート
 import './assets/scripts/animation'
 
@@ -61,6 +63,9 @@ const App = () => {
 
         {/*登録完了画面*/}
         <Route path="/welcompage" element={<WelcomPage/>} />
+
+        {/*講義ごとのページ*/}
+        <Route path="/onelecturepage" element={<OneLecturePage/>} />
 
       </Routes>
     </Router>
