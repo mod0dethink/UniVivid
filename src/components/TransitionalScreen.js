@@ -42,11 +42,6 @@ function TransitionalScreen() {
         </Link>
       </section>
       <section className="section-nav">
-        <Link to="/universitysettingspage">
-          <div className="content">universitysettingpsage</div>
-        </Link>
-      </section>
-      <section className="section-nav">
         <Link to="/article">
           <div className="content">articlelist</div>
         </Link>
