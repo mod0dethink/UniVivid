@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
 //import PropTypes from 'prop-types'
 import ImportImg from '../assets/images/imgImport.png'
+import WhiteReturn from '../assets/images/retunbtnw.png'
 
 //asideのユーザーメニュー
 function UserMenu(itemData) {
@@ -155,6 +156,13 @@ function ReturnBtn(pathData) {
     </Link>
   )
 }
+function WhiteReturnBtn(pathData) {
+  return (
+    <Link to={pathData.linkpath}>
+      <img src={WhiteReturn} alt="btn" width="80px" />
+    </Link>
+  )
+}
 
 //詳細
 function ArticleSearch(pathData) {
@@ -238,9 +246,12 @@ function ArticlePart(PartData) {
 //Boxメニュー
 function BoxMenu(itemData) {
   return (
-    <td className="MenuBoxShadow max-w-[350px] max-h-[350px] w-[25vw] h-[25vw] bg-[#9BBEC8] text-[white] flex items-center justify-center rounded-[5px] font-bold text-[2vw]">
+    <Link
+      to={itemData.linkpath}
+      className="MenuBoxShadow max-w-[350px] max-h-[350px] w-[25vw] h-[25vw] bg-[#9BBEC8] text-[white] flex items-center justify-center rounded-[5px] font-bold text-[2vw]"
+    >
       {itemData.text}
-    </td>
+    </Link>
   )
 }
 
@@ -253,4 +264,6 @@ export {
   ArticlePart,
   ArticleSearch,
   BoxMenu,
+  ReturnBtn,
+  WhiteReturnBtn,
 }
