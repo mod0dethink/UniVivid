@@ -70,6 +70,12 @@ function TransitionalScreen() {
           <div className="content">OneLecturePage</div>
         </Link>
       </section>
+
+      <section className="section-nav">
+        <Link to="/univercitypage">
+          <div className="content">UnivercityPage</div>
+        </Link>
+      </section>
     </div>
   )
 }

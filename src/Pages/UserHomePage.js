@@ -1,6 +1,6 @@
 //必要なlibraryをインポート
 import React, { useRef, useState } from 'react'
-import axios from 'axios'
+import { Axios } from 'axios'
 
 //componentをインポート
 import {
@@ -23,6 +23,7 @@ import {
 //必要なアセットをインポート
 import Imagepng from '../assets/images/IMG_4007.jpg'
 import Door from '../assets/images/door.png'
+import backBtnImg from "../assets/images/back.png"           // 戻るボタン
 
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/bg-images.css'
@@ -71,7 +72,7 @@ function UserSettingsPage() {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      const response = await axios.put(
+      const response = await Axios.put(
         'http://localhost:8080/auth/profile',
         {
           type: 'user', // ここは大学用のコンポーネントでuniversityに変える
@@ -192,4 +193,5 @@ function UserMyPage() {
   )
 }
 
-export { UserHomePage, UserSettingsPage, UserArticleList, UserMyPage }
+
+export { UserHomePage, UserSettingsPage, UserArticleList, UserMyPage}
