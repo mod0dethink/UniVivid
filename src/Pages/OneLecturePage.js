@@ -5,9 +5,9 @@ import starBefore from "../assets/images/star_before.png";    // お気に入り
 import starAfter from "../assets/images/star_after.png";      // お気に入りボタン追加後
 
 // コンポーネント
-import Note from '../userComponents/Note';                      // ノート
+import { Note } from '../components/MaterialComponent';            // ノート
 import { LectureDetails } from '../components/MaterialComponent';  // 講義情報
-import ConnectLink from '../components/ConnectLink';            // 関連記事
+import ConnectLink from '../components/ConnectLink';               // 関連記事
 
 const OneLecturePage = () => {
   // 講義関連
