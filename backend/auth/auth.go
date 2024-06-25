@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"univivid/backend/models"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
@@ -47,6 +48,7 @@ func RegisterRoutes(r *gin.Engine) {
 	r.POST("/auth/login", loginHandler)
 	r.PUT("/auth/profile", profileEditHandler)
 	r.GET("/auth/username", getUserNameHandler)
+	r.POST("/auth/interest", saveUserInterests)
 
 	setupDB()
 	defer DB.Close()
@@ -55,12 +57,7 @@ func RegisterRoutes(r *gin.Engine) {
 }
 
 func loginHandler(c *gin.Context) {
-	var request struct {
-		Type        string `json:"type"` // "user" または "university"
-		MailAddress string `json:"mailaddress"`
-		Password    string `json:"password"`
-		UserName    string `json:"username"` //UserNameとして受け取ってるけどUser_NameだけじゃなくUniv_Nameも入る
-	}
+	var request models.LoginRequest
 
 	if err := c.BindJSON(&request); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なリクエストです"})
@@ -109,16 +106,7 @@ func loginHandler(c *gin.Context) {
 }
 
 func registerHandler(c *gin.Context) {
-	var request struct {
-		Type        string `json:"type"`     // "user" または "university"
-		Username    string `json:"username"` //type = univeristyの時に無視される
-		MailAddress string `json:"mailaddress"`
-		Password    string `json:"password"`
-		UnivName    string `json:"univname,omitempty"`  // 大学の場合のみ
-		InfoName    string `json:"infoname,omitempty"`  // 大学の場合のみ
-		UnivURL     string `json:"univurl,omitempty"`   // 大学の場合のみ
-		DonateURL   string `json:"donateurl,omitempty"` // 大学の場合のみ
-	}
+	var request models.RegisterRequest
 
 	if err := c.BindJSON(&request); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なリクエストです"})
@@ -151,22 +139,13 @@ func registerHandler(c *gin.Context) {
 	}
 }
 
-// プロフィール編集API
+// プロフィール編集API(typeの値でユーザーか大学の処理を分ける)
 func profileEditHandler(c *gin.Context) {
-	var request struct {
-		Type        string `json:"type"` // "user" または "university"
-		MailAddress string `json:"mailaddress"`
-		Username    string `json:"username,omitempty"`
-		UnivName    string `json:"univname,omitempty"`
-		InfoName    string `json:"infoname,omitempty"`
-		UnivURL     string `json:"univurl,omitempty"`
-		DonateURL   string `json:"donateurl,omitempty"`
-		Password    string `json:"password,omitempty"`
-	}
+	var request models.ProfileEditRequest
 
 	if err := c.BindJSON(&request); err != nil {
 		log.Println("JSONバインドエラー:", err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なリクエストです"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "���効なリクエストです"})
 		return
 	}
 
@@ -203,9 +182,9 @@ func profileEditHandler(c *gin.Context) {
 	// ユーザータイプに基づいて更新クエリを実行
 	var err error
 	if request.Type == "user" {
-		_, err = DB.Exec("UPDATE USER SET User_Name = ?, Mail_Address = ?, Password = ? WHERE Mail_Address = ?", request.Username, request.MailAddress, string(hashedPassword), mailAddress) // mailAddress を使用
+		_, err = DB.Exec("UPDATE USER SET User_Name = ?, Mail_Address = ?, Password = ? WHERE Mail_Address = ?", request.Username, request.MailAddress, string(hashedPassword), mailAddress)
 	} else if request.Type == "university" {
-		_, err = DB.Exec("UPDATE UNIVERSITY SET Univ_Name = ?, info_name = ?, Univ_URL = ?, donate_URL = ? WHERE Mail_Address = ?", request.UnivName, request.InfoName, request.UnivURL, request.DonateURL, mailAddress) // mailAddress を使用
+		_, err = DB.Exec("UPDATE UNIVERSITY SET Univ_Name = ?, info_name = ?, Univ_URL = ?, donate_URL = ?, Mail_Address = ? WHERE Mail_Address = ?", request.UnivName, request.InfoName, request.UnivURL, request.DonateURL, request.MailAddress, mailAddress)
 	} else {
 		log.Println("無効なアカウントタイプ:", request.Type)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なアカウントタイプです"})
@@ -232,4 +211,42 @@ func getUserNameHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"username": userName})
+}
+
+// ユーザーの興味対象を保存する処理
+func saveUserInterests(c *gin.Context) {
+	var request models.InterestRequest
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
+		return
+	}
+
+	tx, err := DB.Begin()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "トランザクションの開始に失敗しました"})
+		return
+	}
+
+	_, err = tx.Exec("DELETE FROM INTEREST WHERE User_ID = ?", request.UserID)
+	if err != nil {
+		tx.Rollback()
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "既存の興味対象の削除に失敗しました"})
+		return
+	}
+
+	for _, categoryID := range request.CategoryIDs {
+		_, err = tx.Exec("INSERT INTO INTEREST (User_ID, CATEGORY_ID) VALUES (?, ?)", request.UserID, categoryID)
+		if err != nil {
+			tx.Rollback()
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "興味対象の保存に失敗しました"})
+			return
+		}
+	}
+
+	if err := tx.Commit(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "トランザクションのコミットに失敗しました"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "興味対象が正常に保存されました"})
 }
