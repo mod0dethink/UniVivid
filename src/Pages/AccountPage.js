@@ -1,5 +1,5 @@
 //libraryのインポート
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 //import axios from 'axios'
 //アセットのインポート
@@ -9,6 +9,8 @@ import '../assets/styles/Animations.css'
 
 import PenImg from '../assets/images/pen.png'
 import TeacherImg from '../assets/images/teacher.png'
+
+import Logo from '../assets/images/180_20240622001109.png'
 
 //componentのインポート
 import {
@@ -24,8 +26,67 @@ import {
 
 //初期画面
 function WelcomePage() {
+  const pageLoadingRef = useRef(null)
+  const pageStartRef = useRef(null)
+  const pageImgRef = useRef(null)
+
+  const none = () => {
+    if (pageStartRef.current) pageStartRef.current.style.display = 'none'
+    if (pageLoadingRef.current) pageLoadingRef.current.style.display = 'none'
+  }
+
+  const startAnimation = () => {
+    if (pageStartRef.current) {
+      pageStartRef.current.animate([{ opacity: 1 }, { opacity: 0 }], {
+        duration: 2000,
+        fill: 'forwards',
+      })
+    }
+  }
+
+  const loadAnimation = () => {
+    if (pageLoadingRef.current) {
+      pageLoadingRef.current.animate([{ opacity: 1 }, { opacity: 0 }], {
+        duration: 500,
+        fill: 'forwards',
+      })
+    }
+  }
+
+  const loadImg = () => {
+    if (pageImgRef.current) {
+      pageImgRef.current.animate([{ opacity: 0 }, { opacity: 1 }], {
+        duration: 500,
+        fill: 'forwards',
+      })
+    }
+  }
+
+  useEffect(() => {
+    startAnimation()
+    const imgTimeout = setTimeout(loadImg, 3000)
+    const loadTimeout = setTimeout(loadAnimation, 5000)
+    const noneTimeout = setTimeout(none, 6500)
+
+    return () => {
+      clearTimeout(imgTimeout)
+      clearTimeout(loadTimeout)
+      clearTimeout(noneTimeout)
+    }
+  }, [])
   return (
     <div className="h-screen flex flex-col justify-between">
+      <div id="loading_start" ref={pageStartRef} style={{ opacity: 1 }}></div>
+      <div id="loading" ref={pageLoadingRef} style={{ opacity: 1 }}>
+        <img
+          id="loading_img"
+          ref={pageImgRef}
+          src={Logo}
+          alt="Loading"
+          style={{ opacity: 0 }}
+        />{' '}
+      </div>
+
       {/*header*/}
       <section>
         <UnivividHeader title={<Logotext />} />
