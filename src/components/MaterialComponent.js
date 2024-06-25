@@ -37,11 +37,14 @@ function RootUrl(itemData) {
   return (
     <Link
       to={itemData.linkpath}
-      className="flex justify-around items-center bg-[#D9D9D9] w-[80%] h-[196px] max-w-[700px] rounded-[20px] border border-solid border-[#9BBEC8] border-[5px]"
+      className="flex flex-col justify-center space-y-20 w-auto text-center items-center my-20"
     >
-      <p className="text-[#164863] text-[36px] font-bold">{itemData.text}</p>
-      <img className="w-[150px] -z-[-1]" src={itemData.name} alt="door" />
-      <div className="absolute border-t border-dotted border-[#9BBEC8] border-[10px] w-[55vw] max-w-[700px] top-[70%]"></div>
+      <div className="flex justify-around items-center bg-[#D9D9D9] w-[80%] h-[196px] max-w-[700px] rounded-[20px] border-solid border-[#9BBEC8] border-[5px]">
+        {/* <div className='border-dotted border-t mt-auto mb-10 border- border-main w-full'></div> */}
+        <p className="text-[#164863] text-[36px] font-bold">{itemData.text}</p>
+        <img className="w-[150px] -z-[-1]" src={itemData.name} alt="door" />
+        {/* <div className="absolute border-t border-dotted border-[#9BBEC8] border-[10px] w-[55vw] max-w-[700px] top-[70%]"></div> */}
+      </div>
     </Link>
   )
 }

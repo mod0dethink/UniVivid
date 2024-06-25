@@ -23,7 +23,7 @@ import {
 } from '../components/RegisterMaterial'
 
 //初期画面
-function WelcomePage() {
+function FistWelcomPage() {
   return (
     <div className="h-screen flex flex-col justify-between">
       {/*header*/}
@@ -32,8 +32,8 @@ function WelcomePage() {
       </section>
 
       {/*main*/}
-      <section className="flex flex-col items-center justify-center sw-screen h-full">
-        <div className="h-1/5 text-3xl">
+      <section className="flex flex-col items-center justify-center sw-screen h-full bg-main-bg">
+        <div className="h-1/5 text-2xl mt-24">
           <p className="font-black">ようこそ、UniVividへ！</p>
         </div>
         {/*ログイン画面へ*/}
@@ -255,7 +255,7 @@ function UniRegisterPage() {
 }
 
 export {
-  WelcomePage,
+  FistWelcomPage,
   LoginPage,
   RegisterPage,
   UniRegisterPage,

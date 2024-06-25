@@ -53,11 +53,11 @@ function UserHomePage() {
         Pimage={ProImg}
       />
       {/*記事メニュー*/}
-      <section className="main flex-grow-[7] flex content-center  h-screen ">
-        <div className="flex flex-col justify-center space-y-20 w-[100%] text-center items-center ">
+      <section className="flex-grow-[7] content-center h-screen">
+        {/* <div className="flex flex-col justify-center space-y-20 w-[100%] text-center items-center "> */}
           <RootUrl name={Door} text={'動画へ'} linkpath="" />
           <RootUrl name={Door} text={'記事一覧へ'} linkpath={articlepath} />
-        </div>
+        {/* </div> */}
       </section>
     </div>
   )

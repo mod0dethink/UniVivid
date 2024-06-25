@@ -4,17 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 // Componentのインポート
 import TransitionalScreen from './components/TransitionalScreen' // 開発者用Component
-// import LoginComponent from './components/LoginComponent'
-// import CreateAccount from './components/CreateAccount'
-// import { CreateSchoolAccount } from './components/CreateAccount'
-// import CategoryComponent from './components/CategoryComponent'
-// import WelcomeComponent from './components/WelcomeComponent'
-// import EntitySelection from './components/EntitySelection'
-// import UniversityHome from './universityComponents/UniversityHome'
-// import UniversitySettingsPage from './universityComponents/UniversitySettingsPage'
-// import ArticlePage from './userComponents/ArticlePage'
-// import Article from './userComponents/Article'
-// import UserHome from './userComponents/UserHome'
+import CategoryComponent from './components/CategoryComponent'
 import WelcomPage from './Pages/WelcomPage'
 import OneLecturePage from './Pages/OneLecturePage'
 import UnivercityPage from './Pages/UnivercityPage'
@@ -23,7 +13,7 @@ import UnivercityPage from './Pages/UnivercityPage'
 import './assets/scripts/animation'
 
 import {
-  WelcomePage,
+  FistWelcomPage,
   LoginPage,
   EntitySelectionPage,
   RegisterPage,
@@ -40,8 +30,14 @@ import { UniHomePage, UniSettingsPage } from './Pages/UniHomePage'
 const App = () => {
   return (
     <Router>
+
       <Routes>
-        <Route path="/welcome" element={<WelcomePage />} />
+        {/* 確認用URL画面 */}
+        {/* <Route path="/" element={<TransitionalScreen />} /> */}
+
+        {/* 最初に呼び出される画面 */}
+        <Route path="/" element={<FistWelcomPage />}/>
+        {/* ログイン・新規登録の画面 */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/entityselection" element={<EntitySelectionPage />} />
         <Route path="/register" element={<RegisterPage />} />
@@ -57,40 +53,8 @@ const App = () => {
         <Route path="/unihome" element={<UniHomePage />} />
         <Route path="/unisetting" element={<UniSettingsPage />} />
 
-        {/* 確認用URL画面 */}
-        <Route path="/" element={<TransitionalScreen />} />
-
-        {/*ログイン*/}
-        {/* <Route path="/login" element={<LoginComponent />} /> */}
-        {/*Userアカウント新規作成*/}
-        {/* <Route path="/createaccount" element={<CreateAccount />} /> */}
-        {/*大学用アカウント新規作成*/}
-        {/* <Route path="/createschoolaccount" element={<CreateSchoolAccount />} /> */}
         {/*カテゴリー登録*/}
-        {/* <Route path="/category" element={<CategoryComponent />} /> */}
-        {/*初期画面*/}
-        {/* <Route path="/welcome" element={<WelcomeComponent />} /> */}
-        {/*アカウント使用団体指定*/}
-        {/* <Route path="/entitiyselection" element={<EntitySelection />} /> */}
-
-        {/*---ログイン後(User)---*/}
-        {/*ホーム画面*/}
-        {/* <Route path="/userhome" element={<UserHome />} /> */}
-        {/*ユーザー設定*/}
-        {/* <Route path="/usersettingpsage" element={<UserSettingsPage />} /> */}
-        {/*アーティクルのVuew*/}
-        {/* <Route path="/articlepage" element={<ArticlePage />} /> */}
-        {/*アーティクルの要素(素材)*/}
-        {/* <Route path="/article" element={<Article />} /> */}
-
-        {/*---ログイン後(University)---*/}
-        {/*ホーム画面*/}
-        {/* <Route path="/universityhome" element={<UniversityHome />} /> */}
-        {/*ユーザー設定*/}
-        {/* <Route
-          path="/universitysettingspage"
-          element={<UniversitySettingsPage />}
-        /> */}
+        <Route path="/category" element={<CategoryComponent />} />
 
         {/*登録完了画面*/}
         <Route path="/welcompage" element={<WelcomPage/>} />

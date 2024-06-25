@@ -7,33 +7,31 @@ import Pen from '../assets/images/pen.png'
 //ヘッダー
 function Logotext() {
   return (
-    <section className="-z-[-2] text-[60px] fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
-      <span className="text-6xl">U</span>
+    <section className="fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-2">
+      <span className="text-5xl">U</span>
       <span className="text-3xl">ni</span>
-      <span className="text-6xl">V</span>
+      <span className="text-5xl">V</span>
       <span className="text-3xl">ivid</span>
     </section>
   )
 }
 function EmptyHeader() {
   return (
-    <section className="-z-[-2] text-[60px] fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
+    <section className="text-[60px] fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
       <div>　　　</div>
     </section>
   )
 }
 function UnivividHeader(itemData) {
   return (
-    <section className="text-6xl -z-[-2] fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
+    <section className="text-6xl fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
       {itemData.title}
     </section>
   )
 }
 function Unifooter() {
   return (
-    <section className="w-screen bg-[#427d9d] text-white text-[60px] text-center font-bold py-5">
-      <div>　　　</div>
-    </section>
+    <footer className="w-screen bg-[#427d9d] text-white text-[60px] text-center font-bold py-5"></footer>
   )
 }
 
