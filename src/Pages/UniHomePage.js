@@ -9,8 +9,10 @@ import {
   InputField,
   ProfileImageEditor,
   SaveBtn,
+  ReturnBtn,
+  WhiteReturnBtn,
 } from '../components/MaterialComponent'
-import { WhiteHeader } from '../components/LayoutComponent'
+import { UnivividHeader, WhiteHeader } from '../components/LayoutComponent'
 
 import '../assets/styles/Dimensions.css'
 
@@ -90,7 +92,7 @@ function UniSettingsPage() {
         <ProfileImageEditor Pimage={ProImg} />
 
         {/*セッティングフォーム*/}
-        <section className="w-[60vw] , text-left text-[#427D9D] space-y-5 max-w-[800px]">
+        <section className="w-[60vw] text-left text-[#427D9D] space-y-5 max-w-[800px]">
           <InputField
             label="ユーザー名"
             type="text"
@@ -120,4 +122,120 @@ function UniSettingsPage() {
   )
 }
 
-export { UniHomePage, UniSettingsPage }
+function CreateArticlePage() {
+  return (
+    <div>
+      <UnivividHeader title="記事制作" />
+
+      <section className='absolute -z-[-3] top-[15px] left-[15px]'>
+        <WhiteReturnBtn linkpath="/usermypage" />
+      </section>
+
+      <section className="pt-[101px]">
+        <div className="text-center pt-[3.5rem]">
+          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
+            <label
+              htmlFor="lectureName"
+              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
+            >
+              1.講義名
+            </label>
+            <input
+              id="lectureName"
+              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
+              placeholder=""
+            />
+          </div>
+
+          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
+            <label
+              htmlFor="lectureName"
+              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
+            >
+              2.講師
+            </label>
+            <input
+              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
+              placeholder=""
+            />
+          </div>
+
+          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
+            <label
+              htmlFor="lectureName"
+              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
+            >
+              3.日時
+            </label>
+            <input
+              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
+              placeholder=""
+            />
+          </div>
+
+          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
+            <label
+              htmlFor="lectureName"
+              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
+            >
+              4.ジャンル
+            </label>
+            <input
+              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
+              placeholder=""
+            />
+          </div>
+
+          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
+            <label
+              htmlFor="lectureName"
+              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
+            >
+              5.表示画像
+            </label>
+            <input
+              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
+              placeholder=""
+            />
+          </div>
+
+          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
+            <label
+              htmlFor="lectureName"
+              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
+            >
+              6.申込みURL
+            </label>
+            <input
+              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
+              placeholder=""
+            />
+          </div>
+
+          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
+            <label
+              htmlFor="lectureName"
+              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
+            >
+              7.講義内容
+            </label>
+
+            <textarea
+              type="text"
+              className="w-[600px] h-[10rem] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
+              placeholder=""
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="flex justify-end pr-[5rem] mt-[5rem] mb-[3rem]">
+        <div className="text-[1.2rem] text-[#427D9D] font-bold">
+          確認画面へ&gt;&gt;
+        </div>
+      </section>
+    </div>
+  )
+}
+
+export { UniHomePage, UniSettingsPage, CreateArticlePage }

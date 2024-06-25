@@ -21,7 +21,11 @@ import {
   UpNoteListPage,
   FavoriteListPage,
 } from './Pages/UserHomePage'
-import { UniHomePage, UniSettingsPage } from './Pages/UniHomePage'
+import {
+  UniHomePage,
+  UniSettingsPage,
+  CreateArticlePage,
+} from './Pages/UniHomePage'
 
 const App = () => {
   return (
@@ -45,9 +49,11 @@ const App = () => {
         {/*Uni*/}
         <Route path="/unihome" element={<UniHomePage />} />
         <Route path="/unisetting" element={<UniSettingsPage />} />
+        <Route path="/createarticle" element={<CreateArticlePage />} />
+        <Route path="/createarticle" element={<CreateArticlePage />} />
 
         {/* 確認用URL画面 */}
-        <Route path="/" element={<TransitionalScreen />} />
+        <Route path="/createarticle" element={<CreateArticlePage />} />
       </Routes>
     </Router>
   )
