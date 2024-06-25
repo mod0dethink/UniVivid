@@ -75,7 +75,7 @@ function FistWelcomPage() {
       clearTimeout(noneTimeout)
     }
   }, [])
->>>>>>> a84e200f5d6a2a10d0b81449af52c03230a36cb3
+
   return (
     <div className="h-screen flex flex-col justify-between">
       <div id="loading_start" ref={pageStartRef} style={{ opacity: 1 }}></div>
