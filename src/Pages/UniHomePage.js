@@ -127,7 +127,7 @@ function CreateArticlePage() {
     <div>
       <UnivividHeader title="記事制作" />
 
-      <section className='absolute -z-[-3] top-[15px] left-[15px]'>
+      <section className="fixed -z-[-3] top-[15px] left-[15px]">
         <WhiteReturnBtn linkpath="/usermypage" />
       </section>
 
