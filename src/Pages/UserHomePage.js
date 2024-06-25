@@ -31,6 +31,7 @@ import '../assets/styles/bg-images.css'
 import BgImg from '../assets/images/IMG_4007.jpg'
 import Lok from '../assets/images/lock_back.png'
 import Ticon2 from '../assets/images/English.jpg'
+import { Link } from 'react-router-dom'
 
 /*------ユーザーのデータ変数------*/
 let username = '瀬那' //ログインアカウントのユーザーネーム

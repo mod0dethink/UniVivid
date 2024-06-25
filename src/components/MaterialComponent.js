@@ -1,8 +1,22 @@
+//ユーザ画面のコンポーネント
+
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
 //import PropTypes from 'prop-types'
 import ImportImg from '../assets/images/imgImport.png'
+
+// LectureDetails --------------------------------------------------------------------------
+import uimg from '../assets/images/ecc_logo.jpg'  // 講義詳細で使用する例の画像
+// Note ------------------------------------------------------------------------------------
+import { BsPaperclip } from "react-icons/bs";                 // クリップ
+import { MdOutlineFileUpload } from "react-icons/md";         // アップロードボタン
+import { FaChevronRight } from "react-icons/fa";              // >
+import { FaChevronLeft } from "react-icons/fa";               // <
+import user_icon from "../assets/images/user_icon.png";       // アップしたユーザーのアイコン
+import { AiFillLike } from "react-icons/ai";                  //　支援ボタンのアイコン
+import img1 from '../assets/images/note2.png';                // 例の画像
+
 
 //asideのユーザーメニュー
 function UserMenu(itemData) {
@@ -247,6 +261,78 @@ function BoxMenu(itemData) {
   )
 }
 
+//講義ごとのページ
+const Note = () => {
+  const noteImg = img1; // サムネ
+  const upuser_img = user_icon; // アップしたユーザー画像
+  const user_name = "kata__sk"; // アップしたユーザー名
+  let good_count = 20;          // いいね数
+
+  return (
+    <>
+    <div className='flex h-2/5 mt-5 justify-center '>
+      <div className=' bg-gray-200 h-full w-4/5'>
+        <BsPaperclip className='absolute flex end-[10%] size-16 -mt-7 text-main-middle'/>
+        <img src={noteImg} alt="back" className='h-full w-5/6 m-auto'/>
+        {/* 画像にかぶせるグラデーション */}
+        {/* <div className='h-full w-auto bg-gradient-to-t from-blue-500'> </div> */}
+        <div className='flex -mt-16 ml-28'>
+          <div className='flex size-14 bg-gray-500 rounded-full'>
+            <img src={upuser_img} alt="back" className='h-full w-auto rounded-full'/>
+            <p className='my-auto ml-3 bg-white'>{user_name}</p>
+          </div>
+          <div className='flex my-auto ml-auto mr-28 '>
+            <button type='button'><AiFillLike className='text-black size-8'/></button>
+            <p className='my-auto ml-1'>{good_count}</p>
+          </div>
+        </div>
+      </div>
+      <button className='absolute right-[8%] end-28 top-[50%] size-20 bg-gray-300 rounded-full shadow-lg' type="submit">
+        <MdOutlineFileUpload className='size-16 m-auto text-main-dark'/>
+      </button>
+    </div>
+    <div className='flex font-bold justify-center text-main-dark text-2xl'>
+        <button className='mx-2' type='button'><FaChevronLeft/></button>
+        <p className='mx-2 '>1</p>
+        <button className='mx-2' type='button'><FaChevronRight/></button>
+      </div>
+    </>
+  )
+}
+
+//講義詳細
+const LectureDetails = () => {
+  const lecUimg = uimg;
+  const uname = "ecc_comp";     // 大学ユーザ名
+  const lname = "IoT講座";      // 講義名
+  const teachname = "村上 慧";    // 講師名
+  const detail = "ArduinoでRaspberry Piを用い、IoTに触れる。";  // 内容
+
+  return (
+    <>
+      <div name="uni_account" className='flex size-12 rounded-full my-2'>
+        <img src={lecUimg} alt='img' name='uimg' className='h-full w-auto rounded-full'/>
+        <p className='my-auto ml-3'>{uname}</p>
+      </div>
+
+      <div name="lname" className='flex my-2'>
+        <div className=' bg-main text-white text-center px-3'>講義</div>
+        <p className='my-auto ml-3'>{lname}</p>
+      </div>
+
+      <div name="teachname" className='flex my-2'>
+        <div className=' bg-main text-white text-center px-3'>講師</div>
+        <p className='my-auto ml-3'>{teachname}</p>
+      </div>
+
+      <div name="detail" className='flex my-2'>
+        <div className=' bg-main text-white text-center px-3'>内容</div>
+        <p className='my-auto ml-3'>{detail}</p>
+      </div>
+    </>
+  )
+}
+
 export {
   UserMenu,
   RootUrl,
@@ -256,4 +342,6 @@ export {
   ArticlePart,
   ArticleSearch,
   BoxMenu,
+  Note,
+  LectureDetails,
 }

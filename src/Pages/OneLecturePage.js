@@ -6,7 +6,7 @@ import starAfter from "../assets/images/star_after.png";      // お気に入り
 
 // コンポーネント
 import Note from '../userComponents/Note';                      // ノート
-import LectureDetails from '../userComponents/LectureDetails';  // 講義情報
+import { LectureDetails } from '../components/MaterialComponent';  // 講義情報
 import ConnectLink from '../components/ConnectLink';            // 関連記事
 
 const OneLecturePage = () => {

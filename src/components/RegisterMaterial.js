@@ -1,3 +1,5 @@
+// ログイン・登録のコンポネント
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/styles/UnivividStyle.css'

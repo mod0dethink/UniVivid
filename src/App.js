@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 // Componentのインポート
 import TransitionalScreen from './components/TransitionalScreen' // 開発者用Component
 import CategoryComponent from './components/CategoryComponent'
-import WelcomPage from './Pages/WelcomPage'
 import OneLecturePage from './Pages/OneLecturePage'
 import UnivercityPage from './Pages/UnivercityPage'
 
@@ -18,6 +17,7 @@ import {
   EntitySelectionPage,
   RegisterPage,
   UniRegisterPage,
+  WelcomPage,
 } from './Pages/AccountPage'
 import {
   UserHomePage,
@@ -42,6 +42,7 @@ const App = () => {
         <Route path="/entityselection" element={<EntitySelectionPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/uniRegister" element={<UniRegisterPage />} />
+        <Route path="/welcom" element={<WelcomPage />} />
 
         {/* User Home と User Settings のルート */}
         <Route path="/userhome" element={<UserHomePage />} />
