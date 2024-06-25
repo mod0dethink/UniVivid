@@ -1,6 +1,6 @@
 //必要なlibraryをインポート
 import React, { useRef, useState } from 'react'
-import axios from 'axios'
+import { Axios } from 'axios'
 
 //componentをインポート
 import {
@@ -26,6 +26,7 @@ import {
 //必要なアセットをインポート
 import Imagepng from '../assets/images/IMG_4007.jpg'
 import Door from '../assets/images/door.png'
+import backBtnImg from "../assets/images/back.png"           // 戻るボタン
 
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/bg-images.css'
@@ -33,6 +34,7 @@ import '../assets/styles/bg-images.css'
 import BgImg from '../assets/images/IMG_4007.jpg'
 import Lok from '../assets/images/lock_back.png'
 import Ticon2 from '../assets/images/English.jpg'
+import { Link } from 'react-router-dom'
 
 /*------ユーザーのデータ変数------*/
 let username = '瀬那' //ログインアカウントのユーザーネーム
@@ -55,11 +57,11 @@ function UserHomePage() {
         Pimage={ProImg}
       />
       {/*記事メニュー*/}
-      <section className="main flex-grow-[7] flex content-center  h-screen ">
-        <div className="flex flex-col justify-center space-y-20 w-[100%] text-center items-center ">
+      <section className="flex-grow-[7] content-center h-screen">
+        {/* <div className="flex flex-col justify-center space-y-20 w-[100%] text-center items-center "> */}
           <RootUrl name={Door} text={'動画へ'} linkpath="" />
           <RootUrl name={Door} text={'記事一覧へ'} linkpath={articlepath} />
-        </div>
+        {/* </div> */}
       </section>
     </div>
   )
@@ -74,7 +76,7 @@ function UserSettingsPage() {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      const response = await axios.put(
+      const response = await Axios.put(
         'http://localhost:8080/auth/profile',
         {
           type: 'user', // ここは大学用のコンポーネントでuniversityに変える

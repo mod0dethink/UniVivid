@@ -1,6 +1,7 @@
 //libraryのインポート
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FaAngleDoubleRight } from "react-icons/fa"
 //import axios from 'axios'
 //アセットのインポート
 import '../assets/styles/UnivividStyle.css'
@@ -23,7 +24,7 @@ import {
 } from '../components/RegisterMaterial'
 
 //初期画面
-function WelcomePage() {
+function FistWelcomPage() {
   return (
     <div className="h-screen flex flex-col justify-between">
       {/*header*/}
@@ -32,8 +33,8 @@ function WelcomePage() {
       </section>
 
       {/*main*/}
-      <section className="flex flex-col items-center justify-center sw-screen h-full">
-        <div className="h-1/5 text-3xl">
+      <section className="flex flex-col items-center justify-center sw-screen h-full bg-main-bg">
+        <div className="h-1/5 text-2xl mt-24">
           <p className="font-black">ようこそ、UniVividへ！</p>
         </div>
         {/*ログイン画面へ*/}
@@ -254,10 +255,33 @@ function UniRegisterPage() {
   )
 }
 
+// 新規登録完了の画面
+const WelcomPage = () => {
+  const user_name = "ユーザー名";  // 引数として渡されたidから名前を取得し、変数に代入
+
+  return (
+    <div className='bg-main-bg font-bold h-screen font-mono'>
+      <div className='h-full content-center text-center text-4xl '>
+        <p>登録が完了しました。</p>
+        <p>こんにちは、<font className='text-main-dark'>{user_name}</font>さん！</p>
+      </div>
+      <div className='flex justify-end -mt-14 mr-10 text-main-middle'>
+        <Link to='/userhome'>
+          <button className='flex'>
+            <p>next</p>
+            <FaAngleDoubleRight className='ml-1 mt-1'/>
+          </button>
+        </Link>
+      </div>
+    </div>
+  )
+}
+
 export {
-  WelcomePage,
+  FistWelcomPage,
   LoginPage,
   RegisterPage,
   UniRegisterPage,
   EntitySelectionPage,
+  WelcomPage,
 }

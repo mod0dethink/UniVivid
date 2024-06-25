@@ -11,7 +11,16 @@ function TransitionalScreen() {
           <div className="content">ログイン画面</div>
         </Link>
       </section>
-
+      <section className="section-nav">
+        <Link to="/createaccount">
+          <div className="content">新規登録画面</div>
+        </Link>
+      </section>
+      <section className="section-nav">
+        <Link to="/category">
+          <div className="content">カテゴリー画面</div>
+        </Link>
+      </section>
       <section className="section-nav">
         <Link to="/welcome">
           <div className="content">ようこそ</div>
@@ -22,15 +31,49 @@ function TransitionalScreen() {
           <div className="content">userhome</div>
         </Link>
       </section>
-
       <section className="section-nav">
-        <Link to="/unihome">
+        <Link to="/usersettingpsage">
+          <div className="content">usersettingpsage</div>
+        </Link>
+      </section>
+      <section className="section-nav">
+        <Link to="/universityhome">
           <div className="content">univershome</div>
         </Link>
       </section>
       <section className="section-nav">
         <Link to="/article">
           <div className="content">articlelist</div>
+        </Link>
+      </section>
+
+      <section className="section-nav">
+        <Link to="/articlepage">
+          <div className="content">アーティクルのview</div>
+        </Link>
+      </section>
+
+      <section className="section-nav">
+        <Link to="/entitiyselection">
+          <div className="content">entitiyselectionのview</div>
+        </Link>
+      </section>
+
+      <section className="section-nav">
+        <Link to="/welcompage">
+          <div className="content">welcomePage</div>
+        </Link>
+      </section>
+
+      <section className="section-nav">
+        <Link to="/onelecturepage">
+          <div className="content">OneLecturePage</div>
+        </Link>
+      </section>
+
+      <section className="section-nav">
+        <Link to="/univercitypage">
+          <div className="content">UnivercityPage</div>
         </Link>
       </section>
     </div>

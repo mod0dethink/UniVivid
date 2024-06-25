@@ -1,4 +1,7 @@
+// ログイン・登録のコンポネント
+
 import React from 'react'
+import { Link } from 'react-router-dom'
 import '../assets/styles/UnivividStyle.css'
 
 function LoginForm() {
@@ -6,24 +9,20 @@ function LoginForm() {
     <section className="pt-[150px] bg-{##f3fafb} flex justify-center h-screen">
       <div className="from-nav">
         <from>
-          <div>
-            <p>メールアドレス</p>
-            <input type="emaile" name="email" placeholder="aaa" />
+          <div name='input-area'>
+            <div>
+              <p>メールアドレス</p>
+              <input type="emaile" name="email" placeholder="aaa" />
+            </div>
+            <div>
+              <p>パスワード</p>
+              <input type="password" name="password" placeholder="123" />
+            </div>
           </div>
 
-          <div>
-            <p>パスワード</p>
-            <input type="password" name="password" placeholder="123" />
-          </div>
-
-          <div>
-            <p>ユーザ名</p>
-            <input type="text" name="username" placeholder="abcd" />
-          </div>
-
-          <div>
+          <Link to='/WelcomPage'>
             <button>ログイン</button>
-          </div>
+          </Link>
         </from>
       </div>
     </section>

@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
+import { Axios } from 'axios'
+
 
 import Door from '../assets/images/door.png'
 import { Link } from 'react-router-dom'
@@ -64,7 +66,7 @@ function UniSettingsPage() {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      const response = await axios.put(
+      const response = await Axios.put(
         'http://localhost:8080/auth/profile',
         {
           type: 'user', // ここは大学用のコンポーネントでuniversityに変える
