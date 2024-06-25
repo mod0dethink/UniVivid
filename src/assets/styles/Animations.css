@@ -19,3 +19,46 @@
   background-color: aliceblue;
   transform: scale(1.1);
 }
+
+/*---*/
+/* App.css */
+/* App.css */
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 1000ms;
+}
+
+#loading_start {
+  background-color: white;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: drid;
+  place-items: center;
+}
+
+#loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #427d9d;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: drid;
+  place-items: center;
+}
+#loading_img {
+  opacity: 0;
+}

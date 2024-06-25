@@ -22,6 +22,7 @@ function EmptyHeader() {
     </section>
   )
 }
+
 function UnivividHeader(itemData) {
   return (
     <section className="text-6xl fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
