@@ -54,6 +54,7 @@ const App = () => {
 
         {/* 確認用URL画面 */}
         <Route path="/createarticle" element={<CreateArticlePage />} />
+        <Route path="/" element={<TransitionalScreen />} />
       </Routes>
     </Router>
   )
