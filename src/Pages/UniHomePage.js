@@ -13,6 +13,7 @@ import {
   SaveBtn,
   ReturnBtn,
   WhiteReturnBtn,
+  InputItems,
 } from '../components/MaterialComponent'
 import { UnivividHeader, WhiteHeader } from '../components/LayoutComponent'
 
@@ -135,99 +136,7 @@ function CreateArticlePage() {
 
       <section className="pt-[101px]">
         <div className="text-center pt-[3.5rem]">
-          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
-            <label
-              htmlFor="lectureName"
-              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
-            >
-              1.講義名
-            </label>
-            <input
-              id="lectureName"
-              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
-              placeholder=""
-            />
-          </div>
-
-          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
-            <label
-              htmlFor="lectureName"
-              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
-            >
-              2.講師
-            </label>
-            <input
-              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
-              placeholder=""
-            />
-          </div>
-
-          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
-            <label
-              htmlFor="lectureName"
-              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
-            >
-              3.日時
-            </label>
-            <input
-              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
-              placeholder=""
-            />
-          </div>
-
-          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
-            <label
-              htmlFor="lectureName"
-              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
-            >
-              4.ジャンル
-            </label>
-            <input
-              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
-              placeholder=""
-            />
-          </div>
-
-          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
-            <label
-              htmlFor="lectureName"
-              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
-            >
-              5.表示画像
-            </label>
-            <input
-              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
-              placeholder=""
-            />
-          </div>
-
-          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
-            <label
-              htmlFor="lectureName"
-              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
-            >
-              6.申込みURL
-            </label>
-            <input
-              className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
-              placeholder=""
-            />
-          </div>
-
-          <div className="mx-auto max-w-[600px] mb-[1.5rem]">
-            <label
-              htmlFor="lectureName"
-              className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
-            >
-              7.講義内容
-            </label>
-
-            <textarea
-              type="text"
-              className="w-[600px] h-[10rem] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
-              placeholder=""
-            />
-          </div>
+          <InputItems />
         </div>
       </section>
 
@@ -240,4 +149,30 @@ function CreateArticlePage() {
   )
 }
 
-export { UniHomePage, UniSettingsPage, CreateArticlePage }
+function CreateCheckedPage() {
+  return (
+    <div>
+      <UnivividHeader title="記事制作" />
+
+      <section className="fixed -z-[-3] top-[15px] left-[15px]">
+        <WhiteReturnBtn linkpath="/usermypage" />
+      </section>
+
+      <section className="pt-[101px]">
+        <div className="text-center pt-[3.5rem]">
+          <InputItems />
+        </div>
+      </section>
+
+      <section className='pt-[101px]"'>
+        <div className="mb-[2.5rem] flex justify-end pt-[2.5rem] text-[1.2rem] font-bold">
+          <button className="text-white leading-[3rem] bg-[#427D9D] px-16 py-1 rounded-md w-[175px] mr-[3.2rem]">
+            送信
+          </button>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+export { UniHomePage, UniSettingsPage, CreateArticlePage, CreateCheckedPage }
