@@ -1,18 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import ReturnImg from '../assets/images/return.png'
+import ReturnImgW from '../assets/images/retunbtnw.png' // 戻るボタン白
+import ReturnImg from '../assets/images/return.png'     // 戻るボタン紺
 //テスト用
 import Pen from '../assets/images/pen.png'
 
 //ヘッダー
 function Logotext() {
   return (
-    <section className="fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-2">
+    <p>
       <span className="text-5xl">U</span>
       <span className="text-3xl">ni</span>
       <span className="text-5xl">V</span>
       <span className="text-3xl">ivid</span>
-    </section>
+    </p>
   )
 }
 function EmptyHeader() {
@@ -23,16 +24,34 @@ function EmptyHeader() {
   )
 }
 
+/**
+ * 
+ * @param {*ヘッダーに表示するタイトル} itemData 
+ * @param {*戻るボタンの移動先} link 
+ * @param {*戻るボタンの有無(引数でhiddenを渡したら隠れる)} hidden
+ * @returns ヘッダー
+ */
 function UnivividHeader(itemData) {
+  // 戻るボタンの色(　0 = 紺　1 = 白　)
+  const ReturnBtn = [ReturnImg, ReturnImgW];
+
   return (
-    <section className="text-6xl fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
-      {itemData.title}
+    <>
+    <section className="flex fixed w-screen bg-main py-5">
+      <Link to={itemData.link}>
+        <button className='absolute size-14 ml-5' hidden={itemData.hidden} >
+          <img src={ReturnBtn[itemData.returnCol]} alt='back' />
+        </button>
+      </Link>
+      <p className='text-6xl m-auto text-white font-bold'>{itemData.title}</p>
     </section>
+    </>
   )
 }
+// フッター
 function Unifooter() {
   return (
-    <footer className="w-screen bg-[#427d9d] text-white text-[60px] text-center font-bold py-5"></footer>
+    <footer className="w-screen bg-main text-white text-[60px] text-center font-bold py-5"></footer>
   )
 }
 

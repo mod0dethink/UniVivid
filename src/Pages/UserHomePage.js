@@ -1,7 +1,20 @@
+// ログイン後のユーザーの画面
+
+// インポート --------------------------------------------------------
+
 //必要なlibraryをインポート
 import React, { useRef, useState } from 'react'
 import { Axios } from 'axios'
-
+//必要なアセットをインポート
+import Imagepng from '../assets/images/IMG_4007.jpg'
+import Door from '../assets/images/door.png'
+import '../assets/styles/Dimensions.css'
+import '../assets/styles/bg-images.css'
+//　テスト用
+import BgImg from '../assets/images/IMG_4007.jpg'
+import Lok from '../assets/images/lock_back.png'
+import Ticon2 from '../assets/images/English.jpg'
+import { Link } from 'react-router-dom'
 //componentをインポート
 import {
   UserMenu,
@@ -22,19 +35,6 @@ import {
   Logotext,
   UnivividHeader,
 } from '../components/LayoutComponent'
-
-//必要なアセットをインポート
-import Imagepng from '../assets/images/IMG_4007.jpg'
-import Door from '../assets/images/door.png'
-import backBtnImg from "../assets/images/back.png"           // 戻るボタン
-
-import '../assets/styles/Dimensions.css'
-import '../assets/styles/bg-images.css'
-//テスト用
-import BgImg from '../assets/images/IMG_4007.jpg'
-import Lok from '../assets/images/lock_back.png'
-import Ticon2 from '../assets/images/English.jpg'
-import { Link } from 'react-router-dom'
 
 /*------ユーザーのデータ変数------*/
 let username = '瀬那' //ログインアカウントのユーザーネーム

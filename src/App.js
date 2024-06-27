@@ -12,7 +12,7 @@ import UnivercityPage from './Pages/UnivercityPage'
 import './assets/scripts/animation'
 
 import {
-  FistWelcomPage,
+  FirstWelcomPage,
   LoginPage,
   EntitySelectionPage,
   RegisterPage,
@@ -43,7 +43,7 @@ const App = () => {
         {/* <Route path="/" element={<TransitionalScreen />} /> */}
 
         {/* 最初に呼び出される画面 */}
-        <Route path="/" element={<FistWelcomPage />}/>
+        <Route path="/" element={<FirstWelcomPage />}/>
         {/* ログイン・新規登録の画面 */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/entityselection" element={<EntitySelectionPage />} />

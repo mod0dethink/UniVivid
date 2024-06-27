@@ -1,3 +1,7 @@
+// ログイン・新規登録の画面
+
+// インポート --------------------------------------------------------
+
 //libraryのインポート
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
@@ -7,12 +11,9 @@ import { FaAngleDoubleRight } from "react-icons/fa"
 import '../assets/styles/UnivividStyle.css'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/Animations.css'
-
 import PenImg from '../assets/images/pen.png'
 import TeacherImg from '../assets/images/teacher.png'
-
 import Logo from '../assets/images/180_20240622001109.png'
-
 //componentのインポート
 import {
   UnivividHeader,
@@ -25,8 +26,10 @@ import {
   CreateUniAccountForm,
 } from '../components/RegisterMaterial'
 
+// 画面 ----------------------------------------------------------
+
 //初期画面
-function FistWelcomPage() {
+function FirstWelcomPage() {
   const pageLoadingRef = useRef(null)
   const pageStartRef = useRef(null)
   const pageImgRef = useRef(null)
@@ -91,7 +94,7 @@ function FistWelcomPage() {
 
       {/*header*/}
       <section>
-        <UnivividHeader title={<Logotext />} />
+        <UnivividHeader title={<Logotext />} returnCol={0} hidden='hidden'/>
       </section>
 
       {/*main*/}
@@ -168,7 +171,7 @@ function LoginPage() {
   return (
     <div className="h-screen flex flex-col justify-between">
       {/*header*/}
-      <UnivividHeader title="ログイン" />
+      <UnivividHeader title="ログイン" returnCol={1} link="/" />
       {/*name:email,password,username*/}
       <LoginForm />
       {/*footer*/}
@@ -183,7 +186,7 @@ function EntitySelectionPage() {
     <div className="h-screen flex flex-col justify-between">
       <section>
         {/*header*/}
-        <UnivividHeader title={<Logotext />} />
+        <UnivividHeader title={<Logotext />} returnCol={1} link='/'/>
       </section>
       <section className="flex flex-col items-center justify-center sw-screen h-full bg-[#FFFEF8]">
         {/*---個人or学校---*/}
@@ -260,7 +263,7 @@ function RegisterPage() {
   return (
     <div className="h-screen flex flex-col justify-between">
       {/*Header*/}
-      <UnivividHeader title="新規登録" />
+      <UnivividHeader title="新規登録" returnCol={1} link='/entityselection'/>
       {/*入力フォーム*/}
       <CreateAccountForm />
       {/*footer*/}
@@ -308,7 +311,7 @@ function UniRegisterPage() {
   return (
     <div className="from-container">
       {/*header*/}
-      <UnivividHeader title="新規登録" />
+      <UnivividHeader title="新規登録" returnCol={1} link='/entityselection'/>
       {/*登録フォーム*/}
       <CreateUniAccountForm />
       {/*footer*/}
@@ -340,7 +343,7 @@ const WelcomPage = () => {
 }
 
 export {
-  FistWelcomPage,
+  FirstWelcomPage,
   LoginPage,
   RegisterPage,
   UniRegisterPage,

@@ -19,7 +19,6 @@ function LoginForm() {
               <input type="password" name="password" placeholder="123" />
             </div>
           </div>
-
           <Link to='/WelcomPage'>
             <button>ログイン</button>
           </Link>
@@ -38,22 +37,17 @@ function CreateAccountForm() {
             <p>メールアドレス</p>
             <input type="emaile" name="emaile" placeholder="aaa" />
           </div>
-
           <div>
             <p>パスワード</p>
             <input type="password" name="password" placeholder="123" />
           </div>
-
           <div>
             <p>ユーザ名</p>
             <input type="text" name="username" placeholder="abcd" />
           </div>
-
-          <div>
-            <button className="bg-[#b4c2c9] text-[#164863] mt-[110px] mb-[25px] text-[35px] font-bold rounded-10px w-[35%]">
-              登録
-            </button>
-          </div>
+          <Link to='/welcompage'>
+            <button type='submit'>登録</button>
+          </Link>
         </from>
       </div>
     </section>
@@ -92,9 +86,9 @@ function CreateUniAccountForm() {
             <input type="text" name="username" placeholder="abcd" />
           </div>
 
-          <div>
-            <button>登録</button>
-          </div>
+          <Link to='/welcompage'>
+            <button type='submit'>登録</button>
+          </Link>
         </from>
       </div>
     </section>

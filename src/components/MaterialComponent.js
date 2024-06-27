@@ -40,9 +40,11 @@ function UserMenu(itemData) {
         <Link to={itemData.settingpath}>ユーザー設定</Link>
       </div>
       <div></div>
-      <div className="py-[50px]">
-        <p>ログアウト</p>
-      </div>
+      <Link to='/'>
+        <div className="py-[50px]">
+          <p>ログアウト</p>
+        </div>
+      </Link>
     </aside>
   )
 }
