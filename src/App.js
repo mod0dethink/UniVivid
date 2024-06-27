@@ -32,6 +32,7 @@ import {
   UniHomePage,
   UniSettingsPage,
   CreateArticlePage,
+  CreateCheckedPage,
 } from './Pages/UniHomePage'
 
 const App = () => {
@@ -67,6 +68,8 @@ const App = () => {
         
         {/*カテゴリー登録*/}
         <Route path="/category" element={<CategoryComponent />} />
+        <Route path="/createchecked" element={<CreateCheckedPage />} />
+
 
         {/*登録完了画面*/}
         <Route path="/welcompage" element={<WelcomPage/>} />
