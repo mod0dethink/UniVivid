@@ -38,13 +38,12 @@ import {
 const App = () => {
   return (
     <Router>
-
       <Routes>
         {/* 確認用URL画面 */}
         {/* <Route path="/" element={<TransitionalScreen />} /> */}
 
         {/* 最初に呼び出される画面 */}
-        <Route path="/" element={<FirstWelcomPage />}/>
+        <Route path="/" element={<FirstWelcomPage />} />
         {/* ログイン・新規登録の画面 */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/entityselection" element={<EntitySelectionPage />} />
@@ -65,20 +64,18 @@ const App = () => {
         <Route path="/unihome" element={<UniHomePage />} />
         <Route path="/unisetting" element={<UniSettingsPage />} />
         <Route path="/createarticle" element={<CreateArticlePage />} />
-        
+
         {/*カテゴリー登録*/}
         <Route path="/category" element={<CategoryComponent />} />
         <Route path="/createchecked" element={<CreateCheckedPage />} />
 
-
         {/*登録完了画面*/}
-        <Route path="/welcompage" element={<WelcomPage/>} />
+        <Route path="/welcompage" element={<WelcomPage />} />
 
         {/*講義ごとのページ*/}
-        <Route path="/onelecturepage" element={<OneLecturePage/>} />
+        <Route path="/onelecturepage" element={<OneLecturePage />} />
 
-        <Route path="/univercitypage" element={<UnivercityPage/>} />
-
+        <Route path="/univercitypage" element={<UnivercityPage />} />
       </Routes>
     </Router>
   )
