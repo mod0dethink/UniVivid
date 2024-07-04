@@ -16,7 +16,8 @@ import { FaChevronLeft } from "react-icons/fa";               // <
 import user_icon from "../assets/images/user_icon.png";       // アップしたユーザーのアイコン
 import { AiFillLike } from "react-icons/ai";                  //　支援ボタンのアイコン
 import img1 from '../assets/images/note2.png';                // 例の画像
-
+// Board-------------------------------------------------
+import { TbPencilPlus } from "react-icons/tb";  // 追加
 
 //asideのユーザーメニュー
 function UserMenu(itemData) {
@@ -248,7 +249,7 @@ function ArticlePart(PartData) {
         backgroundSize: `cover`,
       }}
     >
-      <div className="space-x-2   flex pl-[20px] text-left items-center">
+      <div className="space-x-2 flex pl-[20px] text-left items-center">
         <div>
           <img className="w-[50px] h-[50px]" src={PartData.Ticon} alt="ticon" />
         </div>
@@ -383,8 +384,8 @@ const Note = () => {
 
   return (
     <>
-    <div className='flex h-2/5 mt-5 justify-center '>
-      <div className=' bg-gray-200 h-full w-4/5'>
+    <div className='flex h-2/5 mt-5 justify-center'>
+      <div className=' bg-gray-200 h-full w-4/5 '>
         <BsPaperclip className='absolute flex end-[10%] size-16 -mt-7 text-main-middle'/>
         <img src={noteImg} alt="back" className='h-full w-5/6 m-auto'/>
         {/* 画像にかぶせるグラデーション */}
@@ -423,10 +424,12 @@ const LectureDetails = () => {
 
   return (
     <>
-      <div name="uni_account" className='flex size-12 rounded-full my-2'>
-        <img src={lecUimg} alt='img' name='uimg' className='h-full w-auto rounded-full'/>
-        <p className='my-auto ml-3'>{uname}</p>
-      </div>
+      <Link to='/univercitypage'>
+        <button type='submit' name="uni_account" className='flex size-12 rounded-full my-2'>
+          <img src={lecUimg} alt='img' name='uimg' className='h-full w-auto rounded-full'/>
+          <p className='my-auto ml-3'>{uname}</p>
+        </button>
+      </Link>
 
       <div name="lname" className='flex my-2'>
         <div className=' bg-main text-white text-center px-3'>講義</div>
@@ -459,6 +462,42 @@ const ConnectLink = () => {
   )
 }
 
+//  掲示板コメントダイアログ
+const ComentDialog = () => {
+  return (
+    <dialog className='bg-black/50 h-screen w-screen content-center' open>
+      <form method='dialog' className='bg-white h-3/4 w-96 m-auto rounded-md'>
+        <div name='title' className='flex h-14 w-full bg-main-dark text-white text-2xl rounded-t-md'>
+          <p className='my-auto ml-[40%]'>コメント</p>
+          <button className='font-normal ml-auto mr-5'>✕</button>
+        </div>
+        <div className='border-2 h-2/3 w-3/4 ml-12 mt-5'>
+          <textarea className='h-full w-full resize-none' placeholder='コメントを入力してください。'></textarea>
+        </div>
+        <button className='bg-[#2D92C9] bg-gradient-to-t from-[#164863] text-white px-10 ml-[35%] mt-5 rounded-md py-1'>送信</button>
+      </form>
+    </dialog>
+  )
+}
+
+// 掲示板
+const Board = () => {
+  const coment = ['校舎がきれいだった！','階段が狭杉！']
+
+  return (
+    <>
+      <div className='w-5/12 h-full border-2 bg-white'>
+        <p className=' text-main text-center mb-3'>～ 掲示板 ～</p>
+        {coment.map((element,index) => <p key={index} className=' font-normal border-b-2 w-5/6 mx-auto'>{element}</p>)}
+      </div>
+      <button className='size-14 rounded-full bg-main -ml-16 mt-auto mb-3'>
+        {/* ToDo:コメントアイコン押したときにダイアログを開く処理 */}
+        <TbPencilPlus className='size-11 ml-1 -mt-1 text-white'/>
+      </button>
+    </>
+  )
+}
+
 export {
   UserMenu,
   RootUrl,
@@ -473,4 +512,6 @@ export {
   HomeReturnBtn,
   InputItems,
   ConnectLink,
+  ComentDialog,
+  Board,
 }
