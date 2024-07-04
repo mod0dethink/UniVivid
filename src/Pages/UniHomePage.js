@@ -13,7 +13,7 @@ import {
   InputField,
   ProfileImageEditor,
   SaveBtn,
-  ReturnBtn,
+  HomeReturnBtn,
   InputItems,
 } from '../components/MaterialComponent'
 import { UnivividHeader, WhiteHeader } from '../components/LayoutComponent'
