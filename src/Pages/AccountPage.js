@@ -5,7 +5,7 @@
 //libraryのインポート
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { FaAngleDoubleRight } from "react-icons/fa"
+import { FaAngleDoubleRight } from 'react-icons/fa'
 //import axios from 'axios'
 //アセットのインポート
 import '../assets/styles/UnivividStyle.css'
@@ -94,7 +94,7 @@ function FirstWelcomPage() {
 
       {/*header*/}
       <section>
-        <UnivividHeader title={<Logotext />} returnCol={0} hidden='hidden'/>
+        <UnivividHeader title={<Logotext />} returnCol={0} hidden="hidden" />
       </section>
 
       {/*main*/}
@@ -186,7 +186,7 @@ function EntitySelectionPage() {
     <div className="h-screen flex flex-col justify-between">
       <section>
         {/*header*/}
-        <UnivividHeader title={<Logotext />} returnCol={1} link='/'/>
+        <UnivividHeader title={<Logotext />} returnCol={1} link="/" />
       </section>
       <section className="flex flex-col items-center justify-center sw-screen h-full bg-[#FFFEF8]">
         {/*---個人or学校---*/}
@@ -263,7 +263,7 @@ function RegisterPage() {
   return (
     <div className="h-screen flex flex-col justify-between">
       {/*Header*/}
-      <UnivividHeader title="新規登録" returnCol={1} link='/entityselection'/>
+      <UnivividHeader title="新規登録" returnCol={1} link="/entityselection" />
       {/*入力フォーム*/}
       <CreateAccountForm />
       {/*footer*/}
@@ -311,7 +311,7 @@ function UniRegisterPage() {
   return (
     <div className="from-container">
       {/*header*/}
-      <UnivividHeader title="新規登録" returnCol={1} link='/entityselection'/>
+      <UnivividHeader title="新規登録" returnCol={1} link="/entityselection" />
       {/*登録フォーム*/}
       <CreateUniAccountForm />
       {/*footer*/}
@@ -322,19 +322,21 @@ function UniRegisterPage() {
 
 // 新規登録完了の画面
 const WelcomPage = () => {
-  const user_name = "ユーザー名";  // 引数として渡されたidから名前を取得し、変数に代入
+  const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
 
   return (
-    <div className='bg-main-bg font-bold h-screen font-mono'>
-      <div className='h-full content-center text-center text-4xl '>
+    <div className="bg-main-bg font-bold h-screen font-mono">
+      <div className="h-full content-center text-center text-4xl ">
         <p>登録が完了しました。</p>
-        <p>こんにちは、<font className='text-main-dark'>{user_name}</font>さん！</p>
+        <p>
+          こんにちは、<font className="text-main-dark">{user_name}</font>さん！
+        </p>
       </div>
-      <div className='flex justify-end -mt-14 mr-10 text-main-middle'>
-        <Link to='/userhome'>
-          <button className='flex'>
+      <div className="flex justify-end -mt-14 mr-10 text-main-middle">
+        <Link to="/userhome">
+          <button className="flex">
             <p>next</p>
-            <FaAngleDoubleRight className='ml-1 mt-1'/>
+            <FaAngleDoubleRight className="ml-1 mt-1" />
           </button>
         </Link>
       </div>
