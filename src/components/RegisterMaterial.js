@@ -6,7 +6,7 @@ import '../assets/styles/UnivividStyle.css'
 
 function LoginForm() {
   return (
-    <section className=" pt-[5%] bg-main-bg flex justify-center">
+    <section className="pt-[5%] bg-main-bg flex justify-center">
       <div className="from-nav">
         <from>
           <div name='input-area'>
@@ -30,7 +30,7 @@ function LoginForm() {
 
 function CreateAccountForm() {
   return (
-    <section className="pt-[150px] bg-{##f3fafb} flex justify-center h-screen">
+    <section className=" pt-[5%] bg-main-bg flex justify-center">
       <div className="from-nav">
         <from>
           <div>
@@ -41,11 +41,7 @@ function CreateAccountForm() {
             <p>パスワード</p>
             <input type="password" name="password" placeholder="123" />
           </div>
-          <div>
-            <p>ユーザ名</p>
-            <input type="text" name="username" placeholder="abcd" />
-          </div>
-          <Link to='/welcompage'>
+          <Link to='/welcompage' homeLink='/userhome'>
             <button type='submit'>登録</button>
           </Link>
         </from>

@@ -321,7 +321,7 @@ function UniRegisterPage() {
 }
 
 // 新規登録完了の画面
-const WelcomPage = () => {
+function WelcomPage() {
   const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
 
   return (
@@ -333,7 +333,7 @@ const WelcomPage = () => {
         </p>
       </div>
       <div className="flex justify-end -mt-14 mr-10 text-main-middle">
-        <Link to="/userhome">
+        <Link to=''>
           <button className="flex">
             <p>next</p>
             <FaAngleDoubleRight className="ml-1 mt-1" />

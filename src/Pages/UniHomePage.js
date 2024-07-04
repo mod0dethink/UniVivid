@@ -40,7 +40,6 @@ let articlepath = '/userarticlelist' //記事一覧へのLinkパス
 //大学側のホームページ
 function UniHomePage() {
   const Door1 = Door
-
   return (
     <div className="flex w-[100vw] h-screen">
       {/*ユーザーのメニュー*/}
@@ -160,7 +159,7 @@ function CreateCheckedPage() {
         </div>
       </section>
 
-      <section className='pt-[101px]"'>
+      <section className='pt-[101px]'>
         <div className="mb-[2.5rem] flex justify-end pt-[2.5rem] text-[1.2rem] font-bold">
           <button className="text-white leading-[3rem] bg-[#427D9D] px-16 py-1 rounded-md w-[175px] mr-[3.2rem]">
             送信

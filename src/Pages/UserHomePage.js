@@ -151,7 +151,7 @@ function UserArticleList() {
       </div>
 
       <div className="flex justify-between">
-        <div className='mt-56 ml-10'><ArticleSearch /></div>
+        <div className='mt-48 ml-10'><ArticleSearch /></div>
         <div className="space-y-5 mt-24 mr-32">
           <div className="pt-[50px] space-y-10">
           <Link to='/onelecturepage'>

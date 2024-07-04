@@ -178,28 +178,29 @@ function HomeReturnBtn(pathData) {
 function ArticleSearch(pathData) {
   return (
     // <aside className="fixed top-[200px] left-[20px]">
-    <aside className="fixed">
-      <div className="bg-[#9BBEC822] flex flex-col justify-center items-left pl-[25px]  h-[35em] w-[30vw] max-w-[400px] border-b-[4px] border-t-[4px] border-[#427D9D] border-solid">
-        <section className="space-y-3">
+    <aside className="fixed w-full">
+      <div className="bg-[#9BBEC822] flex flex-col justify-center items-left pl-[25px] py-3 w-3/12 border-b-[4px] border-t-[4px] border-main border-solid
+        font-bold text-main-dark">
+        <section className="space-y-1">
           <div className="space-y-2">
-            <p className="text-[#164863] font-bold text-[1.5em]">場所:</p>
+            <p>場所:</p>
             <input type="text" />
           </div>
 
           <div className="space-y-2">
-            <p className="text-[#164863] font-bold text-[1.5em]">日程:</p>
+            <p>日程:</p>
             <input type="text" />
           </div>
           <div className="space-y-2">
-            <p className="text-[#164863] font-bold text-[1.5em]">時間:</p>
+            <p>時間:</p>
             <input type="text" />
           </div>
           <div className="space-y-2">
-            <p className="text-[#164863] font-bold text-[1.5em]">ジャンル:</p>
+            <p>ジャンル:</p>
             <input type="text" />
           </div>
           <div className="space-y-2">
-            <p className="text-[#164863] font-bold text-[1.5em]">キーワード:</p>
+            <p>キーワード:</p>
             <input type="text" />
 
             <div className="border-triangle"></div>
@@ -207,16 +208,16 @@ function ArticleSearch(pathData) {
         </section>
         <section className="pt-[20px]">
           <form className="flex justify-around">
-            <div className="flex justify-center">
-              <p className="text-[1.5em] text-[#164863] font-bold">開講済</p>
+            <div className="flex">
               <input
-                className="rounded-[50px] border-solid border-[2px] w-[25px]"
+                className="border-solid border-[2px] w-4"
                 type="checkbox"
                 id="check"
               />
+              <p className="text-2xl text-[#164863] font-bold ml-2">開講済</p>
             </div>
             <div>
-              <button className="text-center text-[1.5em] bg-[#427D9D] text-[#ffffff] w-[5em] rounded-[10px]">
+              <button className="text-center text-2xl bg-[#427D9D] text-[#ffffff] w-[5em] rounded-[10px]">
                 検索
               </button>
             </div>
