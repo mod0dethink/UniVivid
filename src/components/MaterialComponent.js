@@ -1,15 +1,14 @@
 //ユーザ画面のコンポーネント
 
+// ----------------------------------------インポート --------------------------------------------------
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
 //import PropTypes from 'prop-types'
 import ImportImg from '../assets/images/imgImport.png'
-import WhiteReturn from '../assets/images/retunbtnw.png'
-
-// LectureDetails --------------------------------------------------------------------------
+// LectureDetails----------------------------------------
 import uimg from '../assets/images/ecc_logo.jpg'  // 講義詳細で使用する例の画像
-// Note ------------------------------------------------------------------------------------
+// Note---------------------------------------------
 import { BsPaperclip } from "react-icons/bs";                 // クリップ
 import { MdOutlineFileUpload } from "react-icons/md";         // アップロードボタン
 import { FaChevronRight } from "react-icons/fa";              // >
@@ -164,31 +163,22 @@ function SaveBtn() {
 }
 
 //前のページに戻るボタン
-function ReturnBtn(pathData) {
+function HomeReturnBtn(pathData) {
   return (
-    <Link to={pathData.linkpath} className="flex items-center pb-[50px]">
-      <div className="text-[#ffffff] bg-[#164863] rounded-[50px] w-[40px] h-[40px] font-bold text-center content-center">
-        <p>&#12296;</p>
+    <Link to={pathData.linkpath} className="flex items-center mb-8">
+      <div className="text-white bg-main-dark rounded-full size-10 p-3">
+        <FaChevronLeft />
       </div>
-
-      <p className="pl-[20px] font-bold text-[#164863] text-[30px]">ホームへ</p>
-    </Link>
-  )
-}
-function WhiteReturnBtn(pathData) {
-  return (
-    <Link to={pathData.linkpath}>
-      <img src={WhiteReturn} alt="btn" width="80px" />
+      <p className="ml-5 font-bold text-main-dark text-3xl">ホームへ</p>
     </Link>
   )
 }
 
-//詳細
+//検索エリア
 function ArticleSearch(pathData) {
   return (
-    <aside className="fixed top-[200px] left-[20px]">
-      {/*前のページに戻るボタン*/}
-      <ReturnBtn linkpath={pathData.linkpath} />
+    // <aside className="fixed top-[200px] left-[20px]">
+    <aside className="fixed">
       <div className="bg-[#9BBEC822] flex flex-col justify-center items-left pl-[25px]  h-[35em] w-[30vw] max-w-[400px] border-b-[4px] border-t-[4px] border-[#427D9D] border-solid">
         <section className="space-y-3">
           <div className="space-y-2">
@@ -238,7 +228,16 @@ function ArticleSearch(pathData) {
   )
 }
 
-//講座バー
+/**
+ * 講座バー
+ * @param {*} PartData 
+ * @param {*背景画像} BgImg
+ * @param {*アイコン画像} Ticon
+ * @param {*大学のユーザ名} groupname
+ * @param {*講座名} title
+ * @param {*日付} date
+ * @returns 
+ */
 function ArticlePart(PartData) {
   return (
     <div
@@ -267,9 +266,9 @@ function BoxMenu(itemData) {
   return (
     <Link
       to={itemData.linkpath}
-      className="MenuBoxShadow max-w-[350px] max-h-[350px] w-[25vw] h-[25vw] bg-[#9BBEC8] text-[white] flex items-center justify-center rounded-[5px] font-bold text-[2vw]"
+      className="MenuBoxShadow max-w-[350px] max-h-[350px] w-[25vw] h-[25vw] bg-main-middle text-white flex items-center justify-center rounded-md font-bold text-3xl"
     >
-      {itemData.text}
+      <p>{itemData.text}</p>
     </Link>
   )
 }
@@ -400,8 +399,8 @@ const Note = () => {
           </div>
         </div>
       </div>
-      <button className='absolute right-[8%] end-28 top-[50%] size-20 bg-gray-300 rounded-full shadow-lg' type="submit">
-        <MdOutlineFileUpload className='size-16 m-auto text-main-dark'/>
+      <button className='absolute right-[8%] end-28 top-[50%] size-16 bg-gray-300 rounded-full shadow-lg' type="submit">
+        <MdOutlineFileUpload className='size-14 m-auto text-main-dark'/>
       </button>
     </div>
     <div className='flex font-bold justify-center text-main-dark text-2xl'>
@@ -446,6 +445,19 @@ const LectureDetails = () => {
   )
 }
 
+// 関連記事のリンク
+const ConnectLink = () => {
+  return (
+    <div className=' border-main-middle border-2 border-dashed h-full w-9/12'>
+      <p className='text-xl text-main-dark py-2 text-center'>関連情報</p>
+      <ul className='ml-5 mt-2'>
+        <li className='mb-2'>あああああああああああ</li>
+        <li className='mb-2'>いいいいいいいいいいいいいいい</li>
+      </ul>
+    </div>
+  )
+}
+
 export {
   UserMenu,
   RootUrl,
@@ -457,7 +469,7 @@ export {
   BoxMenu,
   Note,
   LectureDetails,
-  ReturnBtn,
-  WhiteReturnBtn,
+  HomeReturnBtn,
   InputItems,
+  ConnectLink,
 }

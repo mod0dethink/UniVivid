@@ -1,3 +1,5 @@
+// 大学側のページ
+
 import React, { useRef, useState } from 'react'
 // import axios from 'axios'
 import { Axios } from 'axios'
@@ -12,7 +14,6 @@ import {
   ProfileImageEditor,
   SaveBtn,
   ReturnBtn,
-  WhiteReturnBtn,
   InputItems,
 } from '../components/MaterialComponent'
 import { UnivividHeader, WhiteHeader } from '../components/LayoutComponent'
@@ -58,6 +59,7 @@ function UniHomePage() {
     </div>
   )
 }
+
 //セッティングページ
 function UniSettingsPage() {
   const [username, setUsername] = useState('')
@@ -125,14 +127,11 @@ function UniSettingsPage() {
   )
 }
 
+//　記事作成画面
 function CreateArticlePage() {
   return (
     <div>
-      <UnivividHeader title="記事制作" />
-
-      <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        <WhiteReturnBtn linkpath="/usermypage" />
-      </section>
+      <UnivividHeader title="記事制作" returnCol={1} link='/usermypage'/>
 
       <section className="pt-[101px]">
         <div className="text-center pt-[3.5rem]">
@@ -149,14 +148,11 @@ function CreateArticlePage() {
   )
 }
 
+// 作成した記事の確認画面
 function CreateCheckedPage() {
   return (
     <div>
-      <UnivividHeader title="記事制作" />
-
-      <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        <WhiteReturnBtn linkpath="/usermypage" />
-      </section>
+      <UnivividHeader title="記事制作" returnCol={1} link='/createarticle'/>
 
       <section className="pt-[101px]">
         <div className="text-center pt-[3.5rem]">

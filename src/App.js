@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 // Componentのインポート
 import TransitionalScreen from './components/TransitionalScreen' // 開発者用Component
 import CategoryComponent from './components/CategoryComponent'
-import OneLecturePage from './Pages/OneLecturePage'
 import UnivercityPage from './Pages/UnivercityPage'
 
 //assetのインポート
@@ -27,6 +26,7 @@ import {
   ArticleHistoryPage,
   UpNoteListPage,
   FavoriteListPage,
+  OneLecturePage,
 } from './Pages/UserHomePage'
 import {
   UniHomePage,

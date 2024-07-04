@@ -10,6 +10,9 @@ import Imagepng from '../assets/images/IMG_4007.jpg'
 import Door from '../assets/images/door.png'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/bg-images.css'
+import starBefore from "../assets/images/star_before.png";    // お気に入りボタン追加前
+import starAfter from "../assets/images/star_after.png";      // お気に入りボタン追加後
+import { MainReturenBtn } from '../components/LayoutComponent'; // 戻るボタン
 //　テスト用
 import BgImg from '../assets/images/IMG_4007.jpg'
 import Lok from '../assets/images/lock_back.png'
@@ -25,8 +28,10 @@ import {
   ArticleSearch,
   ArticlePart,
   BoxMenu,
-  ReturnBtn,
-  WhiteReturnBtn,
+  HomeReturnBtn,
+  Note,
+  LectureDetails,
+  ConnectLink,
 } from '../components/MaterialComponent'
 import {
   WhiteHeader,
@@ -131,29 +136,25 @@ function UserSettingsPage() {
   )
 }
 
+const testData = [
+  {BgImg,Ticon2,},
+  {}
+]
+
 //記事一覧
 function UserArticleList() {
   return (
     <div>
-      {/*header*/}
-      <section>
-        <UserHeader iconpath={ProImg} />
-      </section>
+      <UserHeader iconpath={ProImg} />
+      <div className='absolute mt-32 ml-10'>
+        <HomeReturnBtn linkpath='/userhome' />
+      </div>
 
-      {/*リスト*/}
-      <section className=" mx-[65vw]">
-        <ArticleSearch linkpath={'/userhome'} />
-        <div className="flex space-y-5 justify-center pt-[101px] text-center">
+      <div className="flex justify-between">
+        <div className='mt-56 ml-10'><ArticleSearch /></div>
+        <div className="space-y-5 mt-24 mr-32">
           <div className="pt-[50px] space-y-10">
-            {/*
-          <ArticlePart
-          BgImg={Lok} メインの背景画像
-          Ticon={Ticon2} 団体のアイコン画像
-          groupname={'ECC comp'} 団体名
-          title={'ポートレート講座'} 講座名
-          date={'2024/08/29'} 当日の日付
-        />
-        */}
+          <Link to='/onelecturepage'>
             <ArticlePart
               BgImg={BgImg}
               Ticon={Ticon2}
@@ -161,16 +162,17 @@ function UserArticleList() {
               title={'ポートレート講座'}
               date={'2002/06/24'}
             />
-            <ArticlePart
-              BgImg={Lok}
-              Ticon={Ticon2}
-              groupname={'ECC comp'}
-              title={'ポートレート講座'}
-              date={'2024/08/29'}
-            />
+          </Link>
+          <ArticlePart
+            BgImg={Lok}
+            Ticon={Ticon2}
+            groupname={'ECC comp'}
+            title={'ポートレート講座'}
+            date={'2024/08/29'}
+          />
           </div>
         </div>
-      </section>
+      </div>
     </div>
   )
 }
@@ -183,22 +185,18 @@ function UserMyPage() {
       <section>
         <UserHeader iconpath={ProImg} />
       </section>
-      <section className="pt-[201px] pl-[10vw]">
-        <ReturnBtn />
+      {/* <section className="pt-[201px] pl-[10vw]"> */}
+      <section className='mt-32 ml-10'>
+        <HomeReturnBtn linkpath='/userhome'/>
       </section>
       {/*マイページメニュー*/}
-      <section className="w-full h-full pt-[50px] text-[#fff] text-center items-center justify-around overflow-x-auto">
-        <table className="w-[100%]">
-          <tr className="flex justify-around">
-            <BoxMenu text="受講履歴一覧" linkpath="/articlehistory" />
-            <BoxMenu
-              text={'お気に入り\nいいねしたノート'}
-              linkpath="/favoritelist"
-            />
-            <BoxMenu text={'アップロードノート一覧'} linkpath="/upnotelist" />
-          </tr>
-        </table>
-      </section>
+      <table className="w-full h-full text-white text-center items-center justify-around">
+        <tr className="flex justify-around">
+          <BoxMenu text="受講履歴一覧" linkpath="/articlehistory" />
+          <BoxMenu text={'お気に入り\nいいねしたノート'} linkpath="/favoritelist" />
+          <BoxMenu text="アップロードノート一覧" linkpath="/upnotelist" />
+        </tr>
+      </table>
     </div>
   )
 }
@@ -208,11 +206,7 @@ function UserMyPage() {
 function ArticleHistoryPage() {
   return (
     <div>
-      <UnivividHeader title="受講履歴一覧" />
-
-      <section className="absolute -z-[-3] top-[15px] left-[15px]">
-        <WhiteReturnBtn linkpath="/usermypage" />
-      </section>
+      <UnivividHeader title="受講履歴一覧" returnCol={1} link='/usermypage'/>
       <section>
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
           <div className="pt-[50px] space-y-10">
@@ -248,12 +242,7 @@ function ArticleHistoryPage() {
 function UpNoteListPage() {
   return (
     <div>
-      <UnivividHeader title="アップロードしたノート一覧" />
-
-      <section className="absolute -z-[-3] top-[15px] left-[15px]">
-        <WhiteReturnBtn linkpath="/usermypage" />
-      </section>
-      <section>
+        <UnivividHeader title="アップロードしたノート一覧" returnCol={1} link='/usermypage'/>
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
           <div className="pt-[50px] space-y-10">
             {/*
@@ -281,17 +270,13 @@ function UpNoteListPage() {
             />
           </div>
         </div>
-      </section>
     </div>
   )
 }
 function FavoriteListPage() {
   return (
     <div className="flex flex-col items-center">
-      <UnivividHeader title="お気に入り" />
-      <section className="absolute -z-[-3] top-[15px] left-[15px]">
-        <WhiteReturnBtn linkpath="/usermypage" />
-      </section>
+      <UnivividHeader title="お気に入り" returnCol={1} link='/usermypage'/>
       <section className="pt-[151px] flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
         <button className="border-b-[2px] border-[#229DF6] w-[15vw]">
           講義
@@ -333,6 +318,34 @@ function FavoriteListPage() {
   )
 }
 
+// 講義記事ごとのページ
+const OneLecturePage = () => {
+  // 講義関連
+  const lectureName = "IoT講座";              // 講義名
+  const time = "2024/oo/xx　11:00 - 12:30";   // 講義日時
+
+  return (
+    <div className='h-screen bg-main-bg font-bold'>
+      <div className='flex'>
+        <MainReturenBtn link='/userarticlelist' returnCol={0}/>
+        <div className='bg-main text-white text-4xl py-2 px-28 rounded-xl mx-7 mt-5'>{lectureName}</div>
+        <p className='text-main mt-auto mb-0'>{time}</p>
+        <button className=' ml-auto mr-20'><img src={starBefore} alt="star" /></button>
+      </div>
+      <Note />
+      <div className='flex justify-around'>
+        <div className=' w-1/2 ml-[10%]'>
+          <LectureDetails />
+          <button type='submit' className='bg-[#3BBC30] text-white text-xl px-10 py-1 rounded-md mt-8'>この講義に申し込む</button>
+        </div>
+        <div className='mt-5 w-1/2'>
+          <ConnectLink />
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export {
   UserHomePage,
   UserSettingsPage,
@@ -341,4 +354,5 @@ export {
   ArticleHistoryPage,
   UpNoteListPage,
   FavoriteListPage,
+  OneLecturePage,
 }

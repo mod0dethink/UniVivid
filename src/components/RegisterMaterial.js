@@ -6,7 +6,7 @@ import '../assets/styles/UnivividStyle.css'
 
 function LoginForm() {
   return (
-    <section className="pt-[150px] bg-{##f3fafb} flex justify-center h-screen">
+    <section className=" pt-[5%] bg-main-bg flex justify-center">
       <div className="from-nav">
         <from>
           <div name='input-area'>

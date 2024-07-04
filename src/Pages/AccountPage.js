@@ -169,9 +169,9 @@ function LoginPage() {
     }
 */
   return (
-    <div className="h-screen flex flex-col justify-between">
+    <div className="justify-between">
       {/*header*/}
-      <UnivividHeader title="ログイン" returnCol={1} link="/" />
+      <UnivividHeader title="ログイン" returnCol={1} link="/"/>
       {/*name:email,password,username*/}
       <LoginForm />
       {/*footer*/}

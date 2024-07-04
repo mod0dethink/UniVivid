@@ -9,49 +9,58 @@ import Pen from '../assets/images/pen.png'
 function Logotext() {
   return (
     <p>
-      <span className="text-5xl">U</span>
-      <span className="text-3xl">ni</span>
-      <span className="text-5xl">V</span>
-      <span className="text-3xl">ivid</span>
+      <span className="text-3xl">U</span>
+      <span className="text-xl">ni</span>
+      <span className="text-3xl">V</span>
+      <span className="text-xl">ivid</span>
     </p>
   )
 }
 function EmptyHeader() {
   return (
-    <section className="text-[60px] fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
+    <section className="text-[60px] fixed w-screen bg-[#427d9d] text-white text-center font-bold py-5">
       <div>　　　</div>
     </section>
   )
 }
-
 /**
- * 
- * @param {*ヘッダーに表示するタイトル} itemData 
- * @param {*戻るボタンの移動先} link 
- * @param {*戻るボタンの有無(引数でhiddenを渡したら隠れる)} hidden
- * @returns ヘッダー
+ * ヘッダー
+ * @param {*ヘッダーに必要なデータ} itemData
+ * @param {*タイトル} title
+ * @param {*ReturnBtnのリンク} link
+ * @param {*ReturnBtnの有無} hidden 
+ * @returns 
  */
 function UnivividHeader(itemData) {
-  // 戻るボタンの色(　0 = 紺　1 = 白　)
-  const ReturnBtn = [ReturnImg, ReturnImgW];
 
   return (
     <>
-    <section className="flex fixed w-screen bg-main py-5">
-      <Link to={itemData.link}>
-        <button className='absolute size-14 ml-5' hidden={itemData.hidden} >
-          <img src={ReturnBtn[itemData.returnCol]} alt='back' />
-        </button>
-      </Link>
-      <p className='text-6xl m-auto text-white font-bold'>{itemData.title}</p>
+    <section className="flex fixed w-screen bg-main h-14">
+      <div className='absolute'>
+        <MainReturenBtn link={itemData.link} returnCol={itemData.returnCol} hidden={itemData.hidden}/>
+      </div>
+      <p className='text-3xl m-auto text-white font-bold'>{itemData.title}</p>
     </section>
     </>
+  )
+}
+// 前画面に戻るボタン
+function MainReturenBtn(itemData) {
+  // ボタンの色(　0 = 紺　1 = 白　)
+  const ReturnBtn = [ReturnImg, ReturnImgW];
+
+  return (
+    <Link to={itemData.link}>
+        <button className='size-12 ml-5 pt-2' hidden={itemData.hidden}>
+          <img src={ReturnBtn[itemData.returnCol]} alt='back' />
+        </button>
+    </Link>
   )
 }
 // フッター
 function Unifooter() {
   return (
-    <footer className="w-screen bg-main text-white text-[60px] text-center font-bold py-5"></footer>
+    <footer className="absolute w-screen bg-main text-white text-[60px] text-center font-bold py-5 bottom-0"></footer>
   )
 }
 
@@ -70,16 +79,11 @@ function WhiteHeader(headerdata) {
 }
 function UserHeader(itemData) {
   return (
-    <section className="-z-[-2] fixed w-screen  bg-[#427d9d] text-white text-center font-bold py-5">
-      <div>
-        <span className="text-6xl">U</span>
-        <span className="text-3xl">ni</span>
-        <span className="text-6xl">V</span>
-        <span className="text-3xl">ivid</span>
-      </div>
+    <section className="-z-[-2] fixed w-screen bg-[#427d9d] text-white text-center font-bold h-14 pt-2">
+      <Logotext />
       <section className="absolute left-[5vw] top-[20px]">
         <div
-          className="relative rounded-full w-[160px] h-[160px] flex flex-col items-center justify-center"
+          className="relative rounded-full size-24 flex flex-col items-center justify-center"
           style={{
             background: `url(${itemData.iconpath}) center center no-repeat`,
             backgroundSize: `cover`,
@@ -92,6 +96,7 @@ function UserHeader(itemData) {
 
 export {
   UnivividHeader,
+  MainReturenBtn,
   Unifooter,
   EmptyHeader,
   Logotext,
