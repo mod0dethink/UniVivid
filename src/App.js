@@ -26,6 +26,7 @@ import {
   UniSettingsPage,
   CreateArticlePage,
   CreateCheckedPage,
+  ApplicationListPage,
 } from './Pages/UniHomePage'
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
         <Route path="/createarticle" element={<CreateArticlePage />} />
         <Route path="/createarticle" element={<CreateArticlePage />} />
         <Route path="/createchecked" element={<CreateCheckedPage />} />
+        <Route path="/applicationlist" element={<ApplicationListPage />} />
 
 
         {/* 確認用URL画面 */}
