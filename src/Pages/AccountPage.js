@@ -333,7 +333,7 @@ const WelcomPage = () => {
         </p>
       </div>
       <div className="flex justify-end -mt-14 mr-10 text-main-middle">
-        <Link to="/userhome">
+        <Link to="/login">
           <button className="flex">
             <p>next</p>
             <FaAngleDoubleRight className="ml-1 mt-1" />
