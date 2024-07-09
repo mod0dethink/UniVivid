@@ -3,8 +3,9 @@
 // インポート --------------------------------------------------------
 
 //必要なlibraryをインポート
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Axios } from 'axios'
+import axios from 'axios';
 //必要なアセットをインポート
 import Imagepng from '../assets/images/IMG_4007.jpg'
 import Door from '../assets/images/door.png'
@@ -42,7 +43,6 @@ import {
 } from '../components/LayoutComponent'
 
 /*------ユーザーのデータ変数------*/
-let username = '瀬那' //ログインアカウントのユーザーネーム
 let ProImg = Imagepng //プロフィール画像
 /*------Linkパス------*/
 let settinglinkpath = '/usersetting' //ユーザーメニュー画面へのLinkパス
@@ -50,8 +50,25 @@ let returnpath = '/userhome' //戻るボタンのLinkパス
 let mypagepath = '/usermypage' //マイページのLinkパス
 let articlepath = '/userarticlelist' //記事一覧へのLinkパス
 
+
 //ユーザーのホーム画面
 function UserHomePage() {
+  const [username, setUsername] = useState(''); // 初期値を空文字列に設定
+
+  useEffect(() => {
+    const fetchUsername = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/auth/username', { withCredentials: true });
+        setUsername(response.data.username);
+      } catch (error) {
+        console.error('ユーザー名の取得に失敗しました:', error);
+        setUsername('ゲスト'); // エラー時のフォールバック
+      }
+    };
+
+    fetchUsername();
+  }, []); // 空の依存配列で、コンポーネントのマウント時に一度だけ実行
+
   return (
     <div className="flex w-[100vw] h-screen">
       {/*ユーザーのメニュー*/}
@@ -81,19 +98,23 @@ function UserSettingsPage() {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      const response = await Axios.put(
+      const response = await axios.put(
         'http://localhost:8080/auth/profile',
         {
-          type: 'user', // ここは大学用のコンポーネントでuniversityに変える
+          type: 'user',
           mailaddress: email,
           username: username,
           password: password,
         },
         { withCredentials: true },
-      ) // withCredentials を追加
+      )
       alert(response.data.message)
     } catch (error) {
-      alert(error.response.data.error)
+      if (error.response) {
+        alert(error.response.data.error)
+      } else {
+        alert('エラーが発生しました。')
+      }
     }
   }
 
