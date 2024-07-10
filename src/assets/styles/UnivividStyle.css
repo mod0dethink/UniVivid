@@ -54,3 +54,21 @@
   border-radius: 10px 10px 10px 10px;
   width: 35%;
 }
+
+/* ユーザー画面のcss */
+#favorite {
+  height: 56px;
+  width: 56px;
+  margin-left: auto;
+  margin-right: 5rem;
+  background-image: url("../images/star_before.png");
+  background-size: 100% 100%;
+}
+#favorite_star_on {
+  height: 56px;
+  width: 56px;
+  margin-left: auto;
+  margin-right: 5rem;
+  background-image: url("../images/star_after.png");
+  background-size: 100% 100%;
+}

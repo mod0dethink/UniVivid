@@ -10,6 +10,10 @@
           "main-middle": "#9BBEC8",
           "main-light": "#DDF2FD",
           "main-bg": "#FFFEF8",
+        },
+        backgroundImage: {
+          "star_off": "../assets/images/star_before.png",
+          "star_on": "../assets/images/star_after.png",
         }
        }
      },

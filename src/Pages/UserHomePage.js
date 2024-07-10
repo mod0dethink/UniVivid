@@ -10,8 +10,6 @@ import Imagepng from '../assets/images/IMG_4007.jpg'
 import Door from '../assets/images/door.png'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/bg-images.css'
-import starBefore from "../assets/images/star_before.png";    // お気に入りボタン追加前
-import starAfter from "../assets/images/star_after.png";      // お気に入りボタン追加後
 import { MainReturenBtn } from '../components/LayoutComponent'; // 戻るボタン
 //　テスト用
 import BgImg from '../assets/images/IMG_4007.jpg'
@@ -20,6 +18,10 @@ import Ticon2 from '../assets/images/English.jpg'
 import { Link } from 'react-router-dom'
 import uni_img from "../assets/images/ECC_build.jpg";         // 大学画像
 import { FaHandHoldingHeart } from "react-icons/fa6";         // 支援ボタンのマーク
+// 処理
+import {
+  favoriteChange,
+} from "../assets/scripts/animation.js"
 //componentをインポート
 import {
   UserMenu,
@@ -327,18 +329,20 @@ const OneLecturePage = () => {
   // 講義関連
   const lectureName = "IoT講座";              // 講義名
   const time = "2024/oo/xx　11:00 - 12:30";   // 講義日時
+  const [isFavorite, setIsFavorite] = useState(false);    // お気に入りボタンの状態
 
   return (
+    <>
     <div className='h-screen bg-main-bg font-bold'>
       <div className='flex'>
         <MainReturenBtn link='/userarticlelist' returnCol={0}/>
         <div className='bg-main text-white text-4xl py-2 px-28 rounded-xl mx-7 mt-5'>{lectureName}</div>
         <p className='text-main mt-auto mb-0'>{time}</p>
-        <button className=' ml-auto mr-20'><img src={starBefore} alt="star" /></button>
+        <button id={isFavorite ? 'favorite_star_on' : 'favorite'} onClick={() => {setIsFavorite(!isFavorite) }}></button>
       </div>
       <Note />
       <div className='flex justify-around'>
-        <div className=' w-1/2 ml-[10%]'>
+        <div className='w-1/2 ml-[10%]'>
           <LectureDetails />
           <button type='submit' className='bg-[#3BBC30] text-white text-xl px-10 py-1 rounded-md mt-8'>この講義に申し込む</button>
         </div>
@@ -347,6 +351,8 @@ const OneLecturePage = () => {
         </div>
       </div>
     </div>
+    <script src="../assets/scripts/animation.js"></script>
+    </>
   )
 }
 

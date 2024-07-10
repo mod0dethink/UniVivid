@@ -2,7 +2,7 @@
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 //assetのインポート
-import './assets/scripts/animation'
+// import './assets/scripts/animation'
 // Componentのインポート
 import TransitionalScreen from './components/TransitionalScreen' // 開発者用Component
 import CategoryComponent from './components/CategoryComponent'
