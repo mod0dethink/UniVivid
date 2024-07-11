@@ -145,7 +145,7 @@ func profileEditHandler(c *gin.Context) {
 
 	if err := c.BindJSON(&request); err != nil {
 		log.Println("JSONバインドエラー:", err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": "���効なリクエストです"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なリクエストです"})
 		return
 	}
 

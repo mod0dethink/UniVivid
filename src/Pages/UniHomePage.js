@@ -4,7 +4,6 @@ import React, { useRef, useState } from 'react'
 // import axios from 'axios'
 import { Axios } from 'axios'
 
-
 import Door from '../assets/images/door.png'
 import { Link } from 'react-router-dom'
 import {
@@ -130,19 +129,12 @@ function UniSettingsPage() {
 function CreateArticlePage() {
   return (
     <div>
-      <UnivividHeader title="記事制作" returnCol={1} link='/usermypage'/>
-
-      <section className="pt-[101px]">
-        <div className="text-center pt-[3.5rem]">
-          <InputItems />
-        </div>
+      <UnivividHeader title="記事制作" />
+      <section className="fixed -z-[-3] top-[15px] left-[15px]">
+        <WhiteReturnBtn linkpath="/usermypage" />
       </section>
-
-      <section className="flex justify-end pr-[5rem] mt-[5rem] mb-[3rem]">
-        <div className="text-[1.2rem] text-[#427D9D] font-bold">
-          確認画面へ&gt;&gt;
-        </div>
-      </section>
+      =======
+      <UnivividHeader title="記事制作" returnCol={1} link="/usermypage" />
     </div>
   )
 }
@@ -151,23 +143,126 @@ function CreateArticlePage() {
 function CreateCheckedPage() {
   return (
     <div>
-      <UnivividHeader title="記事制作" returnCol={1} link='/createarticle'/>
+      <UnivividHeader title="記事制作" />
 
-      <section className="pt-[101px]">
-        <div className="text-center pt-[3.5rem]">
-          <InputItems />
+      <section className="fixed -z-[-3] top-[15px] left-[15px]">
+        <WhiteReturnBtn linkpath="/usermypage" />
+      </section>
+      <UnivividHeader title="記事制作" returnCol={1} link="/createarticle" />
+    </div>
+  )
+}
+
+function ApplicationListPage() {
+  return (
+    <div>
+      <UnivividHeader title="申請一覧" />
+
+      <section className="fixed -z-[-3] top-[15px] left-[15px]">
+        <WhiteReturnBtn linkpath="/usermypage" />
+      </section>
+
+      <div className="grid place-items-center">
+        <section className="pt-[151px] flex justify-around border-b-[2px] border-[#838181] w-[90vw]">
+          <button className="border-b-[2px] border-[#229DF6] w-[15vw] text-[#838181] px-4 py-2">
+            コメント
+          </button>
+          <button className="border-b-[2px] border-[#229DF6] w-[15vw] text-[#838181] px-4 py-2">
+            ノート
+          </button>
+        </section>
+      </div>
+
+      {/* コメントの部分 */}
+      <section className="grid place-items-center pt-[100px]">
+        <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
+          <div className="ml-2 flex-grow">
+            <input
+              type="text"
+              placeholder="コメント"
+              readOnly
+              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
+            />
+          </div>
+          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
+            <button className="font-bold bg-[#D9D9D9] px-4 py-1 ">
+              {' '}
+              認証{' '}
+            </button>
+            <button className="font-bold bg-[#E74646] px-4 py-1 ">
+              {' '}
+              削除{' '}
+            </button>
+          </div>
+        </div>
+
+        <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
+          <div className="ml-2 flex-grow">
+            <input
+              type="text"
+              placeholder=""
+              readOnly
+              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
+            />
+          </div>
+          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
+            <button className="font-bold bg-[#D9D9D9] px-4 py-1 ">
+              {' '}
+              認証{' '}
+            </button>
+            <button className="font-bold bg-[#E74646] px-4 py-1 ">
+              {' '}
+              削除{' '}
+            </button>
+          </div>
         </div>
       </section>
 
-      <section className='pt-[101px]'>
-        <div className="mb-[2.5rem] flex justify-end pt-[2.5rem] text-[1.2rem] font-bold">
-          <button className="text-white leading-[3rem] bg-[#427D9D] px-16 py-1 rounded-md w-[175px] mr-[3.2rem]">
-            送信
-          </button>
+      {/* ノートの部分 */}
+
+      <section className="grid place-items-center pt-[100px]">
+        <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
+          <div className="ml-2 flex-grow">
+            <input
+              type="text"
+              placeholder=""
+              readOnly
+              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
+            />
+          </div>
+          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
+            <button className="font-bold bg-[#E74646] px-4 py-1 ">
+              {' '}
+              削除{' '}
+            </button>
+          </div>
+        </div>
+
+        <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
+          <div className="ml-2 flex-grow">
+            <input
+              type="text"
+              placeholder=""
+              readOnly
+              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
+            />
+          </div>
+          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
+            <button className="font-bold bg-[#E74646] px-4 py-1 ">
+              {' '}
+              削除{' '}
+            </button>
+          </div>
         </div>
       </section>
     </div>
   )
 }
 
-export { UniHomePage, UniSettingsPage, CreateArticlePage, CreateCheckedPage }
+export {
+  UniHomePage,
+  UniSettingsPage,
+  CreateArticlePage,
+  CreateCheckedPage,
+  ApplicationListPage,
+}
