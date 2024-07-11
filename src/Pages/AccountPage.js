@@ -3,7 +3,7 @@
 // インポート --------------------------------------------------------
 
 //libraryのインポート
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FaAngleDoubleRight } from 'react-icons/fa'
 //import axios from 'axios'
@@ -26,6 +26,7 @@ import {
   CreateUniAccountForm,
 } from '../components/RegisterMaterial'
 
+import { UsernameContext } from '../Contexts/UsernameContext'
 // 画面 ----------------------------------------------------------
 
 //初期画面
@@ -171,7 +172,7 @@ function LoginPage() {
   return (
     <div className="justify-between">
       {/*header*/}
-      <UnivividHeader title="ログイン" returnCol={1} link="/"/>
+      <UnivividHeader title="ログイン" returnCol={1} link="/" />
       {/*name:email,password,username*/}
       <LoginForm />
       {/*footer*/}
@@ -274,40 +275,6 @@ function RegisterPage() {
 
 /*-----学校用登録フォーム-----*/
 function UniRegisterPage() {
-  /*  const [formData, setFormData] = useState({
-    mailaddress: '',
-    password: '',
-    username: '',
-    univname: '',
-    univurl: '',
-    donateurl: '',
-  })
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const response = await axios.post(
-        'http://localhost:8080/auth/register',
-        {
-          type: 'university',
-          ...formData,
-        },
-        { withCredentials: true },
-      )
-      alert(response.data.message)
-    } catch (error) {
-      alert('大学アカウントの登録に失敗しました')
-    }
-  }
-  */
-
   return (
     <div className="from-container">
       {/*header*/}
@@ -321,15 +288,17 @@ function UniRegisterPage() {
 }
 
 // 新規登録完了の画面
+
 const WelcomPage = () => {
-  const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
+  const { username, setUsername } = useContext(UsernameContext)
+  //const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
 
   return (
     <div className="bg-main-bg font-bold h-screen font-mono">
       <div className="h-full content-center text-center text-4xl ">
         <p>登録が完了しました。</p>
         <p>
-          こんにちは、<font className="text-main-dark">{user_name}</font>さん！
+          こんにちは、<font className="text-main-dark">{username}</font>さん！
         </p>
       </div>
       <div className="flex justify-end -mt-14 mr-10 text-main-middle">
