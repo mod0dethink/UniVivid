@@ -7,11 +7,6 @@ import { UsernameProvider } from './Contexts/UsernameContext'
 // Componentのインポート
 import TransitionalScreen from './components/TransitionalScreen' // 開発者用Component
 import CategoryComponent from './components/CategoryComponent'
-import UnivercityPage from './Pages/UnivercityPage'
-
-//assetのインポート
-import './assets/scripts/animation'
-
 import {
   FirstWelcomPage,
   LoginPage,
@@ -29,6 +24,7 @@ import {
   UpNoteListPage,
   FavoriteListPage,
   OneLecturePage,
+  UnivercityPage,
 } from './Pages/UserHomePage'
 import {
   UniHomePage,

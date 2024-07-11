@@ -15,7 +15,7 @@ import {
   HomeReturnBtn,
   InputItems,
 } from '../components/MaterialComponent'
-import { UnivividHeader, WhiteHeader } from '../components/LayoutComponent'
+import { MainReturenBtn, UnivividHeader, WhiteHeader } from '../components/LayoutComponent'
 
 import '../assets/styles/Dimensions.css'
 
@@ -39,7 +39,6 @@ let articlepath = '/userarticlelist' //記事一覧へのLinkパス
 //大学側のホームページ
 function UniHomePage() {
   const Door1 = Door
-
   return (
     <div className="flex w-[100vw] h-screen">
       {/*ユーザーのメニュー*/}
@@ -132,7 +131,7 @@ function CreateArticlePage() {
     <div>
       <UnivividHeader title="記事制作" />
       <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        <WhiteReturnBtn linkpath="/usermypage" />
+        <MainReturenBtn link='/usermypage' returnCol={1} />
       </section>
       =======
       <UnivividHeader title="記事制作" returnCol={1} link="/usermypage" />
@@ -147,7 +146,7 @@ function CreateCheckedPage() {
       <UnivividHeader title="記事制作" />
 
       <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        <WhiteReturnBtn linkpath="/usermypage" />
+        <MainReturenBtn link='/usermypage' returnCol={1} />
       </section>
       <UnivividHeader title="記事制作" returnCol={1} link="/createarticle" />
     </div>
@@ -160,7 +159,7 @@ function ApplicationListPage() {
       <UnivividHeader title="申請一覧" />
 
       <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        <WhiteReturnBtn linkpath="/usermypage" />
+        <MainReturenBtn link='/usermypage' returnCol={1} />
       </section>
 
       <div className="grid place-items-center">

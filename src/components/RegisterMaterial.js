@@ -43,9 +43,10 @@ function LoginForm() {
   }
 
   return (
-    <section className=" pt-[5%] bg-main-bg flex justify-center">
+    <section className="pt-[5%] bg-main-bg flex justify-center">
       <div className="from-nav">
         <form onSubmit={handleSubmit}>
+          {error && <p className="text-red-500 absolute -mt-10">{error}</p>}
           <div name="input-area">
             <div>
               <p>メールアドレス</p>
@@ -78,8 +79,9 @@ function LoginForm() {
               />
             </div>
           </div>
-          {error && <p className="text-red-500">{error}</p>}
-          <button type="submit">ログイン</button>
+          <Link to="/welcom">
+            <button type="submit">ログイン</button>
+          </Link>
         </form>
       </div>
     </section>
@@ -128,7 +130,7 @@ function CreateAccountForm() {
   }
 
   return (
-    <section className="pt-[150px] bg-{##f3fafb} flex justify-center h-screen">
+    <section className=" pt-[5%] bg-main-bg flex justify-center">
       <div className="from-nav">
         <form onSubmit={handleSubmit}>
           <div>
