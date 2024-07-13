@@ -32,6 +32,7 @@ import {
   CreateArticlePage,
   CreateCheckedPage,
   ApplicationListPage,
+  ApprovalScreenPage,
 } from './Pages/UniHomePage'
 
 const App = () => {
@@ -67,8 +68,15 @@ const App = () => {
 
           {/*カテゴリー登録*/}
           <Route path="/category" element={<CategoryComponent />} />
+          
+          <Route path="/createarticle" element={<CreateArticlePage />} />
           <Route path="/createchecked" element={<CreateCheckedPage />} />
+
+          {/* 申請画面一覧 */}
           <Route path="/applicationlist" element={<ApplicationListPage />} />
+
+          {/* 承認画面 */}
+          <Route path="/approvalscreen" element={<ApprovalScreenPage />} />
 
           {/*登録完了画面*/}
           <Route path="/welcompage" element={<WelcomPage />} />

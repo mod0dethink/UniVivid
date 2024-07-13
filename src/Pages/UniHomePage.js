@@ -131,10 +131,18 @@ function CreateArticlePage() {
     <div>
       <UnivividHeader title="記事制作" />
       <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        <MainReturenBtn link='/usermypage' returnCol={1} />
+        {/* <MainReturenBtn link='/usermypage' returnCol={1} /> */}
       </section>
-      =======
       <UnivividHeader title="記事制作" returnCol={1} link="/usermypage" />
+
+      <section className='pt-[105px] mb-[50px]'>
+      <InputItems />
+      </section>
+      
+      <section className='flex justify-end pr-[6vw]'>
+        <button className='text-[#427D9D] font-bold text-[20px] mb-[30px]'>確認画面へ&gt;&gt;</button>
+      </section>
+
     </div>
   )
 }
@@ -146,9 +154,18 @@ function CreateCheckedPage() {
       <UnivividHeader title="記事制作" />
 
       <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        <MainReturenBtn link='/usermypage' returnCol={1} />
+        {/* <MainReturenBtn link='/usermypage' returnCol={1} /> */}
       </section>
       <UnivividHeader title="記事制作" returnCol={1} link="/createarticle" />
+    
+      <section className='pt-[105px] mb-[50px]'>
+      <InputItems />
+      </section>
+
+      <section className='flex justify-end pr-[6vw] mb-[30px]'>
+        <button className='text-white text-[18px] font-bold  font-bold bg-[#427D9D] px-12 py-3 rounded-md'>送信</button>
+      </section>
+
     </div>
   )
 }
@@ -259,10 +276,95 @@ function ApplicationListPage() {
   )
 }
 
+
+function ApprovalScreenPage(){
+  const Door1 = Door
+
+  return(
+    <div>
+
+      <UnivividHeader title="承認画面" />
+
+      <section className="fixed -z-[-3] top-[15px] left-[15px]">
+        {/* <WhiteReturnBtn linkpath="/usermypage" /> */}
+      </section>
+
+      {/* コメント承認画面 */}
+
+      {/* ノート承認画面 */}
+
+      <div className='pt-[105px]'>
+        <section>
+          {/* <UserHeader iconpath={ProImg} /> */}
+          {/* <ProfileImageEditor Pimage={ProImg} /> */}
+
+        {/* <UserMenu
+        username={username}
+        settingpath={settinglinkpath}
+        Pimage={ProImg}
+         />   */}
+         {/* アイコン */}
+          <div className='flex items-center space-x-4'>
+            <img src={ProImg} className='w-[150px] h-[150px] rounded-full ml-[5vw]' alt='Profile'/>
+            <p className='text-lg font-semibold'>user_name</p>
+          </div>
+
+        </section>
+
+        <section className=''>
+          <div className='mt-5 '>
+            <div className=' border-main-middle border-2 border-dashed h-[30vw] w-[90vw] ml-[4vw]'>
+              {/* 画像 */}
+              <img src="/static/media/note2.c64b1c5a9cc38667d261.png" className='w-[50vw] h-[25vw] ml-[20vw] mt-[2.3vw]'  alt='ノートの画像'/>
+            </div>
+          </div>
+        </section>
+
+        <section className='pt-[105px]'>
+
+          <div className=' w-[90vw] ml-[10%] font-bold'>
+            {/* 詳細 */}
+            <div className='flex my-2' name="lname">
+              <div className=' bg-main text-white text-center px-3'> 講義 </div>
+              <p className='my-auto ml-3'>Iot講座</p>
+            </div>
+            <div className='flex my-2' name="lname">
+              <div className=' bg-main text-white text-center px-3'> 講師 </div>
+              <p className='my-auto ml-3'>村上 慧</p>
+            </div>
+            <div className='flex my-2' name="lname">
+              <div className=' bg-main text-white text-center px-3'> 内容 </div>
+              <p className='my-auto ml-3'>ArduinoでRaspberry Piを用い、IoTに触れる。</p>
+            </div>
+            <div className='flex my-2' name="lname">
+              <div className=' bg-main text-white text-center px-3'> 日時 </div>
+              <p className='my-auto ml-3'>2024/〇〇/✕✕  11:00-12:30</p>
+            </div>            
+
+            {/* ボタン */}
+            <div className='flex space-x-2 mr-3 mb-1 text-[17px] justify-end mb-[50px] mr-[8vw]'>
+              <button className='font-bold bg-[#D9D9D9] px-4 py-1 '>承認</button>
+              <button className='font-bold bg-[#E74646] px-4 py-1'>削除</button>
+            </div>
+
+          </div>
+        </section>
+       
+
+      </div>
+
+
+      </div>
+
+  )
+}
+
 export {
   UniHomePage,
   UniSettingsPage,
   CreateArticlePage,
   CreateCheckedPage,
   ApplicationListPage,
+  ApprovalScreenPage,
+
 }
