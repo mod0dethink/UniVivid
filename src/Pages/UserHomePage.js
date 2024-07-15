@@ -86,10 +86,8 @@ function UserHomePage() {
       />
       {/*記事メニュー*/}
       <section className="flex-grow-[7] content-center h-screen">
-        {/* <div className="flex flex-col justify-center space-y-20 w-[100%] text-center items-center "> */}
-          <RootUrl name={Door} text={'動画へ'} linkpath="" />
-          <RootUrl name={Door} text={'記事一覧へ'} linkpath={articlepath} />
-        {/* </div> */}
+        <RootUrl name={Door} text={'動画へ'} linkpath="" />
+        <RootUrl name={Door} text={'記事一覧へ'} linkpath={articlepath} />
       </section>
     </div>
   )
@@ -131,7 +129,7 @@ function UserSettingsPage() {
         onSubmit={handleSubmit}
       >
         {/*header*/}
-        <WhiteHeader retunrpath={returnpath} />
+        <WhiteHeader retupath={returnpath} />
         {/*変更可能なプロフィール画像*/}
         <ProfileImageEditor Pimage={ProImg} />
 
@@ -173,31 +171,29 @@ function UserArticleList() {
   return (
     <div>
       <UserHeader iconpath={ProImg} />
-      <div className='absolute mt-32 ml-10'>
+      <div className='fixed mt-32 ml-10 '>
         <HomeReturnBtn linkpath='/userhome' />
       </div>
 
       <div className="flex justify-between">
         <div className='mt-48 ml-10'><ArticleSearch /></div>
-        <div className="space-y-5 mt-24 mr-32">
-          <div className="pt-[50px] space-y-10">
-          <Link to='/onelecturepage'>
-            <ArticlePart
-              BgImg={BgImg}
-              Ticon={Ticon2}
-              groupname={'ECC Artist'}
-              title={'ポートレート講座'}
-              date={'2002/06/24'}
-            />
-          </Link>
+        <div className="mr-32 mt-20">
           <ArticlePart
+            link='/onelecturepage'
+            BgImg={BgImg}
+            Ticon={Ticon2}
+            groupname={'ECC Artist'}
+            title={'ポートレート講座'}
+            date={'2002/06/24'}
+          />
+          <ArticlePart
+            link='/onelecturepage'
             BgImg={Lok}
             Ticon={Ticon2}
             groupname={'ECC comp'}
             title={'ポートレート講座'}
             date={'2024/08/29'}
           />
-          </div>
         </div>
       </div>
     </div>
@@ -233,7 +229,7 @@ function UserMyPage() {
 function ArticleHistoryPage() {
   return (
     <div>
-      <UnivividHeader title="受講履歴一覧" returnCol={1} link='/usermypage'/>
+      <UnivividHeader title="受講履歴一覧" returnCol={1} link='/usermypage' bgCol={true}  />
       <section>
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
           <div className="pt-[50px] space-y-10">
@@ -269,7 +265,7 @@ function ArticleHistoryPage() {
 function UpNoteListPage() {
   return (
     <div>
-        <UnivividHeader title="アップロードしたノート一覧" returnCol={1} link='/usermypage'/>
+        <UnivividHeader title="アップロードしたノート一覧" returnCol={1} link='/usermypage' bgCol={true} />
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
           <div className="pt-[50px] space-y-10">
             {/*
@@ -303,7 +299,7 @@ function UpNoteListPage() {
 function FavoriteListPage() {
   return (
     <div className="flex flex-col items-center">
-      <UnivividHeader title="お気に入り" returnCol={1} link='/usermypage'/>
+      <UnivividHeader title="お気に入り" returnCol={1} link='/usermypage' bgCol={true} />
       <section className="pt-[151px] flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
         <button className="border-b-[2px] border-[#229DF6] w-[15vw]">
           講義
@@ -351,6 +347,8 @@ const OneLecturePage = () => {
   const lectureName = "IoT講座";              // 講義名
   const time = "2024/oo/xx　11:00 - 12:30";   // 講義日時
   const [isFavorite, setIsFavorite] = useState(false);    // お気に入りボタンの状態
+  const [isGoodCount, setIsGoodCount] = useState(0);      // いいね数管理の変数
+  const [isPageCount, setIsPageCount] = useState(0);      // ページ枚数管理の変数
 
   return (
     <>
@@ -408,7 +406,8 @@ const UnivercityPage = () => {
           <p className='text-main mt-2'>HP:</p>
           <p><a href={hp} className='text-[#4C4C4C]'>{hp}</a></p>
 
-          <button type='submit' className='flex mt-6 bg-[#3AE110] bg-gradient-to-t from-[#358D1F] text-white py-3 px-20 text-xl rounded-md'>この学校を支援する<FaHandHoldingHeart className='size-6 ml-2'/>
+          <button type='submit' className='flex mt-6 bg-[#3AE110] bg-gradient-to-t from-[#358D1F] text-white py-3 px-20 text-xl rounded-md'>
+            この学校を支援する<FaHandHoldingHeart className='size-6 ml-2'/>
           </button>
         </div>
       </div>

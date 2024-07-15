@@ -171,7 +171,7 @@ function LoginPage() {
   return (
     <div className="justify-between">
       {/*header*/}
-      <UnivividHeader title="ログイン" returnCol={1} link="/"/>
+      <UnivividHeader title="ログイン" returnCol={1} link="/" bgCol={true}/>
       {/*name:email,password,username*/}
       <LoginForm />
       {/*footer*/}
@@ -180,13 +180,13 @@ function LoginPage() {
   )
 }
 
-//職種選択画面
+//新規登録 職種選択画面
 function EntitySelectionPage() {
   return (
     <div className="h-screen flex flex-col justify-between">
       <section>
         {/*header*/}
-        <UnivividHeader title={<Logotext />} returnCol={1} link="/" />
+        <UnivividHeader title={<Logotext />} returnCol={1} link="/" bgCol={true} />
       </section>
       <section className="flex flex-col items-center justify-center sw-screen h-full bg-[#FFFEF8]">
         {/*---個人or学校---*/}
@@ -263,7 +263,7 @@ function RegisterPage() {
   return (
     <div className="h-screen flex flex-col justify-between">
       {/*Header*/}
-      <UnivividHeader title="新規登録" returnCol={1} link="/entityselection" />
+      <UnivividHeader title="新規登録" returnCol={1} link="/entityselection" bgCol={true} />
       {/*入力フォーム*/}
       <CreateAccountForm />
       {/*footer*/}
@@ -311,7 +311,7 @@ function UniRegisterPage() {
   return (
     <div className="from-container">
       {/*header*/}
-      <UnivividHeader title="新規登録" returnCol={1} link="/entityselection" />
+      <UnivividHeader title="新規登録" returnCol={1} link="/entityselection" bgCol={true} />
       {/*登録フォーム*/}
       <CreateUniAccountForm />
       {/*footer*/}
@@ -321,13 +321,32 @@ function UniRegisterPage() {
 }
 
 // 新規登録完了の画面
-function WelcomPage() {
+function RegisterWelcomPage() {
   const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
 
   return (
     <div className="bg-main-bg font-bold h-screen font-mono">
       <div className="h-full content-center text-center text-4xl ">
-        <p>登録が完了しました。</p>
+        <p>アカウントの登録が完了しました！</p>
+        <p>ようこそ、<font className="text-main-dark">{user_name}</font>さん！</p>
+        <Link to='/login'>
+          <button className='py-3 px-5 text-white text-3xl bg-main bg-gradient-to-t from-main-middle rounded-lg mt-10'>
+            ログインして始める
+          </button>
+        </Link>
+      </div>
+      
+    </div>
+  )
+}
+// ログイン完了ページ
+function RoginWelcomPage() {
+  const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
+
+  return(
+    <>
+    <div className="bg-main-bg font-bold h-screen font-mono">
+      <div className="h-full content-center text-center text-4xl ">
         <p>
           こんにちは、<font className="text-main-dark">{user_name}</font>さん！
         </p>
@@ -341,6 +360,7 @@ function WelcomPage() {
         </Link>
       </div>
     </div>
+    </>
   )
 }
 
@@ -350,5 +370,6 @@ export {
   RegisterPage,
   UniRegisterPage,
   EntitySelectionPage,
-  WelcomPage,
+  RegisterWelcomPage,
+  RoginWelcomPage,
 }

@@ -18,7 +18,6 @@
   background-color: #f3fafb;
   display: flex;
   justify-content: center;
-  height: 100vh;
 }
 
 .from-nav {
@@ -54,7 +53,7 @@
   width: 35%;
 }
 
-/* ユーザー画面のcss */
+/* お気に入りボタン */
 #favorite {
   height: 56px;
   width: 56px;
@@ -71,3 +70,7 @@
   background-image: url("../images/star_after.png");
   background-size: 100% 100%;
 }
+
+/* .commentDialog_open {
+  
+} */

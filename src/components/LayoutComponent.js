@@ -28,19 +28,20 @@ function EmptyHeader() {
  * @param {*ヘッダーに必要なデータ} itemData
  * @param {*タイトル} title
  * @param {*ReturnBtnのリンク} link
+ * @param {*背景色} bgCol true:bg-main false:bg-main-bg
  * @param {*ReturnBtnの有無} hidden 
  * @returns 
  */
 function UnivividHeader(itemData) {
-
   return (
     <>
-    <section className="flex fixed w-screen bg-main h-14">
+    <div className='flex fixed w-screen h-14'
+    style={{backgroundColor: itemData.bgCol?'#427D9D':'#FFFEF8'}}>
       <div className='absolute'>
         <MainReturenBtn link={itemData.link} returnCol={itemData.returnCol} hidden={itemData.hidden}/>
       </div>
       <p className='text-3xl m-auto text-white font-bold'>{itemData.title}</p>
-    </section>
+    </div>
     </>
   )
 }
@@ -48,7 +49,6 @@ function UnivividHeader(itemData) {
 function MainReturenBtn(itemData) {
   // ボタンの色(　0 = 紺　1 = 白　)
   const ReturnBtn = [ReturnImg, ReturnImgW];
-
   return (
     <Link to={itemData.link}>
         <button className='size-12 ml-5 pt-2' hidden={itemData.hidden}>
@@ -60,7 +60,7 @@ function MainReturenBtn(itemData) {
 // フッター
 function Unifooter() {
   return (
-    <footer className="absolute w-screen bg-main text-white text-[60px] text-center font-bold py-5 bottom-0"></footer>
+    <footer className="fixed w-screen bg-main text-white text-[60px] text-center font-bold py-5 bottom-0"></footer>
   )
 }
 

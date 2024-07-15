@@ -34,7 +34,7 @@ let ProImg = Imagepng //プロフィール画像
 let settinglinkpath = '/unisetting' //ユーザーメニュー画面へのLinkパス
 let returnpath = '/unihome' //戻るボタンのLinkパス
 let mypagepath = '/unimypage' //マイページのLinkパス
-let articlepath = '/userarticlelist' //記事一覧へのLinkパス
+let articlepath = '/createarticle' //記事一覧へのLinkパス
 
 //大学側のホームページ
 function UniHomePage() {
@@ -44,15 +44,13 @@ function UniHomePage() {
       {/*ユーザーのメニュー*/}
       <UserMenu
         username={username}
-        settingpath={settinglinkpath}
+        settingpath='/unisetting'
         Pimage={ProImg}
       />
       {/*記事メニュー*/}
-      <section className="main flex-grow-[7] flex content-center  h-screen ">
-        <div className="flex flex-col justify-center space-y-20 w-[100%] text-center items-center ">
-          <RootUrl name={Door1} text={'記事作成画面'} />
-          <RootUrl name={Door1} text={'公開記事一覧'} />
-        </div>
+      <section className="flex-grow-[7] content-center h-screen">
+        <RootUrl name={Door1} text={'記事作成画面'} linkpath='/createarticle' />
+        <RootUrl name={Door1} text={'公開記事一覧'} linkpath='/createarticle' />
       </section>
     </div>
   )
@@ -84,18 +82,20 @@ function UniSettingsPage() {
   }
 
   return (
-    <div>
+    <>
+      {/* <WhiteHeader /> */}
+      <UnivividHeader title='ユーザー設定' link='/unihome' returnCol={1} bgCol={true}/>
       <form
-        className="items-center flex flex-col justify-around text-center h-screen"
+        className="items-center flex flex-col"
         onSubmit={handleSubmit}
       >
-        {/*header*/}
-        <WhiteHeader retunrpath={returnpath} />
         {/*変更可能なプロフィール画像*/}
-        <ProfileImageEditor Pimage={ProImg} />
+        <div className='mt-20'>
+          <ProfileImageEditor Pimage={ProImg}/>
+        </div>
 
         {/*セッティングフォーム*/}
-        <section className="w-[60vw] text-left text-[#427D9D] space-y-5 max-w-[800px]">
+        <div className="w-[60vw] text-left text-[#427D9D] space-y-5 max-w-[800px]">
           <InputField
             label="ユーザー名"
             type="text"
@@ -117,25 +117,21 @@ function UniSettingsPage() {
           <InputField label="学校名" type="text" value={null} />
           <InputField label="大学URL" type="text" value={null} />
           <InputField label="寄付用ページURL" type="text" value={null} />
-        </section>
-        {/*submitボタン*/}
-        <SaveBtn />
+        </div>
+        <div className='my-10'>
+          <SaveBtn/>
+        </div>
       </form>
-    </div>
+    </>
   )
 }
 
 //　記事作成画面
 function CreateArticlePage() {
   return (
-    <div>
-      <UnivividHeader title="記事制作" />
-      <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        <MainReturenBtn link='/usermypage' returnCol={1} />
-      </section>
-      =======
-      <UnivividHeader title="記事制作" returnCol={1} link="/usermypage" />
-    </div>
+    <>
+      <UnivividHeader title="記事制作" returnCol={1} link='/unihome'/>
+    </>
   )
 }
 
@@ -153,6 +149,7 @@ function CreateCheckedPage() {
   )
 }
 
+// 申請許諾画面
 function ApplicationListPage() {
   return (
     <div>

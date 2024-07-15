@@ -1,7 +1,7 @@
 //ユーザ画面のコンポーネント
 
 // ----------------------------------------インポート --------------------------------------------------
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
 //import PropTypes from 'prop-types'
@@ -57,10 +57,8 @@ function RootUrl(itemData) {
       className="flex flex-col justify-center space-y-20 w-auto text-center items-center my-20"
     >
       <div className="flex justify-around items-center bg-[#D9D9D9] w-[80%] h-[196px] max-w-[700px] rounded-[20px] border-solid border-[#9BBEC8] border-[5px]">
-        {/* <div className='border-dotted border-t mt-auto mb-10 border- border-main w-full'></div> */}
         <p className="text-[#164863] text-[36px] font-bold">{itemData.text}</p>
         <img className="w-[150px] -z-[-1]" src={itemData.name} alt="door" />
-        {/* <div className="absolute border-t border-dotted border-[#9BBEC8] border-[10px] w-[55vw] max-w-[700px] top-[70%]"></div> */}
       </div>
     </Link>
   )
@@ -87,7 +85,7 @@ function InputField(InputData) {
     <div className="space-y-3">
       <p>{InputData.label}</p>
       <input
-        className="border-b-[2px] border-[#427D9D] w-[100%] text-[2em]"
+        className="border-b-[2px] border-main w-full text-2xl"
         type={InputData.type}
         value={InputData.value}
         onChange={InputData.onChange}
@@ -112,9 +110,9 @@ function ProfileImageEditor(itemData) {
   }
 
   return (
-    <section className="">
+    <section>
       <div
-        className="relative rounded-full  w-[160px] h-[160px] flex flex-col items-center justify-center"
+        className="relative rounded-full size-[140px] items-center justify-center"
         style={{
           backgroundImage: `url(${itemData.Pimage})`,
           backgroundSize: `cover`,
@@ -242,8 +240,9 @@ function ArticleSearch(pathData) {
  */
 function ArticlePart(PartData) {
   return (
+    <Link to={PartData.link}>
     <div
-      className="pt-[20px] space-y-10 flex flex-col gradient-vontainer h-[158px] w-[55vw] max-w-[800px]"
+      className="gradient-vontainer pt-5 space-y-10 flex flex-col h-[158px] w-[55vw] max-w-[800px] mb-5"
       style={{
         background: `url(${PartData.BgImg}) center center no-repeat`,
         backgroundSize: `cover`,
@@ -260,6 +259,7 @@ function ArticlePart(PartData) {
         <div>{PartData.date}</div>
       </div>
     </div>
+    </Link>
   )
 }
 
@@ -381,23 +381,27 @@ const Note = () => {
   const upuser_img = user_icon; // アップしたユーザー画像
   const user_name = "kata__sk"; // アップしたユーザー名
   let good_count = 20;          // いいね数
+  const [isGoodState, setIsGoodState] = useState(false);
+  const [isGoodCount, setIsGoodCount] = useState(20);      // いいね数管理の変数
+  const [isPageCount, setIsPageCount] = useState(0);      // ページ枚数管理の変数
 
   return (
     <>
     <div className='flex h-2/5 mt-5 justify-center'>
-      <div className=' bg-gray-200 h-full w-4/5 '>
-        <BsPaperclip className='absolute flex end-[10%] size-16 -mt-7 text-main-middle'/>
+      <div className='bg-gray-200 h-full w-4/5'>
         <img src={noteImg} alt="back" className='h-full w-5/6 m-auto'/>
         {/* 画像にかぶせるグラデーション */}
-        {/* <div className='h-full w-auto bg-gradient-to-t from-blue-500'> </div> */}
         <div className='flex -mt-16 ml-28'>
           <div className='flex size-14 bg-gray-500 rounded-full'>
             <img src={upuser_img} alt="back" className='h-full w-auto rounded-full'/>
             <p className='my-auto ml-3 bg-white'>{user_name}</p>
           </div>
-          <div className='flex my-auto ml-auto mr-28 '>
-            <button type='button'><AiFillLike className='text-black size-8'/></button>
-            <p className='my-auto ml-1'>{good_count}</p>
+          <div className='flex my-auto ml-auto mr-28'>
+            <button type='button' id='goodBtn' onClick={() => {setIsGoodState(!isGoodState) }}>
+              <AiFillLike className={isGoodState ? 'size-8 text-black' : 'size-8 text-gray-300'}
+              onClick={() => {isGoodState ? setIsGoodCount(isGoodCount-1) : setIsGoodCount(isGoodCount+1)}}/>
+            </button>
+            <p className='my-auto ml-1'>{isGoodCount}</p>
           </div>
         </div>
       </div>
@@ -465,7 +469,7 @@ const ConnectLink = () => {
 //  掲示板コメントダイアログ
 const ComentDialog = () => {
   return (
-    <dialog className='bg-black/50 h-screen w-screen content-center' open>
+    <dialog id='commentDialog' className='bg-black/50 h-screen w-screen content-center'>
       <form method='dialog' className='bg-white h-3/4 w-96 m-auto rounded-md'>
         <div name='title' className='flex h-14 w-full bg-main-dark text-white text-2xl rounded-t-md'>
           <p className='my-auto ml-[40%]'>コメント</p>
@@ -490,7 +494,10 @@ const Board = () => {
         <p className=' text-main text-center mb-3'>～ 掲示板 ～</p>
         {coment.map((element,index) => <p key={index} className=' font-normal border-b-2 w-5/6 mx-auto'>{element}</p>)}
       </div>
-      <button className='size-14 rounded-full bg-main -ml-16 mt-auto mb-3'>
+      <button 
+      className='size-14 rounded-full bg-main -ml-16 mt-auto mb-3'
+      // onClick={}
+      >
         {/* ToDo:コメントアイコン押したときにダイアログを開く処理 */}
         <TbPencilPlus className='size-11 ml-1 -mt-1 text-white'/>
       </button>

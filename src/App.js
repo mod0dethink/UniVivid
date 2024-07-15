@@ -12,7 +12,8 @@ import {
   EntitySelectionPage,
   RegisterPage,
   UniRegisterPage,
-  WelcomPage,
+  RegisterWelcomPage,
+  RoginWelcomPage,
 } from './Pages/AccountPage'
 import {
   UserHomePage,
@@ -47,7 +48,8 @@ const App = () => {
         <Route path="/entityselection" element={<EntitySelectionPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/uniRegister" element={<UniRegisterPage />} />
-        <Route path="/welcom" element={<WelcomPage />} />
+        <Route path="/registerwelcom" element={<RegisterWelcomPage />} />
+        <Route path="/loginwelcom" element={<RoginWelcomPage />} />
 
         {/* User Home と User Settings のルート */}
         <Route path="/userhome" element={<UserHomePage />} />
@@ -67,9 +69,6 @@ const App = () => {
         <Route path="/category" element={<CategoryComponent />} />
         <Route path="/createchecked" element={<CreateCheckedPage />} />
         <Route path="/applicationlist" element={<ApplicationListPage />} />
-
-        {/*登録完了画面*/}
-        <Route path="/welcompage" element={<WelcomPage />} />
 
         {/*講義ごとのページ*/}
         <Route path="/onelecturepage" element={<OneLecturePage />} />

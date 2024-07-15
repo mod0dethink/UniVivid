@@ -78,7 +78,7 @@ function LoginForm() {
               />
             </div>
           </div>
-          <Link to = '/welcom'>
+          <Link to = '/loginwelcom'>
           <button type="submit">ログイン</button>
           </Link>
         </form>
@@ -166,7 +166,7 @@ function CreateAccountForm() {
     </section>
   )
 }
-
+// アカウント作成のフォーム
 function CreateUniAccountForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -177,6 +177,7 @@ function CreateUniAccountForm() {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
+  // 入力確認のメソッド
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
@@ -210,8 +211,8 @@ function CreateUniAccountForm() {
   }
 
   return (
-    <section className="pt-[40px] from-background">
-      <div className="from-nav">
+    <section className="from-background">
+      <div className="from-nav pb-20">
         <form onSubmit={handleSubmit}>
           <div>
             <p>メールアドレス</p>
