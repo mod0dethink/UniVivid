@@ -1,7 +1,8 @@
 // ログイン・登録のコンポネント
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { UsernameContext } from '../Contexts/UsernameContext'
 import '../assets/styles/UnivividStyle.css'
 
 function LoginForm() {
@@ -46,7 +47,7 @@ function LoginForm() {
       <div className="from-nav">
         <form onSubmit={handleSubmit}>
           {error && <p className="text-red-500 absolute -mt-10">{error}</p>}
-          <div name='input-area'>
+          <div name="input-area">
             <div>
               <p>メールアドレス</p>
               <input
@@ -94,6 +95,8 @@ function CreateAccountForm() {
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
   const [error, setError] = useState('')
+
+  const { setUsername: conUsername } = useContext(UsernameContext) // setUsername を conUsername にリネーム
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -116,6 +119,7 @@ function CreateAccountForm() {
 
       if (response.ok) {
         navigate('/welcompage')
+        conUsername(username)
       } else {
         const data = await response.json()
         setError(data.error || 'アカウント作成に失敗しました')
@@ -160,7 +164,7 @@ function CreateAccountForm() {
             />
           </div>
           {error && <p className="text-red-500">{error}</p>}
-          <button type='submit'>登録</button>
+          <button type="submit">登録</button>
         </form>
       </div>
     </section>
@@ -175,6 +179,9 @@ function CreateUniAccountForm() {
   const [univURL, setUnivURL] = useState('')
   const [donateURL, setDonateURL] = useState('')
   const [error, setError] = useState('')
+
+  const { setUsername: conUsername } = useContext(UsernameContext) // setUsername を conUsername にリネーム
+
   const navigate = useNavigate()
 
   // 入力確認のメソッド
@@ -201,6 +208,7 @@ function CreateUniAccountForm() {
 
       if (response.ok) {
         navigate('/welcompage')
+        conUsername(univName)
       } else {
         const data = await response.json()
         setError(data.error || 'アカウント作成に失敗しました')
@@ -275,7 +283,7 @@ function CreateUniAccountForm() {
             />
           </div>
           {error && <p className="text-red-500">{error}</p>}
-          <button type='submit'>登録</button>
+          <button type="submit">登録</button>
         </form>
       </div>
     </section>
@@ -283,4 +291,3 @@ function CreateUniAccountForm() {
 }
 
 export { LoginForm, CreateAccountForm, CreateUniAccountForm }
-

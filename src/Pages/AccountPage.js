@@ -3,7 +3,7 @@
 // インポート --------------------------------------------------------
 
 //libraryのインポート
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FaAngleDoubleRight } from 'react-icons/fa'
 //import axios from 'axios'
@@ -26,6 +26,7 @@ import {
   CreateUniAccountForm,
 } from '../components/RegisterMaterial'
 
+import { UsernameContext } from '../Contexts/UsernameContext'
 // 画面 ----------------------------------------------------------
 
 //初期画面
@@ -274,40 +275,6 @@ function RegisterPage() {
 
 /*-----学校用登録フォーム-----*/
 function UniRegisterPage() {
-  /*  const [formData, setFormData] = useState({
-    mailaddress: '',
-    password: '',
-    username: '',
-    univname: '',
-    univurl: '',
-    donateurl: '',
-  })
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const response = await axios.post(
-        'http://localhost:8080/auth/register',
-        {
-          type: 'university',
-          ...formData,
-        },
-        { withCredentials: true },
-      )
-      alert(response.data.message)
-    } catch (error) {
-      alert('大学アカウントの登録に失敗しました')
-    }
-  }
-  */
-
   return (
     <div className="from-container">
       {/*header*/}
@@ -324,31 +291,16 @@ function UniRegisterPage() {
 function RegisterWelcomPage() {
   const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
 
+const WelcomPage = () => {
+  const { username, setUsername } = useContext(UsernameContext)
+  //const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
+
   return (
     <div className="bg-main-bg font-bold h-screen font-mono">
       <div className="h-full content-center text-center text-4xl ">
-        <p>アカウントの登録が完了しました！</p>
-        <p>ようこそ、<font className="text-main-dark">{user_name}</font>さん！</p>
-        <Link to='/login'>
-          <button className='py-3 px-5 text-white text-3xl bg-main bg-gradient-to-t from-main-middle rounded-lg mt-10'>
-            ログインして始める
-          </button>
-        </Link>
-      </div>
-      
-    </div>
-  )
-}
-// ログイン完了ページ
-function RoginWelcomPage() {
-  const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
-
-  return(
-    <>
-    <div className="bg-main-bg font-bold h-screen font-mono">
-      <div className="h-full content-center text-center text-4xl ">
+        <p>登録が完了しました。</p>
         <p>
-          こんにちは、<font className="text-main-dark">{user_name}</font>さん！
+          こんにちは、<font className="text-main-dark">{username}</font>さん！
         </p>
       </div>
       <div className="flex justify-end -mt-14 mr-10 text-main-middle">
