@@ -173,11 +173,12 @@ function CreateCheckedPage() {
 function ApplicationListPage() {
   return (
     <div>
-      <UnivividHeader title="申請一覧" />
+      {/* <UnivividHeader title="申請一覧" /> */}
+      <UnivividHeader title="申請一覧" returnCol={1} link="/createarticle" />
 
-      <section className="fixed -z-[-3] top-[15px] left-[15px]">
+      {/* <section className="fixed -z-[-3] top-[15px] left-[15px]">
         <MainReturenBtn link='/usermypage' returnCol={1} />
-      </section>
+      </section> */}
 
       <div className="grid place-items-center">
         <section className="pt-[151px] flex justify-around border-b-[2px] border-[#838181] w-[90vw]">
@@ -203,12 +204,10 @@ function ApplicationListPage() {
           </div>
           <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
             <button className="font-bold bg-[#D9D9D9] px-4 py-1 ">
-              {' '}
-              認証{' '}
+              認証
             </button>
             <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              {' '}
-              削除{' '}
+              削除
             </button>
           </div>
         </div>
@@ -224,12 +223,10 @@ function ApplicationListPage() {
           </div>
           <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
             <button className="font-bold bg-[#D9D9D9] px-4 py-1 ">
-              {' '}
-              認証{' '}
+              認証
             </button>
             <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              {' '}
-              削除{' '}
+              削除
             </button>
           </div>
         </div>
@@ -240,34 +237,26 @@ function ApplicationListPage() {
       <section className="grid place-items-center pt-[100px]">
         <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
           <div className="ml-2 flex-grow">
-            <input
-              type="text"
-              placeholder=""
-              readOnly
-              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
-            />
+            <p type="text" placeholder="" readOnly className="px-2 py-1 flex-grow mr-2 w-[55vw]">
+              
+            </p>
           </div>
           <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
             <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              {' '}
-              削除{' '}
+              削除
             </button>
           </div>
         </div>
 
         <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
           <div className="ml-2 flex-grow">
-            <input
-              type="text"
-              placeholder=""
-              readOnly
-              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
-            />
+          <p type="text" placeholder="" readOnly className="px-2 py-1 flex-grow mr-2 w-[55vw]">
+            
+          </p>
           </div>
           <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
             <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              {' '}
-              削除{' '}
+              削除
             </button>
           </div>
         </div>
@@ -282,47 +271,53 @@ function ApprovalScreenPage(){
 
   return(
     <div>
-
-      <UnivividHeader title="承認画面" />
+      {/* <UnivividHeader title="承認画面" /> */}
 
       <section className="fixed -z-[-3] top-[15px] left-[15px]">
         {/* <WhiteReturnBtn linkpath="/usermypage" /> */}
       </section>
+      <UnivividHeader title="承認画面" returnCol={1} link="/createarticle" />
 
-      {/* コメント承認画面 */}
-
-      {/* ノート承認画面 */}
-
-      <div className='pt-[105px]'>
-        <section>
-          {/* <UserHeader iconpath={ProImg} /> */}
-          {/* <ProfileImageEditor Pimage={ProImg} /> */}
-
-        {/* <UserMenu
-        username={username}
-        settingpath={settinglinkpath}
-        Pimage={ProImg}
-         />   */}
+      <section className='pt-[105px]'>
          {/* アイコン */}
           <div className='flex items-center space-x-4'>
             <img src={ProImg} className='w-[150px] h-[150px] rounded-full ml-[5vw]' alt='Profile'/>
             <p className='text-lg font-semibold'>user_name</p>
           </div>
+      </section>
 
+      {/*----▼▼▼▼▼▼▼▼----- コメント承認画面 ----▼▼▼▼▼▼▼▼-----*/}
+      
+      <section className=''>
+          <div className='mt-5 '>
+            {/* 枠線 */}
+            <div className=' border-main-middle border-2 border-dashed h-[30vw] w-[90vw] ml-[4vw]'>
+              {/* 画像 */}
+              {/* <img src="" className='w-[40vw] h-[20vw] ml-[25vw] mt-[5vw]'  alt=''/> */}
+            </div>
+          </div>
         </section>
+      {/*----▲▲▲▲▲▲▲▲----- コメント承認画面 ----▲▲▲▲▲▲▲▲-----
+
+
+      {/*----▼▼▼▼▼▼▼▼----- ノート承認画面----▼▼▼▼▼▼▼▼----- */}
+
+      <div className='pt-[30px]'>
+
 
         <section className=''>
           <div className='mt-5 '>
+            {/* 枠線 */}
             <div className=' border-main-middle border-2 border-dashed h-[30vw] w-[90vw] ml-[4vw]'>
               {/* 画像 */}
-              <img src="/static/media/note2.c64b1c5a9cc38667d261.png" className='w-[50vw] h-[25vw] ml-[20vw] mt-[2.3vw]'  alt='ノートの画像'/>
+              <img src="/static/media/note2.c64b1c5a9cc38667d261.png" className='w-[40vw] h-[20vw] ml-[25vw] mt-[5vw]'  alt='ノートの画像'/>
             </div>
           </div>
         </section>
 
-        <section className='pt-[105px]'>
+        <section className='pt-[30px]'>
 
-          <div className=' w-[90vw] ml-[10%] font-bold'>
+          <div className=' w-[90vw] ml-[10%] font-bold ml-[5vw]'>
             {/* 詳細 */}
             <div className='flex my-2' name="lname">
               <div className=' bg-main text-white text-center px-3'> 講義 </div>
@@ -340,21 +335,18 @@ function ApprovalScreenPage(){
               <div className=' bg-main text-white text-center px-3'> 日時 </div>
               <p className='my-auto ml-3'>2024/〇〇/✕✕  11:00-12:30</p>
             </div>            
-
-            {/* ボタン */}
-            <div className='flex space-x-2 mr-3 mb-1 text-[17px] justify-end mb-[50px] mr-[8vw]'>
-              <button className='font-bold bg-[#D9D9D9] px-4 py-1 '>承認</button>
-              <button className='font-bold bg-[#E74646] px-4 py-1'>削除</button>
-            </div>
-
           </div>
         </section>
-       
+      {/*----▲▲▲▲▲▲▲▲----- ノート承認画面----▲▲▲▲▲▲▲▲----- */}
 
+        
+      {/* ボタン */}
+        <div className='flex space-x-4 text-[17px] justify-end mb-[50px] mr-[1.5vw]'>
+          <button className='font-bold bg-[#D9D9D9] px-4 py-1 '>承認</button>
+          <button className='font-bold bg-[#E74646] px-4 py-1'>削除</button>
+        </div>
       </div>
-
-
-      </div>
+    </div>
 
   )
 }
