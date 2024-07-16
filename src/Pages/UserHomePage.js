@@ -475,5 +475,5 @@ export {
   OneLecturePage,
   UnivercityPage,
   OtherUserPage,
-  OtherUserNotePage,
+  // OtherUserNotePage,
 }
