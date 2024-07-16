@@ -41,9 +41,7 @@ import {
   Board,
 } from '../components/MaterialComponent'
 import {
-  WhiteHeader,
   UserHeader,
-  EmptyHeader,
   Logotext,
   UnivividHeader,
 } from '../components/LayoutComponent'
@@ -124,15 +122,13 @@ function UserSettingsPage() {
 
   return (
     <div>
+      <UnivividHeader title='ユーザー設定' returnCol={1} link='/userhome' bgCol={true}/>
       <form
         className="items-center flex flex-col justify-around text-center h-screen"
         onSubmit={handleSubmit}
       >
-        {/*header*/}
-        <WhiteHeader retupath={returnpath} />
         {/*変更可能なプロフィール画像*/}
         <ProfileImageEditor Pimage={ProImg} />
-
         {/*セッティングフォーム*/}
         <section className="w-[60vw] , text-left text-[#427D9D] space-y-5 max-w-[800px]">
           <InputField
@@ -296,6 +292,8 @@ function UpNoteListPage() {
     </div>
   )
 }
+
+// お気に入りページ
 function FavoriteListPage() {
   return (
     <div className="flex flex-col items-center">
@@ -413,7 +411,7 @@ const UnivercityPage = () => {
       </div>
       <div name='screen_2' className='flex w-5/6 mx-auto h-[30%] mt-14 bolder-[#D9D9D9]'>
         <Board />
-        <div className=' w-5/12 h-full border-2 ml-[12%]'>
+        <div className='w-5/12 h-full border-2 ml-[12%]'>
           <p className='bg-white text-main text-center mb-3'>～ 講義一覧 ～</p>
           {connectLink.map((element,index) => <p key={index} className=' underline mb-2 w-5/6 mx-auto'>{element}</p>)}
         </div>
@@ -424,6 +422,47 @@ const UnivercityPage = () => {
 }
 
 // ノートをあげている他ユーザーのページ
+function OtherUserPage(itemData) {
+  return (
+  <>
+  <div className='flex'>
+    <div className='h-screen w-1/4 bg-main'>
+      <MainReturenBtn returnCol={0}/>
+      <div className="pt-10 w-full text-center">
+        <div
+          className="rounded-full mx-auto bg-[#D9D9D9] size-28"
+          style={{
+            backgroundImage: `url(${itemData.Pimage})`,
+            backgroundSize: `cover`,
+            backgroundPosition: `center center`,
+          }}
+        ></div>
+        {/* <div>{itemData.username}</div> */}
+        <p>uname</p>
+      </div>
+    </div>
+    <div className="space-y-5 w-3/4 ml-32">
+      <div className="pt-12 space-y-10">
+        <ArticlePart
+          BgImg={BgImg}
+          Ticon={Ticon2}
+          groupname={'ECC Artist'}
+          title={'ポートレート講座'}
+          date={'2002/06/24'}
+        />
+        <ArticlePart
+          BgImg={Lok}
+          Ticon={Ticon2}
+          groupname={'ECC comp'}
+          title={'ポートレート講座'}
+          date={'2024/08/29'}
+        />
+      </div>
+    </div>  
+  </div>
+  </>
+  )
+}
 
 export {
   UserHomePage,
@@ -435,4 +474,6 @@ export {
   FavoriteListPage,
   OneLecturePage,
   UnivercityPage,
+  OtherUserPage,
+  OtherUserNotePage,
 }

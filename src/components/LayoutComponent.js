@@ -2,10 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ReturnImgW from '../assets/images/retunbtnw.png' // 戻るボタン白
 import ReturnImg from '../assets/images/return.png'     // 戻るボタン紺
-//テスト用
-import Pen from '../assets/images/pen.png'
 
-//ヘッダー
+// タイトルロゴ
 function Logotext() {
   return (
     <p>
@@ -14,13 +12,6 @@ function Logotext() {
       <span className="text-3xl">V</span>
       <span className="text-xl">ivid</span>
     </p>
-  )
-}
-function EmptyHeader() {
-  return (
-    <section className="text-[60px] fixed w-screen bg-[#427d9d] text-white text-center font-bold py-5">
-      <div>　　　</div>
-    </section>
   )
 }
 /**
@@ -60,21 +51,7 @@ function MainReturenBtn(itemData) {
 // フッター
 function Unifooter() {
   return (
-    <footer className="fixed w-screen bg-main text-white text-[60px] text-center font-bold py-5 bottom-0"></footer>
-  )
-}
-
-function WhiteHeader(headerdata) {
-  return (
-    <section className="flex justify-between w-[100vw]">
-      <Link to={headerdata.retunrpath} className="return-btn">
-        <img className="w-[60px]" src={ReturnImg} alt="ReturnImg" />
-      </Link>
-      <div>
-        <p className="text-[#164863] text-[30px] font-bold">ユーザー設定</p>
-      </div>
-      <div>　　　</div>
-    </section>
+    <footer className="fixed w-screen bg-main text-white text-[60px] text-center font-bold py-6 bottom-0"></footer>
   )
 }
 function UserHeader(itemData) {
@@ -98,8 +75,6 @@ export {
   UnivividHeader,
   MainReturenBtn,
   Unifooter,
-  EmptyHeader,
   Logotext,
-  WhiteHeader,
   UserHeader,
 }

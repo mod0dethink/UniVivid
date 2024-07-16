@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import ImageMed from '../assets/images/iryou.jpg'
 import ImageEng from '../assets/images/English.jpg'
@@ -178,11 +179,11 @@ function CategoryComponent() {
         </div>
       </section>
 
-      <section>
+      <Link to='/registerwelcom'>
         <div className="text-2xl text-right text-blue-300 font-bold">
           next&gt;&gt;
         </div>
-      </section>
+      </Link>
     </div>
   )
 }

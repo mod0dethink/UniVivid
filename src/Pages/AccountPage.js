@@ -1,20 +1,18 @@
 // ログイン・新規登録の画面
 
 // インポート --------------------------------------------------------
-
-//libraryのインポート
+//library
 import React, { useEffect, useRef, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FaAngleDoubleRight } from 'react-icons/fa'
-//import axios from 'axios'
-//アセットのインポート
+//assete
 import '../assets/styles/UnivividStyle.css'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/Animations.css'
 import PenImg from '../assets/images/pen.png'
 import TeacherImg from '../assets/images/teacher.png'
 import Logo from '../assets/images/180_20240622001109.png'
-//componentのインポート
+//component
 import {
   UnivividHeader,
   Unifooter,
@@ -26,9 +24,7 @@ import {
   CreateUniAccountForm,
 } from '../components/RegisterMaterial'
 
-import { UsernameContext } from '../Contexts/UsernameContext'
 // 画面 ----------------------------------------------------------
-
 //初期画面
 function FirstWelcomPage() {
   const pageLoadingRef = useRef(null)
@@ -81,6 +77,7 @@ function FirstWelcomPage() {
   }, [])
 
   return (
+    <>
     <div className="h-screen flex flex-col justify-between">
       <div id="loading_start" ref={pageStartRef} style={{ opacity: 1 }}></div>
       <div id="loading" ref={pageLoadingRef} style={{ opacity: 1 }}>
@@ -93,12 +90,7 @@ function FirstWelcomPage() {
         />{' '}
       </div>
 
-      {/*header*/}
-      <section>
-        <UnivividHeader title={<Logotext />} returnCol={0} hidden="hidden" />
-      </section>
-
-      {/*main*/}
+      <UnivividHeader title={<Logotext />} returnCol={0} hidden="hidden" />
       <section className="flex flex-col items-center justify-center sw-screen h-full bg-main-bg">
         <div className="h-1/5 text-2xl mt-24">
           <p className="font-black">ようこそ、UniVividへ！</p>
@@ -111,7 +103,6 @@ function FirstWelcomPage() {
           <div className="inner-text">
             <p className="font-black ">Login</p>
           </div>
-
           <div className="w-1/2 justify-end flex">
             <div className="black-circle"></div>
             <div className="black-border"></div>
@@ -132,12 +123,9 @@ function FirstWelcomPage() {
           </div>
         </Link>
       </section>
-
-      {/*footer*/}
-      <section className="">
-        <Unifooter />
-      </section>
+      <Unifooter />
     </div>
+    </>
   )
 }
 
@@ -170,25 +158,22 @@ function LoginPage() {
     }
 */
   return (
+    <>
     <div className="justify-between">
-      {/*header*/}
       <UnivividHeader title="ログイン" returnCol={1} link="/" bgCol={true}/>
-      {/*name:email,password,username*/}
       <LoginForm />
-      {/*footer*/}
       <Unifooter />
     </div>
+    </>
   )
 }
 
 //新規登録 職種選択画面
 function EntitySelectionPage() {
   return (
+    <>
     <div className="h-screen flex flex-col justify-between">
-      <section>
-        {/*header*/}
-        <UnivividHeader title={<Logotext />} returnCol={1} link="/" bgCol={true} />
-      </section>
+      <UnivividHeader title={<Logotext />} returnCol={1} link="/" bgCol={true} />
       <section className="flex flex-col items-center justify-center sw-screen h-full bg-[#FFFEF8]">
         {/*---個人or学校---*/}
         <div>
@@ -224,10 +209,11 @@ function EntitySelectionPage() {
         <Unifooter />
       </section>
     </div>
+    </>
   )
 }
 
-/*-----個人のアカウント登録フォーム-----*/
+//個人のアカウント登録フォーム
 function RegisterPage() {
   /*
   const [formData, setFormData] = useState({
@@ -260,47 +246,63 @@ function RegisterPage() {
     }
   }
   */
-
   return (
+    <>
     <div className="h-screen flex flex-col justify-between">
-      {/*Header*/}
       <UnivividHeader title="新規登録" returnCol={1} link="/entityselection" bgCol={true} />
-      {/*入力フォーム*/}
       <CreateAccountForm />
-      {/*footer*/}
       <Unifooter />
     </div>
+    </>
   )
 }
 
-/*-----学校用登録フォーム-----*/
+//学校用登録フォーム
 function UniRegisterPage() {
   return (
+    <>
     <div className="from-container">
-      {/*header*/}
       <UnivividHeader title="新規登録" returnCol={1} link="/entityselection" bgCol={true} />
-      {/*登録フォーム*/}
       <CreateUniAccountForm />
-      {/*footer*/}
       <Unifooter />
     </div>
+    </>
   )
 }
 
-// 新規登録完了の画面
+//新規登録完了の画面
 function RegisterWelcomPage() {
   const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
 
-const WelcomPage = () => {
-  const { username, setUsername } = useContext(UsernameContext)
-  //const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
-
   return (
+    <>
+    <div className="bg-main-bg font-bold h-screen font-mono">
+      <UnivividHeader title={<Logotext />} hidden="hidden" bgCol={true}/>
+      <div className="h-full content-center text-center text-3xl ">
+        <p>アカウントの登録が完了しました！</p>
+        <p>ようこそ、<font className="text-main-dark">{user_name}</font>さん！</p>
+        <Link to='/login'>
+          <button className='py-3 px-5 text-white text-3xl bg-main bg-gradient-to-t from-main-middle rounded-lg mt-10'>
+            ログインして始める
+          </button>
+        </Link>
+      </div>
+      <Unifooter />
+    </div>
+    </>
+  )
+}
+
+//ログイン完了ページ
+function LoginWelcomPage() {
+  const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
+
+  return(
+    <>
     <div className="bg-main-bg font-bold h-screen font-mono">
       <div className="h-full content-center text-center text-4xl ">
-        <p>登録が完了しました。</p>
         <p>
-          こんにちは、<font className="text-main-dark">{username}</font>さん！
+          こんにちは、<font className="text-main-dark">{user_name}</font>さん！
         </p>
       </div>
       <div className="flex justify-end -mt-14 mr-10 text-main-middle">
@@ -323,5 +325,5 @@ export {
   UniRegisterPage,
   EntitySelectionPage,
   RegisterWelcomPage,
-  RoginWelcomPage,
+  LoginWelcomPage,
 }

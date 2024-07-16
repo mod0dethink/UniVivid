@@ -14,7 +14,7 @@ import {
   RegisterPage,
   UniRegisterPage,
   RegisterWelcomPage,
-  RoginWelcomPage,
+  LoginWelcomPage,
 } from './Pages/AccountPage'
 import {
   UserHomePage,
@@ -26,6 +26,8 @@ import {
   FavoriteListPage,
   OneLecturePage,
   UnivercityPage,
+  OtherUserPage,
+  OtherUserNotePage,
 } from './Pages/UserHomePage'
 import {
   UniHomePage,
@@ -52,9 +54,9 @@ const App = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/uniRegister" element={<UniRegisterPage />} />
           <Route path="/registerwelcom" element={<RegisterWelcomPage />} />
-          <Route path="/loginwelcom" element={<RoginWelcomPage />} />
-
-          {/* User Home と User Settings のルート */}
+          <Route path="/loginwelcom" element={<LoginWelcomPage />} />
+          <Route path="/category" element={<CategoryComponent />} />        {/*カテゴリー登録*/}
+          {/*User*/}
           <Route path="/userhome" element={<UserHomePage />} />
           <Route path="/usersetting" element={<UserSettingsPage />} />
           <Route path="/userarticlelist" element={<UserArticleList />} />
@@ -62,30 +64,19 @@ const App = () => {
           <Route path="/articlehistory" element={<ArticleHistoryPage />} />
           <Route path="/upnotelist" element={<UpNoteListPage />} />
           <Route path="/favoritelist" element={<FavoriteListPage />} />
+          <Route path="/onelecturepage" element={<OneLecturePage />} />     {/*講義ごとのページ*/}
+          <Route path="/univercitypage" element={<UnivercityPage />} />     {/*大学ごとのページ */}
+          <Route path="/otheruser" element={<OtherUserPage />}/>
+          <Route path="/otherusernote" element={<OtherUserNotePage />} />
 
           {/*Uni*/}
           <Route path="/unihome" element={<UniHomePage />} />
           <Route path="/unisetting" element={<UniSettingsPage />} />
           <Route path="/createarticle" element={<CreateArticlePage />} />
-
-          {/*カテゴリー登録*/}
-          <Route path="/category" element={<CategoryComponent />} />
-          {/* 記事作成画面 */}
-          <Route path="/createarticle" element={<CreateArticlePage />} />
+          <Route path="/createarticle" element={<CreateArticlePage />} />    {/* 記事作成画面 */}
           <Route path="/createchecked" element={<CreateCheckedPage />} />
-
-          {/*講義ごとのページ*/}
-          <Route path="/onelecturepage" element={<OneLecturePage />} />
-          {/* 申請画面一覧 */}
-          <Route path="/applicationlist" element={<ApplicationListPage />} />
-          {/* 承認画面 */}
-          <Route path="/approvalscreen" element={<ApprovalScreenPage />} />
-          {/*登録完了画面*/}
-          <Route path="/welcompage" element={<WelcomPage />} />
-          {/*講義ごとのページ*/}
-          <Route path="/onelecturepage" element={<OneLecturePage />} />
-
-          <Route path="/univercitypage" element={<UnivercityPage />} />
+          <Route path="/applicationlist" element={<ApplicationListPage />} />{/* 申請画面一覧 */}
+          <Route path="/approvalscreen" element={<ApprovalScreenPage />} />  {/* 承認画面 */}
         </Routes>
       </Router>
     </UsernameProvider>

@@ -18,11 +18,12 @@ import { AiFillLike } from "react-icons/ai";                  //　支援ボタ�
 import img1 from '../assets/images/note2.png';                // 例の画像
 // Board-------------------------------------------------
 import { TbPencilPlus } from "react-icons/tb";  // 追加
+import { OtherUserPage } from '../Pages/UserHomePage'
 
 //asideのユーザーメニュー
 function UserMenu(itemData) {
   return (
-    <aside className="aside flex-grow-[1] min-w-[300px] bg-[#427D9D] content-center flex flex-col items-center justify-between text-[#ffffff] text-2xl">
+    <aside className="aside flex-grow-[1] min-w-[300px] bg-main content-center flex flex-col items-center justify-between text-white text-2xl">
       <div className="text-center pt-[50px]">
         <div
           className="rounded-full bg-[#D9D9D9] w-[160px] h-[160px] flex flex-col items-center justify-center"
@@ -39,7 +40,6 @@ function UserMenu(itemData) {
         <div className="py-3"></div>
         <Link to={itemData.settingpath}>ユーザー設定</Link>
       </div>
-      <div></div>
       <Link to='/'>
         <div className="py-[50px]">
           <p>ログアウト</p>
@@ -112,7 +112,7 @@ function ProfileImageEditor(itemData) {
   return (
     <section>
       <div
-        className="relative rounded-full size-[140px] items-center justify-center"
+        className="rounded-full size-[140px] items-center justify-center mt-16"
         style={{
           backgroundImage: `url(${itemData.Pimage})`,
           backgroundSize: `cover`,
@@ -120,7 +120,7 @@ function ProfileImageEditor(itemData) {
         }}
       >
         <button
-          className="absolute inset-0 overflow-auto"
+          className="mt-24 ml-[80px]"
           onClick={handleButtonClick}
           style={{
             border: 'none',
@@ -130,7 +130,7 @@ function ProfileImageEditor(itemData) {
           }}
         >
           <img
-            className="absolute bottom-0 right-0 w-[60px] "
+            className="w-[60px]"
             src={ImportImg} // 適切な画像URLに変更
             alt="Click to upload"
           />
@@ -392,10 +392,12 @@ const Note = () => {
         <img src={noteImg} alt="back" className='h-full w-5/6 m-auto'/>
         {/* 画像にかぶせるグラデーション */}
         <div className='flex -mt-16 ml-28'>
-          <div className='flex size-14 bg-gray-500 rounded-full'>
-            <img src={upuser_img} alt="back" className='h-full w-auto rounded-full'/>
-            <p className='my-auto ml-3 bg-white'>{user_name}</p>
-          </div>
+          <Link to='/otheruser'>
+            <div className='flex size-14 bg-gray-500 rounded-full'>
+              <img src={upuser_img} alt="back" className='h-full w-auto rounded-full'/>
+              <p className='my-auto ml-3 bg-white'>{user_name}</p>
+            </div>
+          </Link>
           <div className='flex my-auto ml-auto mr-28'>
             <button type='button' id='goodBtn' onClick={() => {setIsGoodState(!isGoodState) }}>
               <AiFillLike className={isGoodState ? 'size-8 text-black' : 'size-8 text-gray-300'}

@@ -132,6 +132,7 @@ function CreateAccountForm() {
   return (
     <section className=" pt-[5%] bg-main-bg flex justify-center">
       <div className="from-nav">
+        {error && <p className="text-red-500">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div>
             <p>メールアドレス</p>
@@ -163,8 +164,9 @@ function CreateAccountForm() {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          {error && <p className="text-red-500">{error}</p>}
-          <button type="submit">登録</button>
+          <Link to='/category'>
+            <button type="submit">登録</button>
+          </Link>
         </form>
       </div>
     </section>

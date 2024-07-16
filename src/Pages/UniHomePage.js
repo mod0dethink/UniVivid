@@ -15,7 +15,7 @@ import {
   HomeReturnBtn,
   InputItems,
 } from '../components/MaterialComponent'
-import { MainReturenBtn, UnivividHeader, WhiteHeader } from '../components/LayoutComponent'
+import { MainReturenBtn, UnivividHeader } from '../components/LayoutComponent'
 
 import '../assets/styles/Dimensions.css'
 
@@ -40,6 +40,7 @@ let articlepath = '/createarticle' //記事一覧へのLinkパス
 function UniHomePage() {
   const Door1 = Door
   return (
+    <>
     <div className="flex w-[100vw] h-screen">
       {/*ユーザーのメニュー*/}
       <UserMenu
@@ -53,6 +54,7 @@ function UniHomePage() {
         <RootUrl name={Door1} text={'公開記事一覧'} linkpath='/createarticle' />
       </section>
     </div>
+    </>
   )
 }
 
@@ -83,45 +85,44 @@ function UniSettingsPage() {
 
   return (
     <>
-      {/* <WhiteHeader /> */}
-      <UnivividHeader title='ユーザー設定' link='/unihome' returnCol={1} bgCol={true}/>
-      <form
-        className="items-center flex flex-col"
-        onSubmit={handleSubmit}
-      >
-        {/*変更可能なプロフィール画像*/}
-        <div className='mt-20'>
-          <ProfileImageEditor Pimage={ProImg}/>
-        </div>
+    <UnivividHeader title='ユーザー設定' link='/unihome' returnCol={1} bgCol={true}/>
+    <form
+      className="items-center flex flex-col"
+      onSubmit={handleSubmit}
+    >
+      {/*変更可能なプロフィール画像*/}
+      <div className='mt-20'>
+        <ProfileImageEditor Pimage={ProImg}/>
+      </div>
 
-        {/*セッティングフォーム*/}
-        <div className="w-[60vw] text-left text-[#427D9D] space-y-5 max-w-[800px]">
-          <InputField
-            label="ユーザー名"
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <InputField
-            label="メールアドレス"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <InputField
-            label="パスワード"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <InputField label="学校名" type="text" value={null} />
-          <InputField label="大学URL" type="text" value={null} />
-          <InputField label="寄付用ページURL" type="text" value={null} />
-        </div>
-        <div className='my-10'>
-          <SaveBtn/>
-        </div>
-      </form>
+      {/*セッティングフォーム*/}
+      <div className="w-[60vw] text-left text-[#427D9D] space-y-5 max-w-[800px]">
+        <InputField
+          label="ユーザー名"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <InputField
+          label="メールアドレス"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <InputField
+          label="パスワード"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <InputField label="学校名" type="text" value={null} />
+        <InputField label="大学URL" type="text" value={null} />
+        <InputField label="寄付用ページURL" type="text" value={null} />
+      </div>
+      <div className='my-10'>
+        <SaveBtn/>
+      </div>
+    </form>
     </>
   )
 }
@@ -129,58 +130,41 @@ function UniSettingsPage() {
 //　記事作成画面
 function CreateArticlePage() {
   return (
-    <div>
-      <UnivividHeader title="記事制作" />
-      <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        {/* <MainReturenBtn link='/usermypage' returnCol={1} /> */}
-      </section>
-      <UnivividHeader title="記事制作" returnCol={1} link="/usermypage" />
-
-      <section className='pt-[105px] mb-[50px]'>
+    <>
+    <UnivividHeader title="記事制作" returnCol={1} link="/usermypage" bgCol={true} />
+    <section className='pt-[105px] mb-[50px]'>
       <InputItems />
-      </section>
-      
-      <section className='flex justify-end pr-[6vw]'>
-        <button className='text-[#427D9D] font-bold text-[20px] mb-[30px]'>確認画面へ&gt;&gt;</button>
-      </section>
-
-    </div>
+    </section>
+    <section className='flex justify-end pr-[6vw]'>
+      <button className='text-[#427D9D] font-bold text-[20px] mb-[30px]'>確認画面へ&gt;&gt;</button>
+    </section>
+    </>
   )
 }
 
 // 作成した記事の確認画面
 function CreateCheckedPage() {
   return (
-    <div>
-      <UnivividHeader title="記事制作" />
-
-      <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        {/* <MainReturenBtn link='/usermypage' returnCol={1} /> */}
-      </section>
-      <UnivividHeader title="記事制作" returnCol={1} link="/createarticle" />
-    
+    <>
+      <UnivividHeader title="記事制作" returnCol={1} link="/createarticle" bgCol={true}/>
       <section className='pt-[105px] mb-[50px]'>
       <InputItems />
       </section>
-
       <section className='flex justify-end pr-[6vw] mb-[30px]'>
-        <button className='text-white text-[18px] font-bold  font-bold bg-[#427D9D] px-12 py-3 rounded-md'>送信</button>
+        <button className='text-white text-[18px] font-bold bg-[#427D9D] px-12 py-3 rounded-md'>送信</button>
       </section>
-
-    </div>
+    </>
   )
 }
 
 // 申請許諾画面
 function ApplicationListPage() {
   return (
-    <div>
+    <>
       <UnivividHeader title="申請一覧" />
-
       <section className="fixed -z-[-3] top-[15px] left-[15px]">
         <MainReturenBtn link='/usermypage' returnCol={1} />
       </section>
-
       <div className="grid place-items-center">
         <section className="pt-[151px] flex justify-around border-b-[2px] border-[#838181] w-[90vw]">
           <button className="border-b-[2px] border-[#229DF6] w-[15vw] text-[#838181] px-4 py-2">
@@ -274,44 +258,25 @@ function ApplicationListPage() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   )
 }
 
 
 function ApprovalScreenPage(){
   const Door1 = Door
+  //ToDo:引数で名前渡す処理
+  // const isUserName = userName;
+  const isUserName = 'あああ';
 
   return(
-    <div>
-
-      <UnivividHeader title="承認画面" />
-
-      <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        {/* <WhiteReturnBtn linkpath="/usermypage" /> */}
-      </section>
-
-      {/* コメント承認画面 */}
-
-      {/* ノート承認画面 */}
-
-      <div className='pt-[105px]'>
-        <section>
-          {/* <UserHeader iconpath={ProImg} /> */}
-          {/* <ProfileImageEditor Pimage={ProImg} /> */}
-
-        {/* <UserMenu
-        username={username}
-        settingpath={settinglinkpath}
-        Pimage={ProImg}
-         />   */}
-         {/* アイコン */}
-          <div className='flex items-center space-x-4'>
-            <img src={ProImg} className='w-[150px] h-[150px] rounded-full ml-[5vw]' alt='Profile'/>
-            <p className='text-lg font-semibold'>user_name</p>
-          </div>
-
-        </section>
+    <>
+      <UnivividHeader title="承認画面" returnCol={1} link='/applicationlist' bgCol={true}/>
+      <div className='pt-16'>
+        <div className='flex items-center space-x-4'>
+          <img src={ProImg} className=' size-20 rounded-full ml-[5vw]' alt='Profile'/>
+          <p className='text-lg font-semibold'>{isUserName}</p>
+        </div>
 
         <section className=''>
           <div className='mt-5 '>
@@ -323,7 +288,6 @@ function ApprovalScreenPage(){
         </section>
 
         <section className='pt-[105px]'>
-
           <div className=' w-[90vw] ml-[10%] font-bold'>
             {/* 詳細 */}
             <div className='flex my-2' name="lname">
@@ -351,13 +315,8 @@ function ApprovalScreenPage(){
 
           </div>
         </section>
-       
-
       </div>
-
-
-      </div>
-
+    </>
   )
 }
 
@@ -368,5 +327,4 @@ export {
   CreateCheckedPage,
   ApplicationListPage,
   ApprovalScreenPage,
-
 }
