@@ -160,11 +160,14 @@ function CreateCheckedPage() {
 // 申請許諾画面
 function ApplicationListPage() {
   return (
-    <>
-      <UnivividHeader title="申請一覧" />
-      <section className="fixed -z-[-3] top-[15px] left-[15px]">
+    <div>
+      {/* <UnivividHeader title="申請一覧" /> */}
+      <UnivividHeader title="申請一覧" returnCol={1} link="/createarticle" />
+
+      {/* <section className="fixed -z-[-3] top-[15px] left-[15px]">
         <MainReturenBtn link='/usermypage' returnCol={1} />
-      </section>
+      </section> */}
+
       <div className="grid place-items-center">
         <section className="pt-[151px] flex justify-around border-b-[2px] border-[#838181] w-[90vw]">
           <button className="border-b-[2px] border-[#229DF6] w-[15vw] text-[#838181] px-4 py-2">
@@ -189,12 +192,10 @@ function ApplicationListPage() {
           </div>
           <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
             <button className="font-bold bg-[#D9D9D9] px-4 py-1 ">
-              {' '}
-              認証{' '}
+              認証
             </button>
             <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              {' '}
-              削除{' '}
+              削除
             </button>
           </div>
         </div>
@@ -210,12 +211,10 @@ function ApplicationListPage() {
           </div>
           <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
             <button className="font-bold bg-[#D9D9D9] px-4 py-1 ">
-              {' '}
-              認証{' '}
+              認証
             </button>
             <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              {' '}
-              削除{' '}
+              削除
             </button>
           </div>
         </div>
@@ -226,39 +225,31 @@ function ApplicationListPage() {
       <section className="grid place-items-center pt-[100px]">
         <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
           <div className="ml-2 flex-grow">
-            <input
-              type="text"
-              placeholder=""
-              readOnly
-              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
-            />
+            <p type="text" placeholder="" readOnly className="px-2 py-1 flex-grow mr-2 w-[55vw]">
+              
+            </p>
           </div>
           <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
             <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              {' '}
-              削除{' '}
+              削除
             </button>
           </div>
         </div>
 
         <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
           <div className="ml-2 flex-grow">
-            <input
-              type="text"
-              placeholder=""
-              readOnly
-              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
-            />
+          <p type="text" placeholder="" readOnly className="px-2 py-1 flex-grow mr-2 w-[55vw]">
+            
+          </p>
           </div>
           <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
             <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              {' '}
-              削除{' '}
+              削除
             </button>
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
 
@@ -280,15 +271,17 @@ function ApprovalScreenPage(){
 
         <section className=''>
           <div className='mt-5 '>
+            {/* 枠線 */}
             <div className=' border-main-middle border-2 border-dashed h-[30vw] w-[90vw] ml-[4vw]'>
               {/* 画像 */}
-              <img src="/static/media/note2.c64b1c5a9cc38667d261.png" className='w-[50vw] h-[25vw] ml-[20vw] mt-[2.3vw]'  alt='ノートの画像'/>
+              <img src="/static/media/note2.c64b1c5a9cc38667d261.png" className='w-[40vw] h-[20vw] ml-[25vw] mt-[5vw]'  alt='ノートの画像'/>
             </div>
           </div>
         </section>
 
-        <section className='pt-[105px]'>
-          <div className=' w-[90vw] ml-[10%] font-bold'>
+        <section className='pt-[30px]'>
+
+          <div className=' w-[90vw] ml-[10%] font-bold ml-[5vw]'>
             {/* 詳細 */}
             <div className='flex my-2' name="lname">
               <div className=' bg-main text-white text-center px-3'> 講義 </div>
@@ -306,15 +299,16 @@ function ApprovalScreenPage(){
               <div className=' bg-main text-white text-center px-3'> 日時 </div>
               <p className='my-auto ml-3'>2024/〇〇/✕✕  11:00-12:30</p>
             </div>            
-
-            {/* ボタン */}
-            <div className='flex space-x-2 mr-3 mb-1 text-[17px] justify-end mb-[50px] mr-[8vw]'>
-              <button className='font-bold bg-[#D9D9D9] px-4 py-1 '>承認</button>
-              <button className='font-bold bg-[#E74646] px-4 py-1'>削除</button>
-            </div>
-
           </div>
         </section>
+      {/*----▲▲▲▲▲▲▲▲----- ノート承認画面----▲▲▲▲▲▲▲▲----- */}
+
+        
+      {/* ボタン */}
+        <div className='flex space-x-4 text-[17px] justify-end mb-[50px] mr-[1.5vw]'>
+          <button className='font-bold bg-[#D9D9D9] px-4 py-1 '>承認</button>
+          <button className='font-bold bg-[#E74646] px-4 py-1'>削除</button>
+        </div>
       </div>
     </>
   )
