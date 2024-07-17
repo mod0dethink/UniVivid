@@ -19,7 +19,7 @@ import img1 from '../assets/images/note2.png';                // 例の画像
 // Board-------------------------------------------------
 import { TbPencilPlus } from "react-icons/tb";  // 追加
 import { OtherUserPage } from '../Pages/UserHomePage'
-
+import { MainReturenBtn } from './LayoutComponent'
 //asideのユーザーメニュー
 function UserMenu(itemData) {
   return (
@@ -274,7 +274,7 @@ function BoxMenu(itemData) {
     </Link>
   )
 }
-
+// Uniの記事 作成・編集・確認 画面
 function InputItems() {
   return (
     <div>
@@ -421,7 +421,7 @@ const Note = () => {
 }
 
 //講義詳細
-const LectureDetails = () => {
+function LectureDetails() {
   const lecUimg = uimg;
   const uname = "ecc_comp";     // 大学ユーザ名
   const lname = "IoT講座";      // 講義名
@@ -436,20 +436,19 @@ const LectureDetails = () => {
           <p className='my-auto ml-3'>{uname}</p>
         </button>
       </Link>
-
-      <div name="lname" className='flex my-2'>
-        <div className=' bg-main text-white text-center px-3'>講義</div>
-        <p className='my-auto ml-3'>{lname}</p>
-      </div>
-
-      <div name="teachname" className='flex my-2'>
-        <div className=' bg-main text-white text-center px-3'>講師</div>
-        <p className='my-auto ml-3'>{teachname}</p>
-      </div>
-
-      <div name="detail" className='flex my-2'>
-        <div className=' bg-main text-white text-center px-3'>内容</div>
-        <p className='my-auto ml-3'>{detail}</p>
+      <div className='font-bold'>
+        <div name="lname" className='flex my-2'>
+          <div className=' bg-main text-white text-center px-3'>講義</div>
+          <p className='my-auto ml-3'>{lname}</p>
+        </div>
+        <div name="teachname" className='flex my-2'>
+          <div className=' bg-main text-white text-center px-3'>講師</div>
+          <p className='my-auto ml-3'>{teachname}</p>
+        </div>
+        <div name="detail" className='flex my-2'>
+          <div className=' bg-main text-white text-center px-3'>内容</div>
+          <p className='my-auto ml-3'>{detail}</p>
+        </div>
       </div>
     </>
   )
@@ -507,6 +506,28 @@ const Board = () => {
   )
 }
 
+// 他ユーザーの表示
+function OtherMenu(itemData) {
+  return(
+    <>
+    <div className='h-screen w-1/4 bg-main'>
+      <MainReturenBtn returnCol={0} link={itemData.link}/>
+      <div className="pt-10 w-full text-center">
+        <div
+          className="rounded-full mx-auto bg-[#D9D9D9] size-28"
+          style={{
+            backgroundImage: `url(${itemData.img})`,
+            backgroundSize: `cover`,
+            backgroundPosition: `center center`,
+          }}
+        ></div>
+        <p className='mt-2'>{itemData.name}</p>
+      </div>
+    </div>
+    </>
+  )
+}
+
 export {
   UserMenu,
   RootUrl,
@@ -523,4 +544,5 @@ export {
   ConnectLink,
   ComentDialog,
   Board,
+  OtherMenu,
 }

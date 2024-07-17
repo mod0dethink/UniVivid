@@ -27,7 +27,7 @@ import {
   OneLecturePage,
   UnivercityPage,
   OtherUserPage,
-  // OtherUserNotePage,
+  OtherUserNotePage,
 } from './Pages/UserHomePage'
 import {
   UniHomePage,
@@ -43,9 +43,6 @@ const App = () => {
     <UsernameProvider>
       <Router>
         <Routes>
-          {/* 確認用URL画面 */}
-          {/* <Route path="/" element={<TransitionalScreen />} /> */}
-
           {/* 最初に呼び出される画面 */}
           <Route path="/" element={<FirstWelcomPage />} />
           {/* ログイン・新規登録の画面 */}
@@ -67,7 +64,7 @@ const App = () => {
           <Route path="/onelecturepage" element={<OneLecturePage />} />     {/*講義ごとのページ*/}
           <Route path="/univercitypage" element={<UnivercityPage />} />     {/*大学ごとのページ */}
           <Route path="/otheruser" element={<OtherUserPage />}/>
-          {/* <Route path="/otherusernote" element={<OtherUserNotePage />} /> */}
+          <Route path="/otherusernote" element={<OtherUserNotePage />} />
 
           {/*Uni*/}
           <Route path="/unihome" element={<UniHomePage />} />

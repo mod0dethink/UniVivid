@@ -9,16 +9,21 @@ import axios from 'axios';
 //必要なアセットをインポート
 import Imagepng from '../assets/images/IMG_4007.jpg'
 import Door from '../assets/images/door.png'
+import BgNote from '../assets/images/bgnote.jpg'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/bg-images.css'
 import { MainReturenBtn } from '../components/LayoutComponent'; // 戻るボタン
+import { BsPaperclip } from "react-icons/bs";                 // クリップ
 //　テスト用
 import BgImg from '../assets/images/IMG_4007.jpg'
 import Lok from '../assets/images/lock_back.png'
 import Ticon2 from '../assets/images/English.jpg'
+import NoteImg from '../assets/images/note2.png'
 import { Link } from 'react-router-dom'
 import uni_img from "../assets/images/ECC_build.jpg";         // 大学画像
 import { FaHandHoldingHeart } from "react-icons/fa6";         // 支援ボタンのマーク
+import { AiFillLike } from "react-icons/ai";                  //　支援ボタンのアイコン
+
 // 処理
 import {
   favoriteChange,
@@ -39,6 +44,7 @@ import {
   ConnectLink,
   ComentDialog,
   Board,
+  OtherMenu,
 } from '../components/MaterialComponent'
 import {
   UserHeader,
@@ -421,26 +427,12 @@ const UnivercityPage = () => {
   )
 }
 
-// ノートをあげている他ユーザーのページ
-function OtherUserPage(itemData) {
+// 他ユーザーのノート一覧
+function OtherUserPage() {
   return (
   <>
-  <div className='flex'>
-    <div className='h-screen w-1/4 bg-main'>
-      <MainReturenBtn returnCol={0}/>
-      <div className="pt-10 w-full text-center">
-        <div
-          className="rounded-full mx-auto bg-[#D9D9D9] size-28"
-          style={{
-            backgroundImage: `url(${itemData.Pimage})`,
-            backgroundSize: `cover`,
-            backgroundPosition: `center center`,
-          }}
-        ></div>
-        {/* <div>{itemData.username}</div> */}
-        <p>uname</p>
-      </div>
-    </div>
+  <div className='flex bg-main-bg'>
+    <OtherMenu image={uni_img} name={'kata_sk'} link='/onelecturepage' />
     <div className="space-y-5 w-3/4 ml-32">
       <div className="pt-12 space-y-10">
         <ArticlePart
@@ -449,6 +441,7 @@ function OtherUserPage(itemData) {
           groupname={'ECC Artist'}
           title={'ポートレート講座'}
           date={'2002/06/24'}
+          link={'/otherusernote'}
         />
         <ArticlePart
           BgImg={Lok}
@@ -463,7 +456,36 @@ function OtherUserPage(itemData) {
   </>
   )
 }
-
+// 他ユーザーの各ノート
+function OtherUserNotePage(itemData) {
+  const lectureName = 'IoT講座';
+  const date = '2024/oo/xx';
+  const time = '16:00';
+  const goodCount = 20;
+  return(
+    <>
+    <div className='absolute'><MainReturenBtn returnCol={0} link={'/otheruser'} /></div>
+    <div className='flex h-dvh bg-main-bg justify-center'>
+      <BsPaperclip className='absolute size-16 mt-20 left-[12%] text-main-middle'/>
+      <div className='h-96 w-1/3 bg-gray-200 content-center mt-24'>
+        <img src={NoteImg} alt='userNoteImg'/>
+      </div>
+      <div className='mt-20 ml-10 w-5/12 font-bold'>
+        <div className='text-2xl rounded-lg py-2 text-center text-white bg-main'>
+          {lectureName}
+        </div>
+        <p className='my-5'>{date}　{time} に更新 </p>
+        {/* ToDo:値の受渡 */}
+        <LectureDetails />
+        <div className='flex items-center text-main-middle float-right'>
+          <AiFillLike className='size-8' />
+          <p >{goodCount}</p>
+        </div>
+      </div>
+    </div>
+    </>
+  )
+}
 export {
   UserHomePage,
   UserSettingsPage,
@@ -475,5 +497,5 @@ export {
   OneLecturePage,
   UnivercityPage,
   OtherUserPage,
-  // OtherUserNotePage,
+  OtherUserNotePage,
 }
