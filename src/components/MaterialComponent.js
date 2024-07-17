@@ -465,10 +465,13 @@ const ConnectLink = () => {
   )
 }
 
-//  掲示板コメントダイアログ
-const ComentDialog = () => {
+// 掲示板コメントダイアログ
+function ComentDialog(item) {
   return (
-    <dialog id='commentDialog' className='bg-black/50 h-screen w-screen content-center'>
+    <dialog 
+    className='bg-black/50 h-screen w-screen content-center'
+    open={item.open}
+    >
       <form method='dialog' className='bg-white h-3/4 w-96 m-auto rounded-md'>
         <div name='title' className='flex h-14 w-full bg-main-dark text-white text-2xl rounded-t-md'>
           <p className='my-auto ml-[40%]'>コメント</p>
@@ -480,27 +483,6 @@ const ComentDialog = () => {
         <button className='bg-[#2D92C9] bg-gradient-to-t from-[#164863] text-white px-10 ml-[35%] mt-5 rounded-md py-1'>送信</button>
       </form>
     </dialog>
-  )
-}
-
-// 掲示板
-const Board = () => {
-  const coment = ['校舎がきれいだった！','階段が狭杉！']
-
-  return (
-    <>
-      <div className='w-5/12 h-full border-2 bg-white'>
-        <p className=' text-main text-center mb-3'>～ 掲示板 ～</p>
-        {coment.map((element,index) => <p key={index} className=' font-normal border-b-2 w-5/6 mx-auto'>{element}</p>)}
-      </div>
-      <button 
-      className='size-14 rounded-full bg-main -ml-16 mt-auto mb-3'
-      // onClick={}
-      >
-        {/* ToDo:コメントアイコン押したときにダイアログを開く処理 */}
-        <TbPencilPlus className='size-11 ml-1 -mt-1 text-white'/>
-      </button>
-    </>
   )
 }
 
@@ -541,6 +523,5 @@ export {
   InputItems,
   ConnectLink,
   ComentDialog,
-  Board,
   OtherMenu,
 }

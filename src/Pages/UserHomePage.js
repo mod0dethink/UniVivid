@@ -6,12 +6,14 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Axios } from 'axios'
 import axios from 'axios';
+import PropTypes from 'prop-types';
 //必要なアセットをインポート
 import Imagepng from '../assets/images/IMG_4007.jpg'
 import Door from '../assets/images/door.png'
 import BgNote from '../assets/images/bgnote.jpg'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/bg-images.css'
+import { TbPencilPlus } from "react-icons/tb";  // 追加
 import { MainReturenBtn } from '../components/LayoutComponent'; // 戻るボタン
 import { BsPaperclip } from "react-icons/bs";                 // クリップ
 //　テスト用
@@ -43,7 +45,6 @@ import {
   LectureDetails,
   ConnectLink,
   ComentDialog,
-  Board,
   OtherMenu,
 } from '../components/MaterialComponent'
 import {
@@ -51,6 +52,7 @@ import {
   Logotext,
   UnivividHeader,
 } from '../components/LayoutComponent'
+import { type } from '@testing-library/user-event/dist/type/index.js';
 
 /*------ユーザーのデータ変数------*/
 let ProImg = Imagepng //プロフィール画像
@@ -381,16 +383,20 @@ const OneLecturePage = () => {
 
 // 大学ごとのページ
 const UnivercityPage = () => {
-  const uni_name = "ECCコンピュータ専門学校";   // 大学名
-  const tags = ['IT','CG','経営'];             // タグ
+  // テストデータ
+  const uni_name = "ECCコンピュータ専門学校";                     // 大学名
+  const tags = ['IT','CG','経営'];                               // タグ
   const place = '〒530-0015 大阪府大阪市北区中崎西2丁目3番35号';  // 住所
-  const hp = 'https://comp.ecc.ac.jp/';
+  const hp = 'https://comp.ecc.ac.jp/';                         // 大学リンク
   const connectLink = ['@university_name　HTML,CSS講座','@university_name　React講座']; // 関連記事リンク
+  const coment = ['校舎がきれいだった！','階段が狭杉！'];        // 掲示板コメント
+
+  const [isDialog, setIsDialog] = useState(false);  // ダイアログ開閉の変数
 
   return (
     <>
     <div className='h-screen font-bold bg-main-bg'>
-      <ComentDialog/>
+      <ComentDialog open={isDialog}/>
       <div name='header' className='flex'>
         <MainReturenBtn link='/onelecturepage' returnCol={0}/>
         <div className='bg-main font-bold h-96 w-5/6 rounded-[50%] mx-auto -mt-72 text-white text-4xl text-center pt-[315px]'>
@@ -415,8 +421,18 @@ const UnivercityPage = () => {
           </button>
         </div>
       </div>
+
       <div name='screen_2' className='flex w-5/6 mx-auto h-[30%] mt-14 bolder-[#D9D9D9]'>
-        <Board />
+      <div className='w-5/12 h-full border-2 bg-white'>
+        <p className=' text-main text-center mb-3'>～ 掲示板 ～</p>
+        {coment.map((element,index) => <p key={index} className=' font-normal border-b-2 w-5/6 mx-auto'>{element}</p>)}
+      </div>
+      <button 
+      className='size-14 rounded-full bg-main -ml-16 mt-auto mb-3'
+      onClick={() => {setIsDialog(!isDialog)}}
+      >
+        <TbPencilPlus className='size-11 ml-1 -mt-1 text-white'/>
+      </button>
         <div className='w-5/12 h-full border-2 ml-[12%]'>
           <p className='bg-white text-main text-center mb-3'>～ 講義一覧 ～</p>
           {connectLink.map((element,index) => <p key={index} className=' underline mb-2 w-5/6 mx-auto'>{element}</p>)}

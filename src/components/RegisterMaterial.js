@@ -79,7 +79,6 @@ function LoginForm() {
 }
 
 //いったんカテゴリー登録を飛ばして、アカウント作成が完了したらログインにリダイレクトするようにしてる
-
 function CreateAccountForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -199,7 +198,7 @@ function CreateUniAccountForm() {
       })
 
       if (response.ok) {
-        navigate('/welcompage')
+        navigate('/registerwelcom')
         conUsername(univName)
       } else {
         const data = await response.json()
