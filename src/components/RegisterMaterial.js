@@ -43,7 +43,7 @@ function LoginForm() {
   }
 
   return (
-    <section className="pt-[5%] bg-main-bg flex justify-center">
+    <section className="pt-[8%] bg-main-bg flex justify-center">
       <div className="from-nav">
         <form onSubmit={handleSubmit}>
           {error && <p className="text-red-500 absolute -mt-10">{error}</p>}
@@ -68,20 +68,10 @@ function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div>
-              <p>ユーザー名</p>
-              <input
-                type="text"
-                name="username"
-                placeholder="abcd"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
           </div>
-          <Link to = '/loginwelcom'>
+          {/* <Link to = '/loginwelcom'> */}
           <button type="submit">ログイン</button>
-          </Link>
+          {/* </Link> */}
         </form>
       </div>
     </section>

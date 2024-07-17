@@ -75,8 +75,6 @@ function RootUrl(itemData) {
     value={username}
                 value={email}
                               value={password}
-
-
 */
 
 //フォーム入力用のinput
