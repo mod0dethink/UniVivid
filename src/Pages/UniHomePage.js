@@ -3,8 +3,8 @@
 import React, { useRef, useState } from 'react'
 // import axios from 'axios'
 import { Axios } from 'axios'
-
 import Door from '../assets/images/door.png'
+import { FaBell } from "react-icons/fa";
 import { Link } from 'react-router-dom'
 import {
   UserMenu,
@@ -12,15 +12,31 @@ import {
   InputField,
   ProfileImageEditor,
   SaveBtn,
+  ArticlePart,
+  ArticleSearch,
+  BoxMenu,
+  Note,
+  LectureDetails,
   HomeReturnBtn,
   InputItems,
+  ConnectLink,
+  ComentDialog,
+  Board,
+  OtherMenu,
 } from '../components/MaterialComponent'
 import { MainReturenBtn, UnivividHeader } from '../components/LayoutComponent'
-
 import '../assets/styles/Dimensions.css'
-
 import Imagepng from '../assets/images/IMG_4007.jpg'
 import '../assets/styles/Dimensions.css'
+//テスト
+import BgImg from '../assets/images/IMG_4007.jpg'
+import Lok from '../assets/images/lock_back.png'
+import Ticon2 from '../assets/images/English.jpg'
+import NoteImg from '../assets/images/note2.png'
+import uni_img from "../assets/images/ECC_build.jpg";         // 大学画像
+import { FaHandHoldingHeart } from "react-icons/fa6";         // 支援ボタンのマーク
+import { AiFillLike } from "react-icons/ai";                  //　支援ボタンのアイコン
+
 /*
 path変数一覧
   ProImg=プロフィール画像
@@ -48,10 +64,13 @@ function UniHomePage() {
         settingpath='/unisetting'
         Pimage={ProImg}
       />
+      <Link to='/applicationlist'>
+        <FaBell className='absolute text-main-middle size-10 right-5 top-4'/>
+      </Link>
       {/*記事メニュー*/}
       <section className="flex-grow-[7] content-center h-screen">
         <RootUrl name={Door1} text={'記事作成画面'} linkpath='/createarticle' />
-        <RootUrl name={Door1} text={'公開記事一覧'} linkpath='/createarticle' />
+        <RootUrl name={Door1} text={'公開記事一覧'} linkpath='/openarticles' />
       </section>
     </div>
     </>
@@ -131,7 +150,7 @@ function UniSettingsPage() {
 function CreateArticlePage() {
   return (
     <>
-    <UnivividHeader title="記事制作" returnCol={1} link="/usermypage" bgCol={true} />
+    <UnivividHeader title="記事制作" returnCol={1} link="/unihome" bgCol={true} />
     <section className='pt-[105px] mb-[50px]'>
       <InputItems />
     </section>
@@ -162,7 +181,7 @@ function ApplicationListPage() {
   return (
     <div>
       {/* <UnivividHeader title="申請一覧" /> */}
-      <UnivividHeader title="申請一覧" returnCol={1} link="/createarticle" />
+      <UnivividHeader title="申請一覧" returnCol={1} link="/unihome" bgCol={true} />
 
       {/* <section className="fixed -z-[-3] top-[15px] left-[15px]">
         <MainReturenBtn link='/usermypage' returnCol={1} />
@@ -313,6 +332,90 @@ function ApprovalScreenPage(){
     </>
   )
 }
+// 公開記事一覧
+function OpenArtucles() {
+  const detail = "ArduinoでRaspberry Piを用い、IoTに触れる。";  // 内容
+  return (
+    <>
+    <div className='flex bg-main-bg'>
+      <OtherMenu img={ProImg} name={username} link='/unihome' />
+      <div className="space-y-5 w-3/4 ml-32">
+        <div className="pt-12 space-y-10">
+          <ArticlePart
+            BgImg={BgImg}
+            Ticon={Ticon2}
+            groupname={'ECC Artist'}
+            title={'ポートレート講座'}
+            date={'2002/06/24'}
+            link={'/editonelecture'}
+          />
+          <ArticlePart
+            BgImg={Lok}
+            Ticon={Ticon2}
+            groupname={'ECC comp'}
+            title={'ポートレート講座'}
+            date={'2024/08/29'}
+          />
+        </div>
+      </div>  
+    </div>
+    </>
+  )
+}
+// 講義記事ごとのページ
+const EditOneLecture = () => {
+  // 講義関連
+  const lectureName = "IoT講座";              // 講義名
+  const time = "2024/oo/xx　11:00 - 12:30";   // 講義日時
+  const [isFavorite, setIsFavorite] = useState(false);    // お気に入りボタンの状態
+  const [isGoodCount, setIsGoodCount] = useState(0);      // いいね数管理の変数
+  const [isPageCount, setIsPageCount] = useState(0);      // ページ枚数管理の変数
+
+  return (
+    <>
+    <div className='h-screen bg-main-bg font-bold'>
+      <Link to='/editdetailes'>
+      <button className='absolute right-10 bg-gray-700 rounded-md bottom-5 text-white py-2 px-10'>
+        記事を編集する
+      </button>
+      </Link>
+      <div className='flex'>
+        <MainReturenBtn link='/openarticles' returnCol={0}/>
+        <div className='bg-main text-white text-4xl py-2 px-28 rounded-xl mx-7 mt-5'>{lectureName}</div>
+        <p className='text-main mt-auto mb-0'>{time}</p>
+        <button id='favorite'></button>
+      </div>
+      <Note />
+      <div className='flex justify-around'>
+        <div className='w-1/2 ml-[10%]'>
+          <LectureDetails />
+          <button type='submit' className='bg-[#3BBC30] text-white text-xl px-10 py-1 rounded-md mt-8'>この講義に申し込む</button>
+        </div>
+        <div className='mt-5 w-1/2'>
+          <ConnectLink />
+        </div>
+      </div>
+    </div>
+    <script src="../assets/scripts/animation.js"></script>
+    </>
+  )
+}
+// 記事編集
+function EditDetails() {
+  return(
+  <>
+  <UnivividHeader title='記事編集' returnCol={1} link='/editonelecture' bgCol={true} />
+  <div className='pt-20'>
+  <InputItems />
+  </div>
+  <Link to='/editonelecture'>
+  <section className='flex justify-end pr-[6vw]'>
+    <button className='font-bold text-[20px] mb-[30px] bg-main text-white py-1 px-10 rounded-md'>送信</button>
+  </section>
+  </Link>
+  </>
+  )
+}
 
 export {
   UniHomePage,
@@ -321,4 +424,7 @@ export {
   CreateCheckedPage,
   ApplicationListPage,
   ApprovalScreenPage,
+  OpenArtucles,
+  EditOneLecture,
+  EditDetails,
 }

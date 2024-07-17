@@ -36,6 +36,9 @@ import {
   CreateCheckedPage,
   ApplicationListPage,
   ApprovalScreenPage,
+  OpenArtucles,
+  EditOneLecture,
+  EditDetails,
 } from './Pages/UniHomePage'
 
 const App = () => {
@@ -52,7 +55,7 @@ const App = () => {
           <Route path="/uniRegister" element={<UniRegisterPage />} />
           <Route path="/registerwelcom" element={<RegisterWelcomPage />} />
           <Route path="/loginwelcom" element={<LoginWelcomPage />} />
-          <Route path="/category" element={<CategoryComponent />} />        {/*カテゴリー登録*/}
+          <Route path="/category" element={<CategoryComponent />} /> 
           {/*User*/}
           <Route path="/userhome" element={<UserHomePage />} />
           <Route path="/usersetting" element={<UserSettingsPage />} />
@@ -61,19 +64,21 @@ const App = () => {
           <Route path="/articlehistory" element={<ArticleHistoryPage />} />
           <Route path="/upnotelist" element={<UpNoteListPage />} />
           <Route path="/favoritelist" element={<FavoriteListPage />} />
-          <Route path="/onelecturepage" element={<OneLecturePage />} />     {/*講義ごとのページ*/}
-          <Route path="/univercitypage" element={<UnivercityPage />} />     {/*大学ごとのページ */}
+          <Route path="/onelecturepage" element={<OneLecturePage />} />
+          <Route path="/univercitypage" element={<UnivercityPage />} /> 
           <Route path="/otheruser" element={<OtherUserPage />}/>
           <Route path="/otherusernote" element={<OtherUserNotePage />} />
-
           {/*Uni*/}
           <Route path="/unihome" element={<UniHomePage />} />
           <Route path="/unisetting" element={<UniSettingsPage />} />
           <Route path="/createarticle" element={<CreateArticlePage />} />
-          <Route path="/createarticle" element={<CreateArticlePage />} />    {/* 記事作成画面 */}
+          <Route path="/createarticle" element={<CreateArticlePage />} />
           <Route path="/createchecked" element={<CreateCheckedPage />} />
-          <Route path="/applicationlist" element={<ApplicationListPage />} />{/* 申請画面一覧 */}
-          <Route path="/approvalscreen" element={<ApprovalScreenPage />} />  {/* 承認画面 */}
+          <Route path="/applicationlist" element={<ApplicationListPage />} />
+          <Route path="/approvalscreen" element={<ApprovalScreenPage />} />
+          <Route path="/openarticles" element={<OpenArtucles />} />
+          <Route path="/editonelecture" element={<EditOneLecture />} />
+          <Route path="/editdetailes" element={<EditDetails />} />
         </Routes>
       </Router>
     </UsernameProvider>

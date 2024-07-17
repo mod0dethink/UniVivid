@@ -521,7 +521,7 @@ function OtherMenu(itemData) {
             backgroundPosition: `center center`,
           }}
         ></div>
-        <p className='mt-2'>{itemData.name}</p>
+        <p className='mt-2 font-bold text-white'>{itemData.name}</p>
       </div>
     </div>
     </>
