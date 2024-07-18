@@ -1,12 +1,10 @@
 // ログイン後のユーザーの画面
 
-// インポート --------------------------------------------------------
-
 //必要なlibraryをインポート
 import React, { useRef, useState, useEffect } from 'react'
 import { Axios } from 'axios'
 import axios from 'axios';
-import PropTypes from 'prop-types';
+import { Children } from 'react';
 //必要なアセットをインポート
 import Imagepng from '../assets/images/IMG_4007.jpg'
 import Door from '../assets/images/door.png'
@@ -14,7 +12,7 @@ import BgNote from '../assets/images/bgnote.jpg'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/bg-images.css'
 import { TbPencilPlus } from "react-icons/tb";  // 追加
-import { MainReturenBtn } from '../components/LayoutComponent'; // 戻るボタン
+import { MainReturenBtn } from '../components/LayoutComponent.js'; // 戻るボタン
 import { BsPaperclip } from "react-icons/bs";                 // クリップ
 //　テスト用
 import BgImg from '../assets/images/IMG_4007.jpg'
@@ -46,12 +44,13 @@ import {
   ConnectLink,
   ComentDialog,
   OtherMenu,
-} from '../components/MaterialComponent'
+  SwichBar,
+} from '../components/MaterialComponent.js'
 import {
   UserHeader,
   Logotext,
   UnivividHeader,
-} from '../components/LayoutComponent'
+} from '../components/LayoutComponent.js'
 import { type } from '@testing-library/user-event/dist/type/index.js';
 
 /*------ユーザーのデータ変数------*/
@@ -61,7 +60,6 @@ let settinglinkpath = '/usersetting' //ユーザーメニュー画面へのLink�
 let returnpath = '/userhome' //戻るボタンのLinkパス
 let mypagepath = '/usermypage' //マイページのLinkパス
 let articlepath = '/userarticlelist' //記事一覧へのLinkパス
-
 
 //ユーザーのホーム画面
 function UserHomePage() {
@@ -165,12 +163,7 @@ function UserSettingsPage() {
   )
 }
 
-const testData = [
-  {BgImg,Ticon2,},
-  {}
-]
-
-//記事一覧
+// 記事一覧
 function UserArticleList() {
   return (
     <div>
@@ -227,9 +220,9 @@ function UserMyPage() {
     </div>
   )
 }
-/*マイページからの遷移先以下三つ*/
 
-//受講履歴一覧
+/*マイページからの遷移先以下三つ*/
+// 受講履歴一覧
 function ArticleHistoryPage() {
   return (
     <div>
@@ -237,15 +230,6 @@ function ArticleHistoryPage() {
       <section>
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
           <div className="pt-[50px] space-y-10">
-            {/*
-          <ArticlePart
-          BgImg={Lok} メインの背景画像
-          Ticon={Ticon2} 団体のアイコン画像
-          groupname={'ECC comp'} 団体名
-          title={'ポートレート講座'} 講座名
-          date={'2024/08/29'} 当日の日付
-        />
-        */}
             <ArticlePart
               BgImg={BgImg}
               Ticon={Ticon2}
@@ -266,21 +250,13 @@ function ArticleHistoryPage() {
     </div>
   )
 }
+// アップロードしたノート一覧
 function UpNoteListPage() {
   return (
     <div>
         <UnivividHeader title="アップロードしたノート一覧" returnCol={1} link='/usermypage' bgCol={true} />
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
           <div className="pt-[50px] space-y-10">
-            {/*
-        <ArticlePart
-        BgImg={Lok} メインの背景画像
-        Ticon={Ticon2} 団体のアイコン画像
-        groupname={'ECC comp'} 団体名
-        title={'ポートレート講座'} 講座名
-        date={'2024/08/29'} 当日の日付
-      />
-      */}
             <ArticlePart
               BgImg={BgImg}
               Ticon={Ticon2}
@@ -300,32 +276,29 @@ function UpNoteListPage() {
     </div>
   )
 }
-
 // お気に入りページ
 function FavoriteListPage() {
+  const [isPage, setIsPage] = useState(1);
   return (
     <div className="flex flex-col items-center">
       <UnivividHeader title="お気に入り" returnCol={1} link='/usermypage' bgCol={true} />
-      <section className="pt-[151px] flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
-        <button className="border-b-[2px] border-[#229DF6] w-[15vw]">
-          講義
-        </button>
-        <button className="border-b-[2px] border-[#229DF6] w-[15vw]">
-          ノート
-        </button>
-      </section>
+      <section className="pt-28 flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
+      <button 
+      id={isPage==1 ? 'swichBar': ''}
+      onClick={()=>{setIsPage(1)}}
+      >
+        講座
+      </button>
+      <button 
+      id={isPage==2 ? 'swichBar': ''}
+      onClick={()=>{setIsPage(2)}}
+      >
+        ノート
+      </button>
+    </section>
       <section>
         <div className="flex space-y-5 justify-center text-center">
           <div className="pt-[50px] space-y-10">
-            {/*
-        <ArticlePart
-        BgImg={Lok} メインの背景画像
-        Ticon={Ticon2} 団体のアイコン画像
-        groupname={'ECC comp'} 団体名
-        title={'ポートレート講座'} 講座名
-        date={'2024/08/29'} 当日の日付
-      />
-      */}
             <ArticlePart
               BgImg={BgImg}
               Ticon={Ticon2}
@@ -472,6 +445,7 @@ function OtherUserPage() {
   </>
   )
 }
+
 // 他ユーザーの各ノート
 function OtherUserNotePage(itemData) {
   const lectureName = 'IoT講座';
@@ -502,6 +476,7 @@ function OtherUserNotePage(itemData) {
     </>
   )
 }
+
 export {
   UserHomePage,
   UserSettingsPage,

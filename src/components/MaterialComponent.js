@@ -4,7 +4,6 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
-//import PropTypes from 'prop-types'
 import ImportImg from '../assets/images/imgImport.png'
 // LectureDetails----------------------------------------
 import uimg from '../assets/images/ecc_logo.jpg'  // 講義詳細で使用する例の画像
@@ -261,6 +260,73 @@ function ArticlePart(PartData) {
   )
 }
 
+// タブごとの内容
+function SwichPage(item) {
+  switch(item.isPage) {
+    //コメント
+    case 0:
+      return(
+        <section>
+        {item.comment.map(element => 
+        <div key={element} className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
+          <div className="ml-2 flex-grow">
+            <input
+              type="text"
+              placeholder={element}
+              readOnly
+              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
+            />
+          </div>
+          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
+            <button className="font-bold bg-[#D9D9D9] px-4 py-1 ">
+              認証
+            </button>
+            <button className="font-bold bg-[#E74646] px-4 py-1 ">
+              削除
+            </button>
+          </div>
+        </div>
+        )}
+        </section>
+      )
+    
+    //ノート
+    case 1:
+      return(
+        <section>
+        {item.comment.map(element => 
+          <div key={element} className="flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
+          <div className="ml-2 flex-grow">
+            <p type="text" placeholder="" readOnly className="px-2 py-1 flex-grow mr-2 w-[55vw]">{element}</p>
+          </div>
+          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
+            <button className="font-bold bg-[#E74646] px-4 py-1 ">
+              削除
+            </button>
+          </div>
+        </div>
+        )}
+        </section>
+      )
+  }
+}
+
+// 講義とノートで切り替えるバー
+function SwichBar(handleButtonClick){
+  return(
+    <>
+    <section className="pt-28 flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
+      <button id='lecture' className="border-b-[2px] border-[#229DF6] w-[15vw]"
+      onClick={handleButtonClick(1)}>
+        あ
+      </button>
+      <button id='note' className="border-b-[2px] border-[#229DF6] w-[15vw]">
+        {/* {this.props.tab2} */}
+      </button>
+    </section>
+    </>
+  )
+}
 //Boxメニュー
 function BoxMenu(itemData) {
   return (
@@ -524,4 +590,6 @@ export {
   ConnectLink,
   ComentDialog,
   OtherMenu,
+  SwichBar,
+  SwichPage,
 }
