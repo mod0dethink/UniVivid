@@ -1,42 +1,55 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import ImageMed from '../assets/images/iryou.jpg'
-import ImageEng from '../assets/images/English.jpg'
-import ImageIt from '../assets/images/IT.jpg'
-import ImageEar from '../assets/images/earth.jpg'
-import ImageSya from '../assets/images/syachi.jpg'
-import ImageKou from '../assets/images/kougaku.jpg'
-import ImageKan from '../assets/images/kankyou.jpg'
-import ImageTet from '../assets/images/tetugaku.jpg'
-import ImageHou from '../assets/images/hougaku.jpg'
+import ImageMed from '../assets/images/iryou.jpg'    //医療
+import ImageEng from '../assets/images/English.jpg'  //英語
+import ImageIt from '../assets/images/IT.jpg'        //IT
+import ImageEar from '../assets/images/earth.jpg'    //物理学
+import ImageSya from '../assets/images/syachi.jpg'   //しゃち
+import ImageKou from '../assets/images/kougaku.jpg'  //機械
+import ImageKan from '../assets/images/kankyou.jpg'  //環境
+import ImageTet from '../assets/images/tetugaku.jpg' //哲学
+import ImageHou from '../assets/images/hougaku.jpg'  //法学
+import ReturnImg from '../assets/images/return.png'  // 戻るボタン紺
+
 
 function CategoryComponent() {
   return (
+    
     <div className=" m-32 mt-16">
+      <button className="absolute top-0 left-0 size-12 ml-5 pt-2">
+        <img src={ReturnImg} alt="back" />
+      </button>
+
       <section className="mb-8">
         <div className="absolute w-14 h-14 left-10 top-5"></div>
-
-        <div className="text-3xl font-bold text-center text-[#164863]">
-          興味のある分野を選択しましょう！
-        </div>
+          <div className="text-3xl font-bold text-center text-[#164863]">
+            興味のある分野を選択しましょう！
+          </div>
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-10">
+      {/* categoryの選択 */}
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-[2rem] mb-10">
         <div className="relative">
+          {/* 画像の上に表示されるテキスト */}
           <p className="text-white text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
             #医療
           </p>
-
           <article className="row-span-2 bg-white hover:bg-white rounded-md shadow-md hover:shadow-lg transition-shadow overflow-hidden">
             <div className="block w-full h-full">
               <figure className="h-48 overflow-hidden">
-                <img
-                  src={ImageMed}
+                <img src={ImageMed}
                   className="w-full h-full object- object-top"
-                  alt="医療"
-                />
+                  alt="医療" />
               </figure>
+              {/* 画像の左下に配置されるチェックボックス */}
+              <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
+                <label className="inline-flex items-center">
+                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
+                  {/* ↓↓↓↓↓↓↓↓　下のコメントは消すとエラーが出る　↓↓↓↓↓↓↓ */}
+                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                </label>
+              </div>
             </div>
           </article>
         </div>
@@ -48,12 +61,17 @@ function CategoryComponent() {
           <article className="row-span-2 bg-white hover:bg-white rounded-md shadow-md hover:shadow-lg transition-shadow overflow-hidden">
             <div className="block w-full h-full">
               <figure className="h-48 overflow-hidden">
-                <img
-                  src={ImageEng}
+                <img src={ImageEng}
                   className="w-full h-full object- object-top"
-                  alt="英語"
-                />
+                  alt="英語" />
               </figure>
+              {/* 画像の左下に配置されるチェックボックス */}
+              <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
+                <label className="inline-flex items-center">
+                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
+                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                </label>
+              </div>
             </div>
           </article>
         </div>
@@ -71,6 +89,13 @@ function CategoryComponent() {
                   alt="IT"
                 />
               </figure>
+              {/* 画像の左下に配置されるチェックボックス */}
+              <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
+                <label className="inline-flex items-center">
+                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
+                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                </label>
+              </div>
             </div>
           </article>
         </div>
@@ -88,6 +113,13 @@ function CategoryComponent() {
                   alt="物理学"
                 />
               </figure>
+              {/* 画像の左下に配置されるチェックボックス */}
+              <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
+                <label className="inline-flex items-center">
+                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
+                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                </label>
+              </div>
             </div>
           </article>
         </div>
@@ -105,6 +137,13 @@ function CategoryComponent() {
                   alt="シャチ"
                 />
               </figure>
+              {/* 画像の左下に配置されるチェックボックス */}
+              <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
+                <label className="inline-flex items-center">
+                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
+                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                </label>
+              </div>
             </div>
           </article>
         </div>
@@ -122,6 +161,13 @@ function CategoryComponent() {
                   alt="機械工学"
                 />
               </figure>
+              {/* 画像の左下に配置されるチェックボックス */}
+              <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
+                <label className="inline-flex items-center">
+                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
+                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                </label>
+              </div>
             </div>
           </article>
         </div>
@@ -139,6 +185,13 @@ function CategoryComponent() {
                   alt="環境学"
                 />
               </figure>
+              {/* 画像の左下に配置されるチェックボックス */}
+              <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
+                <label className="inline-flex items-center">
+                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
+                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                </label>
+              </div>
             </div>
           </article>
         </div>
@@ -156,6 +209,13 @@ function CategoryComponent() {
                   alt="哲学"
                 />
               </figure>
+              {/* 画像の左下に配置されるチェックボックス */}
+              <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
+                <label className="inline-flex items-center">
+                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
+                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                </label>
+              </div>
             </div>
           </article>
         </div>
@@ -173,7 +233,13 @@ function CategoryComponent() {
                   alt="法学"
                 />
               </figure>
-              
+              {/* 画像の左下に配置されるチェックボックス */}
+              <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
+                <label className="inline-flex items-center">
+                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
+                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                </label>
+              </div>
             </div>
           </article>
         </div>
@@ -184,6 +250,7 @@ function CategoryComponent() {
           next&gt;&gt;
         </div>
       </Link>
+
     </div>
   )
 }
