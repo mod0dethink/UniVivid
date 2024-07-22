@@ -21,8 +21,8 @@ import {
   InputItems,
   ConnectLink,
   ComentDialog,
-  Board,
   OtherMenu,
+  SwichPage,
 } from '../components/MaterialComponent'
 import { MainReturenBtn, UnivividHeader } from '../components/LayoutComponent'
 import '../assets/styles/Dimensions.css'
@@ -36,6 +36,7 @@ import NoteImg from '../assets/images/note2.png'
 import uni_img from "../assets/images/ECC_build.jpg";         // 大学画像
 import { FaHandHoldingHeart } from "react-icons/fa6";         // 支援ボタンのマーク
 import { AiFillLike } from "react-icons/ai";                  //　支援ボタンのアイコン
+import { element } from 'prop-types';
 
 /*
 path変数一覧
@@ -54,7 +55,17 @@ let articlepath = '/createarticle' //記事一覧へのLinkパス
 
 //大学側のホームページ
 function UniHomePage() {
-  const Door1 = Door
+  const Door1 = Door;
+  // テスト用
+  const data = true;    // データの有無
+
+  // 通知表示するかの判定
+  // if(data){
+  //   setIsData(true);
+  // } else {
+  //   setIsData(false);
+  // }
+
   return (
     <>
     <div className="flex w-[100vw] h-screen">
@@ -66,7 +77,9 @@ function UniHomePage() {
       />
       <Link to='/applicationlist'>
         <FaBell className='absolute text-main-middle size-10 right-5 top-4'/>
+        {(data) && <div className='absolute right-5 top-4 size-5 rounded-full bg-red-500'></div>}
       </Link>
+
       {/*記事メニュー*/}
       <section className="flex-grow-[7] content-center h-screen">
         <RootUrl name={Door1} text={'記事作成画面'} linkpath='/createarticle' />
@@ -178,95 +191,32 @@ function CreateCheckedPage() {
 
 // 申請許諾画面
 function ApplicationListPage() {
+  const [isPage, setIsPage] = useState(0);
+  const comment = ['comment','コメント','こめんと','comment','コメント','こめんと','comment','コメント','こめんと'];
+  const note = ['oo講座','xx講座','△△講座','oo講座','xx講座','△△講座','oo講座','xx講座','△△講座'];
+
   return (
-    <div>
-      {/* <UnivividHeader title="申請一覧" /> */}
+    <div className='bg-main-bg overflow-hidden'>
       <UnivividHeader title="申請一覧" returnCol={1} link="/unihome" bgCol={true} />
-
-      {/* <section className="fixed -z-[-3] top-[15px] left-[15px]">
-        <MainReturenBtn link='/usermypage' returnCol={1} />
-      </section> */}
-
-      <div className="grid place-items-center">
-        <section className="pt-[151px] flex justify-around border-b-[2px] border-[#838181] w-[90vw]">
-          <button className="border-b-[2px] border-[#229DF6] w-[15vw] text-[#838181] px-4 py-2">
+      <div className="grid pt-[98px] place-items-center w-screen">
+        <section className="fixed flex justify-around border-b-[2px] border-[#838181] w-11/12 bg-main-bg pt-14">
+          <button 
+          id={isPage === 0 ? 'swichBar': ''}
+          onClick={()=>{setIsPage(0)}}
+          >
             コメント
           </button>
-          <button className="border-b-[2px] border-[#229DF6] w-[15vw] text-[#838181] px-4 py-2">
+          <button 
+          id={isPage === 1 ? 'swichBar': ''}
+          onClick={()=>{setIsPage(1)}}
+          >
             ノート
           </button>
         </section>
       </div>
-
-      {/* コメントの部分 */}
-      <section className="grid place-items-center pt-[100px]">
-        <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
-          <div className="ml-2 flex-grow">
-            <input
-              type="text"
-              placeholder="コメント"
-              readOnly
-              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
-            />
-          </div>
-          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
-            <button className="font-bold bg-[#D9D9D9] px-4 py-1 ">
-              認証
-            </button>
-            <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              削除
-            </button>
-          </div>
-        </div>
-
-        <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
-          <div className="ml-2 flex-grow">
-            <input
-              type="text"
-              placeholder=""
-              readOnly
-              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
-            />
-          </div>
-          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
-            <button className="font-bold bg-[#D9D9D9] px-4 py-1 ">
-              認証
-            </button>
-            <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              削除
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ノートの部分 */}
-
-      <section className="grid place-items-center pt-[100px]">
-        <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
-          <div className="ml-2 flex-grow">
-            <p type="text" placeholder="" readOnly className="px-2 py-1 flex-grow mr-2 w-[55vw]">
-              
-            </p>
-          </div>
-          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
-            <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              削除
-            </button>
-          </div>
-        </div>
-
-        <div className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
-          <div className="ml-2 flex-grow">
-          <p type="text" placeholder="" readOnly className="px-2 py-1 flex-grow mr-2 w-[55vw]">
-            
-          </p>
-          </div>
-          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
-            <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              削除
-            </button>
-          </div>
-        </div>
+      <section className="grid place-items-center pt-14">
+        {(isPage === 0) && <SwichPage isPage={isPage} comment={comment} />}
+        {(isPage === 1) && <SwichPage isPage={isPage} comment={note} />}
       </section>
     </div>
   )

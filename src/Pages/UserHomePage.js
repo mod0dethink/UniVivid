@@ -1,18 +1,18 @@
 // ログイン後のユーザーの画面
 
-// インポート --------------------------------------------------------
-
 //必要なlibraryをインポート
 import React, { useRef, useState, useEffect } from 'react'
 import { Axios } from 'axios'
 import axios from 'axios';
+import { Children } from 'react';
 //必要なアセットをインポート
 import Imagepng from '../assets/images/IMG_4007.jpg'
 import Door from '../assets/images/door.png'
 import BgNote from '../assets/images/bgnote.jpg'
 import '../assets/styles/Dimensions.css'
 import '../assets/styles/bg-images.css'
-import { MainReturenBtn } from '../components/LayoutComponent'; // 戻るボタン
+import { TbPencilPlus } from "react-icons/tb";  // 追加
+import { MainReturenBtn } from '../components/LayoutComponent.js'; // 戻るボタン
 import { BsPaperclip } from "react-icons/bs";                 // クリップ
 //　テスト用
 import BgImg from '../assets/images/IMG_4007.jpg'
@@ -43,14 +43,15 @@ import {
   LectureDetails,
   ConnectLink,
   ComentDialog,
-  Board,
   OtherMenu,
-} from '../components/MaterialComponent'
+  SwichBar,
+} from '../components/MaterialComponent.js'
 import {
   UserHeader,
   Logotext,
   UnivividHeader,
-} from '../components/LayoutComponent'
+} from '../components/LayoutComponent.js'
+import { type } from '@testing-library/user-event/dist/type/index.js';
 
 /*------ユーザーのデータ変数------*/
 let ProImg = Imagepng //プロフィール画像
@@ -59,7 +60,6 @@ let settinglinkpath = '/usersetting' //ユーザーメニュー画面へのLink�
 let returnpath = '/userhome' //戻るボタンのLinkパス
 let mypagepath = '/usermypage' //マイページのLinkパス
 let articlepath = '/userarticlelist' //記事一覧へのLinkパス
-
 
 //ユーザーのホーム画面
 function UserHomePage() {
@@ -163,12 +163,7 @@ function UserSettingsPage() {
   )
 }
 
-const testData = [
-  {BgImg,Ticon2,},
-  {}
-]
-
-//記事一覧
+// 記事一覧
 function UserArticleList() {
   return (
     <div>
@@ -225,9 +220,9 @@ function UserMyPage() {
     </div>
   )
 }
-/*マイページからの遷移先以下三つ*/
 
-//受講履歴一覧
+/*マイページからの遷移先以下三つ*/
+// 受講履歴一覧
 function ArticleHistoryPage() {
   return (
     <div>
@@ -235,15 +230,6 @@ function ArticleHistoryPage() {
       <section>
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
           <div className="pt-[50px] space-y-10">
-            {/*
-          <ArticlePart
-          BgImg={Lok} メインの背景画像
-          Ticon={Ticon2} 団体のアイコン画像
-          groupname={'ECC comp'} 団体名
-          title={'ポートレート講座'} 講座名
-          date={'2024/08/29'} 当日の日付
-        />
-        */}
             <ArticlePart
               BgImg={BgImg}
               Ticon={Ticon2}
@@ -264,21 +250,13 @@ function ArticleHistoryPage() {
     </div>
   )
 }
+// アップロードしたノート一覧
 function UpNoteListPage() {
   return (
     <div>
         <UnivividHeader title="アップロードしたノート一覧" returnCol={1} link='/usermypage' bgCol={true} />
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
           <div className="pt-[50px] space-y-10">
-            {/*
-        <ArticlePart
-        BgImg={Lok} メインの背景画像
-        Ticon={Ticon2} 団体のアイコン画像
-        groupname={'ECC comp'} 団体名
-        title={'ポートレート講座'} 講座名
-        date={'2024/08/29'} 当日の日付
-      />
-      */}
             <ArticlePart
               BgImg={BgImg}
               Ticon={Ticon2}
@@ -298,32 +276,29 @@ function UpNoteListPage() {
     </div>
   )
 }
-
 // お気に入りページ
 function FavoriteListPage() {
+  const [isPage, setIsPage] = useState(1);
   return (
     <div className="flex flex-col items-center">
       <UnivividHeader title="お気に入り" returnCol={1} link='/usermypage' bgCol={true} />
-      <section className="pt-[151px] flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
-        <button className="border-b-[2px] border-[#229DF6] w-[15vw]">
-          講義
-        </button>
-        <button className="border-b-[2px] border-[#229DF6] w-[15vw]">
-          ノート
-        </button>
-      </section>
+      <section className="pt-28 flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
+      <button 
+      id={isPage==1 ? 'swichBar': ''}
+      onClick={()=>{setIsPage(1)}}
+      >
+        講座
+      </button>
+      <button 
+      id={isPage==2 ? 'swichBar': ''}
+      onClick={()=>{setIsPage(2)}}
+      >
+        ノート
+      </button>
+    </section>
       <section>
         <div className="flex space-y-5 justify-center text-center">
           <div className="pt-[50px] space-y-10">
-            {/*
-        <ArticlePart
-        BgImg={Lok} メインの背景画像
-        Ticon={Ticon2} 団体のアイコン画像
-        groupname={'ECC comp'} 団体名
-        title={'ポートレート講座'} 講座名
-        date={'2024/08/29'} 当日の日付
-      />
-      */}
             <ArticlePart
               BgImg={BgImg}
               Ticon={Ticon2}
@@ -381,16 +356,20 @@ const OneLecturePage = () => {
 
 // 大学ごとのページ
 const UnivercityPage = () => {
-  const uni_name = "ECCコンピュータ専門学校";   // 大学名
-  const tags = ['IT','CG','経営'];             // タグ
+  // テストデータ
+  const uni_name = "ECCコンピュータ専門学校";                     // 大学名
+  const tags = ['IT','CG','経営'];                               // タグ
   const place = '〒530-0015 大阪府大阪市北区中崎西2丁目3番35号';  // 住所
-  const hp = 'https://comp.ecc.ac.jp/';
+  const hp = 'https://comp.ecc.ac.jp/';                         // 大学リンク
   const connectLink = ['@university_name　HTML,CSS講座','@university_name　React講座']; // 関連記事リンク
+  const coment = ['校舎がきれいだった！','階段が狭杉！'];        // 掲示板コメント
+
+  const [isDialog, setIsDialog] = useState(false);  // ダイアログ開閉の変数
 
   return (
     <>
     <div className='h-screen font-bold bg-main-bg'>
-      <ComentDialog/>
+      <ComentDialog open={isDialog}/>
       <div name='header' className='flex'>
         <MainReturenBtn link='/onelecturepage' returnCol={0}/>
         <div className='bg-main font-bold h-96 w-5/6 rounded-[50%] mx-auto -mt-72 text-white text-4xl text-center pt-[315px]'>
@@ -415,8 +394,18 @@ const UnivercityPage = () => {
           </button>
         </div>
       </div>
+
       <div name='screen_2' className='flex w-5/6 mx-auto h-[30%] mt-14 bolder-[#D9D9D9]'>
-        <Board />
+      <div className='w-5/12 h-full border-2 bg-white'>
+        <p className=' text-main text-center mb-3'>～ 掲示板 ～</p>
+        {coment.map((element,index) => <p key={index} className=' font-normal border-b-2 w-5/6 mx-auto'>{element}</p>)}
+      </div>
+      <button 
+      className='size-14 rounded-full bg-main -ml-16 mt-auto mb-3'
+      onClick={() => {setIsDialog(!isDialog)}}
+      >
+        <TbPencilPlus className='size-11 ml-1 -mt-1 text-white'/>
+      </button>
         <div className='w-5/12 h-full border-2 ml-[12%]'>
           <p className='bg-white text-main text-center mb-3'>～ 講義一覧 ～</p>
           {connectLink.map((element,index) => <p key={index} className=' underline mb-2 w-5/6 mx-auto'>{element}</p>)}
@@ -456,6 +445,7 @@ function OtherUserPage() {
   </>
   )
 }
+
 // 他ユーザーの各ノート
 function OtherUserNotePage(itemData) {
   const lectureName = 'IoT講座';
@@ -486,6 +476,7 @@ function OtherUserNotePage(itemData) {
     </>
   )
 }
+
 export {
   UserHomePage,
   UserSettingsPage,

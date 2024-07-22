@@ -71,6 +71,14 @@
   background-size: 100% 100%;
 }
 
-/* .commentDialog_open {
-  
-} */
+#swichBar {
+  border-bottom-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: #229DF6;
+  width: 15vw;
+}
+
+#hidden {
+  opacity: 0;
+}
+
