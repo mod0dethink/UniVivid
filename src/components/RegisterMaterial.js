@@ -8,7 +8,6 @@ import '../assets/styles/UnivividStyle.css'
 function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [username, setUsername] = useState('')
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
@@ -25,7 +24,6 @@ function LoginForm() {
         body: JSON.stringify({
           MailAddress: email,
           Password: password,
-          UserName: username,
           Type: 'user', // または 'university'
         }),
         credentials: 'include',
