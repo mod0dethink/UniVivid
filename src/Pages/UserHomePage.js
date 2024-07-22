@@ -278,24 +278,26 @@ function UpNoteListPage() {
 }
 // お気に入りページ
 function FavoriteListPage() {
-  const [isPage, setIsPage] = useState(1);
+  const [isPage, setIsPage] = useState(0);
   return (
     <div className="flex flex-col items-center">
       <UnivividHeader title="お気に入り" returnCol={1} link='/usermypage' bgCol={true} />
-      <section className="pt-28 flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
-      <button 
-      id={isPage==1 ? 'swichBar': ''}
-      onClick={()=>{setIsPage(1)}}
-      >
-        講座
-      </button>
-      <button 
-      id={isPage==2 ? 'swichBar': ''}
-      onClick={()=>{setIsPage(2)}}
-      >
-        ノート
-      </button>
-    </section>
+      <div className="grid pt-[98px] place-items-center w-screen">
+        <section className="fixed flex justify-around border-b-[2px] border-[#838181] w-11/12 bg-main-bg pt-14">
+        <button 
+        id={isPage==0 ? 'swichBar': ''}
+        onClick={()=>{setIsPage(0)}}
+        >
+          講座
+        </button>
+        <button 
+        id={isPage==1 ? 'swichBar': ''}
+        onClick={()=>{setIsPage(1)}}
+        >
+          ノート
+        </button>
+      </section>
+    </div>
       <section>
         <div className="flex space-y-5 justify-center text-center">
           <div className="pt-[50px] space-y-10">
