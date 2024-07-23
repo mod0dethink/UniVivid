@@ -39,6 +39,11 @@ func createSeminar(c *gin.Context) {
 }
 
 func getSeminars(c *gin.Context) {
+	if db == nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "データベース接続が初期化されていません"})
+		return
+	}
+
 	rows, err := db.Query(`
 		SELECT Seminar_ID, Univ_ID, Seminar_Name, Prof_name, Start_Date, Category_ID, thumbnail, offer_URL, content 
 		FROM SEMINAR

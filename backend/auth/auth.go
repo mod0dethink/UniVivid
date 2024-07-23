@@ -17,6 +17,10 @@ import (
 // エクスポートされたグローバル変数
 var DB *sql.DB
 
+func init() {
+	setupDB()
+}
+
 func setupDB() {
 	var err error
 	DB, err = sql.Open("mysql", "root:root@tcp(localhost:3306)/univivid")
@@ -50,7 +54,6 @@ func RegisterRoutes(r *gin.Engine) {
 	r.GET("/auth/username", getUserNameHandler)
 	r.POST("/auth/interest", saveUserInterests)
 
-	setupDB()
 	defer DB.Close()
 
 	r.Run(":8080")
@@ -69,15 +72,15 @@ func loginHandler(c *gin.Context) {
 	var query string
 
 	if request.Type == "user" {
-		query = "SELECT User_Name, Password FROM USER WHERE Mail_Address = ? AND User_Name = ?"
+		query = "SELECT User_Name, Password FROM USER WHERE Mail_Address = ?"
 	} else if request.Type == "university" {
-		query = "SELECT Univ_Name, Password FROM UNIVERSITY WHERE Mail_Address = ? AND Univ_Name = ?"
+		query = "SELECT Univ_Name, Password FROM UNIVERSITY WHERE Mail_Address = ?"
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なアカウントタイプです"})
 		return
 	}
 
-	err := DB.QueryRow(query, request.MailAddress, request.UserName).Scan(&userName, &storedPassword)
+	err := DB.QueryRow(query, request.MailAddress).Scan(&userName, &storedPassword)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "メールアドレス、ユーザー名、またはパスワードが間違っています"})
