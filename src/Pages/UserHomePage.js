@@ -165,14 +165,22 @@ function UserSettingsPage() {
 
 // 記事一覧
 function UserArticleList() {
-  // ！テストデータ！
-  const data = [
-    [BgImg,Ticon2,'ECC Artist','ポートレート講座','2002/06/24'],
-    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
-    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
-    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
-    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
-  ]
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/get-seminars', { withCredentials: true });
+        setData(response.data.seminars);
+      } catch (error) {
+        console.error('セミナー情報の取得に失敗しました:', error);
+        setError('セミナー情報の取得に失敗しました。後でもう一度お試しください。');
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -184,16 +192,17 @@ function UserArticleList() {
       <div className="flex justify-between">
         <div className='mt-48 ml-10'><ArticleSearch /></div>
         <div className="mr-32 mt-20">
-        {
+          {error && <p className="text-red-500">{error}</p>}
+          {
             data.map((item, index) =>
               <ArticlePart 
                 key={index}
-                BgImg={item[0]}
-                Ticon={item[1]}
-                groupname={item[2]}
-                title={item[3]}
-                date={item[4]}
-                link={'/editonelecture'}
+                BgImg={item.thumbnail}
+                Ticon={Ticon2}
+                groupname={item.university_name}
+                title={item.seminar_name}
+                date={item.start_date}
+                link={'/onelecturepage'}
               />
             )
           }
@@ -202,6 +211,7 @@ function UserArticleList() {
     </div>
   )
 }
+
 
 //マイページ
 function UserMyPage() {

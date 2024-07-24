@@ -290,7 +290,7 @@ function OpenArtucles() {
     [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
     [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
     [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
-    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','あああああ','2024/08/29',],
   ]
 
   const detail = "ArduinoでRaspberry Piを用い、IoTに触れる。";  // 内容
