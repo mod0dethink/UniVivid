@@ -26,7 +26,7 @@ import { AiFillLike } from "react-icons/ai";                  //　支援ボタ�
 
 // 処理
 import {
-  favoriteChange,
+  OpenNote,
 } from "../assets/scripts/animation.js"
 //componentをインポート
 import {
@@ -278,24 +278,26 @@ function UpNoteListPage() {
 }
 // お気に入りページ
 function FavoriteListPage() {
-  const [isPage, setIsPage] = useState(1);
+  const [isPage, setIsPage] = useState(0);
   return (
     <div className="flex flex-col items-center">
       <UnivividHeader title="お気に入り" returnCol={1} link='/usermypage' bgCol={true} />
-      <section className="pt-28 flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
-      <button 
-      id={isPage==1 ? 'swichBar': ''}
-      onClick={()=>{setIsPage(1)}}
-      >
-        講座
-      </button>
-      <button 
-      id={isPage==2 ? 'swichBar': ''}
-      onClick={()=>{setIsPage(2)}}
-      >
-        ノート
-      </button>
-    </section>
+      <div className="grid pt-[98px] place-items-center w-screen">
+        <section className="fixed flex justify-around border-b-[2px] border-[#838181] w-11/12 bg-main-bg pt-14">
+        <button 
+        id={isPage==0 ? 'swichBar': ''}
+        onClick={()=>{setIsPage(0)}}
+        >
+          講座
+        </button>
+        <button 
+        id={isPage==1 ? 'swichBar': ''}
+        onClick={()=>{setIsPage(1)}}
+        >
+          ノート
+        </button>
+      </section>
+    </div>
       <section>
         <div className="flex space-y-5 justify-center text-center">
           <div className="pt-[50px] space-y-10">
@@ -328,10 +330,17 @@ const OneLecturePage = () => {
   const [isFavorite, setIsFavorite] = useState(false);    // お気に入りボタンの状態
   const [isGoodCount, setIsGoodCount] = useState(0);      // いいね数管理の変数
   const [isPageCount, setIsPageCount] = useState(0);      // ページ枚数管理の変数
+  const [Is_Init,setInit] = useState(true);
+
+  // React.useEffect(() => {
+  //   OpenNote();
+  //   console.log(document.readyState);
+  // })
 
   return (
     <>
     <div className='h-screen bg-main-bg font-bold'>
+      <div id='test_div'></div>
       <div className='flex'>
         <MainReturenBtn link='/userarticlelist' returnCol={0}/>
         <div className='bg-main text-white text-4xl py-2 px-28 rounded-xl mx-7 mt-5'>{lectureName}</div>
