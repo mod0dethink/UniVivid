@@ -23,7 +23,7 @@ func init() {
 
 func setupDB() {
 	var err error
-	DB, err = sql.Open("mysql", "root:root@tcp(localhost:3306)/univivid")
+	DB, err = sql.Open("mysql", "root:114514z4Z@tcp(localhost:3306)/univivid")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -83,7 +83,7 @@ func loginHandler(c *gin.Context) {
 	err := DB.QueryRow(query, request.MailAddress).Scan(&userName, &storedPassword)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "メールアドレス、ユーザー名、またはパスワードが間違っています"})
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "メールアドレスまたはパスワードが間違っています"})
 		} else {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
 		}
@@ -92,14 +92,14 @@ func loginHandler(c *gin.Context) {
 
 	// パスワードの比較
 	if err := bcrypt.CompareHashAndPassword([]byte(storedPassword), []byte(request.Password)); err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "メールアドレス、ユーザー名、またはパスワードが間違っています"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "メールアドレスまたはパスワードが間違っています"})
 		return
 	}
 
 	// セッションの開始
 	session := sessions.Default(c)
 	session.Set("mailaddress", request.MailAddress)
-	session.Set("username", userName) // ユーザー名をセッションに保存
+	session.Set("username", userName)
 	if err := session.Save(); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "セッションの保存に失敗しました"})
 		return
