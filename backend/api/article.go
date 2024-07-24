@@ -6,6 +6,7 @@ import (
 	"univivid/backend/auth"
 	"univivid/backend/models"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -13,6 +14,13 @@ import (
 var db = auth.DB
 
 func RegisterArticleRoutes(r *gin.Engine) {
+	// CORSミドルウェアを追加
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"} // フロントエンドのURLを指定
+	config.AllowCredentials = true                          // クレデンシャルを許可
+	config.AllowHeaders = []string{"Origin", "Content-Type", "Accept", "Authorization"}
+	r.Use(cors.New(config))
+
 	r.POST("/api/create-seminar", createSeminar)
 	r.GET("/api/get-seminars", getSeminars)
 	r.POST("/api/add-history", addHistory)
@@ -45,8 +53,9 @@ func getSeminars(c *gin.Context) {
 	}
 
 	rows, err := db.Query(`
-		SELECT Seminar_ID, Univ_ID, Seminar_Name, Prof_name, Start_Date, Category_ID, thumbnail, offer_URL, content 
+		SELECT SEMINAR.Seminar_ID, SEMINAR.Univ_ID, SEMINAR.Seminar_Name, SEMINAR.Prof_name, SEMINAR.Start_Date, SEMINAR.Category_ID, SEMINAR.thumbnail, SEMINAR.offer_URL, SEMINAR.content, UNIVERSITY.Univ_Name
 		FROM SEMINAR
+		JOIN UNIVERSITY ON SEMINAR.Univ_ID = UNIVERSITY.Univ_ID
 	`)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
@@ -58,10 +67,12 @@ func getSeminars(c *gin.Context) {
 
 	for rows.Next() {
 		var seminar models.Seminar
-		if err := rows.Scan(&seminar.SeminarID, &seminar.UnivID, &seminar.SeminarName, &seminar.ProfName, &seminar.StartDate, &seminar.CategoryID, &seminar.Thumbnail, &seminar.OfferURL, &seminar.Content); err != nil {
+		var universityName string
+		if err := rows.Scan(&seminar.SeminarID, &seminar.UnivID, &seminar.SeminarName, &seminar.ProfName, &seminar.StartDate, &seminar.CategoryID, &seminar.Thumbnail, &seminar.OfferURL, &seminar.Content, &universityName); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
 			return
 		}
+		seminar.UniversityName = universityName
 		seminars = append(seminars, seminar)
 	}
 
