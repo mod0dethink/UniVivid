@@ -1,9 +1,11 @@
 // ノートを開く処理
-export function OpenNote() {  
+export function OpenNote(img) {  
   const openPopupBtn = document.getElementById('noteImg');
   openPopupBtn.addEventListener('click',() => {
     
   })
+
+  return(img);
   // prompt()
   
   // const test_div = document.getElementById("test_div");

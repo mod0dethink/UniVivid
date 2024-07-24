@@ -454,16 +454,17 @@ const Note = () => {
   const [isGoodState, setIsGoodState] = useState(false);
   const [isGoodCount, setIsGoodCount] = useState(20);      // いいね数管理の変数
   const [isPageCount, setIsPageCount] = useState(1);      // ページ枚数管理の変数
-
+  
   React.useEffect(() => {
-    OpenNote();
+    OpenNote(notePages[isPageCount-1]);
     console.log(document.readyState);
   })
 
   return (
     <>
     <div className='flex h-2/5 mt-5 justify-center'>
-      <div id='noteImg' className='relative bg-gray-200 h-full w-4/5 z-0'>
+      <div id='noteImg' className='relative bg-gray-200 h-full w-4/5'>
+        <BsPaperclip className='absolute size-16 right-0 -top-5 text-main'/>
         <img src={notePages[isPageCount-1]} alt="back" className='h-full w-5/6 m-auto object-cover'/>
         <div className=' bg-gradient-to-t from-slate-900 absolute h-1/2 w-full bottom-0'></div>
         <div className='flex -mt-16 ml-28'>
