@@ -243,7 +243,7 @@ function ArticleHistoryPage() {
       <UnivividHeader title="受講履歴一覧" returnCol={1} link='/usermypage' bgCol={true}  />
       <section>
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
-          <div className="pt-[50px] space-y-10">
+          <div>
           {
             data.map((item, index) =>
               <ArticlePart 
@@ -359,13 +359,12 @@ const OneLecturePage = () => {
   const [isPageCount, setIsPageCount] = useState(0);      // ページ枚数管理の変数
   const [Is_Init,setInit] = useState(true);
 
-  // React.useEffect(() => {
-  //   OpenNote();
-  //   console.log(document.readyState);
-  // })
-
   return (
     <>
+    {/* Todo:ダイアログ */}
+    <dialog className='bg-black '>
+
+    </dialog>
     <div className='h-screen bg-main-bg font-bold'>
       <div id='test_div'></div>
       <div className='flex'>

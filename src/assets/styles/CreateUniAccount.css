@@ -28,11 +28,11 @@
     padding-top: 40px;
   }
   
-  .from-nav input {
+  .from-nav #input-area {
     background-color: #e4e4e4;
     border: 1.5px solid #164863;
     font-size: 25px;
-    width: 600px;
+    /* width: 600px; */
     padding: 10px 10px 10px 15px;
     /* border-radius: 10px 10px 10px 10px; */
   }
