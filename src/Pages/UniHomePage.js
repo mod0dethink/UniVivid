@@ -45,7 +45,7 @@ path変数一覧
  */
 
 /*------ユーザーのデータ変数------*/
-let username = '瀬那通信大学' //ログインアカウントのユーザーネーム
+let username = '小野寺工業大学' //ログインアカウントのユーザーネーム
 let ProImg = Imagepng //プロフィール画像
 /*------Linkパス------*/
 let settinglinkpath = '/unisetting' //ユーザーメニュー画面へのLinkパス

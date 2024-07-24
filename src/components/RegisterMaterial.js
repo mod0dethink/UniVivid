@@ -9,6 +9,7 @@ function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [type, setType] = useState('user') // デフォルトを'user'に設定
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -24,13 +25,14 @@ function LoginForm() {
         body: JSON.stringify({
           MailAddress: email,
           Password: password,
-          Type: 'user', // または 'university'
+          Type: type, // ラジオボタンで選択されたタイプを使用
         }),
         credentials: 'include',
       })
 
       if (response.ok) {
-        navigate('/userhome')
+        // タイプに応じてナビゲート先を変更
+        navigate(type === 'user' ? '/userhome' : '/unihome')
       } else {
         const data = await response.json()
         setError(data.error || 'ログインに失敗しました')
@@ -45,7 +47,7 @@ function LoginForm() {
       <div className="from-nav">
         <form onSubmit={handleSubmit}>
           {error && <p className="text-red-500 absolute -mt-10">{error}</p>}
-          <div  name="input-area">
+          <div name="input-area">
             <div>
               <p>メールアドレス</p>
               <input
@@ -69,23 +71,29 @@ function LoginForm() {
               />
             </div>
           </div>
-          {/* <div className="flex items-center mb-4">
-            <input id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-            <label htmlFor='default-radio-1' className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Default radio</label>
-          </div> */}
-          <div className=' flex justify-start mt-5 space-x-2 ml-12'>
+          <div className='flex justify-start mt-5 space-x-2 ml-12'>
             <label>
-              <input type='radio' name='selectUser' value='個人' />
+              <input 
+                type='radio' 
+                name='selectUser' 
+                value='user'
+                checked={type === 'user'}
+                onChange={() => setType('user')}
+              />
               個人
             </label>
             <label>
-              <input type='radio' name='selectUser' value='大学' />
+              <input 
+                type='radio' 
+                name='selectUser' 
+                value='university'
+                checked={type === 'university'}
+                onChange={() => setType('university')}
+              />
               大学
             </label>
           </div>
-          {/* <Link to = '/loginwelcom'> */}
           <button type="submit">ログイン</button>
-          {/* </Link> */}
         </form>
       </div>
     </section>
