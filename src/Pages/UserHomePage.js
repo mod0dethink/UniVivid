@@ -23,6 +23,8 @@ import { Link } from 'react-router-dom'
 import uni_img from "../assets/images/ECC_build.jpg";         // 大学画像
 import { FaHandHoldingHeart } from "react-icons/fa6";         // 支援ボタンのマーク
 import { AiFillLike } from "react-icons/ai";                  //　支援ボタンのアイコン
+import uimg from '../assets/images/ecc_logo.jpg'  // 講義詳細で使用する例の画像
+
 
 // 処理
 import {
@@ -175,7 +177,7 @@ function UserArticleList() {
         setData(response.data.seminars);
       } catch (error) {
         console.error('セミナー情報の取得に失敗しました:', error);
-        setError('セミナー情報の取得に失敗しました。後でもう一度お試しください。');
+        setError('セミナー情報の取得に失敗しました.');
       }
     };
 
@@ -198,7 +200,7 @@ function UserArticleList() {
               <ArticlePart 
                 key={index}
                 BgImg={item.thumbnail}
-                Ticon={Ticon2}
+                Ticon={uimg}
                 groupname={item.university_name}
                 title={item.seminar_name}
                 date={item.start_date}

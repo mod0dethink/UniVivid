@@ -449,8 +449,8 @@ const Note = () => {
   const noteImg = img1; // サムネ
   const noteImg2 = img2;
   const notePages = [noteImg, noteImg2];
-  const upuser_img = user_icon; // アップしたユーザー画像
-  const user_name = "kata__sk"; // アップしたユーザー名
+  const upuser_img = uimg; // アップしたユーザー画像
+  const user_name = "ecc comp"; // アップしたユーザー名
   const [isGoodState, setIsGoodState] = useState(false);
   const [isGoodCount, setIsGoodCount] = useState(20);      // いいね数管理の変数
   const [isPageCount, setIsPageCount] = useState(1);      // ページ枚数管理の変数
