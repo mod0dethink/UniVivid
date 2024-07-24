@@ -26,7 +26,7 @@ import { AiFillLike } from "react-icons/ai";                  //　支援ボタ�
 
 // 処理
 import {
-  favoriteChange,
+  CallInit,
 } from "../assets/scripts/animation.js"
 //componentをインポート
 import {
@@ -330,10 +330,18 @@ const OneLecturePage = () => {
   const [isFavorite, setIsFavorite] = useState(false);    // お気に入りボタンの状態
   const [isGoodCount, setIsGoodCount] = useState(0);      // いいね数管理の変数
   const [isPageCount, setIsPageCount] = useState(0);      // ページ枚数管理の変数
+  const [Is_Init,setInit] = useState(true);
+
+  React.useEffect(() => {
+    CallInit();
+    console.log(document.readyState);
+
+  })
 
   return (
     <>
     <div className='h-screen bg-main-bg font-bold'>
+      <div id='test_div'></div>
       <div className='flex'>
         <MainReturenBtn link='/userarticlelist' returnCol={0}/>
         <div className='bg-main text-white text-4xl py-2 px-28 rounded-xl mx-7 mt-5'>{lectureName}</div>
