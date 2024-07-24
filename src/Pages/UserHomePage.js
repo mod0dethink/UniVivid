@@ -332,11 +332,10 @@ const OneLecturePage = () => {
   const [isPageCount, setIsPageCount] = useState(0);      // ページ枚数管理の変数
   const [Is_Init,setInit] = useState(true);
 
-  React.useEffect(() => {
-    OpenNote();
-    console.log(document.readyState);
-
-  })
+  // React.useEffect(() => {
+  //   OpenNote();
+  //   console.log(document.readyState);
+  // })
 
   return (
     <>

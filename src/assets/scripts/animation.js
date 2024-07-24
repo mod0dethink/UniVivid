@@ -2,7 +2,7 @@
 export function OpenNote() {  
   const openPopupBtn = document.getElementById('noteImg');
   openPopupBtn.addEventListener('click',() => {
-
+    
   })
   // prompt()
   

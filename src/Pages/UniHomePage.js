@@ -284,28 +284,35 @@ function ApprovalScreenPage(){
 }
 // 公開記事一覧
 function OpenArtucles() {
+  // ！テストデータ！
+  const data = [
+    [BgImg,Ticon2,'ECC Artist','ポートレート講座','2002/06/24'],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+  ]
+
   const detail = "ArduinoでRaspberry Piを用い、IoTに触れる。";  // 内容
   return (
     <>
     <div className='flex bg-main-bg'>
       <OtherMenu img={ProImg} name={username} link='/unihome' />
-      <div className="space-y-5 w-3/4 ml-32">
-        <div className="pt-12 space-y-10">
-          <ArticlePart
-            BgImg={BgImg}
-            Ticon={Ticon2}
-            groupname={'ECC Artist'}
-            title={'ポートレート講座'}
-            date={'2002/06/24'}
-            link={'/editonelecture'}
-          />
-          <ArticlePart
-            BgImg={Lok}
-            Ticon={Ticon2}
-            groupname={'ECC comp'}
-            title={'ポートレート講座'}
-            date={'2024/08/29'}
-          />
+      <div className="space-y-5 w-3/4 ml-32 h-screen">
+        <div className=" pt-12 space-y-10 h-full overflow-y-scroll">
+          {
+            data.map((item, index) =>
+              <ArticlePart 
+                key={index}
+                BgImg={item[0]}
+                Ticon={item[1]}
+                groupname={item[2]}
+                title={item[3]}
+                date={item[4]}
+                link={'/editonelecture'}
+              />
+            )
+          }
         </div>
       </div>  
     </div>
@@ -314,11 +321,10 @@ function OpenArtucles() {
 }
 // 講義記事ごとのページ
 const EditOneLecture = () => {
-  // 講義関連
+  // 講義関連(！テストデータ！)
   const lectureName = "IoT講座";              // 講義名
   const time = "2024/oo/xx　11:00 - 12:30";   // 講義日時
-  const [isFavorite, setIsFavorite] = useState(false);    // お気に入りボタンの状態
-  const [isGoodCount, setIsGoodCount] = useState(0);      // いいね数管理の変数
+  const goodCount = 20;                       // いいね数
   const [isPageCount, setIsPageCount] = useState(0);      // ページ枚数管理の変数
 
   return (

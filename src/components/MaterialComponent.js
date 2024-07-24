@@ -20,6 +20,10 @@ import img2 from '../assets/images/note1.jpg';
 import { TbPencilPlus } from "react-icons/tb";  // 追加
 import { OtherUserPage } from '../Pages/UserHomePage'
 import { MainReturenBtn } from './LayoutComponent'
+import {
+  OpenNote,
+} from "../assets/scripts/animation.js"
+
 //asideのユーザーメニュー
 function UserMenu(itemData) {
   return (
@@ -451,11 +455,16 @@ const Note = () => {
   const [isGoodCount, setIsGoodCount] = useState(20);      // いいね数管理の変数
   const [isPageCount, setIsPageCount] = useState(1);      // ページ枚数管理の変数
 
+  React.useEffect(() => {
+    OpenNote();
+    console.log(document.readyState);
+  })
+
   return (
     <>
     <div className='flex h-2/5 mt-5 justify-center'>
-      <div className='relative bg-gray-200 h-full w-4/5 z-0'>
-        <img id='noteImg' src={notePages[isPageCount-1]} alt="back" className='h-full w-5/6 m-auto object-cover'/>
+      <div id='noteImg' className='relative bg-gray-200 h-full w-4/5 z-0'>
+        <img src={notePages[isPageCount-1]} alt="back" className='h-full w-5/6 m-auto object-cover'/>
         <div className=' bg-gradient-to-t from-slate-900 absolute h-1/2 w-full bottom-0'></div>
         <div className='flex -mt-16 ml-28'>
           <Link to='/otheruser'>
