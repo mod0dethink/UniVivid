@@ -165,6 +165,15 @@ function UserSettingsPage() {
 
 // 記事一覧
 function UserArticleList() {
+  // ！テストデータ！
+  const data = [
+    [BgImg,Ticon2,'ECC Artist','ポートレート講座','2002/06/24'],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+  ]
+
   return (
     <div>
       <UserHeader iconpath={ProImg} />
@@ -175,22 +184,19 @@ function UserArticleList() {
       <div className="flex justify-between">
         <div className='mt-48 ml-10'><ArticleSearch /></div>
         <div className="mr-32 mt-20">
-          <ArticlePart
-            link='/onelecturepage'
-            BgImg={BgImg}
-            Ticon={Ticon2}
-            groupname={'ECC Artist'}
-            title={'ポートレート講座'}
-            date={'2002/06/24'}
-          />
-          <ArticlePart
-            link='/onelecturepage'
-            BgImg={Lok}
-            Ticon={Ticon2}
-            groupname={'ECC comp'}
-            title={'ポートレート講座'}
-            date={'2024/08/29'}
-          />
+        {
+            data.map((item, index) =>
+              <ArticlePart 
+                key={index}
+                BgImg={item[0]}
+                Ticon={item[1]}
+                groupname={item[2]}
+                title={item[3]}
+                date={item[4]}
+                link={'/editonelecture'}
+              />
+            )
+          }
         </div>
       </div>
     </div>
@@ -224,26 +230,33 @@ function UserMyPage() {
 /*マイページからの遷移先以下三つ*/
 // 受講履歴一覧
 function ArticleHistoryPage() {
+   // ！テストデータ！
+   const data = [
+    [BgImg,Ticon2,'ECC Artist','ポートレート講座','2002/06/24'],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+  ]
   return (
     <div>
       <UnivividHeader title="受講履歴一覧" returnCol={1} link='/usermypage' bgCol={true}  />
       <section>
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
           <div className="pt-[50px] space-y-10">
-            <ArticlePart
-              BgImg={BgImg}
-              Ticon={Ticon2}
-              groupname={'ECC Artist'}
-              title={'ポートレート講座'}
-              date={'2002/06/24'}
-            />
-            <ArticlePart
-              BgImg={Lok}
-              Ticon={Ticon2}
-              groupname={'ECC comp'}
-              title={'ポートレート講座'}
-              date={'2024/08/29'}
-            />
+          {
+            data.map((item, index) =>
+              <ArticlePart 
+                key={index}
+                BgImg={item[0]}
+                Ticon={item[1]}
+                groupname={item[2]}
+                title={item[3]}
+                date={item[4]}
+                link={'/editonelecture'}
+              />
+            )
+          }
           </div>
         </div>
       </section>
@@ -252,25 +265,32 @@ function ArticleHistoryPage() {
 }
 // アップロードしたノート一覧
 function UpNoteListPage() {
+   // ！テストデータ！
+   const data = [
+    [BgImg,Ticon2,'ECC Artist','ポートレート講座','2002/06/24'],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+  ]
   return (
     <div>
         <UnivividHeader title="アップロードしたノート一覧" returnCol={1} link='/usermypage' bgCol={true} />
         <div className="flex space-y-5 justify-center pt-[101px] text-center">
           <div className="pt-[50px] space-y-10">
-            <ArticlePart
-              BgImg={BgImg}
-              Ticon={Ticon2}
-              groupname={'ECC Artist'}
-              title={'ポートレート講座'}
-              date={'2002/06/24'}
-            />
-            <ArticlePart
-              BgImg={Lok}
-              Ticon={Ticon2}
-              groupname={'ECC comp'}
-              title={'ポートレート講座'}
-              date={'2024/08/29'}
-            />
+          {
+            data.map((item, index) =>
+              <ArticlePart 
+                key={index}
+                BgImg={item[0]}
+                Ticon={item[1]}
+                groupname={item[2]}
+                title={item[3]}
+                date={item[4]}
+                link={'/editonelecture'}
+              />
+            )
+          }
           </div>
         </div>
     </div>
@@ -278,6 +298,14 @@ function UpNoteListPage() {
 }
 // お気に入りページ
 function FavoriteListPage() {
+   // ！テストデータ！
+   const data = [
+    [BgImg,Ticon2,'ECC Artist','ポートレート講座','2002/06/24'],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+  ]
   const [isPage, setIsPage] = useState(0);
   return (
     <div className="flex flex-col items-center">
@@ -301,20 +329,19 @@ function FavoriteListPage() {
       <section>
         <div className="flex space-y-5 justify-center text-center">
           <div className="pt-[50px] space-y-10">
-            <ArticlePart
-              BgImg={BgImg}
-              Ticon={Ticon2}
-              groupname={'ECC Artist'}
-              title={'ポートレート講座'}
-              date={'2002/06/24'}
-            />
-            <ArticlePart
-              BgImg={Lok}
-              Ticon={Ticon2}
-              groupname={'ECC comp'}
-              title={'ポートレート講座'}
-              date={'2024/08/29'}
-            />
+          {
+            data.map((item, index) =>
+              <ArticlePart 
+                key={index}
+                BgImg={item[0]}
+                Ticon={item[1]}
+                groupname={item[2]}
+                title={item[3]}
+                date={item[4]}
+                link={'/editonelecture'}
+              />
+            )
+          }
           </div>
         </div>
       </section>
@@ -427,27 +454,33 @@ const UnivercityPage = () => {
 
 // 他ユーザーのノート一覧
 function OtherUserPage() {
+  // ！テストデータ！
+  const data = [
+    [BgImg,Ticon2,'ECC Artist','ポートレート講座','2002/06/24'],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
+  ]
   return (
   <>
   <div className='flex bg-main-bg'>
     <OtherMenu image={uni_img} name={'kata_sk'} link='/onelecturepage' />
     <div className="space-y-5 w-3/4 ml-32">
       <div className="pt-12 space-y-10">
-        <ArticlePart
-          BgImg={BgImg}
-          Ticon={Ticon2}
-          groupname={'ECC Artist'}
-          title={'ポートレート講座'}
-          date={'2002/06/24'}
-          link={'/otherusernote'}
-        />
-        <ArticlePart
-          BgImg={Lok}
-          Ticon={Ticon2}
-          groupname={'ECC comp'}
-          title={'ポートレート講座'}
-          date={'2024/08/29'}
-        />
+      {
+        data.map((item, index) =>
+          <ArticlePart 
+            key={index}
+            BgImg={item[0]}
+            Ticon={item[1]}
+            groupname={item[2]}
+            title={item[3]}
+            date={item[4]}
+            link={'/editonelecture'}
+          />
+        )
+      }
       </div>
     </div>  
   </div>
