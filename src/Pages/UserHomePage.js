@@ -26,7 +26,7 @@ import { AiFillLike } from "react-icons/ai";                  //　支援ボタ�
 
 // 処理
 import {
-  CallInit,
+  OpenNote,
 } from "../assets/scripts/animation.js"
 //componentをインポート
 import {
@@ -333,7 +333,7 @@ const OneLecturePage = () => {
   const [Is_Init,setInit] = useState(true);
 
   React.useEffect(() => {
-    CallInit();
+    OpenNote();
     console.log(document.readyState);
 
   })
