@@ -254,11 +254,7 @@ function UserMyPage() {
 function ArticleHistoryPage() {
   // ！テストデータ！
   const data = [
-    [BgImg, Ticon2, 'ECC Artist', 'ポートレート講座', '2002/06/24'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+    [222,uimg, 'ecc comp', 'IoT講座', '2023/10/15'],
   ]
   return (
     <div>
@@ -292,11 +288,11 @@ function ArticleHistoryPage() {
 function UpNoteListPage() {
   // ！テストデータ！
   const data = [
-    [BgImg, Ticon2, 'ECC Artist', 'ポートレート講座', '2002/06/24'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+    // [BgImg, Ticon2, 'ECC Artist', 'ポートレート講座', '2002/06/24'],
+    // [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+    // [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+    // [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+    // [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
   ]
   return (
     <div>
@@ -328,11 +324,7 @@ function UpNoteListPage() {
 function FavoriteListPage() {
   // ！テストデータ！
   const data = [
-    [BgImg, Ticon2, 'ECC Artist', 'ポートレート講座', '2002/06/24'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+    [222,uimg, 'ecc comp', 'IoT講座', '2023/10/15'],
   ]
   const [isPage, setIsPage] = useState(0)
   return (
@@ -388,7 +380,7 @@ function FavoriteListPage() {
 const OneLecturePage = () => {
   // 講義関連
   const lectureName = 'IoT講座' // 講義名
-  const time = '2024/oo/xx　11:00 - 12:30' // 講義日時
+  const time = '2023/10/15　11:00 - 12:30' // 講義日時
   const [isFavorite, setIsFavorite] = useState(false) // お気に入りボタンの状態
   const [isGoodCount, setIsGoodCount] = useState(0) // いいね数管理の変数
   const [isPageCount, setIsPageCount] = useState(0) // ページ枚数管理の変数
@@ -529,11 +521,11 @@ const UnivercityPage = () => {
 function OtherUserPage() {
   // ！テストデータ！
   const data = [
-    [BgImg, Ticon2, 'ECC Artist', 'ポートレート講座', '2002/06/24'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+    // [BgImg, Ticon2, 'ECC Artist', 'ポートレート講座', '2002/06/24'],
+    // [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+    // [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+    // [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+    // [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
   ]
   return (
     <>
@@ -562,8 +554,8 @@ function OtherUserPage() {
 // 他ユーザーの各ノート
 function OtherUserNotePage(itemData) {
   const lectureName = 'IoT講座'
-  const date = '2024/oo/xx'
-  const time = '16:00'
+  const date = '2023/10/15'
+  const time = '11:00'
   const goodCount = 20
   return (
     <>
