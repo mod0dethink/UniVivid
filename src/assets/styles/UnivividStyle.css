@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
 .margin-section {
   width: 100vw;
   background-color: #427d9d;
@@ -27,7 +31,7 @@
   padding-top: 40px;
 }
 
-.from-nav input {
+.from-nav #input-area {
   background-color: #e4e4e4;
   border: 1.5px solid #164863;
   font-size: 25px;
@@ -82,3 +86,6 @@
   opacity: 0;
 }
 
+#noteBox {
+  background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,1));
+}

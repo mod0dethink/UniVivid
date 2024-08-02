@@ -17,9 +17,13 @@ import (
 // エクスポートされたグローバル変数
 var DB *sql.DB
 
+func init() {
+	setupDB()
+}
+
 func setupDB() {
 	var err error
-	DB, err = sql.Open("mysql", "root:114514z4Z@tcp(localhost:3306)/univivid")
+	DB, err = sql.Open("mysql", "root:root@tcp(localhost:3306)/univivid")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -50,7 +54,6 @@ func RegisterRoutes(r *gin.Engine) {
 	r.GET("/auth/username", getUserNameHandler)
 	r.POST("/auth/interest", saveUserInterests)
 
-	setupDB()
 	defer DB.Close()
 
 	r.Run(":8080")

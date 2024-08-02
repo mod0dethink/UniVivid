@@ -5,20 +5,24 @@ import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
 import ImportImg from '../assets/images/imgImport.png'
+import useFocusHover from '../assets/scripts/animation.js'
 // LectureDetails----------------------------------------
-import uimg from '../assets/images/ecc_logo.jpg'  // 講義詳細で使用する例の画像
+import uimg from '../assets/images/ecc_logo.jpg' // 講義詳細で使用する例の画像
 // Note---------------------------------------------
-import { BsPaperclip } from "react-icons/bs";                 // クリップ
-import { MdOutlineFileUpload } from "react-icons/md";         // アップロードボタン
-import { FaChevronRight } from "react-icons/fa";              // >
-import { FaChevronLeft } from "react-icons/fa";               // <
-import user_icon from "../assets/images/user_icon.png";       // アップしたユーザーのアイコン
-import { AiFillLike } from "react-icons/ai";                  //　支援ボタンのアイコン
-import img1 from '../assets/images/note2.png';                // 例の画像
+import { BsPaperclip } from 'react-icons/bs' // クリップ
+import { MdOutlineFileUpload } from 'react-icons/md' // アップロードボタン
+import { FaChevronRight } from 'react-icons/fa' // >
+import { FaChevronLeft } from 'react-icons/fa' // <
+import user_icon from '../assets/images/user_icon.png' // アップしたユーザーのアイコン
+import { AiFillLike } from 'react-icons/ai' //　支援ボタンのアイコン
+import img1 from '../assets/images/note2.png' // 例の画像
+import img2 from '../assets/images/note1.jpg'
 // Board-------------------------------------------------
-import { TbPencilPlus } from "react-icons/tb";  // 追加
+import { TbPencilPlus } from 'react-icons/tb' // 追加
 import { OtherUserPage } from '../Pages/UserHomePage'
 import { MainReturenBtn } from './LayoutComponent'
+import { OpenNote } from '../assets/scripts/animation.js'
+
 //asideのユーザーメニュー
 function UserMenu(itemData) {
   return (
@@ -39,7 +43,7 @@ function UserMenu(itemData) {
         <div className="py-3"></div>
         <Link to={itemData.settingpath}>ユーザー設定</Link>
       </div>
-      <Link to='/'>
+      <Link to="/">
         <div className="py-[50px]">
           <p>ログアウト</p>
         </div>
@@ -53,11 +57,13 @@ function RootUrl(itemData) {
   return (
     <Link
       to={itemData.linkpath}
-      className="flex flex-col justify-center space-y-20 w-auto text-center items-center my-20"
+      className="scale-content flex flex-col justify-center space-y-20 w-auto text-center items-center my-20 "
     >
-      <div className="flex justify-around items-center bg-[#D9D9D9] w-[80%] h-[196px] max-w-[700px] rounded-[20px] border-solid border-[#9BBEC8] border-[5px]">
-        <p className="text-[#164863] text-[36px] font-bold">{itemData.text}</p>
-        <img className="w-[150px] -z-[-1]" src={itemData.name} alt="door" />
+      <div className="doorUrl-effect FAup flex justify-around items-center bg-[#D9D9D9] w-[80%] h-[196px] max-w-[700px] rounded-[20px] border-solid border-[#9BBEC8] border-[5px]">
+        <p className="  text-[#164863] text-[36px] font-bold">
+          {itemData.text}
+        </p>
+        <img className=" w-[150px] -z-[-1]" src={itemData.name} alt="door" />
       </div>
     </Link>
   )
@@ -78,14 +84,19 @@ function RootUrl(itemData) {
 
 //フォーム入力用のinput
 function InputField(InputData) {
+  //animationのifelse用
+  const { isHovered, handleFocus, handleBlur } = useFocusHover()
+
   return (
     <div className="space-y-3">
       <p>{InputData.label}</p>
       <input
-        className="border-b-[2px] border-main w-full text-2xl"
+        className={`border-b-[2px] border-main w-full text-2xl ${isHovered ? 'bg-[#f1f1f1]' : 'border-[#427D9D]'}`}
         type={InputData.type}
         value={InputData.value}
         onChange={InputData.onChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
     </div>
   )
@@ -172,11 +183,14 @@ function HomeReturnBtn(pathData) {
 
 //検索エリア
 function ArticleSearch(pathData) {
+  const { isHovered, handleFocus, handleBlur } = useFocusHover()
   return (
     // <aside className="fixed top-[200px] left-[20px]">
     <aside className="fixed w-full">
-      <div className="bg-[#9BBEC822] flex flex-col justify-center items-left pl-[25px] py-3 w-3/12 border-b-[4px] border-t-[4px] border-main border-solid
-        font-bold text-main-dark">
+      <div
+        className="bg-[#9BBEC822] flex flex-col justify-center items-left pl-[25px] py-3 w-3/12 border-b-[4px] border-t-[4px] border-main border-solid
+        font-bold text-main-dark"
+      >
         <section className="space-y-1">
           <div className="space-y-2">
             <p>場所:</p>
@@ -227,103 +241,123 @@ function ArticleSearch(pathData) {
 
 /**
  * 講座バー
- * @param {*} PartData 
+ * @param {*} PartData
  * @param {*背景画像} BgImg
  * @param {*アイコン画像} Ticon
  * @param {*大学のユーザ名} groupname
  * @param {*講座名} title
  * @param {*日付} date
- * @returns 
+ * @returns
  */
 function ArticlePart(PartData) {
   return (
     <Link to={PartData.link}>
-    <div
-      className="gradient-vontainer pt-5 space-y-10 flex flex-col h-[158px] w-[55vw] max-w-[800px] mb-5"
-      style={{
-        background: `url(${PartData.BgImg}) center center no-repeat`,
-        backgroundSize: `cover`,
-      }}
-    >
-      <div className="space-x-2 flex pl-[20px] text-left items-center">
-        <div>
-          <img className="w-[50px] h-[50px]" src={PartData.Ticon} alt="ticon" />
+      <div
+        className="gradient-vontainer pt-5 space-y-10 flex flex-col h-[158px] w-[55vw] max-w-[800px] mb-5"
+        style={{
+          background: `url(${PartData.BgImg}) center center no-repeat`,
+          backgroundSize: `cover`,
+        }}
+      >
+        <div className="space-x-2 flex pl-[20px] text-left items-center">
+          <div>
+            <img
+              className="w-[50px] h-[50px]"
+              src={PartData.Ticon}
+              alt="ticon"
+            />
+          </div>
+          <div className="font-bold">{PartData.groupname}</div>
         </div>
-        <div className="font-bold">{PartData.groupname}</div>
+        <div className="items-end -z-[-1] text-[white] flex justify-between mx-[15px]">
+          <div className="font-bold text-[2em]">{PartData.title}</div>
+          <div>{PartData.date}</div>
+        </div>
       </div>
-      <div className="items-end -z-[-1] text-[white] flex justify-between mx-[15px]">
-        <div className="font-bold text-[2em]">{PartData.title}</div>
-        <div>{PartData.date}</div>
-      </div>
-    </div>
     </Link>
   )
 }
 
 // タブごとの内容
 function SwichPage(item) {
-  switch(item.isPage) {
+  switch (item.isPage) {
     //コメント
     case 0:
-      return(
+      return (
         <section>
-        {item.comment.map(element => 
-        <div key={element} className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
-          <div className="ml-2 flex-grow">
-            <input
-              type="text"
-              placeholder={element}
-              readOnly
-              className="px-2 py-1 flex-grow mr-2 w-[55vw]"
-            />
-          </div>
-          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
-            <button className="font-bold bg-[#D9D9D9] px-4 py-1 ">
-              認証
-            </button>
-            <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              削除
-            </button>
-          </div>
-        </div>
-        )}
+          {item.comment.map((element) => (
+            <div
+              key={element}
+              className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]"
+            >
+              <div className="ml-2 flex-grow">
+                <input
+                  type="text"
+                  placeholder={element}
+                  readOnly
+                  className="px-2 py-1 flex-grow mr-2 w-[55vw]"
+                />
+              </div>
+              <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
+                <button className="font-bold bg-[#D9D9D9] px-4 py-1 ">
+                  認証
+                </button>
+                <button className="font-bold bg-[#E74646] px-4 py-1 ">
+                  削除
+                </button>
+              </div>
+            </div>
+          ))}
         </section>
       )
-    
+
     //ノート
     case 1:
-      return(
+      return (
         <section>
-        {item.comment.map(element => 
-          <div key={element} className="flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]">
-          <div className="ml-2 flex-grow">
-            <p type="text" placeholder="" readOnly className="px-2 py-1 flex-grow mr-2 w-[55vw]">{element}</p>
-          </div>
-          <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
-            <button className="font-bold bg-[#E74646] px-4 py-1 ">
-              削除
-            </button>
-          </div>
-        </div>
-        )}
+          {item.comment.map((element) => (
+            <div
+              key={element}
+              className="flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]"
+            >
+              <div className="ml-2 flex-grow">
+                <p
+                  type="text"
+                  placeholder=""
+                  readOnly
+                  className="px-2 py-1 flex-grow mr-2 w-[55vw]"
+                >
+                  {element}
+                </p>
+              </div>
+              <div className="flex space-x-2 mr-3 mb-1 text-[17px]">
+                <button className="font-bold bg-[#E74646] px-4 py-1 ">
+                  削除
+                </button>
+              </div>
+            </div>
+          ))}
         </section>
       )
   }
 }
 
 // 講義とノートで切り替えるバー
-function SwichBar(handleButtonClick){
-  return(
+function SwichBar(handleButtonClick) {
+  return (
     <>
-    <section className="pt-28 flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
-      <button id='lecture' className="border-b-[2px] border-[#229DF6] w-[15vw]"
-      onClick={handleButtonClick(1)}>
-        あ
-      </button>
-      <button id='note' className="border-b-[2px] border-[#229DF6] w-[15vw]">
-        {/* {this.props.tab2} */}
-      </button>
-    </section>
+      <section className="pt-28 flex justify-around border-b-[2px] border-[#838181] w-[80vw]">
+        <button
+          id="lecture"
+          className="border-b-[2px] border-[#229DF6] w-[15vw]"
+          onClick={handleButtonClick(1)}
+        >
+          あ
+        </button>
+        <button id="note" className="border-b-[2px] border-[#229DF6] w-[15vw]">
+          {/* {this.props.tab2} */}
+        </button>
+      </section>
     </>
   )
 }
@@ -441,44 +475,96 @@ function InputItems() {
 
 //講義ごとのページ
 const Note = () => {
-  const noteImg = img1; // サムネ
-  const upuser_img = user_icon; // アップしたユーザー画像
-  const user_name = "kata__sk"; // アップしたユーザー名
-  let good_count = 20;          // いいね数
-  const [isGoodState, setIsGoodState] = useState(false);
-  const [isGoodCount, setIsGoodCount] = useState(20);      // いいね数管理の変数
-  const [isPageCount, setIsPageCount] = useState(0);      // ページ枚数管理の変数
+  const noteImg = img1 // サムネ
+  const noteImg2 = img2
+  const notePages = [noteImg, noteImg2]
+  const upuser_img = uimg // アップしたユーザー画像
+  const user_name = 'ecc comp' // アップしたユーザー名
+  const [isGoodState, setIsGoodState] = useState(false)
+  const [isGoodCount, setIsGoodCount] = useState(20) // いいね数管理の変数
+  const [isPageCount, setIsPageCount] = useState(1) // ページ枚数管理の変数
+
+  React.useEffect(() => {
+    OpenNote(notePages[isPageCount - 1])
+    console.log(document.readyState)
+  })
 
   return (
     <>
-    <div className='flex h-2/5 mt-5 justify-center'>
-      <div className='bg-gray-200 h-full w-4/5'>
-        <img src={noteImg} alt="back" className='h-full w-5/6 m-auto'/>
-        {/* 画像にかぶせるグラデーション */}
-        <div className='flex -mt-16 ml-28'>
-          <Link to='/otheruser'>
-            <div className='flex size-14 bg-gray-500 rounded-full'>
-              <img src={upuser_img} alt="back" className='h-full w-auto rounded-full'/>
-              <p className='my-auto ml-3 bg-white'>{user_name}</p>
+      <div className="flex h-2/5 mt-5 justify-center">
+        <div id="noteImg" className="relative bg-gray-200 h-full w-4/5">
+          <BsPaperclip className="absolute size-16 right-0 -top-5 text-main" />
+          <img
+            src={notePages[isPageCount - 1]}
+            alt="back"
+            className="h-full w-5/6 m-auto object-cover"
+          />
+          <div className=" bg-gradient-to-t from-slate-900 absolute h-1/2 w-full bottom-0"></div>
+          <div className="flex -mt-16 ml-28">
+            <Link to="/otheruser">
+              <div className="flex size-14 bg-gray-500 rounded-full text-white">
+                <img
+                  src={upuser_img}
+                  alt="back"
+                  className="h-full w-auto rounded-full z-10"
+                />
+                <p className="my-auto ml-3 z-10">{user_name}</p>
+              </div>
+            </Link>
+            <div className="flex my-auto ml-auto mr-28 z-10 text-white">
+              <button
+                type="button"
+                id="goodBtn"
+                onClick={() => {
+                  setIsGoodState(!isGoodState)
+                }}
+              >
+                <AiFillLike
+                  className={
+                    isGoodState ? 'size-8 text-main' : 'size-8 text-white'
+                  }
+                  onClick={() => {
+                    isGoodState
+                      ? setIsGoodCount(isGoodCount - 1)
+                      : setIsGoodCount(isGoodCount + 1)
+                  }}
+                />
+              </button>
+              <p className="my-auto ml-1">{isGoodCount}</p>
             </div>
-          </Link>
-          <div className='flex my-auto ml-auto mr-28'>
-            <button type='button' id='goodBtn' onClick={() => {setIsGoodState(!isGoodState) }}>
-              <AiFillLike className={isGoodState ? 'size-8 text-black' : 'size-8 text-gray-300'}
-              onClick={() => {isGoodState ? setIsGoodCount(isGoodCount-1) : setIsGoodCount(isGoodCount+1)}}/>
-            </button>
-            <p className='my-auto ml-1'>{isGoodCount}</p>
           </div>
         </div>
+        <button
+          id="testBtn"
+          onClick={() => {
+            console.log(document.getElementById('test_div'))
+          }}
+          className="absolute right-[8%] end-28 top-[50%] size-16 bg-gray-300 rounded-full shadow-lg"
+          type="submit"
+        >
+          <MdOutlineFileUpload className="size-14 m-auto text-main-dark" />
+        </button>
       </div>
-      <button className='absolute right-[8%] end-28 top-[50%] size-16 bg-gray-300 rounded-full shadow-lg' type="submit">
-        <MdOutlineFileUpload className='size-14 m-auto text-main-dark'/>
-      </button>
-    </div>
-    <div className='flex font-bold justify-center text-main-dark text-2xl'>
-        <button className='mx-2' type='button'><FaChevronLeft/></button>
-        <p className='mx-2 '>1</p>
-        <button className='mx-2' type='button'><FaChevronRight/></button>
+      <div className="flex font-bold justify-center text-main-dark text-2xl">
+        <button
+          className="mx-2"
+          type="button"
+          onClick={() => {
+            if (isPageCount > 1) setIsPageCount(isPageCount - 1)
+          }}
+        >
+          <FaChevronLeft />
+        </button>
+        <p className="mx-2">{isPageCount}</p>
+        <button
+          className="mx-2"
+          type="button"
+          onClick={() => {
+            if (isPageCount < notePages.length) setIsPageCount(isPageCount + 1)
+          }}
+        >
+          <FaChevronRight />
+        </button>
       </div>
     </>
   )
@@ -486,32 +572,41 @@ const Note = () => {
 
 //講義詳細
 function LectureDetails() {
-  const lecUimg = uimg;
-  const uname = "ecc_comp";     // 大学ユーザ名
-  const lname = "IoT講座";      // 講義名
-  const teachname = "村上 慧";    // 講師名
-  const detail = "ArduinoでRaspberry Piを用い、IoTに触れる。";  // 内容
+  const lecUimg = uimg
+  const uname = 'ecc_comp' // 大学ユーザ名
+  const lname = 'IoT講座' // 講義名
+  const teachname = '村上 慧' // 講師名
+  const detail = 'ArduinoでRaspberry Piを用い、IoTに触れる。' // 内容
 
   return (
     <>
-      <Link to='/univercitypage'>
-        <button type='submit' name="uni_account" className='flex size-12 rounded-full my-2'>
-          <img src={lecUimg} alt='img' name='uimg' className='h-full w-auto rounded-full'/>
-          <p className='my-auto ml-3'>{uname}</p>
+      <Link to="/univercitypage">
+        <button
+          type="submit"
+          name="uni_account"
+          className="flex size-12 rounded-full my-2"
+        >
+          <img
+            src={lecUimg}
+            alt="img"
+            name="uimg"
+            className="h-full w-auto rounded-full"
+          />
+          <p className="my-auto ml-3">{uname}</p>
         </button>
       </Link>
-      <div className='font-bold'>
-        <div name="lname" className='flex my-2'>
-          <div className=' bg-main text-white text-center px-3'>講義</div>
-          <p className='my-auto ml-3'>{lname}</p>
+      <div className="font-bold">
+        <div name="lname" className="flex my-2">
+          <div className=" bg-main text-white text-center px-3">講義</div>
+          <p className="my-auto ml-3">{lname}</p>
         </div>
-        <div name="teachname" className='flex my-2'>
-          <div className=' bg-main text-white text-center px-3'>講師</div>
-          <p className='my-auto ml-3'>{teachname}</p>
+        <div name="teachname" className="flex my-2">
+          <div className=" bg-main text-white text-center px-3">講師</div>
+          <p className="my-auto ml-3">{teachname}</p>
         </div>
-        <div name="detail" className='flex my-2'>
-          <div className=' bg-main text-white text-center px-3'>内容</div>
-          <p className='my-auto ml-3'>{detail}</p>
+        <div name="detail" className="flex my-2">
+          <div className=" bg-main text-white text-center px-3">内容</div>
+          <p className="my-auto ml-3">{detail}</p>
         </div>
       </div>
     </>
@@ -521,11 +616,11 @@ function LectureDetails() {
 // 関連記事のリンク
 const ConnectLink = () => {
   return (
-    <div className=' border-main-middle border-2 border-dashed h-full w-9/12'>
-      <p className='text-xl text-main-dark py-2 text-center'>関連情報</p>
-      <ul className='ml-5 mt-2'>
-        <li className='mb-2'>あああああああああああ</li>
-        <li className='mb-2'>いいいいいいいいいいいいいいい</li>
+    <div className=" border-main-middle border-2 border-dashed h-full w-9/12">
+      <p className="text-xl text-main-dark py-2 text-center">関連情報</p>
+      <ul className="ml-5 mt-2">
+        <li className="mb-2">あああああああああああ</li>
+        <li className="mb-2">いいいいいいいいいいいいいいい</li>
       </ul>
     </div>
   )
@@ -534,19 +629,27 @@ const ConnectLink = () => {
 // 掲示板コメントダイアログ
 function ComentDialog(item) {
   return (
-    <dialog 
-    className='bg-black/50 h-screen w-screen content-center'
-    open={item.open}
+    <dialog
+      className="bg-black/50 h-screen w-screen content-center"
+      open={item.open}
     >
-      <form method='dialog' className='bg-white h-3/4 w-96 m-auto rounded-md'>
-        <div name='title' className='flex h-14 w-full bg-main-dark text-white text-2xl rounded-t-md'>
-          <p className='my-auto ml-[40%]'>コメント</p>
-          <button className='font-normal ml-auto mr-5'>✕</button>
+      <form method="dialog" className="bg-white h-3/4 w-96 m-auto rounded-md">
+        <div
+          name="title"
+          className="flex h-14 w-full bg-main-dark text-white text-2xl rounded-t-md"
+        >
+          <p className="my-auto ml-[40%]">コメント</p>
+          <button className="font-normal ml-auto mr-5">✕</button>
         </div>
-        <div className='border-2 h-2/3 w-3/4 ml-12 mt-5'>
-          <textarea className='h-full w-full resize-none' placeholder='コメントを入力してください。'></textarea>
+        <div className="border-2 h-2/3 w-3/4 ml-12 mt-5">
+          <textarea
+            className="h-full w-full resize-none"
+            placeholder="コメントを入力してください。"
+          ></textarea>
         </div>
-        <button className='bg-[#2D92C9] bg-gradient-to-t from-[#164863] text-white px-10 ml-[35%] mt-5 rounded-md py-1'>送信</button>
+        <button className="bg-[#2D92C9] bg-gradient-to-t from-[#164863] text-white px-10 ml-[35%] mt-5 rounded-md py-1">
+          送信
+        </button>
       </form>
     </dialog>
   )
@@ -554,22 +657,22 @@ function ComentDialog(item) {
 
 // 他ユーザーの表示
 function OtherMenu(itemData) {
-  return(
+  return (
     <>
-    <div className='h-screen w-1/4 bg-main'>
-      <MainReturenBtn returnCol={0} link={itemData.link}/>
-      <div className="pt-10 w-full text-center">
-        <div
-          className="rounded-full mx-auto bg-[#D9D9D9] size-28"
-          style={{
-            backgroundImage: `url(${itemData.img})`,
-            backgroundSize: `cover`,
-            backgroundPosition: `center center`,
-          }}
-        ></div>
-        <p className='mt-2 font-bold text-white'>{itemData.name}</p>
+      <div className="h-screen w-1/4 bg-main">
+        <MainReturenBtn returnCol={0} link={itemData.link} />
+        <div className="pt-10 w-full text-center">
+          <div
+            className="rounded-full mx-auto bg-[#D9D9D9] size-28"
+            style={{
+              backgroundImage: `url(${itemData.img})`,
+              backgroundSize: `cover`,
+              backgroundPosition: `center center`,
+            }}
+          ></div>
+          <p className="mt-2 font-bold text-white">{itemData.name}</p>
+        </div>
       </div>
-    </div>
     </>
   )
 }

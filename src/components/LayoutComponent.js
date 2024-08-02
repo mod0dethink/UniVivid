@@ -26,7 +26,7 @@ function Logotext() {
 function UnivividHeader(itemData) {
   return (
     <>
-    <div className='flex fixed w-screen h-14'
+    <div className='flex fixed w-screen h-14 z-50'
     style={{backgroundColor: itemData.bgCol?'#427D9D':'#FFFEF8'}}>
       <div className='absolute'>
         <MainReturenBtn link={itemData.link} returnCol={itemData.returnCol} hidden={itemData.hidden}/>

@@ -9,6 +9,7 @@ function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [type, setType] = useState('user') // デフォルトを'user'に設定
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -24,13 +25,14 @@ function LoginForm() {
         body: JSON.stringify({
           MailAddress: email,
           Password: password,
-          Type: 'user', // または 'university'
+          Type: type, // ラジオボタンで選択されたタイプを使用
         }),
         credentials: 'include',
       })
 
       if (response.ok) {
-        navigate('/userhome')
+        // タイプに応じてナビゲート先を変更
+        navigate(type === 'user' ? '/userhome' : '/unihome')
       } else {
         const data = await response.json()
         setError(data.error || 'ログインに失敗しました')
@@ -49,6 +51,7 @@ function LoginForm() {
             <div>
               <p>メールアドレス</p>
               <input
+                id='input-area'
                 type="email"
                 name="email"
                 placeholder="aaa"
@@ -59,6 +62,7 @@ function LoginForm() {
             <div>
               <p>パスワード</p>
               <input
+                id='input-area'
                 type="password"
                 name="password"
                 placeholder="123"
@@ -67,9 +71,29 @@ function LoginForm() {
               />
             </div>
           </div>
-          {/* <Link to = '/loginwelcom'> */}
+          <div className='flex justify-start mt-5 space-x-2 ml-12'>
+            <label>
+              <input 
+                type='radio' 
+                name='selectUser' 
+                value='user'
+                checked={type === 'user'}
+                onChange={() => setType('user')}
+              />
+              個人
+            </label>
+            <label>
+              <input 
+                type='radio' 
+                name='selectUser' 
+                value='university'
+                checked={type === 'university'}
+                onChange={() => setType('university')}
+              />
+              大学
+            </label>
+          </div>
           <button type="submit">ログイン</button>
-          {/* </Link> */}
         </form>
       </div>
     </section>
