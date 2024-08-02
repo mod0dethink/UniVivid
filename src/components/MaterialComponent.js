@@ -2,6 +2,7 @@
 
 // ----------------------------------------インポート --------------------------------------------------
 import React, { useRef, useState } from 'react'
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import '../assets/styles/Dimensions.css'
 import ImportImg from '../assets/images/imgImport.png'
@@ -40,7 +41,7 @@ function UserMenu(itemData) {
         <div>{itemData.username}</div>
       </div>
       <div>
-        <Link to={itemData.mypagepath}>マイページ</Link>
+        <Link to={itemData.mypagepath} hidden={itemData.hidden}>マイページ</Link>
         <div className="py-3"></div>
         <Link to={itemData.settingpath}>ユーザー設定</Link>
       </div>
@@ -343,8 +344,56 @@ function BoxMenu(itemData) {
     </Link>
   )
 }
+
 // Uniの記事 作成・編集・確認 画面
-function InputItems() {
+const InputItems = ({ handle }) => {
+  //入力値
+  const [lectureName, setLectureName] = useState('');
+  const [teacher, setTeacher] = useState('');
+  const [date, setDate] = useState('');
+  const [genre, setGenre] = useState('');
+  const [img, setImg] = useState('');
+  const [offer, setOffer] = useState('');
+  const [detaile, setDetaile] = useState('');
+  const data = [lectureName,teacher,date,genre,img,offer,detaile];
+
+  //入力
+  const inputErea = document.querySelectorAll('input');
+  inputErea.addEventListener('change', (event) => {
+    const itemData = null;
+    switch(event.target.getElementById){
+      case 'lectureName':
+        setLectureName(event.target.value);
+        itemData = lectureName;
+        break;
+      case 'teacher':
+        setTeacher(event.target.value);
+        itemData = teacher;
+        break;
+      case 'date':
+        setDate(event.target.value);
+        itemData = date;
+        break;
+      case 'genre':
+        setGenre(event.target.value);
+        itemData = genre;
+        break;
+      case 'img':
+        setImg(event.target.value);
+        itemData = img;
+        break;
+      case 'offer':
+        setOffer(event.target.value);
+        itemData = offer;
+        break;
+      case 'detail':
+        setDetaile(event.target.value);
+        itemData = detaile;
+        break;
+    }
+    handle(data);
+  })
+
   return (
     <div>
       <div className="mx-auto max-w-[600px] mb-[1.5rem]">
@@ -360,81 +409,80 @@ function InputItems() {
           placeholder=""
         />
       </div>
-
       <div className="mx-auto max-w-[600px] mb-[1.5rem]">
         <label
-          htmlFor="lectureName"
+          htmlFor="teacher"
           className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
         >
           2.講師
         </label>
         <input
+          id="teacher"
           className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
           placeholder=""
         />
       </div>
-
       <div className="mx-auto max-w-[600px] mb-[1.5rem]">
         <label
-          htmlFor="lectureName"
+          htmlFor="date"
           className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
         >
           3.日時
         </label>
         <input
+          id="date"
           className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
           placeholder=""
         />
       </div>
-
       <div className="mx-auto max-w-[600px] mb-[1.5rem]">
         <label
-          htmlFor="lectureName"
+          htmlFor="genre"
           className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
         >
           4.ジャンル
         </label>
         <input
+          id="genre"
           className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
           placeholder=""
         />
       </div>
-
       <div className="mx-auto max-w-[600px] mb-[1.5rem]">
         <label
-          htmlFor="lectureName"
+          htmlFor="img"
           className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
         >
           5.表示画像
         </label>
         <input
+          id="img"
           className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
           placeholder=""
         />
       </div>
-
       <div className="mx-auto max-w-[600px] mb-[1.5rem]">
         <label
-          htmlFor="lectureName"
+          htmlFor="offer"
           className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
         >
           6.申込みURL
         </label>
         <input
+          id="offer"
           className="w-full lg:w-[600px] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
           placeholder=""
         />
       </div>
-
       <div className="mx-auto max-w-[600px] mb-[1.5rem]">
         <label
-          htmlFor="lectureName"
+          htmlFor="detaile"
           className="block text-[1.4rem] font-bold text-[#838181] mb-[0.4rem] text-left"
         >
           7.講義内容
         </label>
-
         <textarea
+          id="detaile"
           type="text"
           className="w-[600px] h-[10rem] text-[1.4rem] leading-[2.5rem] border border-[#838181] rounded-[5px] pl-[1rem]"
           placeholder=""
@@ -443,6 +491,9 @@ function InputItems() {
     </div>
   )
 }
+InputItems.propTypes = {
+  handle: PropTypes.func.isRequired, // 'handle'を関数として定義し、必須とする
+};
 
 //講義ごとのページ
 const Note = () => {

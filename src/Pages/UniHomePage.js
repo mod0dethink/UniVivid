@@ -36,7 +36,7 @@ import NoteImg from '../assets/images/note2.png'
 import uni_img from "../assets/images/ECC_build.jpg";         // 大学画像
 import { FaHandHoldingHeart } from "react-icons/fa6";         // 支援ボタンのマーク
 import { AiFillLike } from "react-icons/ai";                  //　支援ボタンのアイコン
-import { element } from 'prop-types';
+import { array, element } from 'prop-types';
 
 /*
 path変数一覧
@@ -74,6 +74,7 @@ function UniHomePage() {
         username={username}
         settingpath='/unisetting'
         Pimage={ProImg}
+        hidden={true}
       />
       <Link to='/applicationlist'>
         <FaBell className='absolute text-main-middle size-10 right-5 top-4'/>
@@ -161,11 +162,26 @@ function UniSettingsPage() {
 
 //　記事作成画面
 function CreateArticlePage() {
+  const url = 'http://localhost:3000/createchecked';
+  const options = {
+    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+
+    })
+  }
+  const data = new Array(7);
+  // 送信時にすべてのデータをとってくるハンドラー
+  function handle(item) {
+    item.forEach(element, index => {
+      data[index] = element;
+    });
+  }
   return (
     <>
     <UnivividHeader title="記事制作" returnCol={1} link="/unihome" bgCol={true} />
     <section className='pt-[105px] mb-[50px]'>
-      <InputItems />
+      <InputItems handle={handle}/>
     </section>
     <section className='flex justify-end pr-[6vw]'>
       <button className='text-[#427D9D] font-bold text-[20px] mb-[30px]'>確認画面へ&gt;&gt;</button>
