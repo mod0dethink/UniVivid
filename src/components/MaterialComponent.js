@@ -352,7 +352,7 @@ function SwichBar(handleButtonClick) {
           className="border-b-[2px] border-[#229DF6] w-[15vw]"
           onClick={handleButtonClick(1)}
         >
-          あ
+          
         </button>
         <button id="note" className="border-b-[2px] border-[#229DF6] w-[15vw]">
           {/* {this.props.tab2} */}

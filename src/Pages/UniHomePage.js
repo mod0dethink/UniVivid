@@ -29,6 +29,7 @@ import '../assets/styles/Dimensions.css'
 import Imagepng from '../assets/images/IMG_4007.jpg'
 import '../assets/styles/Dimensions.css'
 //テスト
+import uimg from '../assets/images/ecc_logo.jpg' 
 import BgImg from '../assets/images/IMG_4007.jpg'
 import Lok from '../assets/images/lock_back.png'
 import Ticon2 from '../assets/images/English.jpg'
@@ -45,8 +46,8 @@ path変数一覧
  */
 
 /*------ユーザーのデータ変数------*/
-let username = '小野寺工業大学' //ログインアカウントのユーザーネーム
-let ProImg = Imagepng //プロフィール画像
+let username = 'ecc comp' //ログインアカウントのユーザーネーム
+let ProImg = uimg //プロフィール画像
 /*------Linkパス------*/
 let settinglinkpath = '/unisetting' //ユーザーメニュー画面へのLinkパス
 let returnpath = '/unihome' //戻るボタンのLinkパス
@@ -286,11 +287,7 @@ function ApprovalScreenPage(){
 function OpenArtucles() {
   // ！テストデータ！
   const data = [
-    [BgImg,Ticon2,'ECC Artist','ポートレート講座','2002/06/24'],
-    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
-    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
-    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
-    [Lok,Ticon2,'ECC comp','あああああ','2024/08/29',],
+    [222,uimg,'ecc comp','IoT講座','2023/10/15'],
   ]
 
   const detail = "ArduinoでRaspberry Piを用い、IoTに触れる。";  // 内容
