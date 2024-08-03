@@ -9,4 +9,5 @@ type RegisterRequest struct {
 	InfoName    string `json:"infoname,omitempty"`
 	UnivURL     string `json:"univurl,omitempty"`
 	DonateURL   string `json:"donateurl,omitempty"`
+	CategoryIDs []int  `json:"categoryids,omitempty"`
 }

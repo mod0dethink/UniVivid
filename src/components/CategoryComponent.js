@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import ImageMed from '../assets/images/iryou.jpg'    //医療
 import ImageEng from '../assets/images/English.jpg'  //英語
@@ -12,10 +12,64 @@ import ImageTet from '../assets/images/tetugaku.jpg' //哲学
 import ImageHou from '../assets/images/hougaku.jpg'  //法学
 import ReturnImg from '../assets/images/return.png'  // 戻るボタン紺
 
-
 function CategoryComponent() {
+  const [selectedCategories, setSelectedCategories] = useState([])
+  const navigate = useNavigate()
+  const [userInfo, setUserInfo] = useState(null)
+
+  useEffect(() => {
+    const tempUserInfo = JSON.parse(localStorage.getItem('tempUserInfo'))
+    if (tempUserInfo) {
+      setUserInfo(tempUserInfo)
+    } else {
+      // ユーザー情報がない場合は登録画面にリダイレクト
+      navigate('/register')
+    }
+  }, [navigate])
+
+  const handleCheckboxChange = (categoryID) => {
+    setSelectedCategories((prevSelected) =>
+      prevSelected.includes(categoryID)
+        ? prevSelected.filter((id) => id !== categoryID)
+        : [...prevSelected, categoryID]
+    )
+  }
+
+  const handleSubmit = async () => {
+    if (!userInfo) {
+      console.error('ユーザー情報が見つかりません')
+      return
+    }
+
+    try {
+      const response = await fetch('http://localhost:8080/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          MailAddress: userInfo.email,
+          Password: userInfo.password,
+          Username: userInfo.username,
+          Type: 'user',
+          CategoryIDs: selectedCategories,
+        }),
+      })
+
+      if (response.ok) {
+        // ローカルストレージのテンポラリーデータを削除
+        localStorage.removeItem('tempUserInfo')
+        navigate('/registerwelcom')
+      } else {
+        const data = await response.json()
+        console.error(data.error || 'アカウント作成に失敗しました')
+      }
+    } catch (error) {
+      console.error('ネットワークエラーが発生しました:', error)
+    }
+  }
+
   return (
-    
     <div className=" m-32 mt-16">
       <button className="absolute top-0 left-0 size-12 ml-5 pt-2">
         <img src={ReturnImg} alt="back" />
@@ -31,7 +85,6 @@ function CategoryComponent() {
       {/* categoryの選択 */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-[2rem] mb-10">
         <div className="relative">
-          {/* 画像の上に表示されるテキスト */}
           <p className="text-white text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2">
             #医療
           </p>
@@ -42,12 +95,15 @@ function CategoryComponent() {
                   className="w-full h-full object- object-top"
                   alt="医療" />
               </figure>
-              {/* 画像の左下に配置されるチェックボックス */}
               <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
-                <label className="inline-flex items-center">
-                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
-                  {/* ↓↓↓↓↓↓↓↓　下のコメントは消すとエラーが出る　↓↓↓↓↓↓↓ */}
-                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                <label htmlFor="category-1" className="inline-flex items-center">
+                  <input
+                    id="category-1"
+                    type="checkbox"
+                    className="form-checkbox w-[30px] h-[50px]"
+                    onChange={() => handleCheckboxChange(1)}
+                  />
+                  <span className="ml-2">Select</span>
                 </label>
               </div>
             </div>
@@ -65,11 +121,15 @@ function CategoryComponent() {
                   className="w-full h-full object- object-top"
                   alt="英語" />
               </figure>
-              {/* 画像の左下に配置されるチェックボックス */}
               <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
-                <label className="inline-flex items-center">
-                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
-                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                <label htmlFor="category-2" className="inline-flex items-center">
+                  <input
+                    id="category-2"
+                    type="checkbox"
+                    className="form-checkbox w-[30px] h-[50px]"
+                    onChange={() => handleCheckboxChange(2)}
+                  />
+                  <span className="ml-2">Select</span>
                 </label>
               </div>
             </div>
@@ -89,11 +149,15 @@ function CategoryComponent() {
                   alt="IT"
                 />
               </figure>
-              {/* 画像の左下に配置されるチェックボックス */}
               <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
-                <label className="inline-flex items-center">
-                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
-                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                <label htmlFor="category-3" className="inline-flex items-center">
+                  <input
+                    id="category-3"
+                    type="checkbox"
+                    className="form-checkbox w-[30px] h-[50px]"
+                    onChange={() => handleCheckboxChange(3)}
+                  />
+                  <span className="ml-2">Select</span>
                 </label>
               </div>
             </div>
@@ -113,11 +177,15 @@ function CategoryComponent() {
                   alt="物理学"
                 />
               </figure>
-              {/* 画像の左下に配置されるチェックボックス */}
               <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
-                <label className="inline-flex items-center">
-                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
-                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                <label htmlFor="category-4" className="inline-flex items-center">
+                  <input
+                    id="category-4"
+                    type="checkbox"
+                    className="form-checkbox w-[30px] h-[50px]"
+                    onChange={() => handleCheckboxChange(4)}
+                  />
+                  <span className="ml-2">Select</span>
                 </label>
               </div>
             </div>
@@ -137,11 +205,15 @@ function CategoryComponent() {
                   alt="シャチ"
                 />
               </figure>
-              {/* 画像の左下に配置されるチェックボックス */}
               <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
-                <label className="inline-flex items-center">
-                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
-                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                <label htmlFor="category-5" className="inline-flex items-center">
+                  <input
+                    id="category-5"
+                    type="checkbox"
+                    className="form-checkbox w-[30px] h-[50px]"
+                    onChange={() => handleCheckboxChange(5)}
+                  />
+                  <span className="ml-2">Select</span>
                 </label>
               </div>
             </div>
@@ -161,11 +233,15 @@ function CategoryComponent() {
                   alt="機械工学"
                 />
               </figure>
-              {/* 画像の左下に配置されるチェックボックス */}
               <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
-                <label className="inline-flex items-center">
-                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
-                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                <label htmlFor="category-6" className="inline-flex items-center">
+                  <input
+                    id="category-6"
+                    type="checkbox"
+                    className="form-checkbox w-[30px] h-[50px]"
+                    onChange={() => handleCheckboxChange(6)}
+                  />
+                  <span className="ml-2">Select</span>
                 </label>
               </div>
             </div>
@@ -185,11 +261,15 @@ function CategoryComponent() {
                   alt="環境学"
                 />
               </figure>
-              {/* 画像の左下に配置されるチェックボックス */}
               <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
-                <label className="inline-flex items-center">
-                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
-                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                <label htmlFor="category-7" className="inline-flex items-center">
+                  <input
+                    id="category-7"
+                    type="checkbox"
+                    className="form-checkbox w-[30px] h-[50px]"
+                    onChange={() => handleCheckboxChange(7)}
+                  />
+                  <span className="ml-2">Select</span>
                 </label>
               </div>
             </div>
@@ -209,11 +289,15 @@ function CategoryComponent() {
                   alt="哲学"
                 />
               </figure>
-              {/* 画像の左下に配置されるチェックボックス */}
               <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
-                <label className="inline-flex items-center">
-                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
-                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                <label htmlFor="category-8" className="inline-flex items-center">
+                  <input
+                    id="category-8"
+                    type="checkbox"
+                    className="form-checkbox w-[30px] h-[50px]"
+                    onChange={() => handleCheckboxChange(8)}
+                  />
+                  <span className="ml-2">Select</span>
                 </label>
               </div>
             </div>
@@ -233,11 +317,15 @@ function CategoryComponent() {
                   alt="法学"
                 />
               </figure>
-              {/* 画像の左下に配置されるチェックボックス */}
               <div className="absolute bottom-0 left-0 p-[5px] ml-[10px]">
-                <label className="inline-flex items-center">
-                  <input type="checkbox" className="form-checkbox w-[30px] h-[50px]" />
-                  {/* <span className="ml-[10px] text-[20px]">aaa</span> */}
+                <label htmlFor="category-9" className="inline-flex items-center">
+                  <input
+                    id="category-9"
+                    type="checkbox"
+                    className="form-checkbox w-[30px] h-[50px]"
+                    onChange={() => handleCheckboxChange(9)}
+                  />
+                  <span className="ml-2">Select</span>
                 </label>
               </div>
             </div>
@@ -245,12 +333,9 @@ function CategoryComponent() {
         </div>
       </section>
 
-      <Link to='/registerwelcom'>
-        <div className="text-2xl text-right text-blue-300 font-bold">
-          next&gt;&gt;
-        </div>
-      </Link>
-
+      <button onClick={handleSubmit} className="text-2xl text-right text-blue-300 font-bold">
+        next&gt;&gt;
+      </button>
     </div>
   )
 }

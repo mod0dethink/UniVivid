@@ -100,48 +100,28 @@ function LoginForm() {
   )
 }
 
-//いったんカテゴリー登録を飛ばして、アカウント作成が完了したらログインにリダイレクトするようにしてる
 function CreateAccountForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
   const [error, setError] = useState('')
 
-  const { setUsername: conUsername } = useContext(UsernameContext) // setUsername を conUsername にリネーム
   const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     setError('')
 
-    try {
-      const response = await fetch('http://localhost:8080/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          MailAddress: email,
-          Password: password,
-          Username: username,
-          Type: 'user',
-        }),
-      })
+    // ユーザー情報をローカルストレージに保存
+    const userInfo = { email, password, username }
+    localStorage.setItem('tempUserInfo', JSON.stringify(userInfo))
 
-      if (response.ok) {
-        navigate('/welcompage')
-        conUsername(username)
-      } else {
-        const data = await response.json()
-        setError(data.error || 'アカウント作成に失敗しました')
-      }
-    } catch (error) {
-      setError('ネットワークエラーが発生しました')
-    }
+    // カテゴリー選択画面に遷移
+    navigate('/category')
   }
 
   return (
-    <section className=" pt-[5%] bg-main-bg flex justify-center">
+    <section className="pt-[8%] bg-main-bg flex justify-center">
       <div className="from-nav">
         {error && <p className="text-red-500">{error}</p>}
         <form onSubmit={handleSubmit}>
@@ -175,14 +155,13 @@ function CreateAccountForm() {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <Link to='/category'>
-            <button type="submit">登録</button>
-          </Link>
+          <button type="submit">登録</button>
         </form>
       </div>
     </section>
   )
 }
+
 // アカウント作成のフォーム
 function CreateUniAccountForm() {
   const [email, setEmail] = useState('')
@@ -193,7 +172,7 @@ function CreateUniAccountForm() {
   const [donateURL, setDonateURL] = useState('')
   const [error, setError] = useState('')
 
-  const { setUsername: conUsername } = useContext(UsernameContext) // setUsername を conUsername にリネーム
+  const { setUsername: conUsername } = useContext(UsernameContext)
 
   const navigate = useNavigate()
 

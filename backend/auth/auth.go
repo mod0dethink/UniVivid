@@ -123,23 +123,65 @@ func registerHandler(c *gin.Context) {
 		return
 	}
 
+	var userID int64
+	tx, err := DB.Begin()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "トランザクションの開始に失敗しました"})
+		return
+	}
+
 	if request.Type == "user" {
-		_, err = DB.Exec("INSERT INTO USER (Mail_Address, User_Name, Password) VALUES (?, ?, ?)", request.MailAddress, request.Username, string(hashedPassword))
+		result, err := tx.Exec("INSERT INTO USER (Mail_Address, User_Name, Password) VALUES (?, ?, ?)", request.MailAddress, request.Username, string(hashedPassword))
 		if err != nil {
+			tx.Rollback()
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
+			return
+		}
+		userID, err = result.LastInsertId()
+		if err != nil {
+			tx.Rollback()
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "ユーザーIDの取得に失敗しました"})
 			return
 		}
 		c.JSON(http.StatusOK, gin.H{"message": "ユーザーアカウントが作成されました！"})
 	} else if request.Type == "university" {
-		_, err = DB.Exec("INSERT INTO UNIVERSITY (Mail_Address, Password, Univ_Name, info_name, Univ_URL, donate_URL) VALUES (?, ?, ?, ?, ?, ?)", request.MailAddress, string(hashedPassword), request.UnivName, request.InfoName, request.UnivURL, request.DonateURL)
+		result, err := tx.Exec("INSERT INTO UNIVERSITY (Mail_Address, Password, Univ_Name, info_name, Univ_URL, donate_URL) VALUES (?, ?, ?, ?, ?, ?)", request.MailAddress, string(hashedPassword), request.UnivName, request.InfoName, request.UnivURL, request.DonateURL)
 		if err != nil {
+			tx.Rollback()
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
+			return
+		}
+		userID, err = result.LastInsertId()
+		if err != nil {
+			tx.Rollback()
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "大学IDの取得に失敗しました"})
 			return
 		}
 		c.JSON(http.StatusOK, gin.H{"message": "大学アカウントが作成されました！"})
 	} else {
+		tx.Rollback()
 		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なアカウントタイプです"})
+		return
 	}
+
+	// 興味の追加
+	log.Println("CategoryIDs:", request.CategoryIDs) // CategoryIDsのログ出力
+	for _, categoryID := range request.CategoryIDs {
+		log.Println("Inserting into INTEREST:", userID, categoryID) // 挿入クエリのログ出力
+		_, err = tx.Exec("INSERT INTO INTEREST (User_ID, CATEGORY_ID) VALUES (?, ?)", userID, categoryID)
+		if err != nil {
+			tx.Rollback()
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "興味の追加に失敗しました"})
+			return
+		}
+	}
+
+	if err := tx.Commit(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "トランザクションのコミットに失敗しました"})
+		return
+	}
+
+	log.Println("アカウントと興味が正常に作成されました。")
 }
 
 // プロフィール編集API(typeの値でユーザーか大学の処理を分ける)
