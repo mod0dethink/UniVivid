@@ -28,10 +28,11 @@ import {
 //asideのユーザーメニュー
 function UserMenu(itemData) {
   return (
-    <aside className="aside flex-grow-[1] min-w-[300px] bg-main content-center flex flex-col items-center justify-between text-white text-2xl">
+    <aside name="slideElement" id="slide-out"
+      className="animate-slide-in-bottom aside flex-grow-[1] min-w-[300px] bg-main content-center flex flex-col items-center justify-between text-white text-2xl">
       <div className="text-center pt-[50px]">
         <div
-          className="rounded-full bg-[#D9D9D9] w-[160px] h-[160px] flex flex-col items-center justify-center"
+          className="rounded-full bg-[#D9D9D9] size-32 flex flex-col items-center justify-center"
           style={{
             backgroundImage: `url(${itemData.Pimage})`,
             backgroundSize: `cover`,
@@ -43,7 +44,9 @@ function UserMenu(itemData) {
       <div>
         <Link to={itemData.mypagepath} hidden={itemData.hidden}>マイページ</Link>
         <div className="py-3"></div>
-        <Link to={itemData.settingpath}>ユーザー設定</Link>
+        {/* <Link to={itemData.settingpath}> */}
+        <button>ユーザー設定</button>
+        {/* </Link> */}
       </div>
       <Link to='/'>
         <div className="py-[50px]">
@@ -357,11 +360,15 @@ const InputItems = ({ handle }) => {
   const [detaile, setDetaile] = useState('');
   const data = [lectureName,teacher,date,genre,img,offer,detaile];
 
-  //入力
-  const inputErea = document.querySelectorAll('input');
-  inputErea.addEventListener('change', (event) => {
-    const itemData = null;
-    switch(event.target.getElementById){
+  //入力欄の値に変化があった時
+  const inputErea = document.querySelectorAll('input');//ToDo:textereaも
+  
+  console.log(inputErea);
+  inputErea.forEach(element => {
+    const targetData = element;
+    targetData.addEventListener('change', (event) => {
+      const itemData = null;
+      switch(event.target.getElementById){
       case 'lectureName':
         setLectureName(event.target.value);
         itemData = lectureName;
@@ -392,7 +399,8 @@ const InputItems = ({ handle }) => {
         break;
     }
     handle(data);
-  })
+    })
+  });
 
   return (
     <div>

@@ -1,6 +1,7 @@
 // 大学側のページ
 
 import React, { useRef, useState } from 'react'
+import PropTypes from 'prop-types';
 // import axios from 'axios'
 import { Axios } from 'axios'
 import Door from '../assets/images/door.png'
@@ -167,16 +168,22 @@ function CreateArticlePage() {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-
+      
     })
   }
   const data = new Array(7);
   // 送信時にすべてのデータをとってくるハンドラー
   function handle(item) {
-    item.forEach(element, index => {
+    item.forEach((element, index) => {
       data[index] = element;
-    });
+      console.log(element);
+    })
   }
+
+  // data.forEach(element,index => {
+  //   <p>{index}: {element}</p>
+  // });
+
   return (
     <>
     <UnivividHeader title="記事制作" returnCol={1} link="/unihome" bgCol={true} />
@@ -184,7 +191,9 @@ function CreateArticlePage() {
       <InputItems handle={handle}/>
     </section>
     <section className='flex justify-end pr-[6vw]'>
-      <button className='text-[#427D9D] font-bold text-[20px] mb-[30px]'>確認画面へ&gt;&gt;</button>
+      <button 
+      className='text-[#427D9D] font-bold text-[20px] mb-[30px]'
+      >確認画面へ&gt;&gt;</button>
     </section>
     </>
   )
