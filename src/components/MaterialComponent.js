@@ -13,13 +13,10 @@ import { BsPaperclip } from 'react-icons/bs' // クリップ
 import { MdOutlineFileUpload } from 'react-icons/md' // アップロードボタン
 import { FaChevronRight } from 'react-icons/fa' // >
 import { FaChevronLeft } from 'react-icons/fa' // <
-import user_icon from '../assets/images/user_icon.png' // アップしたユーザーのアイコン
 import { AiFillLike } from 'react-icons/ai' //　支援ボタンのアイコン
 import img1 from '../assets/images/note2.png' // 例の画像
 import img2 from '../assets/images/note1.jpg'
 // Board-------------------------------------------------
-import { TbPencilPlus } from 'react-icons/tb' // 追加
-import { OtherUserPage } from '../Pages/UserHomePage'
 import { MainReturenBtn } from './LayoutComponent'
 import { OpenNote } from '../assets/scripts/animation.js'
 

@@ -23,19 +23,18 @@ import ApprovalScreenPage from './Pages/university/ApprovalScreenPage'
 import OpenArtucles from './Pages/university/OpenArtucles'
 import EditOneLecture from './Pages/university/EditOneLecture'
 import EditDetails from './Pages/university/EditDetails'
-import {
-  UserHomePage,
-  UserSettingsPage,
-  UserArticleList,
-  UserMyPage,
-  ArticleHistoryPage,
-  UpNoteListPage,
-  FavoriteListPage,
-  OneLecturePage,
-  UnivercityPage,
-  OtherUserPage,
-  OtherUserNotePage,
-} from './Pages/UserHomePage'
+// ユーザー側のページ --------
+import UserHomePage from './Pages/user/UserHomePage'
+import UserSettingsPage from './Pages/user/UserSettingsPage'
+import UserArticleList from './Pages/user/UserArticleList'
+import UserMyPage from './Pages/user/UserMyPage'
+import ArticleHistoryPage from './Pages/user/ArticleHistoryPage'
+import UpNoteListPage from './Pages/user/UpNoteListPage'
+import FavoriteListPage from './Pages/user/FavoriteListPage'
+import OneLecturePage from './Pages/user/OneLecturePage'
+import UnivercityPage from './Pages/user/UnivercityPage'
+import OtherUserPage from './Pages/user/OtherUserPage'
+import OtherUserNotePage from './Pages/user/OtherUserNotePage'
 
 const App = () => {
   return (
