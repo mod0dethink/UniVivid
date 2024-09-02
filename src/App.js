@@ -7,15 +7,16 @@ import { UsernameProvider } from './Contexts/UsernameContext'
 // Componentのインポート
 import TransitionalScreen from './components/TransitionalScreen' // 開発者用Component
 import CategoryComponent from './components/CategoryComponent'
-import {
-  FirstWelcomPage,
-  LoginPage,
-  EntitySelectionPage,
-  RegisterPage,
-  UniRegisterPage,
-  RegisterWelcomPage,
-  LoginWelcomPage,
-} from './Pages/AccountPage'
+//Pageのインポート
+// ログイン・新規作成 --------
+import FirstWelcomPage from './Pages/acount/FirstWelcomPage'
+import LoginPage from './Pages/acount/LoginPage'
+import EntitySelectionPage from './Pages/acount/EntitySelectionPage'
+import RegisterPage from './Pages/acount/RegisterPage'
+import UniRegisterPage from './Pages/acount/UniRegisterPage'
+import RegisterWelcomPage from './Pages/acount/RegisterWelcomPage'
+import LoginWelcomPage from './Pages/acount/LoginWelcomPage'
+
 import {
   UserHomePage,
   UserSettingsPage,
