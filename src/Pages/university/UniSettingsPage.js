@@ -5,7 +5,9 @@ import { Axios } from 'axios'
 import Imagepng from '../../assets/images/IMG_4007.jpg'
 //component
 import { UnivividHeader } from '../../components/LayoutComponent'
-import { InputField, ProfileImageEditor, SaveBtn } from '../../components/MaterialComponent'
+import InputField from '../../components/materialComponent/InputField.js'
+import ProfileImageEditor from '../../components/materialComponent/ProfileImageEditor.js'
+import SaveBtn from '../../components/materialComponent/SaveBtn.js'
 /*------ユーザーのデータ変数------*/
 let ProImg = Imagepng //プロフィール画像
 

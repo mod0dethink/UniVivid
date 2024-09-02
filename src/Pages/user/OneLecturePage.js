@@ -5,7 +5,9 @@ import '../../assets/styles/Dimensions.css'
 import '../../assets/styles/bg-images.css'
 import { MainReturenBtn } from '../../components/LayoutComponent.js' // 戻るボタン
 //component
-import { Note, LectureDetails, ConnectLink } from '../../components/MaterialComponent.js'
+import Note from '../../components/materialComponent/Note.js'
+import LectureDetails from '../../components/materialComponent/LectureDetails.js'
+import ConnectLink from '../../components/materialComponent/ConnectLink.js'
 
 // 講義記事ごとのページ
 const OneLecturePage = () => {

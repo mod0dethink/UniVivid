@@ -8,7 +8,7 @@ import { TbPencilPlus } from 'react-icons/tb' // 追加
 import { FaHandHoldingHeart } from 'react-icons/fa6' // 支援ボタンのマーク
 //component
 import { MainReturenBtn } from '../../components/LayoutComponent.js' // 戻るボタン
-import { ComentDialog } from '../../components/MaterialComponent.js'
+import ComentDialog from '../../components/materialComponent/ComentDialog.js'
 
 //テスト用
 import uni_img from '../../assets/images/ECC_build.jpg' // 大学画像

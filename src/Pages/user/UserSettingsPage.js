@@ -2,8 +2,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 //component
-import { InputField, ProfileImageEditor, SaveBtn } from '../../components/MaterialComponent.js'
 import { UnivividHeader } from '../../components/LayoutComponent.js'
+import InputField from '../../components/materialComponent/InputField.js'
+import ProfileImageEditor from '../../components/materialComponent/ProfileImageEditor.js'
+import SaveBtn from '../../components/materialComponent/SaveBtn.js'
 //assets
 import Imagepng from '../../assets/images/IMG_4007.jpg'
 import '../../assets/styles/Dimensions.css'

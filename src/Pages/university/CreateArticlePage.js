@@ -1,8 +1,8 @@
 //インポート
 import React from 'react'
 //component
-import { InputItems } from '../../components/MaterialComponent'
 import { UnivividHeader } from '../../components/LayoutComponent'
+import InputItems from '../../components/materialComponent/InputItems.js'
 
 //　記事作成画面
 function CreateArticlePage() {

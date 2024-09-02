@@ -1,8 +1,8 @@
 //インポート
 import React from 'react'
 //component
-import { ArticlePart } from '../../components/MaterialComponent.js'
 import { UnivividHeader } from '../../components/LayoutComponent.js'
+import ArticlePart from '../../components/materialComponent/ArticlePart.js'
 
 //　テスト用
 import BgImg from '../../assets/images/IMG_4007.jpg'

@@ -4,8 +4,8 @@ import React from 'react'
 import '../../assets/styles/Dimensions.css'
 import '../../assets/styles/bg-images.css'
 //component
-import { ArticlePart } from '../../components/MaterialComponent.js'
 import { UnivividHeader } from '../../components/LayoutComponent.js'
+import ArticlePart from '../../components/materialComponent/ArticlePart.js'
 
 //テスト用
 import BgImg from '../../assets/images/IMG_4007.jpg'

@@ -1,8 +1,10 @@
 //インポート
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Note, LectureDetails, ConnectLink } from '../../components/MaterialComponent'
 import { MainReturenBtn } from '../../components/LayoutComponent'
+import Note from '../../components/materialComponent/Note.js'
+import LectureDetails from '../../components/materialComponent/LectureDetails.js'
+import ConnectLink from '../../components/materialComponent/ConnectLink.js'
 
 // 講義記事ごとのページ
 const EditOneLecture = () => {

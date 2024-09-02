@@ -1,8 +1,8 @@
 //インポート
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { InputItems } from '../../components/MaterialComponent'
 import { UnivividHeader } from '../../components/LayoutComponent'
+import InputItems from '../../components/materialComponent/InputItems.js'
 import '../../assets/styles/Dimensions.css'
 
 // 記事編集

@@ -1,6 +1,7 @@
 //インポート
 import React from 'react'
-import { ArticlePart, OtherMenu } from '../../components/MaterialComponent'
+import ArticlePart from '../../components/materialComponent/ArticlePart.js'
+import OtherMenu from '../../components/materialComponent/OtherMenu.js'
 
 //テスト
 import BgImg from '../../assets/images/IMG_4007.jpg'

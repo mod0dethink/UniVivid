@@ -7,7 +7,7 @@ import '../../assets/styles/bg-images.css'
 import { BsPaperclip } from 'react-icons/bs' // クリップ
 import { AiFillLike } from 'react-icons/ai' //　支援ボタンのアイコン
 //component
-import { LectureDetails } from '../../components/MaterialComponent.js'
+import LectureDetails from '../../components/materialComponent/LectureDetails.js'
 import { MainReturenBtn } from '../../components/LayoutComponent.js' // 戻るボタン
 
 

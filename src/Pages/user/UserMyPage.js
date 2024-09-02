@@ -1,8 +1,9 @@
 //インポート
 import React from 'react'
 //component
-import { BoxMenu, HomeReturnBtn } from '../../components/MaterialComponent.js'
 import { UserHeader } from '../../components/LayoutComponent.js'
+import BoxMenu from '../../components/materialComponent/BoxMenu.js'
+import HomeReturnBtn from '../../components/materialComponent/HomeReturnBtn.js'
 //assets
 import Imagepng from '../../assets/images/IMG_4007.jpg'
 

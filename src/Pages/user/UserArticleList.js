@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 //component
-import { ArticleSearch, ArticlePart, HomeReturnBtn } from '../../components/MaterialComponent.js'
 import { UserHeader } from '../../components/LayoutComponent.js'
+import ArticleSearch from '../../components/materialComponent/ArticleSearch.js'
+import ArticlePart from '../../components/materialComponent/ArticlePart.js'
+import HomeReturnBtn from '../../components/materialComponent/HomeReturnBtn.js'
 //assets
 import Imagepng from '../../assets/images/IMG_4007.jpg'
 import '../../assets/styles/Dimensions.css'

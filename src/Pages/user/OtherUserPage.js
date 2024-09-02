@@ -4,7 +4,8 @@ import React from 'react'
 import '../../assets/styles/Dimensions.css'
 import '../../assets/styles/bg-images.css'
 //component
-import { ArticlePart, OtherMenu } from '../../components/MaterialComponent.js'
+import ArticlePart from '../../components/materialComponent/ArticlePart.js'
+import OtherMenu from '../../components/materialComponent/OtherMenu.js'
 
 //テスト用
 import BgImg from '../../assets/images/IMG_4007.jpg'

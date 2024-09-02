@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 //component
 import { UnivividHeader } from '../../components/LayoutComponent'
-import { SwichPage } from '../../components/MaterialComponent'
+import SwichPage from '../../components/materialComponent/SwichPage.js'
 
 // 申請許諾画面
 function ApplicationListPage() {

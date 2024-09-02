@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 //component
-import { UserMenu, RootUrl } from '../../components/MaterialComponent.js'
+import UserMenu from '../../components/materialComponent/UserMenu.js'
+import RootUrl from '../../components/materialComponent/RootUrl.js'
 //assets
 import Imagepng from '../../assets/images/IMG_4007.jpg'
 import Door from '../../assets/images/door.png'

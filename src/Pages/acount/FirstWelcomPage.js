@@ -7,7 +7,7 @@ import Logo from '../../assets/images/start_logo.png'
 import {
   UnivividHeader,
   Unifooter,
-  Logotext,
+  Logotext
 } from '../../components/LayoutComponent'
 
 // 初期画面

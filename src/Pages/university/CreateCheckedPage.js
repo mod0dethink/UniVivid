@@ -1,8 +1,8 @@
 //インポート
 import React from 'react'
 //component
-import { InputItems } from '../../components/MaterialComponent'
 import { UnivividHeader } from '../../components/LayoutComponent'
+import InputItems from '../../components/materialComponent/InputItems.js'
 
 // 作成した記事の確認画面
 function CreateCheckedPage() {

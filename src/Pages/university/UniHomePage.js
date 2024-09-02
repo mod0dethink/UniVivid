@@ -7,7 +7,8 @@ import { FaBell } from "react-icons/fa"
 import Door from '../../assets/images/door.png'
 import Imagepng from '../../assets/images/IMG_4007.jpg'
 //component
-import { UserMenu, RootUrl } from '../../components/MaterialComponent'
+import UserMenu from '../../components/materialComponent/UserMenu.js'
+import RootUrl from '../../components/materialComponent/RootUrl.js'
 
 /*------ユーザーのデータ変数------*/
 let username = '小野寺工業大学' //ログインアカウントのユーザーネーム

@@ -14,6 +14,7 @@ function Logotext() {
     </p>
   )
 }
+
 /**
  * ヘッダー
  * @param {*ヘッダーに必要なデータ} itemData
@@ -36,6 +37,7 @@ function UnivividHeader(itemData) {
     </>
   )
 }
+
 // 前画面に戻るボタン
 function MainReturenBtn(itemData) {
   // ボタンの色(　0 = 紺　1 = 白　)
@@ -48,12 +50,15 @@ function MainReturenBtn(itemData) {
     </Link>
   )
 }
+
 // フッター
 function Unifooter() {
   return (
     <footer className="fixed w-screen bg-main text-white text-[60px] text-center font-bold py-6 bottom-0"></footer>
   )
 }
+
+// ユーザーヘッダー
 function UserHeader(itemData) {
   return (
     <section className="-z-[-2] fixed w-screen bg-[#427d9d] text-white text-center font-bold h-14 pt-2">
@@ -76,5 +81,5 @@ export {
   MainReturenBtn,
   Unifooter,
   Logotext,
-  UserHeader,
+  UserHeader
 }
