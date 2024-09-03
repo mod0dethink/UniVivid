@@ -11,7 +11,7 @@ import HeaderLogo from '../../components/layout/layouts'
 function FirstWelcomPage() {
   return (
     <div>
-      <HeaderLogo />
+      <HeaderLogo color="text-[#fff]" />
       <section className="gradient-background w-[100vw] h-screen flex justify-around items-center text-center">
         <img
           src={images.pen}
