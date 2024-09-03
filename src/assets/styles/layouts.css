@@ -1,0 +1,10 @@
+.gradient-background {
+  background: linear-gradient(
+    to right,
+    #fff 0%,
+    #fff 34%,
+    #a0bece 52%,
+    #719db5 64%,
+    #427d9d 100%
+  );
+}

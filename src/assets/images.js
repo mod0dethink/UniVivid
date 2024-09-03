@@ -1,7 +1,6 @@
 /*---画像をすべてインポートするjs(可読性工場のため)--- */
 
 const images = {
-  '180_20240622001109': require('./images/180_20240622001109.png'),
   back: require('./images/back.png'),
   bgnote: require('./images/bgnote.jpg'),
   door: require('./images/door.png'),
@@ -28,6 +27,11 @@ const images = {
   teacher: require('./images/teacher.png'),
   tetugaku: require('./images/tetugaku.jpg'),
   user_icon: require('./images/user_icon.png'),
+  big_logo: require('./images/BigLogo.png'),
+  WebImage1: require('./images/WebImage1.png'),
+  WebImage2: require('./images/WebImage2.png'),
+  WebImage3: require('./images/WebImage3.png'),
+  WebImage4: require('./images/WebImage4.png'),
 }
 
 export default images
