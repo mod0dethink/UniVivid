@@ -1,5 +1,6 @@
 //インポート
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 //component
 
 import Input from '../../components/common/Input'
@@ -8,6 +9,7 @@ import FormButton from '../../components/common/formBotton'
 
 //ログインフォーム
 function LoginPage() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     pass: '',
@@ -23,12 +25,21 @@ function LoginPage() {
       [name]: value,
     }))
   }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    navigate('/userhome')
+  }
   return (
     <section className="bg-[#DDF2FD] h-screen flex flex-col items-center justify-center">
       <HeaderLogo />
-      <form className="bg-[#fff] w-[700px] min-h-[700px] flex flex-col items-center justify-evenly rounded-[50px]">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-[#fff] w-[700px] min-h-[700px] flex flex-col items-center justify-evenly rounded-[50px]"
+      >
         <p className="text-[50px] font-bold">ログイン</p>
-        <div className="mb-4">
+        <div className="flex flex-col space-y-[20px]">
           {inputValue.map(({ name, type, label }) => (
             <Input
               key={name}

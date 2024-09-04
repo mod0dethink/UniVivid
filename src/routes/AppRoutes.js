@@ -17,6 +17,8 @@ import RegisterPage from '../Pages/acount/RegisterPage'
 import UniRegisterPage from '../Pages/acount/UniRegisterPage'
 import RegisterWelcomPage from '../Pages/acount/RegisterWelcomPage'
 import LoginWelcomPage from '../Pages/acount/LoginWelcomPage'
+import UserChoiceCategory from '../Pages/acount/UserChoiceCategory'
+import { LogoViwer1, LogoViwer2 } from '../Pages/acount/LogoViwer'
 
 import UniHomePage from '../Pages/university/UniHomePage'
 import UniSettingsPage from '../Pages/university/UniSettingsPage'
@@ -181,7 +183,35 @@ const AppRoutes = () => {
                 variants={pageVariants}
                 transition={pageTransition}
               >
-                <CategoryComponent />
+                <UserChoiceCategory />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/LogoViwer1"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <LogoViwer1 />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/LogoViwer2"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <LogoViwer2 />
               </motion.div>
             }
           />

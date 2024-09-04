@@ -1,33 +1,36 @@
 //インポート
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 //component
-import {
-  UnivividHeader,
-  Unifooter,
-  Logotext,
-} from '../../components/LayoutComponent'
+import HeaderLogo from '../../components/layout/layouts.js'
+import FormButton from '../../components/common/formBotton.js'
+import images from '../../assets/images.js'
+import { UsernameContext } from '../../Contexts/UsernameContext.js'
 
 //新規登録完了の画面
 function RegisterWelcomPage() {
-  const user_name = 'ユーザー名' // 引数として渡されたidから名前を取得し、変数に代入
+  const navigate = useNavigate('')
+  const { username } = useContext(UsernameContext)
+  const handleSubmit = (event) => {
+    event.preventDefault()
 
+    navigate('/LogoViwer1')
+  }
   return (
-    <section>
-    <div className="bg-main-bg font-bold h-screen font-mono">
-      <UnivividHeader title={<Logotext />} hidden="hidden" bgCol={true}/>
-      <div className="h-full content-center text-center text-3xl ">
-        <p>アカウントの登録が完了しました！</p>
-        <p>ようこそ、<font className="text-main-dark">{user_name}</font>さん！</p>
-        <Link to='/login'>
-          <button className='py-3 px-5 text-white text-3xl bg-main bg-gradient-to-t from-main-middle rounded-lg mt-10'>
-            ログインして始める
-          </button>
-        </Link>
-      </div>
-      <Unifooter />
+    <div className="w-[100vw] h-screen flex justify-around items-center">
+      <HeaderLogo />
+      <section className="text-[36px] font-bold space-y-[50px]">
+        <img src={images.WebImage2} alt="weimage2" width="400px" />
+        <p>
+          登録が完了しました。
+          <br />
+          こんにちは、<span className="text-[#427D9D]">{username}</span>さん
+        </p>
+      </section>
+      <section>
+        <FormButton text="UniVividへ進む>>" onSubmit={handleSubmit} />
+      </section>
     </div>
-    </section>
   )
 }
 

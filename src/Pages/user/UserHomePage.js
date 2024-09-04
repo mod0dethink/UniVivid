@@ -10,6 +10,8 @@ import Door from '../../assets/images/door.png'
 import '../../assets/styles/Dimensions.css'
 import '../../assets/styles/bg-images.css'
 
+import UniSidebar from '../../components/common/UniSidebar.js'
+
 /*------ユーザーのデータ変数------*/
 let ProImg = Imagepng //プロフィール画像
 /*------Linkパス------*/
@@ -40,20 +42,21 @@ function UserHomePage() {
 
   return (
     <section>
-    <div className="flex w-[100vw] h-screen">
-      {/*ユーザーのメニュー*/}
-      <UserMenu
-        username={username}
-        settingpath={settinglinkpath}
-        mypagepath={mypagepath}
-        Pimage={ProImg}
-      />
-      {/*記事メニュー*/}
-      <div className="flex-grow-[7] content-center h-screen">
-        <RootUrl name={Door} text={'動画へ'} linkpath="" />
-        <RootUrl name={Door} text={'記事一覧へ'} linkpath={articlepath} />
+      <UniSidebar />
+      <div className="flex w-[100vw] h-screen">
+        {/*ユーザーのメニュー*/}
+        <UserMenu
+          username={username}
+          settingpath={settinglinkpath}
+          mypagepath={mypagepath}
+          Pimage={ProImg}
+        />
+        {/*記事メニュー*/}
+        <div className="flex-grow-[7] content-center h-screen">
+          <RootUrl name={Door} text={'動画へ'} linkpath="" />
+          <RootUrl name={Door} text={'記事一覧へ'} linkpath={articlepath} />
+        </div>
       </div>
-    </div>
     </section>
   )
 }

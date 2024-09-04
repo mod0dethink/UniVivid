@@ -32,6 +32,13 @@ const images = {
   WebImage2: require('./images/WebImage2.png'),
   WebImage3: require('./images/WebImage3.png'),
   WebImage4: require('./images/WebImage4.png'),
+  barImg: require('./images/barImg.png'),
+  barImg1: require('./images/barImg1.png'),
+  barImg2: require('./images/barImg2.png'),
+  barImg3: require('./images/barImg3.png'),
+  barImg4: require('./images/barImg4.png'),
+  barImg5: require('./images/barImg5.png'),
+  Close: require('./images/Close.png'),
 }
 
 export default images
