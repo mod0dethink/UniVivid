@@ -1,0 +1,83 @@
+/*Sidebar-CSS*/
+.sidebar {
+  position: absolute;
+  z-index: 2;
+  top: 100px;
+  left: 50px;
+  border-radius: 20px;
+  width: 100px;
+  height: 700px;
+  background: linear-gradient(to bottom, #427d9d, #172c37);
+
+  backdrop-filter: blur(10px);
+  transition: width 0.45s;
+}
+
+.sidebar.open {
+  width: 250px;
+}
+
+.sidebar .inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 190px;
+}
+.sidebar header {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 0 25px;
+}
+
+.sidebar-burger {
+  width: 50px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  color: white;
+}
+
+.sidebar nav {
+  display: grid;
+  padding: 0 10px;
+  gap: 20px;
+}
+
+.sidebar nav > button {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 100px;
+  width: 80px;
+  padding: 0 0;
+  border-radius: 8px;
+  opacity: 0.7;
+  color: white;
+}
+
+.sidebar nav > button:hover {
+  background: rgb(0 0 0 / 30%);
+  opacity: 1;
+}
+
+.sidebar:not(.open) nav > button:hover p {
+  opacity: 1;
+  background: rgb(0 0 0 /70%);
+  padding: 4px 8px;
+  border-radius: 6px;
+  translate: 10px 0;
+}
+
+.sidebar header > img,
+.sidebar nav > button p {
+  opacity: 0;
+  transition: 0.25s;
+}
+
+.sidebar.open nav button p,
+.sidebar.open header > img {
+  opacity: 1;
+}

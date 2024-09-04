@@ -1,0 +1,506 @@
+// インポート
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import { UsernameProvider } from '../Contexts/UsernameContext'
+
+// ページコンポーネント
+import FirstWelcomPage from '../Pages/acount/FirstWelcomPage'
+import LoginPage from '../Pages/acount/LoginPage'
+import EntitySelectionPage from '../Pages/acount/EntitySelectionPage'
+import RegisterPage from '../Pages/acount/RegisterPage'
+import UniRegisterPage from '../Pages/acount/UniRegisterPage'
+import RegisterWelcomPage from '../Pages/acount/RegisterWelcomPage'
+import LoginWelcomPage from '../Pages/acount/LoginWelcomPage'
+import UserChoiceCategory from '../Pages/acount/UserChoiceCategory'
+import { LogoViwer1, LogoViwer2 } from '../Pages/acount/LogoViwer'
+
+import UniHomePage from '../Pages/university/UniHomePage'
+import UniSettingsPage from '../Pages/university/UniSettingsPage'
+import CreateArticlePage from '../Pages/university/CreateArticlePage'
+import CreateCheckedPage from '../Pages/university/CreateCheckedPage'
+import ApplicationListPage from '../Pages/university/ApplicationListPage'
+import ApprovalScreenPage from '../Pages/university/ApprovalScreenPage'
+import OpenArtucles from '../Pages/university/OpenArtucles'
+import EditOneLecture from '../Pages/university/EditOneLecture'
+import EditDetails from '../Pages/university/EditDetails'
+
+import UserHomePage from '../Pages/user/UserHomePage'
+import UserSettingsPage from '../Pages/user/UserSettingsPage'
+import UserArticleList from '../Pages/user/UserArticleList'
+import UserMyPage from '../Pages/user/UserMyPage'
+import ArticleHistoryPage from '../Pages/user/ArticleHistoryPage'
+import UpNoteListPage from '../Pages/user/UpNoteListPage'
+import FavoriteListPage from '../Pages/user/FavoriteListPage'
+import OneLecturePage from '../Pages/user/OneLecturePage'
+import UnivercityPage from '../Pages/user/UnivercityPage'
+import OtherUserPage from '../Pages/user/OtherUserPage'
+import OtherUserNotePage from '../Pages/user/OtherUserNotePage'
+
+import CategoryComponent from '../components/CategoryComponent'
+
+// アニメーション設定
+const pageVariants = {
+  initial: {
+    opacity: 0,
+  },
+  in: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      delay: 0.5, // フェードインに遅延を追加
+    },
+  },
+  out: {
+    opacity: 0,
+  },
+}
+
+const pageTransition = {
+  duration: 0.5,
+}
+
+const AppRoutes = () => {
+  const location = useLocation()
+
+  return (
+    <UsernameProvider>
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          {/* 最初に呼び出される画面 */}
+          <Route
+            path="/"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <FirstWelcomPage />
+              </motion.div>
+            }
+          />
+          {/* ログイン・新規登録の画面 */}
+          <Route
+            path="/login"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <LoginPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/entityselection"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <EntitySelectionPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <RegisterPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/uniRegister"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UniRegisterPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/registerwelcom"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <RegisterWelcomPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/loginwelcom"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <LoginWelcomPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/category"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UserChoiceCategory />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/LogoViwer1"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <LogoViwer1 />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/LogoViwer2"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <LogoViwer2 />
+              </motion.div>
+            }
+          />
+          {/*User*/}
+          <Route
+            path="/userhome"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UserHomePage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/usersetting"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UserSettingsPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/userarticlelist"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UserArticleList />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/usermypage"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UserMyPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/articlehistory"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <ArticleHistoryPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/upnotelist"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UpNoteListPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/favoritelist"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <FavoriteListPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/onelecturepage"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <OneLecturePage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/univercitypage"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UnivercityPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/otheruser"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <OtherUserPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/otherusernote"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <OtherUserNotePage />
+              </motion.div>
+            }
+          />
+          {/*Uni*/}
+          <Route
+            path="/unihome"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UniHomePage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/unisetting"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UniSettingsPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/createarticle"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <CreateArticlePage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/createchecked"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <CreateCheckedPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/applicationlist"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <ApplicationListPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/approvalscreen"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <ApprovalScreenPage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/openarticles"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <OpenArtucles />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/editonelecture"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <EditOneLecture />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/editdetailes"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <EditDetails />
+              </motion.div>
+            }
+          />
+        </Routes>
+      </AnimatePresence>
+    </UsernameProvider>
+  )
+}
+
+export default AppRoutes

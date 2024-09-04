@@ -4,16 +4,18 @@ import PropTypes from 'prop-types'
 export const UsernameContext = createContext()
 
 export const UsernameProvider = ({ children }) => {
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState('テストマン')
+  const [registerPath, setRegisterPath] = useState('/')
 
   return (
-    <UsernameContext.Provider value={{ username, setUsername }}>
+    <UsernameContext.Provider
+      value={{ username, setUsername, registerPath, setRegisterPath }}
+    >
       {children}
     </UsernameContext.Provider>
   )
 }
 
-// PropTypesを使ってchildrenの型検証を追加
 UsernameProvider.propTypes = {
   children: PropTypes.node.isRequired,
 }

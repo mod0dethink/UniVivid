@@ -1,31 +1,34 @@
-// ノートを開く処理
-export function OpenNote(img) {  
-  const openPopupBtn = document.getElementById('noteImg');
-  openPopupBtn.addEventListener('click',() => {
-    
-  })
+import { useState, useCallback } from 'react'
 
-  return(img);
+// ノートを開く処理
+export function OpenNote(img) {
+  const openPopupBtn = document.getElementById('noteImg')
+  openPopupBtn.addEventListener('click', () => {})
+
+  return img
   // prompt()
-  
+
   // const test_div = document.getElementById("test_div");
   // console.log(test_div);
 }
 
-// homeから移動する時のheaderのアニメーション
-const buttons = document.querySelectorAll('button');
-const userMenu = document.getElementsByName('slideElement');
+/*----------InputTextのFocusエフェクト---------- */
+const useFocusHover = () => {
+  const [isHovered, setIsHovered] = useState(false)
 
-// function slideMenu () {
-//   buttons.forEach(element => {
-//     element.addEventListener('click', () => {
-//       console.log('おされたよん！');
-//     })
-//   });
-// }
-buttons.forEach(element => {
-  element.addEventListener('click', () => {
-    console.log('おされたよん！');
-    userMenu.classList.add('active');
-  })
-});
+  const handleFocus = useCallback(() => {
+    setIsHovered(true)
+  }, [])
+
+  const handleBlur = useCallback(() => {
+    setIsHovered(false)
+  }, [])
+
+  return {
+    isHovered,
+    handleFocus,
+    handleBlur,
+  }
+}
+
+export default useFocusHover

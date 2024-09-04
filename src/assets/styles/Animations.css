@@ -71,3 +71,31 @@
 #active {
   transform: translateX(100%); /* 画面外にスライドアウト */
 }
+
+.filter-invert {
+  transition: 0.3s;
+}
+.filter-invert:hover {
+  filter: invert(100%);
+}
+
+input[type='text'],
+.expand-border,
+.scale-content,
+.FAup,
+.FAdown,
+.scale-content {
+  transition: 0.3s;
+}
+.scale-content:hover .FAdown {
+  transform: scale(0.8);
+}
+.scale-content:hover .FAup {
+  transform: scale(1.2);
+}
+
+.doorUrl-effect {
+}
+.scale-content:hover .doorUrl-effect {
+  border: solid 5px rgb(163, 53, 53);
+}
