@@ -7,6 +7,11 @@ import '../../assets/styles/Dimensions.css'
 import '../../assets/styles/bg-images.css'
 
 import SearchBar from '../../components/common/SearchBar.js'
+import UniSidebar from '../../components/common/UniSidebar.js'
+import HeaderLogo from '../../components/layout/layouts.js'
+import images from '../../assets/images.js'
+
+import ArticlePart from '../../components/materialComponent/ArticlePart.js'
 
 //　テスト用
 /*------ユーザーのデータ変数------*/
@@ -14,8 +19,17 @@ let ProImg = Imagepng //プロフィール画像
 
 // 記事一覧
 function UserArticleList() {
-  const [data, setData] = useState([])
   const [error, setError] = useState(null)
+  const [data, setData] = useState(null)
+  const articleData = [
+    {
+      bgimg: images.BgImg,
+      icon: images.Ticon2,
+      aName: 'ECC Artist',
+      pName: 'ポートレート講座',
+      date: '2002/06/24',
+    },
+  ]
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,8 +49,23 @@ function UserArticleList() {
   }, [])
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center w-[100vw] h-screen">
       <SearchBar />
+      <UniSidebar />
+      <HeaderLogo />
+      <div>
+        {articleData.map(({ bgimg, icon, aName, pName, date, index }) => (
+          <ArticlePart
+            key={index}
+            BgImg={bgimg}
+            Ticon={icon}
+            groupname={aName}
+            title={pName}
+            date={date}
+            link={'/editonelecture'}
+          />
+        ))}
+      </div>
     </div>
   )
 }

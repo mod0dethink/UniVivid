@@ -44,6 +44,9 @@ const images = {
   U3: require('./images/U3.png'),
   U4: require('./images/U4.png'),
   U5: require('./images/U5.png'),
+  Icon0: require('./images/Icon0.png'),
+  Icon1: require('./images/Icon1.png'),
+  Icon2: require('./images/Icon2.png'),
 }
 
 export default images

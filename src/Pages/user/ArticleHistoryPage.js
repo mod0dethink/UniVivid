@@ -24,7 +24,7 @@ function ArticleHistoryPage() {
     },
   ]
   return (
-    <div className="flex flex-col justify-around items-center w-[100vw] h-screen text-center">
+    <div className="flex flex-col justify-start items-center w-[100vw] h-screen text-center pt-[100px]">
       <UniSidebar />
       <HeaderLogo />
       <p className="text-[50px]">受講履歴一覧</p>
