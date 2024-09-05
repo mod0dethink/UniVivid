@@ -6,7 +6,7 @@ import Imagepng from '../../assets/images/IMG_4007.jpg'
 import '../../assets/styles/Dimensions.css'
 import '../../assets/styles/bg-images.css'
 
-import SearchBar from '../../components/common/SearchBar.js'
+import SearchBar from '../../components/specific/SearchBar.js'
 import UniSidebar from '../../components/common/UniSidebar.js'
 import HeaderLogo from '../../components/layout/layouts.js'
 import images from '../../assets/images.js'

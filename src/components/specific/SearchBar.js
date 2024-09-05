@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import '../../assets/styles/styles.css'
 import images from '../../assets/images.js'
 import { UsernameContext } from '../../Contexts/UsernameContext.js'
-import Input from './Input.js'
+import Input from '../common/Input.js'
 
 const navItems = ['keyword', 'place', 'time', 'UserSetting', 'Logout']
 

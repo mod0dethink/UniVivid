@@ -29,6 +29,9 @@ import ApprovalScreenPage from '../Pages/university/ApprovalScreenPage'
 import OpenArtucles from '../Pages/university/OpenArtucles'
 import EditOneLecture from '../Pages/university/EditOneLecture'
 import EditDetails from '../Pages/university/EditDetails'
+import UMovieDetail from '../Pages/user/UMovieDetail'
+import UMovieList from '../Pages/user/UmovieList'
+import URegisterNote from '../Pages/user/URegisterNote'
 
 import UserHomePage from '../Pages/user/UserHomePage'
 import UserSettingsPage from '../Pages/user/UserSettingsPage'
@@ -367,6 +370,49 @@ const AppRoutes = () => {
                 transition={pageTransition}
               >
                 <OtherUserNotePage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/umovielist"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UMovieList />
+              </motion.div>
+            }
+          />
+
+          <Route
+            path="/umoviedetail"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UMovieDetail />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/uregisternote"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <URegisterNote />
               </motion.div>
             }
           />

@@ -47,6 +47,8 @@ const images = {
   Icon0: require('./images/Icon0.png'),
   Icon1: require('./images/Icon1.png'),
   Icon2: require('./images/Icon2.png'),
+  Good: require('./images/good.png'),
+  Share: require('./images/share.png'),
 }
 
 export default images

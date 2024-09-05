@@ -1,8 +1,6 @@
 //インポート
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../../assets/styles/Dimensions.css'
-import '../../assets/styles/bg-images.css'
 
 import images from '../../assets/images.js'
 
@@ -15,7 +13,10 @@ function UserHomePage() {
     <div className="flex items-center justify-evenly w-[100vw] h-screen  font-bold">
       <UniSidebar />
       <HeaderLogo />
-      <Link className="flex flex-col items-center justify-center">
+      <Link
+        to="/umovielist"
+        className="flex flex-col items-center justify-center"
+      >
         <div className="w-[500px] h-[500px] border-solid border-[#9BBEC8] border-[5px] rounded-[20px] flex items-center justify-center">
           <img src={images.U1} alt="U1" width="300px" />
         </div>
