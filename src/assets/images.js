@@ -32,6 +32,8 @@ const images = {
   WebImage2: require('./images/WebImage2.png'),
   WebImage3: require('./images/WebImage3.png'),
   WebImage4: require('./images/WebImage4.png'),
+  WebImage6: require('./images/WebImage6.png'),
+  WebImage7: require('./images/WebImage7.webp'),
   barImg: require('./images/barImg.png'),
   barImg1: require('./images/barImg1.png'),
   barImg2: require('./images/barImg2.png'),

@@ -1,66 +1,57 @@
-//インポート
 import React from 'react'
+import HeaderLogo from '../../components/layout/layouts'
+import UniSidebar from '../../components/common/UniSidebar'
 import { Link } from 'react-router-dom'
-//icon
-import { FaBell } from 'react-icons/fa'
-//assets
-import Door from '../../assets/images/door.png'
-import Imagepng from '../../assets/images/IMG_4007.jpg'
-//component
-import UserMenu from '../../components/materialComponent/UserMenu.js'
-import RootUrl from '../../components/materialComponent/RootUrl.js'
+import images from '../../assets/images'
 
-import UniSidebar from '../../components/common/UniSidebar.js'
-
-/*------ユーザーのデータ変数------*/
-let username = '小野寺工業大学' //ログインアカウントのユーザーネーム
-let ProImg = Imagepng //プロフィール画像
-
-//大学側のホームページ
-function UniHomePage() {
-  const Door1 = Door
-  // テスト用
-  const data = true // データの有無
-
-  // 通知表示するかの判定
-  // if(data){
-  //   setIsData(true);
-  // } else {
-  //   setIsData(false);
-  // }
-
+const UniHomePage = () => {
   return (
-    <section>
+    <div className=" w-[100vw] h-screen flex flex-col justify-center items-center space-y-[50px]">
+      <HeaderLogo />
       <UniSidebar />
-      <div className="flex w-[100vw] h-screen">
-        {/*ユーザーのメニュー*/}
-        <UserMenu
-          username={username}
-          settingpath="/unisetting"
-          Pimage={ProImg}
-        />
-        <Link to="/applicationlist">
-          <FaBell className="absolute text-main-middle size-10 right-5 top-4" />
-          {data && (
-            <div className="absolute right-5 top-4 size-5 rounded-full bg-red-500"></div>
-          )}
-        </Link>
-
-        {/*記事メニュー*/}
-        <section className="flex-grow-[7] content-center h-screen">
-          <RootUrl
-            name={Door1}
-            text={'記事作成画面'}
-            linkpath="/createarticle"
-          />
-          <RootUrl
-            name={Door1}
-            text={'公開記事一覧'}
-            linkpath="/openarticles"
-          />
-        </section>
+      <div className="font-bold text-[36px] flex justify-evenly items-center w-full">
+        <div className="flex flex-col justify-evenly items-center space-y-[10px]">
+          <div className="border-[5px] border-solid border-[#98BEC8] w-[500px] h-[400px] rounded-[50px] flex flex-col justify-center items-center">
+            <img src={images.WebImage7} alt="7" className="h-[300px]" />
+          </div>
+          <div className="flex justify-center items-center space-x-[50px]">
+            <Link
+              to="/createarticle"
+              className="text-[#427d9d] border-[1px] border-solid border-[#98BEC8] rounded-[20px] w-[250px] h-[100px] flex justify-center items-center"
+            >
+              記事作成
+            </Link>
+            <Link
+              to="/openarticles"
+              className="text-[#fff] bg-[#98BEC8] rounded-[20px] w-[250px] h-[100px] flex justify-center items-center"
+            >
+              公開記事一覧
+            </Link>
+          </div>
+        </div>
+        <div className="flex flex-col justify-evenly items-center space-y-[10px]">
+          <div className="border-[5px] border-solid border-[#98BEC8] w-[500px] h-[400px] rounded-[50px] flex flex-col justify-center items-center">
+            <img src={images.WebImage6} alt="6" className="h-[300px]" />
+          </div>
+          <div className="flex justify-center items-center space-x-[50px]">
+            <Link className="text-[#427d9d] border-[1px] border-solid border-[#98BEC8] rounded-[20px] w-[250px] h-[100px] flex justify-center items-center">
+              動画作成
+            </Link>
+            <Link className="text-[#fff] bg-[#98BEC8] rounded-[20px] w-[250px] h-[100px] flex justify-center items-center">
+              公開動画一覧
+            </Link>
+          </div>
+        </div>
       </div>
-    </section>
+      <div className="font-bold text-[36px] flex justify-center items-center w-full space-x-[20px]">
+        <Link
+          to="/applicationlist"
+          className=" flex justify-center items-center w-[500px] h-[100px] text-[#427d9d] rounded-[20px] border-[1px] border-solid border-[#98BEC8]"
+        >
+          ノートとコメントを確認する
+        </Link>
+      </div>
+    </div>
   )
 }
 
