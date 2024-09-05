@@ -14,16 +14,8 @@ const navIcons = [
 ]
 //const navPath = ['', '', '', '', '']
 
-const UniSidebar = () => {
+const SearchBar = () => {
   let navPath = ['', '', '', '', '']
-  const { registerPath } = useContext(UsernameContext)
-  if (registerPath === '/unihome') {
-    navPath = ['/unisetting', '/unihome', '/unimypage', '/unisetting', '/']
-    console.log(navPath)
-  } else {
-    navPath = ['/usersetting', '/userhome', '/usermypage', '/usersetting', '/']
-    console.log('userhome')
-  }
 
   const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
@@ -66,4 +58,4 @@ const UniSidebar = () => {
   )
 }
 
-export default UniSidebar
+export default SearchBar

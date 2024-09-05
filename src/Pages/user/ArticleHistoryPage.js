@@ -5,46 +5,43 @@ import { UnivividHeader } from '../../components/LayoutComponent.js'
 import ArticlePart from '../../components/materialComponent/ArticlePart.js'
 
 //　テスト用
-import BgImg from '../../assets/images/IMG_4007.jpg'
-import Lok from '../../assets/images/lock_back.png'
-import Ticon2 from '../../assets/images/English.jpg'
+
+import images from '../../assets/images.js'
+import UniSidebar from '../../components/common/UniSidebar.js'
+import HeaderLogo from '../../components/layout/layouts.js'
 
 // 受講履歴一覧
 function ArticleHistoryPage() {
   // ！テストデータ！
+
   const data = [
-    [BgImg, Ticon2, 'ECC Artist', 'ポートレート講座', '2002/06/24'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+    {
+      bgimg: images.BgImg,
+      icon: images.Ticon2,
+      aName: 'ECC Artist',
+      pName: 'ポートレート講座',
+      date: '2002/06/24',
+    },
   ]
   return (
-    <section>
-    <UnivividHeader
-      title="受講履歴一覧"
-      returnCol={1}
-      link="/usermypage"
-      bgCol={true}
-    />
-    <div>
-      <div className="flex space-y-5 justify-center pt-[101px] text-center">
-        <div>
-          {data.map((item, index) => (
-            <ArticlePart
-              key={index}
-              BgImg={item[0]}
-              Ticon={item[1]}
-              groupname={item[2]}
-              title={item[3]}
-              date={item[4]}
-              link={'/editonelecture'}
-            />
-          ))}
-        </div>
+    <div className="flex flex-col justify-around items-center w-[100vw] h-screen text-center">
+      <UniSidebar />
+      <HeaderLogo />
+      <p className="text-[50px]">受講履歴一覧</p>
+      <div className="flex space-y-5 justify-center text-center">
+        {data.map(({ bgimg, icon, aName, pName, date, index }) => (
+          <ArticlePart
+            key={index}
+            BgImg={bgimg}
+            Ticon={icon}
+            groupname={aName}
+            title={pName}
+            date={date}
+            link={'/editonelecture'}
+          />
+        ))}
       </div>
     </div>
-    </section>
   )
 }
 
