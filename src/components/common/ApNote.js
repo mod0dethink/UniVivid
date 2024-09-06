@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const NoteList = ({ icon, username }) => {
+const ApNote = ({ icon, username }) => {
   return (
     <div className="w-[1000px] h-[100px] flex justify-between items-center border-b-2">
       <div className="flex items-center space-x-[20px]">
@@ -14,6 +14,12 @@ const NoteList = ({ icon, username }) => {
       </div>
       <div className="flex space-x-[10px]">
         <button
+          className="bg-[#427d9d] text-white w-[150px] h-[50px] rounded-[20px] flex items-center justify-center"
+          type="submit"
+        >
+          承認
+        </button>
+        <button
           className="bg-[#CDCDCD] w-[150px] h-[50px] rounded-[20px] flex items-center justify-center"
           type="submit"
         >
@@ -24,9 +30,9 @@ const NoteList = ({ icon, username }) => {
   )
 }
 
-NoteList.propTypes = {
+ApNote.propTypes = {
   icon: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
 }
 
-export default NoteList
+export default ApNote

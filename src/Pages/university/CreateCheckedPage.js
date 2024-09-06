@@ -6,7 +6,6 @@ import HeaderLogo from '../../components/layout/layouts'
 import UniSidebar from '../../components/common/UniSidebar'
 import FormButton from '../../components/common/formBotton'
 import images from '../../assets/images'
-import MovieDetail from '../../components/common/MovieDetail'
 import ADetail from '../../components/common/ADetail'
 
 // 作成した記事の確認画面

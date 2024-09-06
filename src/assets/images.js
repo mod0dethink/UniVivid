@@ -52,6 +52,8 @@ const images = {
   Good: require('./images/good.png'),
   Share: require('./images/share.png'),
   ImportPng: require('./images/import.png'),
+  Edite: require('./images/edite.png'),
+  Delete: require('./images/delete.png'),
 }
 
 export default images

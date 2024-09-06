@@ -44,8 +44,12 @@ import OneLecturePage from '../Pages/user/OneLecturePage'
 import UnivercityPage from '../Pages/user/UnivercityPage'
 import OtherUserPage from '../Pages/user/OtherUserPage'
 import OtherUserNotePage from '../Pages/user/OtherUserNotePage'
-
-import CategoryComponent from '../components/CategoryComponent'
+import UniRegisterMovie from '../Pages/university/UniRegisterMovie'
+import UniConfirmMovie from '../Pages/university/UniConfirmMovie'
+import UniPostedMovieList from '../Pages/university/UniPostedMovieList'
+import AppNote from '../Pages/university/AppNote'
+import AppCommnet from '../Pages/university/AppComment'
+import LectureEdite from '../Pages/university/LectureEdite'
 
 // アニメーション設定
 const pageVariants = {
@@ -540,6 +544,90 @@ const AppRoutes = () => {
                 transition={pageTransition}
               >
                 <EditDetails />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/uniregistermovie"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UniRegisterMovie />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/uniconfirmmovie"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UniConfirmMovie />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/unipostedmovielist"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <UniPostedMovieList />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/appnote"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <AppNote />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/appcomment"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <AppCommnet />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/lectureedite"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <LectureEdite />
               </motion.div>
             }
           />

@@ -34,10 +34,16 @@ const UniHomePage = () => {
             <img src={images.WebImage6} alt="6" className="h-[300px]" />
           </div>
           <div className="flex justify-center items-center space-x-[50px]">
-            <Link className="text-[#427d9d] border-[1px] border-solid border-[#98BEC8] rounded-[20px] w-[250px] h-[100px] flex justify-center items-center">
+            <Link
+              to="/uniregistermovie"
+              className="text-[#427d9d] border-[1px] border-solid border-[#98BEC8] rounded-[20px] w-[250px] h-[100px] flex justify-center items-center"
+            >
               動画作成
             </Link>
-            <Link className="text-[#fff] bg-[#98BEC8] rounded-[20px] w-[250px] h-[100px] flex justify-center items-center">
+            <Link
+              to="/unipostedmovielist"
+              className="text-[#fff] bg-[#98BEC8] rounded-[20px] w-[250px] h-[100px] flex justify-center items-center"
+            >
               公開動画一覧
             </Link>
           </div>
