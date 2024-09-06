@@ -57,7 +57,6 @@
   opacity: 0.7;
   color: white;
 }
-
 .sidebar nav > button:hover {
   background: rgb(0 0 0 / 30%);
   opacity: 1;
@@ -81,3 +80,96 @@
 .sidebar.open header > img {
   opacity: 1;
 }
+
+/*Searchbar-CSS*/
+.Ssidebar {
+  display: flex;
+  position: absolute;
+  z-index: 2;
+  top: 80px;
+  left: 210px;
+  border: #427d9d solid 2px;
+  border-radius: 20px;
+  width: 1500px;
+  height: 100px;
+
+  backdrop-filter: blur(10px);
+  transition: height 0.45s;
+}
+
+.Ssidebar.open {
+  height: 500px;
+}
+
+.Ssidebar .Sinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 190px;
+}
+.Ssidebar header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 要素の間にスペースを追加 */
+  height: 64px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 50px 25px;
+}
+
+.Ssidebar-burger {
+  min-width: 50px;
+  width: 50px;
+  min-height: 72px;
+  color: white;
+}
+
+.Ssidebar nav {
+  flex-grow: 1; /* ナビゲーション部分が残りのスペースを占める */
+  padding: 0 100px;
+  gap: 20px;
+}
+
+.Ssidebar nav > div {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 100px;
+  width: 80px;
+  padding: 0 0;
+  border-radius: 8px;
+  opacity: 0.7;
+  color: white;
+}
+.Ssidebar nav > div:hover {
+  background: rgb(0 0 0 / 30%);
+  opacity: 1;
+}
+
+.Ssidebar:not(.open) nav > div:hover p {
+  opacity: 1;
+  background: rgb(0 0 0 /70%);
+  padding: 4px 8px;
+  border-radius: 6px;
+  translate: 10 10px;
+}
+.Ssidebar header {
+  display: flex;
+  align-items: center;
+}
+
+.Ssidebar header > img,
+.Ssidebar nav > div p {
+  opacity: 0;
+  transition: 0.25s;
+}
+
+.Ssidebar.open nav div p,
+.SSsidebar.open header > img {
+  opacity: 1;
+}
+
+/*Login-CSS*/

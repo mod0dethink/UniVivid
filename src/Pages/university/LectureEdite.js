@@ -8,7 +8,7 @@ import Input from '../../components/common/Input'
 import FormButton from '../../components/common/formBotton'
 
 //　記事作成画面
-const CreateArticlePage = () => {
+const LectureEdite = () => {
   const navigate = useNavigate()
   const inputValue = [
     { type: 'text', name: 'lecturename', label: '講義名' },
@@ -16,7 +16,6 @@ const CreateArticlePage = () => {
     { type: 'date', name: 'date', label: '日付' },
     { type: 'url', name: 'applyurl', label: '申込URL' },
     { type: 'text', name: 'genre', label: 'ジャンル' },
-    { type: 'color', name: 'themecolor', label: 'テーマカラー' },
   ]
 
   const [formData, setFormData] = useState({
@@ -67,19 +66,9 @@ const CreateArticlePage = () => {
         <p className="text-[20px]">投稿する記事の作成</p>
       </div>
       <div className="flex flex-col justify-center items-center space-y-[20px]">
-        <label className="bg-[#f5f5f5] flex flex-col justify-center items-center w-[1030px] h-[360px]">
-          <img src={images.ImportPng} alt="upfile" width="200px" />
-          <p className="text-[30px] font-bold text-[#b8b8b8]">
-            画像をアップロード
-          </p>
-
-          <input
-            className="hidden"
-            type="file"
-            name="upNote"
-            onChange={handleImageChange}
-          />
-        </label>
+        <div className="bg-[#f5f5f5] flex flex-col justify-center items-center w-[1030px] h-[360px]">
+          <img src="" alt="img" />
+        </div>
         <div className="flex w-full space-x-[20px] ">
           <div className="grid grid-cols-2 gap-[20px]">
             {inputValue.map(({ type, name, label }, index) => (
@@ -110,4 +99,4 @@ const CreateArticlePage = () => {
   )
 }
 
-export default CreateArticlePage
+export default LectureEdite

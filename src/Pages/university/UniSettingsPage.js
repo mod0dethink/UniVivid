@@ -1,82 +1,125 @@
 //インポート
 import React, { useState } from 'react'
-import { Axios } from 'axios'
-//assets
-import Imagepng from '../../assets/images/IMG_4007.jpg'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 //component
-import { UnivividHeader } from '../../components/LayoutComponent'
-import InputField from '../../components/materialComponent/InputField.js'
-import ProfileImageEditor from '../../components/materialComponent/ProfileImageEditor.js'
-import SaveBtn from '../../components/materialComponent/SaveBtn.js'
-/*------ユーザーのデータ変数------*/
-let ProImg = Imagepng //プロフィール画像
-
+import UniSidebar from '../../components/common/UniSidebar.js'
+import HeaderLogo from '../../components/layout/layouts'
+import Input from '../../components/common/Input.js'
+import FormButton from '../../components/common/formBotton'
+import images from '../../assets/images.js'
 //セッティングページ
 function UniSettingsPage() {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    userImg: null,
+  })
+
+  const inputValue = [
+    { type: 'text', name: 'username', label: 'Username' },
+    { type: 'email', name: 'email', label: 'Email' },
+    { type: 'password', name: 'password', label: 'Password' },
+    { type: 'text', name: 'uniname', label: '大学名' },
+    { type: 'url', name: 'uniurl', label: '大学ホームページURL' },
+    { type: 'url', name: 'donate', label: '寄付ページURL' },
+  ]
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      const response = await Axios.put(
+      const formDataToSend = new FormData()
+      formDataToSend.append('type', 'user')
+      formDataToSend.append('mailaddress', formData.email)
+      formDataToSend.append('username', formData.username)
+      formDataToSend.append('password', formData.password)
+      if (formData.userImg) {
+        formDataToSend.append('userImg', formData.userImg)
+      }
+
+      const response = await axios.put(
         'http://localhost:8080/auth/profile',
-        {
-          type: 'user', // ここは大学用のコンポーネントでuniversityに変える
-          mailaddress: email,
-          username: username,
-          password: password,
-        },
+        formDataToSend,
         { withCredentials: true },
-      ) // withCredentials を追加
+      )
       alert(response.data.message)
     } catch (error) {
-      alert(error.response.data.error)
+      if (error.response) {
+        alert(error.response.data.error)
+      } else {
+        alert('エラーが発生しました。')
+      }
+    }
+    navigate('/userhome')
+  }
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      setFormData((prevData) => ({
+        ...prevData,
+        userImg: file,
+      }))
     }
   }
 
   return (
-    <>
-    <UnivividHeader title='ユーザー設定' link='/unihome' returnCol={1} bgCol={true}/>
-    <form
-      className="items-center flex flex-col"
-      onSubmit={handleSubmit}
-    >
-      {/*変更可能なプロフィール画像*/}
-      <div className='mt-20'>
-        <ProfileImageEditor Pimage={ProImg}/>
+    <div className="w-[100vw] h-screen flex flex-col justify-center items-center space-y-[10px]">
+      <UniSidebar />
+      <HeaderLogo />
+      <div className="text-center">
+        <p className="text-[50px]">ユーザー設定</p>
+        <p>大学用アカウント編集</p>
       </div>
-
-      {/*セッティングフォーム*/}
-      <div className="w-[60vw] text-left text-[#427D9D] space-y-5 max-w-[800px]">
-        <InputField
-          label="ユーザー名"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <InputField
-          label="メールアドレス"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <InputField
-          label="パスワード"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <InputField label="学校名" type="text" value={null} />
-        <InputField label="大学URL" type="text" value={null} />
-        <InputField label="寄付用ページURL" type="text" value={null} />
-      </div>
-      <div className='my-10'>
-        <SaveBtn/>
-      </div>
-    </form>
-    </>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center justify-center space-y-[20px]"
+      >
+        <label
+          htmlFor="userImgUpload"
+          className="flex flex-col items-center justify-center  w-[150px] h-[150px] bg-[#CCCCCC] rounded-[50%] overflow-hidden"
+        >
+          {' '}
+          {/* 修正: htmlFor属性を追加 */}
+          <img
+            src={formData.userImg ? URL.createObjectURL(formData.userImg) : ''}
+            alt="ユーザー画像" // 修正: alt属性を追加
+            className="object-cover" // サイズを設定
+          />
+          <input
+            id="userImgUpload" // 修正: id属性を追加してhtmlForと関連付け
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="hidden"
+          />
+        </label>
+        <div>
+          {inputValue.map(({ type, name, label }) => (
+            <Input
+              key={name}
+              type={type}
+              name={name}
+              label={label}
+              value={formData[name]}
+              onChange={handleChange}
+            />
+          ))}
+        </div>
+        <FormButton text="保存" />
+      </form>
+    </div>
   )
 }
 

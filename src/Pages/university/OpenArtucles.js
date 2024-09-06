@@ -1,52 +1,41 @@
 //インポート
 import React from 'react'
 import ArticlePart from '../../components/materialComponent/ArticlePart.js'
-import OtherMenu from '../../components/materialComponent/OtherMenu.js'
 
-//テスト
-import BgImg from '../../assets/images/IMG_4007.jpg'
-import Lok from '../../assets/images/lock_back.png'
-import Ticon2 from '../../assets/images/English.jpg'
-import Imagepng from '../../assets/images/IMG_4007.jpg'
-/*------ユーザーのデータ変数------*/
-let username = '小野寺工業大学' //ログインアカウントのユーザーネーム
-let ProImg = Imagepng //プロフィール画像
-
+import UniSidebar from '../../components/common/UniSidebar.js'
+import HeaderLogo from '../../components/layout/layouts.js'
+import images from '../../assets/images.js'
 // 公開記事一覧
 function OpenArtucles() {
-  // ！テストデータ！
   const data = [
-    [BgImg,Ticon2,'ECC Artist','ポートレート講座','2002/06/24'],
-    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
-    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
-    [Lok,Ticon2,'ECC comp','ポートレート講座','2024/08/29',],
-    [Lok,Ticon2,'ECC comp','あああああ','2024/08/29',],
+    {
+      bgimg: images.BgImg,
+      icon: images.Ticon2,
+      aName: 'ECC Artist',
+      pName: 'ポートレート講座',
+      date: '2002/06/24',
+    },
   ]
-
-  const detail = "ArduinoでRaspberry Piを用い、IoTに触れる。";  // 内容
   return (
-    <>
-    <div className='flex bg-main-bg'>
-      <OtherMenu img={ProImg} name={username} link='/unihome' />
-      <div className="space-y-5 w-3/4 ml-32 h-screen">
-        <div className=" pt-12 space-y-10 h-full overflow-y-scroll">
-          {
-            data.map((item, index) =>
-              <ArticlePart 
-                key={index}
-                BgImg={item[0]}
-                Ticon={item[1]}
-                groupname={item[2]}
-                title={item[3]}
-                date={item[4]}
-                link={'/editonelecture'}
-              />
-            )
-          }
-        </div>
-      </div>  
+    <div className="flex flex-col justify-start items-center w-[100vw] h-screen text-center pt-[100px]">
+      <UniSidebar />
+      <HeaderLogo />
+      <p className="text-[50px]">公開記事一覧</p>
+      <p className="text-[20px]">公開した記事の一覧が表示されます</p>
+      <div className="flex space-y-5 justify-center text-center">
+        {data.map(({ bgimg, icon, aName, pName, date, index }) => (
+          <ArticlePart
+            key={index}
+            BgImg={bgimg}
+            Ticon={icon}
+            groupname={aName}
+            title={pName}
+            date={date}
+            link={'/editonelecture'}
+          />
+        ))}
+      </div>
     </div>
-    </>
   )
 }
 

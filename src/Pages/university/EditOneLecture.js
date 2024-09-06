@@ -1,45 +1,91 @@
-//インポート
 import React, { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { MainReturenBtn } from '../../components/LayoutComponent'
-import Note from '../../components/materialComponent/Note.js'
-import LectureDetails from '../../components/materialComponent/LectureDetails.js'
-import ConnectLink from '../../components/materialComponent/ConnectLink.js'
-
-// 講義記事ごとのページ
+//component
+import HeaderLogo from '../../components/layout/layouts'
+import UniSidebar from '../../components/common/UniSidebar'
+import FormButton from '../../components/common/formBotton'
+import images from '../../assets/images'
+import ADetail from '../../components/common/ADetail'
 const EditOneLecture = () => {
-  // 講義関連(！テストデータ！)
-  const lectureName = "IoT講座";              // 講義名
-  const time = "2024/oo/xx　11:00 - 12:30";   // 講義日時
-  const goodCount = 20;                       // いいね数
-  const [isPageCount, setIsPageCount] = useState(0);      // ページ枚数管理の変数
+  const location = useLocation()
+  const navigate = useNavigate()
+  //const { formData } = location.state || {} // 前のページから渡されたデータを取得
+  const [formData, setFormData] = useState({
+    lecturename: '',
+    teacher: '',
+    date: '',
+    applyurl: '',
+    genre: '',
+    themecolor: 'black',
+    upNote: null,
+    otherText: '',
+  })
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    navigate('/openarticles')
+  }
 
   return (
-    <section>
-    <div className='h-screen bg-main-bg font-bold'>
-      <Link to='/editdetailes'>
-      <button className='absolute right-10 bg-gray-700 rounded-md bottom-5 text-white py-2 px-10'>
-        記事を編集する
-      </button>
-      </Link>
-      <div className='flex'>
-        <MainReturenBtn link='/openarticles' returnCol={0}/>
-        <div className='bg-main text-white text-4xl py-2 px-28 rounded-xl mx-7 mt-5'>{lectureName}</div>
-        <p className='text-main mt-auto mb-0'>{time}</p>
-        <button id='favorite'></button>
+    <div className="flex flex-col justify-center items-center">
+      <UniSidebar />
+      <HeaderLogo />
+      <div>
+        <p className="">{formData.date}</p>
+        <ADetail
+          title={formData.lecturename}
+          imageUrl={formData.userImg}
+          uicon={images.user_icon}
+          username={formData.upNote}
+          good={''}
+          themecolor={formData.themecolor}
+          date={formData.date}
+        />
       </div>
-      <Note />
-      <div className='flex justify-around'>
-        <div className='w-1/2 ml-[10%]'>
-          <LectureDetails />
-          <button type='submit' className='bg-[#3BBC30] text-white text-xl px-10 py-1 rounded-md mt-8'>この講義に申し込む</button>
+      <div className="font-bold flex space-x-[50px] mt-[600px]">
+        <div className="flex space-x-[10px]">
+          <p
+            className=" text-[16px] text-white px-10 h-[25px]"
+            style={{ backgroundColor: formData.themecolor }}
+          >
+            講義
+          </p>
+          <p>{formData.lecturename}</p>
         </div>
-        <div className='mt-5 w-1/2'>
-          <ConnectLink />
+        <div className="flex space-x-[10px]">
+          <p
+            className="text-[16px] text-white px-10 h-[25px]"
+            style={{ backgroundColor: formData.themecolor }}
+          >
+            講師
+          </p>
+          <p>{formData.teacher}</p>
         </div>
+        <div className="flex space-x-[10px]">
+          <p
+            className="text-[16px] text-white px-10 h-[25px]"
+            style={{ backgroundColor: formData.themecolor }}
+          >
+            講義内容
+          </p>
+          <p>{formData.otherText}</p>
+        </div>
+      </div>
+      <div className="pt-[100px] flex text-[30px] text-white font-bold space-x-[100px]">
+        <Link
+          to="/lectureedite"
+          className="flex justify-center items-center bg-[#4c4c4c] w-[330px] h-[60px] rounded-[5px] space-x-[10px]"
+        >
+          <p>記事を編集する</p>
+          <img src={images.Edite} alt="Edite" className="h-[50px]" />
+        </Link>
+        <button className="flex justify-center items-center bg-[#760000] w-[330px] h-[60px] rounded-[5px] space-x-[10px]">
+          <p>記事を削除する</p>
+          <img src={images.Delete} alt="Delete" className="h-[50px]" />
+        </button>
       </div>
     </div>
-    </section>
   )
 }
 

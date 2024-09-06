@@ -1,76 +1,79 @@
 //インポート
 import React, { useState } from 'react'
 //assets
-import '../../assets/styles/Dimensions.css'
-import '../../assets/styles/bg-images.css'
 //component
-import { UnivividHeader } from '../../components/LayoutComponent.js'
 import ArticlePart from '../../components/materialComponent/ArticlePart.js'
-
-//テスト用
-import BgImg from '../../assets/images/IMG_4007.jpg'
-import Lok from '../../assets/images/lock_back.png'
-import Ticon2 from '../../assets/images/English.jpg'
+import HeaderLogo from '../../components/layout/layouts.js'
+import images from '../../assets/images.js'
+import UniSidebar from '../../components/common/UniSidebar.js'
+import NoteList from '../../components/common/NoteList.js'
 
 // お気に入りページ
 function FavoriteListPage() {
-  // ！テストデータ！
-  const data = [
-    [BgImg, Ticon2, 'ECC Artist', 'ポートレート講座', '2002/06/24'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
-    [Lok, Ticon2, 'ECC comp', 'ポートレート講座', '2024/08/29'],
+  const [selectedOption, setSelectedOption] = useState(false)
+  let data = [
+    {
+      bgimg: images.BgImg,
+      icon: images.Ticon2,
+      aName: 'ECC Artist',
+      pName: 'ポートレート講座',
+      date: '2002/06/24',
+    },
   ]
-  const [isPage, setIsPage] = useState(0)
+
+  let notedata = [
+    {
+      icon: images.user_icon,
+      username: 'test',
+    },
+    {
+      icon: images.WebImage2,
+      username: 'minami',
+    },
+  ]
+  const handleOptionChange = (option) => {
+    setSelectedOption(option)
+  }
+
+  // ！テストデータ！
+
   return (
-    <section>
-    <div className="flex flex-col items-center">
-      <UnivividHeader
-        title="お気に入り"
-        returnCol={1}
-        link="/usermypage"
-        bgCol={true}
-      />
-      <div className="grid pt-[98px] place-items-center w-screen">
-        <div className="fixed flex justify-around border-b-[2px] border-[#838181] w-11/12 bg-main-bg pt-14">
-          <button
-            id={isPage == 0 ? 'swichBar' : ''}
-            onClick={() => {
-              setIsPage(0)
-            }}
-          >
-            講座
-          </button>
-          <button
-            id={isPage == 1 ? 'swichBar' : ''}
-            onClick={() => {
-              setIsPage(1)
-            }}
-          >
-            ノート
-          </button>
-        </div>
+    <div className="flex flex-col justify-start items-center w-[100vw] h-screen text-center pt-[100px]">
+      <UniSidebar />
+      <HeaderLogo />
+      <p className="text-[50px]">受講履歴一覧</p>
+      <div className="bg-[#427D9D] text-[36px] w-[800px] flex justify-around rounded-[50px] text-white">
+        <button
+          onClick={() => handleOptionChange(false)}
+          className={`w-[200px] ${selectedOption ? '' : 'bg-white rounded-[30px] text-black'}`}
+        >
+          講義
+        </button>
+        <button
+          onClick={() => handleOptionChange(true)}
+          className={`w-[200px] ${selectedOption ? 'bg-white rounded-[30px] text-black' : ''}`}
+        >
+          ノート
+        </button>
       </div>
-      <div>
-        <div className="flex space-y-5 justify-center text-center">
-          <div className="pt-[50px] space-y-10">
-            {data.map((item, index) => (
+      <div className="flex flex-col space-y-5 justify-center text-center">
+        {selectedOption === false
+          ? data.map(({ bgimg, icon, aName, pName, date, index }) => (
               <ArticlePart
                 key={index}
-                BgImg={item[0]}
-                Ticon={item[1]}
-                groupname={item[2]}
-                title={item[3]}
-                date={item[4]}
+                BgImg={bgimg}
+                Ticon={icon}
+                groupname={aName}
+                title={pName}
+                date={date}
                 link={'/editonelecture'}
               />
+            ))
+          : notedata.map(({ icon, username, index }) => (
+              <NoteList key={index} icon={icon} username={username} />
             ))}
-          </div>
-        </div>
       </div>
     </div>
-    </section>
   )
 }
 

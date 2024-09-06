@@ -1,38 +1,45 @@
 //インポート
 import React from 'react'
+import { Link } from 'react-router-dom'
 //component
-import { UserHeader } from '../../components/LayoutComponent.js'
-import BoxMenu from '../../components/materialComponent/BoxMenu.js'
-import HomeReturnBtn from '../../components/materialComponent/HomeReturnBtn.js'
-//assets
-import Imagepng from '../../assets/images/IMG_4007.jpg'
+import images from '../../assets/images.js'
+
+import UniSidebar from '../../components/common/UniSidebar.js'
+import HeaderLogo from '../../components/layout/layouts.js'
 
 /*------ユーザーのデータ変数------*/
-let ProImg = Imagepng //プロフィール画像
 
 //マイページ
 function UserMyPage() {
+  const MyPageContents = [
+    { img: images.U3, text: '受講履歴一覧', link: '/articlehistory' },
+    {
+      img: images.U4,
+      text: 'お気に入りいいねしたノート',
+      link: '/favoritelist',
+    },
+    { img: images.U5, text: 'アップロードノート一覧', link: '/upnotelist' },
+  ]
   return (
-    <div className="flex flex-col h-screen w-[100vw] justify-center">
-      {/*header*/}
-      <section>
-        <UserHeader iconpath={ProImg} />
-      </section>
-      {/* <section className="pt-[201px] pl-[10vw]"> */}
-      <section className="mt-32 ml-10">
-        <HomeReturnBtn linkpath="/userhome" />
-      </section>
-      {/*マイページメニュー*/}
-      <table className="w-full h-full text-white text-center items-center justify-around">
-        <tr className="flex justify-around">
-          <BoxMenu text="受講履歴一覧" linkpath="/articlehistory" />
-          <BoxMenu
-            text={'お気に入り\nいいねしたノート'}
-            linkpath="/favoritelist"
+    <div className="flex justify-around items-center w-[100vw] h-screen text-center">
+      <UniSidebar />
+      <HeaderLogo />
+
+      {MyPageContents.map(({ img, text, link, index }) => (
+        <Link
+          to={link}
+          key={index}
+          className="flex flex-col justify-center items-center text-[36px] "
+        >
+          <img
+            src={img}
+            alt="U"
+            width="300px"
+            className="border-solid border-[#9BBEC8] border-[5px] rounded-[20px]"
           />
-          <BoxMenu text="アップロードノート一覧" linkpath="/upnotelist" />
-        </tr>
-      </table>
+          <p>{text}</p>
+        </Link>
+      ))}
     </div>
   )
 }

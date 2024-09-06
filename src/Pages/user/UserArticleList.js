@@ -1,25 +1,35 @@
 //インポート
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-//component
-import { UserHeader } from '../../components/LayoutComponent.js'
-import ArticleSearch from '../../components/materialComponent/ArticleSearch.js'
-import ArticlePart from '../../components/materialComponent/ArticlePart.js'
-import HomeReturnBtn from '../../components/materialComponent/HomeReturnBtn.js'
 //assets
 import Imagepng from '../../assets/images/IMG_4007.jpg'
 import '../../assets/styles/Dimensions.css'
 import '../../assets/styles/bg-images.css'
 
+import SearchBar from '../../components/specific/SearchBar.js'
+import UniSidebar from '../../components/common/UniSidebar.js'
+import HeaderLogo from '../../components/layout/layouts.js'
+import images from '../../assets/images.js'
+
+import ArticlePart from '../../components/materialComponent/ArticlePart.js'
+
 //　テスト用
-import uimg from '../../assets/images/ecc_logo.jpg' // 講義詳細で使用する例の画像
 /*------ユーザーのデータ変数------*/
 let ProImg = Imagepng //プロフィール画像
 
 // 記事一覧
 function UserArticleList() {
-  const [data, setData] = useState([])
   const [error, setError] = useState(null)
+  const [data, setData] = useState(null)
+  const articleData = [
+    {
+      bgimg: images.BgImg,
+      icon: images.Ticon2,
+      aName: 'ECC Artist',
+      pName: 'ポートレート講座',
+      date: '2002/06/24',
+    },
+  ]
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,32 +49,24 @@ function UserArticleList() {
   }, [])
 
   return (
-    <section>
-    <UserHeader iconpath={ProImg} />
-    <div className="fixed mt-32 ml-10 ">
-      <HomeReturnBtn linkpath="/userhome" />
-    </div>
-
-    <div className="flex justify-between">
-      <div className="mt-48 ml-10">
-        <ArticleSearch />
-      </div>
-      <div className="mr-32 mt-20">
-        {error && <p className="text-red-500">{error}</p>}
-        {data.map((item, index) => (
+    <div className="flex flex-col justify-center items-center w-[100vw] h-screen">
+      <SearchBar />
+      <UniSidebar />
+      <HeaderLogo />
+      <div>
+        {articleData.map(({ bgimg, icon, aName, pName, date, index }) => (
           <ArticlePart
             key={index}
-            BgImg={item.thumbnail}
-            Ticon={uimg}
-            groupname={item.university_name}
-            title={item.seminar_name}
-            date={item.start_date}
-            link={'/onelecturepage'}
+            BgImg={bgimg}
+            Ticon={icon}
+            groupname={aName}
+            title={pName}
+            date={date}
+            link={'/editonelecture'}
           />
         ))}
       </div>
     </div>
-    </section>
   )
 }
 
