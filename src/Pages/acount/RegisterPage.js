@@ -35,7 +35,7 @@ function RegisterPage() {
   const handleSubmit = (event) => {
     event.preventDefault()
     setUsername(formData.username) // 修正: ユーザー名をコンテキストに保存
-    setRegisterPath('/userhome')
+    setRegisterPath(false)
     navigate('/category') // 修正: 画面遷移先を修正
   }
 
