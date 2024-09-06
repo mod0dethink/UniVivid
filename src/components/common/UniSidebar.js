@@ -4,24 +4,29 @@ import '../../assets/styles/styles.css'
 import images from '../../assets/images.js'
 import { UsernameContext } from '../../Contexts/UsernameContext.js'
 
-const navItems = ['Username', 'HomePage', 'MyPage', 'UserSetting', 'Logout']
-const navIcons = [
-  images.barImg1,
-  images.barImg2,
-  images.barImg3,
-  images.barImg4,
-  images.barImg5,
-]
 //const navPath = ['', '', '', '', '']
 
 const UniSidebar = () => {
+  let navItems = ['Username', 'HomePage', 'MyPage', 'UserSetting', 'Logout']
+  let navIcons = ['', '', '', '', '']
   let navPath = ['', '', '', '', '']
   const { registerPath } = useContext(UsernameContext)
   if (registerPath === '/unihome') {
-    navPath = ['/unisetting', '/unihome', '/unimypage', '/unisetting', '/']
+    navItems = ['Username', 'HomePage', 'UserSetting', 'Logout']
+
+    navPath = ['/unisetting', '/unihome', '/unisetting', '/']
+    navIcons = [images.barImg1, images.barImg2, images.barImg4, images.barImg5]
     console.log(navPath)
   } else {
+    navItems = ['Username', 'HomePage', 'MyPage', 'UserSetting', 'Logout']
     navPath = ['/usersetting', '/userhome', '/usermypage', '/usersetting', '/']
+    navIcons = [
+      images.barImg1,
+      images.barImg2,
+      images.barImg3,
+      images.barImg4,
+      images.barImg5,
+    ]
     console.log('userhome')
   }
 
