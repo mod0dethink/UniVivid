@@ -12,7 +12,7 @@ import '../../assets/styles/Dimensions.css'
 import uimg from '../../assets/images/ecc_logo.jpg' // 講義詳細で使用する例の画像
 import img1 from '../../assets/images/note2.png' // 例の画像
 import img2 from '../../assets/images/note1.jpg'
-import { OpenNote } from '../../assets/scripts/animation.js'
+import { OpenNote } from '../../assets/scripts/animation'
 
 //講義ごとのページ
 const Note = () => {
