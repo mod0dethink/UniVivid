@@ -7,7 +7,7 @@ type Seminar struct {
 	ProfName       string `json:"prof_name"`
 	StartDate      string `json:"start_date"`
 	CategoryID     int    `json:"category_id"`
-	Thumbnail      []byte `json:"thumbnail"`
+	Thumbnail      string `json:"thumbnail"` // string 型に変更
 	OfferURL       string `json:"offer_url"`
 	Content        string `json:"content"`
 	UniversityName string `json:"university_name"`

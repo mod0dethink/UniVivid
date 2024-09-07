@@ -2,11 +2,16 @@ package api
 
 import (
 	"io/ioutil"
+	"log"
 	"net/http"
 	"univivid/backend/auth"
 	"univivid/backend/models"
 
+	"encoding/base64" // ここを修正
+
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -14,6 +19,10 @@ import (
 var db = auth.DB
 
 func RegisterArticleRoutes(r *gin.Engine) {
+	// セッションストアを設定
+	store := cookie.NewStore([]byte("secret"))
+	r.Use(sessions.Sessions("mysession", store))
+
 	// CORSミドルウェアを追加
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"http://localhost:3000"} // フロントエンドのURLを指定
@@ -29,15 +38,42 @@ func RegisterArticleRoutes(r *gin.Engine) {
 }
 
 func createSeminar(c *gin.Context) {
+	session := sessions.Default(c)
+	univID := session.Get("univid")
+
+	if univID == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
+		return
+	}
+
 	var seminar models.Seminar
 	if err := c.ShouldBindJSON(&seminar); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
+		log.Printf("JSONバインドエラー: %v", err)
+
+		body, _ := ioutil.ReadAll(c.Request.Body)
+		log.Printf("受信したリクエストボディ: %s", string(body))
+
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":    "JSONのバインドに失敗しました",
+			"details":  err.Error(),
+			"received": string(body),
+		})
+		return
+	}
+
+	// UnivIDをクッキーから取得した値に設定
+	seminar.UnivID = univID.(int)
+
+	// Thumbnail を base64 から []byte に変換
+	thumbnailBytes, err := base64.StdEncoding.DecodeString(seminar.Thumbnail)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "サムネイルのデコードに失敗しました", "details": err.Error()})
 		return
 	}
 
 	query := `INSERT INTO SEMINAR (Univ_ID, Seminar_Name, Prof_name, Start_Date, Category_ID, thumbnail, offer_URL, content) 
 	          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
-	_, err := db.Exec(query, seminar.UnivID, seminar.SeminarName, seminar.ProfName, seminar.StartDate, seminar.CategoryID, seminar.Thumbnail, seminar.OfferURL, seminar.Content)
+	_, err = db.Exec(query, seminar.UnivID, seminar.SeminarName, seminar.ProfName, seminar.StartDate, seminar.CategoryID, thumbnailBytes, seminar.OfferURL, seminar.Content)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "セミナーの作成に失敗しました", "details": err.Error()})
 		return

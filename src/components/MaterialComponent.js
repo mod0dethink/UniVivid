@@ -285,7 +285,7 @@ function SwichPage(item) {
     case 0:
       return (
         <section>
-          {item.comment.map((element) => (
+          {Array.isArray(item.comment) && item.comment.map((element) => (
             <div
               key={element}
               className=" flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]"
@@ -315,7 +315,7 @@ function SwichPage(item) {
     case 1:
       return (
         <section>
-          {item.comment.map((element) => (
+          {Array.isArray(item.comment) && item.comment.map((element) => (
             <div
               key={element}
               className="flex justify-around border-b border-[#838181] w-[80vw] mb-[22px]"
@@ -352,7 +352,7 @@ function SwichBar(handleButtonClick) {
           className="border-b-[2px] border-[#229DF6] w-[15vw]"
           onClick={handleButtonClick(1)}
         >
-          
+          あ
         </button>
         <button id="note" className="border-b-[2px] border-[#229DF6] w-[15vw]">
           {/* {this.props.tab2} */}
@@ -695,4 +695,5 @@ export {
   OtherMenu,
   SwichBar,
   SwichPage,
+
 }

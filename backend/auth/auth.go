@@ -23,7 +23,7 @@ func init() {
 
 func setupDB() {
 	var err error
-	DB, err = sql.Open("mysql", "root:root@tcp(localhost:3306)/univivid")
+	DB, err = sql.Open("mysql", "root:114514z4Z@tcp(localhost:3306)/univivid")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -53,6 +53,7 @@ func RegisterRoutes(r *gin.Engine) {
 	r.PUT("/auth/profile", profileEditHandler)
 	r.GET("/auth/username", getUserNameHandler)
 	r.POST("/auth/interest", saveUserInterests)
+	r.GET("/auth/univid", getUnivIDHandler) // 新しいエンドポイントを追加
 
 	defer DB.Close()
 
@@ -69,25 +70,38 @@ func loginHandler(c *gin.Context) {
 
 	var storedPassword string
 	var userName string
+	var univID int
 	var query string
 
 	if request.Type == "user" {
 		query = "SELECT User_Name, Password FROM USER WHERE Mail_Address = ?"
 	} else if request.Type == "university" {
-		query = "SELECT Univ_Name, Password FROM UNIVERSITY WHERE Mail_Address = ?"
+		query = "SELECT Univ_Name, Password, Univ_ID FROM UNIVERSITY WHERE Mail_Address = ?"
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なアカウントタイプです"})
 		return
 	}
 
-	err := DB.QueryRow(query, request.MailAddress).Scan(&userName, &storedPassword)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "メールアドレスまたはパスワードが間違っています"})
-		} else {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
+	if request.Type == "university" {
+		err := DB.QueryRow(query, request.MailAddress).Scan(&userName, &storedPassword, &univID)
+		if err != nil {
+			if err == sql.ErrNoRows {
+				c.JSON(http.StatusUnauthorized, gin.H{"error": "メールアドレスまたはパスワードが間違っています"})
+			} else {
+				c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
+			}
+			return
 		}
-		return
+	} else {
+		err := DB.QueryRow(query, request.MailAddress).Scan(&userName, &storedPassword)
+		if err != nil {
+			if err == sql.ErrNoRows {
+				c.JSON(http.StatusUnauthorized, gin.H{"error": "メールアドレスまたはパスワードが間違っています"})
+			} else {
+				c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
+			}
+			return
+		}
 	}
 
 	// パスワードの比較
@@ -100,6 +114,9 @@ func loginHandler(c *gin.Context) {
 	session := sessions.Default(c)
 	session.Set("mailaddress", request.MailAddress)
 	session.Set("username", userName)
+	if request.Type == "university" {
+		session.Set("univid", univID)
+	}
 	if err := session.Save(); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "セッションの保存に失敗しました"})
 		return
@@ -294,4 +311,17 @@ func saveUserInterests(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "興味対象が正常に保存されました"})
+}
+
+// UnivIDを返すAPI
+func getUnivIDHandler(c *gin.Context) {
+	session := sessions.Default(c)
+	univID := session.Get("univid")
+
+	if univID == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"univid": univID})
 }
