@@ -63,6 +63,15 @@
   opacity: 0;
 }
 
+/* スライドアウト */
+#slide-out {
+  transition: transform 0.5s ease-out;
+  transform: translateX(0); /* 初期位置 */
+}
+#active {
+  transform: translateX(100%); /* 画面外にスライドアウト */
+}
+
 .filter-invert {
   transition: 0.3s;
 }

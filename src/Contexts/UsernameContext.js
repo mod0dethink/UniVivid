@@ -5,7 +5,7 @@ export const UsernameContext = createContext()
 
 export const UsernameProvider = ({ children }) => {
   const [username, setUsername] = useState('テストマン')
-  const [registerPath, setRegisterPath] = useState('/')
+  const [registerPath, setRegisterPath] = useState(true)
 
   return (
     <UsernameContext.Provider

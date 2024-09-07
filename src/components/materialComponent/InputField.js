@@ -1,7 +1,7 @@
 //インポート
 import React from 'react'
 import '../../assets/styles/Dimensions.css'
-import useFocusHover from '../../assets/scripts/animation.js'
+import useFocusHover from '../../assets/scripts/animation'
 
 //フォーム入力用のinput
 function InputField(InputData) {

@@ -54,6 +54,8 @@ const images = {
   ImportPng: require('./images/import.png'),
   Edite: require('./images/edite.png'),
   Delete: require('./images/delete.png'),
+  User: require('./images/user.png'),
+  School: require('./images/school.png'),
 }
 
 export default images

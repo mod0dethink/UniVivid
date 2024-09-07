@@ -1,7 +1,7 @@
 //インポート
 import React from 'react'
 import '../../assets/styles/Dimensions.css'
-import useFocusHover from '../../assets/scripts/animation.js'
+import useFocusHover from '../../assets/scripts/animation'
 
 //検索エリア
 function ArticleSearch(pathData) {

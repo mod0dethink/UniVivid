@@ -11,7 +11,7 @@ const UniSidebar = () => {
   let navIcons = ['', '', '', '', '']
   let navPath = ['', '', '', '', '']
   const { registerPath } = useContext(UsernameContext)
-  if (registerPath === '/unihome') {
+  if (registerPath === true) {
     navItems = ['Username', 'HomePage', 'UserSetting', 'Logout']
 
     navPath = ['/unisetting', '/unihome', '/unisetting', '/']
