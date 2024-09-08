@@ -23,7 +23,7 @@ func init() {
 
 func setupDB() {
 	var err error
-	DB, err = sql.Open("mysql", "root:114514z4Z@tcp(localhost:3306)/univivid")
+	DB, err = sql.Open("mysql", "root:root@tcp(localhost:3306)/univivid")
 	if err != nil {
 		log.Fatal(err)
 	}

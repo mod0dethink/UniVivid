@@ -13,15 +13,16 @@ function RegisterPage() {
   const { setUsername, setRegisterPath } = useContext(UsernameContext) // 修正: コンテキストから値を取得
 
   const [formData, setFormData] = useState({
-    email: '',
-    pass: '',
-    username: '',
+    Type: 'user',
+    Username: '',
+    MailAddress: '',
+    Password: '',
   })
 
   const inputValue = [
-    { type: 'email', name: 'email', label: 'Email' },
-    { type: 'password', name: 'pass', label: 'Password' }, // 修正: name属性と一致するように変更
-    { type: 'text', name: 'username', label: 'Username' },
+    { type: 'email', name: 'MailAddress', label: 'Email' },
+    { type: 'password', name: 'Password', label: 'Password' },
+    { type: 'text', name: 'Username', label: 'Username' },
   ]
 
   const handleChange = (e) => {
@@ -31,14 +32,48 @@ function RegisterPage() {
       [name]: value,
     }))
   }
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    setUsername(formData.username) // 修正: ユーザー名をコンテキストに保存
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(false)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setUsername(formData.Username)
     setRegisterPath(false)
-    navigate('/category') // 修正: 画面遷移先を修正
-  }
 
+    try {
+      const response = await fetch('http://localhost:8080/auth/register', {
+        method: 'POST',
+        credentials: 'include', // クッキー
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const text = await response.text()
+      console.log('Response text:', text)
+
+      let data
+      try {
+        data = JSON.parse(text)
+      } catch (error) {
+        console.error('Error parsing JSON:', error)
+        throw new Error('Invalid JSON response from server')
+      }
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${data.error || 'Unknown error'}`)
+      }
+
+      console.log('Registration successful:', data)
+      setSuccess(true)
+      setError(null)
+      navigate('/category')
+    } catch (error) {
+      console.error('Registration failed:', error)
+      setError(error.message)
+      setSuccess(false)
+    }
+  }
   return (
     <section className="bg-[#DDF2FD] h-screen flex flex-col items-center justify-center">
       <HeaderLogo />
@@ -61,8 +96,13 @@ function RegisterPage() {
               onChange={handleChange}
             />
           ))}
+          {error && (
+            <p className="text-red-500">
+              メールアドレスが既に使用されています。
+            </p>
+          )}
         </div>
-        <FormButton text="登録" /> {/* 修正: onSubmitを追加 */}
+        <FormButton text="登録" />
       </form>
     </section>
   )

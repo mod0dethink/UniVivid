@@ -9,6 +9,8 @@ import {
 import { motion, AnimatePresence } from 'framer-motion'
 import { UsernameProvider } from '../Contexts/UsernameContext'
 
+//テストcomponent
+import Test from '../test/Test'
 // ページコンポーネント
 import FirstWelcomPage from '../Pages/acount/FirstWelcomPage'
 import LoginPage from '../Pages/acount/LoginPage'
@@ -80,6 +82,21 @@ const AppRoutes = () => {
     <UsernameProvider>
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
+          {/*テストパス*/}
+          <Route
+            path="/test"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <Test />
+              </motion.div>
+            }
+          />
           {/* 最初に呼び出される画面 */}
           <Route
             path="/"
