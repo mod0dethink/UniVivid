@@ -11,23 +11,22 @@ import FormButton from '../../components/common/formBotton'
 const CreateArticlePage = () => {
   const navigate = useNavigate()
   const inputValue = [
-    { type: 'text', name: 'lecturename', label: '講義名' },
-    { type: 'text', name: 'teacher', label: '講師' },
-    { type: 'date', name: 'date', label: '日付' },
-    { type: 'url', name: 'applyurl', label: '申込URL' },
-    { type: 'text', name: 'genre', label: 'ジャンル' },
+    { type: 'text', name: 'SeminarName', label: '講義名' },
+    { type: 'text', name: 'ProfName', label: '講師' },
+    { type: 'date', name: 'StartDate', label: '日付' },
+    { type: 'url', name: 'OfferURL', label: '申込URL' },
+    { type: 'text', name: 'CategoryID', label: 'ジャンル' },
     { type: 'color', name: 'themecolor', label: 'テーマカラー' },
   ]
 
   const [formData, setFormData] = useState({
-    lecturename: '',
-    teacher: '',
-    date: '',
-    applyurl: '',
-    genre: '',
-    themecolor: '',
-    upNote: null,
-    otherText: '',
+    SeminarName: '',
+    ProfName: '',
+    StartDate: '',
+    OfferURL: '',
+    CategoryID: '1',
+    themecolor: '#000000',
+    Content: '',
   })
 
   const handleChange = (e) => {
@@ -38,11 +37,11 @@ const CreateArticlePage = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('Form Data:', formData)
+
     navigate('/createchecked', { state: { formData } })
-    // ここでformDataをバックエンドに送信するなどの処理を行います。
   }
 
   const handleImageChange = (e) => {
@@ -50,7 +49,7 @@ const CreateArticlePage = () => {
     if (file) {
       setFormData((prevData) => ({
         ...prevData,
-        upNote: file, // 画像ファイルをformDataに格納
+        Thumbnai: file, // 画像ファイルをformDataに格納
       }))
     }
   }
@@ -76,7 +75,7 @@ const CreateArticlePage = () => {
           <input
             className="hidden"
             type="file"
-            name="upNote"
+            name="Thumbnai"
             onChange={handleImageChange}
           />
         </label>
@@ -98,7 +97,7 @@ const CreateArticlePage = () => {
             <input
               className="bg-[#E4E4E4] h-[200px] w-[460px] rounded-[20px]"
               type="text"
-              name="otherText"
+              name="Content"
               onChange={handleChange}
               value={formData.otherText} // formDataの値をバインド
             />

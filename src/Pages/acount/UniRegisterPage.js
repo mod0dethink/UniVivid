@@ -41,7 +41,7 @@ function UniRegisterPage() {
   const [success, setSuccess] = useState(false)
   const handleSubmit = async (event) => {
     event.preventDefault()
-    setUsername(formData.UnivName) // 修正: ユーザー名をコンテキストに保存
+    setUsername(formData.UnivName)
     setRegisterPath(true)
 
     try {

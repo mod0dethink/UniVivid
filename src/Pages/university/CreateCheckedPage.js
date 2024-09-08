@@ -1,6 +1,7 @@
 //インポート
-import React from 'react'
+import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+
 //component
 import HeaderLogo from '../../components/layout/layouts'
 import UniSidebar from '../../components/common/UniSidebar'
@@ -14,8 +15,48 @@ function CreateCheckedPage() {
   const navigate = useNavigate()
   const { formData } = location.state || {} // 前のページから渡されたデータを取得
 
-  const onSubmit = (e) => {
+  console.log(formData)
+
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(false)
+  const onSubmit = async (e) => {
     e.preventDefault()
+
+    try {
+      const response = await fetch('http://localhost:8080/api/create-seminar', {
+        method: 'POST',
+        credentials: 'include', // クッキー
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const text = await response.text()
+      console.log('デバッグ用、レスポンス:', text)
+
+      let data
+      try {
+        data = JSON.parse(text)
+      } catch (error) {
+        console.error('JSONのエラー:', error)
+        throw new Error('JSON応答が無効')
+      }
+
+      if (!response.ok) {
+        throw new Error(`サーバーエラー: ${data.error || '知らんけどエラー'}`)
+      }
+
+      console.log('登録が成功しました:', data)
+      setSuccess(true)
+      setError(null)
+      navigate('/category')
+    } catch (error) {
+      console.error('登録が失敗しました:', error)
+      setError(error.message)
+      setSuccess(false)
+    }
+
     navigate('/openarticles')
   }
   return (
@@ -23,15 +64,15 @@ function CreateCheckedPage() {
       <UniSidebar />
       <HeaderLogo />
       <div>
-        <p className="">{formData.date}</p>
+        <p className="">{formData.StartDate}</p>
         <ADetail
-          title={formData.lecturename}
-          imageUrl={formData.userImg}
+          title={formData.SeminarName}
+          imageUrl={formData.Thumbnai}
           uicon={images.user_icon}
           username={formData.upNote}
           good={''}
           themecolor={formData.themecolor}
-          date={formData.date}
+          date={formData.StartDate}
         />
       </div>
       <div className="font-bold flex space-x-[50px] mt-[600px]">
@@ -42,7 +83,7 @@ function CreateCheckedPage() {
           >
             講義
           </p>
-          <p>{formData.lecturename}</p>
+          <p>{formData.SeminarName}</p>
         </div>
         <div className="flex space-x-[10px]">
           <p
@@ -51,7 +92,7 @@ function CreateCheckedPage() {
           >
             講師
           </p>
-          <p>{formData.teacher}</p>
+          <p>{formData.ProfName}</p>
         </div>
         <div className="flex space-x-[10px]">
           <p
@@ -60,7 +101,7 @@ function CreateCheckedPage() {
           >
             講義内容
           </p>
-          <p>{formData.otherText}</p>
+          <p>{formData.Content}</p>
         </div>
       </div>
       <div className="pt-[100px]">

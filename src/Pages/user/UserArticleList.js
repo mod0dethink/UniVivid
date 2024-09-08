@@ -20,6 +20,7 @@ let ProImg = Imagepng //プロフィール画像
 // 記事一覧
 function UserArticleList() {
   const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(true)
   const [data, setData] = useState(null)
   const articleData = [
     {
@@ -32,20 +33,26 @@ function UserArticleList() {
   ]
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          'http://localhost:8080/api/get-seminars',
-          { withCredentials: true },
-        )
-        setData(response.data.seminars)
-      } catch (error) {
-        console.error('セミナー情報の取得に失敗しました:', error)
-        setError('セミナー情報の取得に失敗しました.')
-      }
-    }
-
-    fetchData()
+    // ポート5000のエンドポイントからデータをフェッチ
+    fetch('http://localhost:8080/api/get-seminars', {
+      method: 'GET',
+      credentials: 'include', // クッキーを含める設定
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+        return response.json()
+      })
+      .then((data) => {
+        setData(data) // フェッチしたデータを状態にセット
+        console.log(data)
+        setLoading(false) // ローディング完了
+      })
+      .catch((error) => {
+        setError(error) // エラーをキャッチ
+        setLoading(false)
+      })
   }, [])
 
   return (

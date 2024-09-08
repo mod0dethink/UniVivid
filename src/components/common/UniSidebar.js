@@ -16,7 +16,6 @@ const UniSidebar = () => {
 
     navPath = ['/unisetting', '/unihome', '/unisetting', '/']
     navIcons = [images.barImg1, images.barImg2, images.barImg4, images.barImg5]
-    console.log(navPath)
   } else {
     navItems = [`${username}`, 'HomePage', 'MyPage', 'UserSetting', 'Logout']
     navPath = ['/usersetting', '/userhome', '/usermypage', '/usersetting', '/']
@@ -27,7 +26,6 @@ const UniSidebar = () => {
       images.barImg4,
       images.barImg5,
     ]
-    console.log('userhome')
   }
 
   const [isOpen, setIsOpen] = useState(false)

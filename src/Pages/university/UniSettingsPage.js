@@ -13,19 +13,22 @@ function UniSettingsPage() {
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    userImg: null,
+    UnivName: '',
+    MailAddress: '',
+    Password: '',
+    Type: 'university',
+    InfoName: '',
+    UnivURL: '',
+    DonateURL: '',
   })
 
   const inputValue = [
-    { type: 'text', name: 'username', label: 'Username' },
-    { type: 'email', name: 'email', label: 'Email' },
-    { type: 'password', name: 'password', label: 'Password' },
-    { type: 'text', name: 'uniname', label: '大学名' },
-    { type: 'url', name: 'uniurl', label: '大学ホームページURL' },
-    { type: 'url', name: 'donate', label: '寄付ページURL' },
+    { type: 'text', name: 'InfoName', label: 'Username' },
+    { type: 'email', name: 'MailAddress', label: 'Email' },
+    { type: 'password', name: 'Password', label: 'Password' },
+    { type: 'text', name: 'UnivName', label: '大学名' },
+    { type: 'url', name: 'UnivURL', label: '大学ホームページURL' },
+    { type: 'url', name: 'DonateURL', label: '寄付ページURL' },
   ]
 
   const handleChange = (e) => {

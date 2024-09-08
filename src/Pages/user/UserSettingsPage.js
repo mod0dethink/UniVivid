@@ -1,28 +1,29 @@
 //インポート
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 //component
 import UniSidebar from '../../components/common/UniSidebar.js'
 import HeaderLogo from '../../components/layout/layouts'
 import Input from '../../components/common/Input.js'
 import FormButton from '../../components/common/formBotton'
-import images from '../../assets/images.js'
+import { UsernameContext } from '../../Contexts/UsernameContext'
+
 //セッティングページ
 function UserSettingsPage() {
   const navigate = useNavigate()
+  const { setUsername } = useContext(UsernameContext)
 
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    userImg: null,
+    MailAddress: '',
+    Password: '',
+    Username: '',
+    Type: 'user',
   })
 
   const inputValue = [
-    { type: 'text', name: 'username', label: 'Username' },
-    { type: 'email', name: 'email', label: 'Email' },
-    { type: 'password', name: 'password', label: 'Password' },
+    { type: 'email', name: 'MailAddress', label: 'Email' },
+    { type: 'text', name: 'Username', label: 'Username' },
+    { type: 'password', name: 'Password', label: 'Password' },
   ]
 
   const handleChange = (e) => {
@@ -33,32 +34,36 @@ function UserSettingsPage() {
     }))
   }
 
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(false)
   const handleSubmit = async (event) => {
     event.preventDefault()
+    console.log(formData)
     try {
-      const formDataToSend = new FormData()
-      formDataToSend.append('type', 'user')
-      formDataToSend.append('mailaddress', formData.email)
-      formDataToSend.append('username', formData.username)
-      formDataToSend.append('password', formData.password)
-      if (formData.userImg) {
-        formDataToSend.append('userImg', formData.userImg)
+      const response = await fetch('http://localhost:8080/auth/profile', {
+        method: 'PUT',
+        credentials: 'include', // クッキー
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(`サーバーエラー: ${data.error || '知らんけどエラー'}`)
       }
 
-      const response = await axios.put(
-        'http://localhost:8080/auth/profile',
-        formDataToSend,
-        { withCredentials: true },
-      )
-      alert(response.data.message)
+      console.log('登録が成功しました:', data)
+      setSuccess(true)
+      setError(null)
+      setUsername(formData.Username)
     } catch (error) {
-      if (error.response) {
-        alert(error.response.data.error)
-      } else {
-        alert('エラーが発生しました。')
-      }
+      console.error('登録が失敗しました:', error)
+      setError(error.message)
+      setSuccess(false)
     }
-    navigate('/userhome')
   }
 
   const handleImageChange = (e) => {
@@ -78,6 +83,7 @@ function UserSettingsPage() {
       <div className="text-center">
         <p className="text-[50px]">ユーザー設定</p>
         <p>個人用アカウント編集</p>
+        {success && <p className="text-green-500">更新に成功しました</p>}
       </div>
       <form
         onSubmit={handleSubmit}

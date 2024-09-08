@@ -45,4 +45,4 @@ const Test = () => {
 
 export default Test
 
-//localhost:8080/auth/register
+//localhost:8080/api/create-seminar
