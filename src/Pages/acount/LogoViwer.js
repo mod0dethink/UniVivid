@@ -4,19 +4,24 @@ import images from '../../assets/images'
 import { UsernameContext } from '../../Contexts/UsernameContext.js'
 
 const LogoViwer1 = () => {
-  const { registerPath } = useContext(UsernameContext) // 修正: コンテキストから正しい値を取得
+  const { registerPath } = useContext(UsernameContext)
+  let path = ''
+  if (registerPath) {
+    path = '/unihome'
+  } else {
+    path = '/userhome'
+  }
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    // タイマーを設定して指定した時間（例: 3秒後）にページを遷移する
+    // タイマーを設定して指定した時間にページを遷移する
     const timer = setTimeout(() => {
-      navigate(registerPath) // 遷移先のパスを指定
-    }, 3000) // 3000ミリ秒 = 3秒
+      navigate(path) // 遷移先のパス
+    }, 3000)
 
-    // クリーンアップ関数を返して、コンポーネントがアンマウントされる際にタイマーをクリア
     return () => clearTimeout(timer)
-  }, [navigate, registerPath]) // 修正: registerPathを依存配列に追加
+  }, [navigate, path])
 
   return (
     <div className="bg-[#427D9D] w-[100vw] h-screen flex flex-col justify-center items-center">

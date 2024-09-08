@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../../assets/styles/styles.css'
 import images from '../../assets/images.js'
@@ -10,15 +10,15 @@ const UniSidebar = () => {
   let navItems = ['Username', 'HomePage', 'MyPage', 'UserSetting', 'Logout']
   let navIcons = ['', '', '', '', '']
   let navPath = ['', '', '', '', '']
-  const { registerPath } = useContext(UsernameContext)
+  const { registerPath, username } = useContext(UsernameContext)
   if (registerPath === true) {
-    navItems = ['Username', 'HomePage', 'UserSetting', 'Logout']
+    navItems = [`${username}`, 'HomePage', 'UserSetting', 'Logout']
 
     navPath = ['/unisetting', '/unihome', '/unisetting', '/']
     navIcons = [images.barImg1, images.barImg2, images.barImg4, images.barImg5]
     console.log(navPath)
   } else {
-    navItems = ['Username', 'HomePage', 'MyPage', 'UserSetting', 'Logout']
+    navItems = [`${username}`, 'HomePage', 'MyPage', 'UserSetting', 'Logout']
     navPath = ['/usersetting', '/userhome', '/usermypage', '/usersetting', '/']
     navIcons = [
       images.barImg1,

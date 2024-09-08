@@ -12,7 +12,7 @@ import { UsernameContext } from '../../Contexts/UsernameContext'
 //ログインフォーム
 function LoginPage() {
   const [swapped, setSwapped] = useState(false) //falseの時学生のログインフォーム
-  const { setRegisterPath } = useContext(UsernameContext) // 修正: コンテキストから値を取得
+  const { setRegisterPath, setUsername } = useContext(UsernameContext) // 修正: コンテキストから値を取得
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -20,12 +20,13 @@ function LoginPage() {
   }
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    email: '',
-    pass: '',
+    MailAddress: '',
+    Password: '',
+    Type: '',
   })
   const inputValue = [
-    { type: 'email', name: 'email', label: 'Email' },
-    { type: 'password', name: 'password', label: 'Password' },
+    { type: 'email', name: 'MailAddress', label: 'Email' },
+    { type: 'password', name: 'Password', label: 'Password' },
   ]
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -35,13 +36,66 @@ function LoginPage() {
     }))
   }
 
-  const handleSubmit = (event) => {
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(false)
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const handleSubmit = async (event) => {
     event.preventDefault()
+
+    // Type を設定
+    const updatedFormData = {
+      ...formData,
+      Type: swapped ? 'university' : 'user',
+    }
+
     setRegisterPath(swapped)
-    if (swapped === true) {
-      navigate('/unihome')
-    } else {
-      navigate('/userhome')
+
+    try {
+      const response = await fetch('http://localhost:8080/auth/login', {
+        method: 'POST',
+        credentials: 'include', // クッキー
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedFormData),
+      })
+
+      if (!response.ok) {
+        throw new Error(
+          'サーバーエラー: ' + (response.statusText || '不明なエラー'),
+        )
+      }
+
+      const data = await response.json()
+      console.log('ログインが成功しました:', data)
+
+      // ユーザー名を取得
+      const usernameResponse = await fetch(
+        'http://localhost:8080/auth/username',
+        {
+          method: 'GET',
+          credentials: 'include', // クッキーを含める設定
+        },
+      )
+
+      if (!usernameResponse.ok) {
+        throw new Error('Network response was not ok')
+      }
+
+      const usernameData = await usernameResponse.json()
+      setUsername(usernameData.username) // 正しく username をセット
+
+      // 画面遷移
+      if (swapped) {
+        navigate('/unihome')
+      } else {
+        navigate('/userhome')
+      }
+    } catch (error) {
+      console.error('ログインが失敗しました:', error)
+      setError(error.message)
+      setSuccess(false)
     }
   }
   return (
@@ -69,6 +123,11 @@ function LoginPage() {
                   onChange={handleChange}
                 />
               ))}
+              {error && (
+                <p className="text-red-500">
+                  メールアドレスまたはユーザー名が間違っています。
+                </p>
+              )}
             </div>
             <FormButton text="ログイン" />
           </form>
@@ -102,6 +161,11 @@ function LoginPage() {
                   onChange={handleChange}
                 />
               ))}
+              {error && (
+                <p className="text-red-500">
+                  メールアドレスまたはユーザー名が間違っています。
+                </p>
+              )}
             </div>
             <FormButton text="ログイン" />
           </form>

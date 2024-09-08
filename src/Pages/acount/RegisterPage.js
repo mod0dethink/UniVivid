@@ -50,26 +50,26 @@ function RegisterPage() {
       })
 
       const text = await response.text()
-      console.log('Response text:', text)
+      console.log('デバッグ用、レスポンス:', text)
 
       let data
       try {
         data = JSON.parse(text)
       } catch (error) {
-        console.error('Error parsing JSON:', error)
-        throw new Error('Invalid JSON response from server')
+        console.error('JSONのエラー:', error)
+        throw new Error('JSON応答が無効')
       }
 
       if (!response.ok) {
-        throw new Error(`Server error: ${data.error || 'Unknown error'}`)
+        throw new Error(`サーバーエラー: ${data.error || '知らんけどエラー'}`)
       }
 
-      console.log('Registration successful:', data)
+      console.log('登録が成功しました:', data)
       setSuccess(true)
       setError(null)
       navigate('/category')
     } catch (error) {
-      console.error('Registration failed:', error)
+      console.error('登録が失敗しました:', error)
       setError(error.message)
       setSuccess(false)
     }

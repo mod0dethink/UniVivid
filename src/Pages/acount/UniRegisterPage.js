@@ -13,17 +13,21 @@ function UniRegisterPage() {
   const { setUsername, setRegisterPath } = useContext(UsernameContext)
 
   const [formData, setFormData] = useState({
-    email: '',
-    pass: '',
-    username: '',
+    MailAddress: '',
+    Password: '',
+    Type: 'university',
+    UnivName: '',
+    InfoName: '',
+    UnivURL: '',
+    DonateURL: '',
   })
   const inputValue = [
-    { type: 'email', name: 'email', label: 'Email' },
-    { type: 'password', name: 'password', label: 'Password' },
-    { type: 'text', name: 'username', label: 'Username' },
-    { type: 'text', name: 'uniname', label: '学校名' },
-    { type: 'url', name: 'uniurl', label: '大学URL' },
-    { type: 'url', name: 'unidonate', label: '寄付ページURL' },
+    { type: 'email', name: 'MailAddress', label: 'Email' },
+    { type: 'password', name: 'Password', label: 'Password' },
+    { type: 'text', name: 'InfoName', label: 'Username' },
+    { type: 'text', name: 'UnivName', label: '学校名' },
+    { type: 'url', name: 'UnivURL', label: '大学URL' },
+    { type: 'url', name: 'DonateURL', label: '寄付ページURL' },
   ]
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -33,10 +37,48 @@ function UniRegisterPage() {
     }))
   }
 
-  const handleSubmit = (event) => {
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(false)
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    setUsername(formData.username) // 修正: ユーザー名をコンテキストに保存
-    setRegisterPath('/unihome')
+    setUsername(formData.UnivName) // 修正: ユーザー名をコンテキストに保存
+    setRegisterPath(true)
+
+    try {
+      const response = await fetch('http://localhost:8080/auth/register', {
+        method: 'POST',
+        credentials: 'include', // クッキー
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const text = await response.text()
+      console.log('デバッグ用、レスポンス:', text)
+
+      let data
+      try {
+        data = JSON.parse(text)
+      } catch (error) {
+        console.error('JSONのエラー:', error)
+        throw new Error('JSON応答が無効')
+      }
+
+      if (!response.ok) {
+        throw new Error(`サーバーエラー: ${data.error || '知らんけどエラー'}`)
+      }
+
+      console.log('登録が成功しました:', data)
+      setSuccess(true)
+      setError(null)
+      navigate('/category')
+    } catch (error) {
+      console.error('登録が失敗しました:', error)
+      setError(error.message)
+      setSuccess(false)
+    }
+
     navigate('/registerwelcom')
   }
   return (
@@ -61,6 +103,11 @@ function UniRegisterPage() {
               onChange={handleChange}
             />
           ))}
+          {error && (
+            <p className="text-red-500">
+              メールアドレスが既に使用されています。
+            </p>
+          )}
         </div>
         <FormButton text="登録" />
       </form>
