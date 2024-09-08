@@ -1,101 +1,57 @@
-.link-btn {
-  transition: 0.5s;
-}
-.inner-text {
-  transition: 0.5s;
-}
-.link-btn:hover {
-  border-radius: 20px;
-  width: 70vw;
-}
-.link-btn:hover .inner-text {
-  transform: scale(1.5);
+/*ホバーテンプレート*/
+.parent {
+  transition: transform 0.3s ease;
 }
 
-.bg-scale-hover {
-  transition: 0.5s;
-}
-.bg-scale-hover:hover {
-  background-color: aliceblue;
-  transform: scale(1.1);
-}
-
-/*---*/
-/* App.css */
-/* App.css */
-.fade-enter {
-  opacity: 0;
-}
-.fade-enter-active {
-  opacity: 1;
-  transition: opacity 1000ms;
-}
-.fade-exit {
-  opacity: 1;
-}
-.fade-exit-active {
-  opacity: 0;
-  transition: opacity 1000ms;
-}
-
-#loading_start {
-  background-color: white;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: drid;
-  place-items: center;
-}
-
-#loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: #427d9d;
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  display: drid;
-  place-items: center;
-}
-#loading_img {
-  opacity: 0;
-}
-
-/* スライドアウト */
-#slide-out {
-  transition: transform 0.5s ease-out;
-  transform: translateX(0); /* 初期位置 */
-}
-#active {
-  transform: translateX(100%); /* 画面外にスライドアウト */
-}
-
-.filter-invert {
-  transition: 0.3s;
-}
-.filter-invert:hover {
-  filter: invert(100%);
-}
-
-input[type='text'],
-.expand-border,
-.scale-content,
-.FAup,
-.FAdown,
-.scale-content {
-  transition: 0.3s;
-}
-.scale-content:hover .FAdown {
-  transform: scale(0.8);
-}
-.scale-content:hover .FAup {
+.parent:hover .scale-hover {
   transform: scale(1.2);
 }
 
-.doorUrl-effect {
+.scale-hover {
+  transition: transform 0.3s ease;
 }
-.scale-content:hover .doorUrl-effect {
-  border: solid 5px rgb(163, 53, 53);
+.scale-hover:hover {
+  transform: scale(1.2);
+}
+
+.scale-hover-x {
+  transition: transform 0.3s ease;
+}
+.scale-hover-x:hover {
+  transform: scalex(1.3);
+}
+
+.scale-hover-baw {
+  transition: 0.3s ease;
+  filter: grayscale(100%);
+}
+.scale-hover-baw:hover {
+  transform: scale(1.3);
+  filter: grayscale(0%);
+}
+
+.box-shadow-hover {
+  transition: 0.3s ease;
+}
+.box-shadow-hover:hover {
+  box-shadow:
+    0 0 10px #427d9d,
+    0 0 20px #427d9da0,
+    0 0 30px #427d9d50;
+
+  transform: scale(1.05);
+}
+
+.unibtn-hover {
+  transition: 0.3s;
+}
+
+.unibtn-hover:hover {
+  transform: scale(1.05);
+  background: #427d9d;
+  color: #fff;
+  box-shadow:
+    0 0 10px #427d9d,
+    0 0 20px #427d9da0,
+    0 0 30px #427d9d50;
 }

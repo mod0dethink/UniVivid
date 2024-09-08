@@ -11,7 +11,7 @@ const FormButton = ({ text, onSubmit }) => {
 
   return (
     <button
-      className="text-[36px] bg-[#427D9D] rounded-[20px] h-[77px] min-w-[270px] flex flex-col items-center justify-center text-white font-bold px-[20px]"
+      className="unibtn-hover text-[36px] bg-[#427D9D] rounded-[20px] h-[77px] min-w-[270px] flex flex-col items-center justify-center text-white font-bold px-[20px]"
       type="submit"
       onClick={handleClick}
     >

@@ -30,7 +30,7 @@ const SearchBar = () => {
         <header className="w-[100%]">
           <button
             type="button"
-            className="Ssidebar-burger"
+            className=" Ssidebar-burger"
             onClick={() => setIsOpen(!isOpen)}
           >
             <span>
@@ -53,7 +53,7 @@ const SearchBar = () => {
               <p className="w-[80px]">開講済</p>
             </div>
             <button
-              className="text-[30px] bg-[#427D9D] rounded-[20px] h-[70px] min-w-[200px] flex items-center justify-center text-white font-bold px-[20px]"
+              className="unibtn-hover text-[30px] bg-[#427D9D] rounded-[20px] h-[70px] min-w-[200px] flex items-center justify-center text-white font-bold px-[20px]"
               type="submit"
             >
               <img src={images.Icon2} alt="Icon2" width="50px" />

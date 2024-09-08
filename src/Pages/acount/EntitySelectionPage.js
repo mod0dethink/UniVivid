@@ -26,7 +26,12 @@ function EntitySelectionPage() {
                 to={link}
                 className="bg-scale-hover border border-solid border-[#164863] rounded-[50%] w-[400px] h-[400px]"
               >
-                <img src={img} alt={`${img}`} width="400px" />
+                <img
+                  src={img}
+                  alt={`${img}`}
+                  width="400px"
+                  className="scale-hover-baw"
+                />
               </Link>
               <p>{text}</p>
             </div>
