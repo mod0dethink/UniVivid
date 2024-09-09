@@ -49,45 +49,45 @@ const UMovieList = () => {
           />
         </div>
         <button
-          className="text-[30px] bg-[#427D9D] rounded-[20px] h-[70px] min-w-[200px] flex items-center justify-center text-white font-bold px-[20px]"
+          className="unibtn-hover text-[30px] bg-[#427D9D] rounded-[20px] h-[70px] min-w-[200px] flex items-center justify-center text-white font-bold px-[20px]"
           type="submit"
         >
           <img src={images.Icon2} alt="Icon2" width="50px" />
           <p className="text-white font-bold">検索</p>
         </button>
       </form>
-      <div className="flex flex-col items-start w-[1600px] space-y-[20px] pl-[100px] pt-[100px]">
+      <div className="flex flex-col items-start w-[1600px] space-y-[10px] pl-[100px] pt-[100px]">
         {searched === false ? (
           <>
             <p className="text-[#427d9d] text-[36px] font-bold">人気の動画</p>
-            <div className="flex space-x-[20px] overflow-x-auto">
+            <div className="flex overflow-x-auto px-[30px]">
               {faMovieValue.map(({ img, title, index }) => (
                 <Link
                   to="/umoviedetail"
                   key={index}
-                  className="flex flex-col justify-center items-center"
+                  className="m-[10px] flex flex-col justify-center items-center"
                 >
                   <img
                     src={img}
                     alt=""
-                    className="object-cover w-[355px] h-[200px] rounded-[10px]"
+                    className="box-shadow-hover object-cover w-[355px] h-[200px] rounded-[10px]"
                   />
                   <p>{title}</p>
                 </Link>
               ))}
             </div>
             <p className="text-[#427d9d] text-[36px] font-bold">最新の動画</p>
-            <div className="flex space-x-[20px] overflow-x-auto">
+            <div className="flex space-x-[20px] overflow-x-auto px-[30px]">
               {newMovieValue.map(({ img, title, index }) => (
                 <Link
                   to="/umoviedetail"
                   key={index}
-                  className="flex flex-col justify-center items-center"
+                  className="m-[10px] flex flex-col justify-center items-center"
                 >
                   <img
                     src={img}
                     alt=""
-                    className="object-cover w-[355px] h-[200px] rounded-[10px]"
+                    className="box-shadow-hover object-cover w-[355px] h-[200px] rounded-[10px]"
                   />
                   <p>{title}</p>
                 </Link>

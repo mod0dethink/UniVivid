@@ -18,7 +18,12 @@ function UserHomePage() {
         className="flex flex-col items-center justify-center"
       >
         <div className="w-[500px] h-[500px] border-solid border-[#9BBEC8] border-[5px] rounded-[20px] flex items-center justify-center">
-          <img src={images.U1} alt="U1" width="300px" />
+          <img
+            src={images.U1}
+            alt="U1"
+            width="300px"
+            className="scale-hover-baw"
+          />
         </div>
         <p className="text-[36px]">動画へ</p>
       </Link>
@@ -27,7 +32,12 @@ function UserHomePage() {
         className="flex flex-col items-center justify-center"
       >
         <div className="w-[500px] h-[500px] border-solid border-[#9BBEC8] border-[5px] rounded-[20px] flex items-center justify-center">
-          <img src={images.U2} alt="U2" width="300px" />
+          <img
+            src={images.U2}
+            alt="U2"
+            width="300px"
+            className="scale-hover-baw"
+          />
         </div>
         <p className="text-[36px]">記事一覧へ</p>
       </Link>

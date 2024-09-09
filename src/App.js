@@ -5,6 +5,7 @@ import './components/layout/layouts.js'
 import './index.css'
 import './assets/styles/layouts.css'
 import './assets/styles/styles.css'
+import './assets/styles/Animations.css'
 
 //ルーディングの読み込み
 import AppRoutes from './routes/AppRoutes'

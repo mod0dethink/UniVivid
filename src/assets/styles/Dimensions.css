@@ -17,7 +17,9 @@
   top: 10px;
   border-top: #000000 3px solid;
   width: 300px;
+  transition: 0.3s ease;
 }
+
 .black-circle {
   background-color: #000000;
   width: 20px;
