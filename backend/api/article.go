@@ -36,7 +36,6 @@ func RegisterArticleRoutes(r *gin.Engine) {
 	r.POST("/api/upload-note", uploadNote)
 	r.POST("/api/favorite-note", favoriteNote)
 }
-
 func createSeminar(c *gin.Context) {
 	session := sessions.Default(c)
 	univID := session.Get("univid")
@@ -71,11 +70,32 @@ func createSeminar(c *gin.Context) {
 		return
 	}
 
-	query := `INSERT INTO SEMINAR (Univ_ID, Seminar_Name, Prof_name, Start_Date, Category_ID, thumbnail, offer_URL, content) 
-	          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
-	_, err = db.Exec(query, seminar.UnivID, seminar.SeminarName, seminar.ProfName, seminar.StartDate, seminar.CategoryID, thumbnailBytes, seminar.OfferURL, seminar.Content)
+	// StartDateのフォーマットを確認
+	if seminar.StartDate == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "開始日が指定されていません"})
+		return
+	}
+
+	// Seminar テーブルに挿入
+	query := `INSERT INTO Seminar (Univ_ID, Category_ID) VALUES (?, ?)`
+	result, err := db.Exec(query, seminar.UnivID, seminar.CategoryID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "セミナーの作成に失敗しました", "details": err.Error()})
+		return
+	}
+
+	seminarID, err := result.LastInsertId()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "セミナーIDの取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	// seminar_in_person テーブルに挿入
+	query = `INSERT INTO seminar_in_person (Seminar_ID, Semi_name, Prof_name, Start_Date, offer_URL, Category_ID, thema_color, Location, content, thumbnail) 
+             VALUES (?, ?, ?, ?, ?, ?, '#FFFFFF', 'LOC', ?, ?)`
+	_, err = db.Exec(query, seminarID, seminar.SeminarName, seminar.ProfName, seminar.StartDate, seminar.OfferURL, seminar.CategoryID, seminar.Content, thumbnailBytes)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "セミナーの詳細情報の作成に失敗しました", "details": err.Error()})
 		return
 	}
 
@@ -89,10 +109,11 @@ func getSeminars(c *gin.Context) {
 	}
 
 	rows, err := db.Query(`
-		SELECT SEMINAR.Seminar_ID, SEMINAR.Univ_ID, SEMINAR.Seminar_Name, SEMINAR.Prof_name, SEMINAR.Start_Date, SEMINAR.Category_ID, SEMINAR.thumbnail, SEMINAR.offer_URL, SEMINAR.content, UNIVERSITY.Univ_Name
-		FROM SEMINAR
-		JOIN UNIVERSITY ON SEMINAR.Univ_ID = UNIVERSITY.Univ_ID
-	`)
+        SELECT seminar_in_person.Seminar_ID, Seminar.Univ_ID, seminar_in_person.Semi_name, seminar_in_person.Prof_name, seminar_in_person.Start_Date, Seminar.Category_ID, seminar_in_person.thumbnail, seminar_in_person.offer_URL, seminar_in_person.content, University.Univ_Name
+        FROM Seminar
+        JOIN seminar_in_person ON Seminar.Seminar_ID = seminar_in_person.Seminar_ID
+        JOIN University ON Seminar.Univ_ID = University.Univ_ID
+    `)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
 		return
