@@ -70,11 +70,12 @@ func loginHandler(c *gin.Context) {
 
 	var storedPassword string
 	var userName string
+	var userID int
 	var univID int
 	var query string
 
 	if request.Type == "user" {
-		query = "SELECT User_Name, Password FROM USER WHERE Mail_Address = ?"
+		query = "SELECT User_Name, Password, User_ID FROM USER WHERE Mail_Address = ?"
 	} else if request.Type == "university" {
 		query = "SELECT Univ_Name, Password, Univ_ID FROM UNIVERSITY WHERE Mail_Address = ?"
 	} else {
@@ -93,7 +94,7 @@ func loginHandler(c *gin.Context) {
 			return
 		}
 	} else {
-		err := DB.QueryRow(query, request.MailAddress).Scan(&userName, &storedPassword)
+		err := DB.QueryRow(query, request.MailAddress).Scan(&userName, &storedPassword, &userID)
 		if err != nil {
 			if err == sql.ErrNoRows {
 				c.JSON(http.StatusUnauthorized, gin.H{"error": "メールアドレスまたはパスワードが間違っています"})
@@ -116,6 +117,8 @@ func loginHandler(c *gin.Context) {
 	session.Set("username", userName)
 	if request.Type == "university" {
 		session.Set("univid", univID)
+	} else {
+		session.Set("userid", userID) // ユーザーIDもセッションに保存
 	}
 	if err := session.Save(); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "セッションの保存に失敗しました"})

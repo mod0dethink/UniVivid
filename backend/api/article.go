@@ -142,8 +142,15 @@ func getSeminars(c *gin.Context) {
 }
 
 func addHistory(c *gin.Context) {
+	session := sessions.Default(c)
+	userID := session.Get("userid")
+
+	if userID == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
+		return
+	}
+
 	var history struct {
-		UserID    int `json:"user_id"`
 		SeminarID int `json:"seminar_id"`
 	}
 	if err := c.ShouldBindJSON(&history); err != nil {
@@ -152,7 +159,7 @@ func addHistory(c *gin.Context) {
 	}
 
 	query := `INSERT INTO HISTORY (User_ID, Seminar_ID) VALUES (?, ?)`
-	_, err := db.Exec(query, history.UserID, history.SeminarID)
+	_, err := db.Exec(query, userID, history.SeminarID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "受講履歴の追加に失敗しました", "details": err.Error()})
 		return
