@@ -32,7 +32,6 @@ func RegisterArticleRoutes(r *gin.Engine) {
 	r.Use(cors.New(config))
 
 	r.POST("/api/create-seminar", createSeminar)
-	r.GET("/api/get-seminars", getSeminars)
 	r.POST("/api/add-history", addHistory)
 	r.POST("/api/upload-note", uploadNote)
 	r.POST("/api/favorite-note", favoriteNote)
@@ -42,6 +41,9 @@ func RegisterArticleRoutes(r *gin.Engine) {
 	r.POST("/api/approve-note-comment", approveNoteComment)
 	r.POST("/api/add-univ-comment", addUnivComment)
 	r.POST("/api/approve-univ-comment", approveUnivComment)
+	r.POST("/api/reject-note", rejectNote)
+	r.POST("/api/reject-note-comment", rejectNoteComment)
+	r.POST("/api/reject-univ-comment", rejectUnivComment)
 }
 
 func createSeminar(c *gin.Context) {
@@ -108,45 +110,6 @@ func createSeminar(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "セミナーが正常に作成されました"})
-}
-
-func getSeminars(c *gin.Context) {
-	if db == nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "データベース接続が初期化されていません"})
-		return
-	}
-
-	rows, err := db.Query(`
-        SELECT seminar_in_person.Seminar_ID, Seminar.Univ_ID, seminar_in_person.Semi_name, seminar_in_person.Prof_name, seminar_in_person.Start_Date, Seminar.Category_ID, seminar_in_person.thumbnail, seminar_in_person.offer_URL, seminar_in_person.content, University.Univ_Name
-        FROM Seminar
-        JOIN seminar_in_person ON Seminar.Seminar_ID = seminar_in_person.Seminar_ID
-        JOIN University ON Seminar.Univ_ID = University.Univ_ID
-    `)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
-		return
-	}
-	defer rows.Close()
-
-	var seminars []models.Seminar
-
-	for rows.Next() {
-		var seminar models.Seminar
-		var universityName string
-		if err := rows.Scan(&seminar.SeminarID, &seminar.UnivID, &seminar.SeminarName, &seminar.ProfName, &seminar.StartDate, &seminar.CategoryID, &seminar.Thumbnail, &seminar.OfferURL, &seminar.Content, &universityName); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
-			return
-		}
-		seminar.UniversityName = universityName
-		seminars = append(seminars, seminar)
-	}
-
-	if err := rows.Err(); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"seminars": seminars})
 }
 
 func addHistory(c *gin.Context) {
@@ -518,4 +481,94 @@ func approveUnivComment(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "大学コメントが正常に承認されました"})
+}
+
+func rejectNote(c *gin.Context) {
+	var request struct {
+		NoteID int `json:"note_id"`
+	}
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
+		return
+	}
+
+	query := `UPDATE Note SET approve = 2 WHERE Note_ID = ?`
+	result, err := db.Exec(query, request.NoteID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "ノートの拒否に失敗しました", "details": err.Error()})
+		return
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "影響を受けた行の取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	if rowsAffected == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "指定されたノートが見つかりません"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "ノートが正常に拒否されました"})
+}
+
+func rejectNoteComment(c *gin.Context) {
+	var request struct {
+		CommentID int `json:"comment_id"`
+	}
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
+		return
+	}
+
+	query := `UPDATE Note_comment SET approve = 2 WHERE Note_ID = ? AND User_ID = ?`
+	result, err := db.Exec(query, request.CommentID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "コメントの拒否に失敗しました", "details": err.Error()})
+		return
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "影響を受けた行の取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	if rowsAffected == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "指定されたコメントが見つかりません"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "コメントが正常に拒否されました"})
+}
+
+func rejectUnivComment(c *gin.Context) {
+	var request struct {
+		CommentID int `json:"comment_id"`
+	}
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
+		return
+	}
+
+	query := `UPDATE Univ_comment SET approve = 2 WHERE comment_ID = ?`
+	result, err := db.Exec(query, request.CommentID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "大学コメントの拒否に失敗しました", "details": err.Error()})
+		return
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "影響を受けた行の取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	if rowsAffected == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "指定された大学コメントが見つかりません"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "大学コメントが正常に拒否されました"})
 }
