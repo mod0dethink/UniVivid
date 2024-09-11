@@ -147,7 +147,13 @@ function FirstWelcomPage() {
           いい講義を開講してくれる大学には寄附し、いい講義を存続できるようにしましょう。
         </div>
       </section>
-      <section className="w-[100vw] h-screen flex justify-around items-center text-center"></section>
+      {/* 説明文5 */}
+      <section className="w-[100vw] h-screen content-center items-center">
+        <div>
+          <img src={images.ShareContent} alt=''/>
+        </div>
+      </section>
+      {/* 説明文6 */}
       <section className="text-white bg-main w-[100vw] h-[50px] flex justify-around items-center text-center">
         Copyright 2024 - Hemi / N. All Rights Reserved.
       </section>
