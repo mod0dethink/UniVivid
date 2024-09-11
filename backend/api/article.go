@@ -37,6 +37,11 @@ func RegisterArticleRoutes(r *gin.Engine) {
 	r.POST("/api/upload-note", uploadNote)
 	r.POST("/api/favorite-note", favoriteNote)
 	r.POST("/api/favorite-semi", favoriteSemi)
+	r.POST("/api/add-note-comment", addNoteComment)
+	r.POST("/api/approve-note", approveNote)
+	r.POST("/api/approve-note-comment", approveNoteComment)
+	r.POST("/api/add-univ-comment", addUnivComment)
+	r.POST("/api/approve-univ-comment", approveUnivComment)
 }
 
 func createSeminar(c *gin.Context) {
@@ -339,4 +344,178 @@ func favoriteSemi(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "セミナーが正常にお気に入りに追加されました"})
+}
+
+func addNoteComment(c *gin.Context) {
+	session := sessions.Default(c)
+	userID := session.Get("userid")
+
+	if userID == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
+		return
+	}
+
+	var comment struct {
+		NoteID  int    `json:"note_id"`
+		Comment string `json:"comment"`
+	}
+	if err := c.ShouldBindJSON(&comment); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
+		return
+	}
+
+	// Note_IDがNoteテーブルに存在するか確認
+	var noteExists bool
+	query := `SELECT EXISTS(SELECT 1 FROM Note WHERE Note_ID = ?)`
+	err := db.QueryRow(query, comment.NoteID).Scan(&noteExists)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "ノートの存在確認に失敗しました", "details": err.Error()})
+		return
+	}
+
+	if !noteExists {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "指定されたノートが存在しません"})
+		return
+	}
+
+	query = `INSERT INTO Note_comment (Note_ID, User_ID, Comment, approve) VALUES (?, ?, ?, 0)`
+	_, err = db.Exec(query, comment.NoteID, userID, comment.Comment)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "コメントの追加に失敗しました", "details": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "コメントが正常に追加されました"})
+}
+
+func approveNote(c *gin.Context) {
+	var request struct {
+		NoteID int `json:"note_id"`
+	}
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
+		return
+	}
+
+	query := `UPDATE Note SET approve = 1 WHERE Note_ID = ?`
+	result, err := db.Exec(query, request.NoteID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "ノートの承認に失敗しました", "details": err.Error()})
+		return
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "影響を受けた行の取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	if rowsAffected == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "指定されたノートが見つかりません"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "ノートが正常に承認されました"})
+}
+
+func approveNoteComment(c *gin.Context) {
+	var request struct {
+		CommentID int `json:"comment_id"`
+	}
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
+		return
+	}
+
+	query := `UPDATE Note_comment SET approve = 1 WHERE Note_ID = ? AND User_ID = ?`
+	result, err := db.Exec(query, request.CommentID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "コメントの承認に失敗しました", "details": err.Error()})
+		return
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "影響を受けた行の取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	if rowsAffected == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "指定されたコメントが見つかりません"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "コメントが正常に承認されました"})
+}
+
+func addUnivComment(c *gin.Context) {
+	session := sessions.Default(c)
+	userID := session.Get("userid")
+
+	if userID == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
+		return
+	}
+
+	var comment struct {
+		UnivID int    `json:"univ_id"`
+		Review string `json:"review"`
+	}
+	if err := c.ShouldBindJSON(&comment); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
+		return
+	}
+
+	// Univ_IDがUniversityテーブルに存在するか確認
+	var univExists bool
+	query := `SELECT EXISTS(SELECT 1 FROM University WHERE Univ_ID = ?)`
+	err := db.QueryRow(query, comment.UnivID).Scan(&univExists)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "大学の存在確認に失敗しました", "details": err.Error()})
+		return
+	}
+
+	if !univExists {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "指定された大学が存在しません"})
+		return
+	}
+
+	query = `INSERT INTO Univ_comment (Univ_ID, User_ID, Review, approve) VALUES (?, ?, ?, 0)`
+	_, err = db.Exec(query, comment.UnivID, userID, comment.Review)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "コメントの追加に失敗しました", "details": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "コメントが正常に追加されました"})
+}
+
+func approveUnivComment(c *gin.Context) {
+	var request struct {
+		CommentID int `json:"comment_id"`
+	}
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
+		return
+	}
+
+	query := `UPDATE Univ_comment SET approve = 1 WHERE comment_ID = ?`
+	result, err := db.Exec(query, request.CommentID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "大学コメントの承認に失敗しました", "details": err.Error()})
+		return
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "影響を受けた行の取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	if rowsAffected == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "指定された大学コメントが見つかりません"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "大学コメントが正常に承認されました"})
 }

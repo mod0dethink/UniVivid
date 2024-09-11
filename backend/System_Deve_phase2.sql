@@ -132,7 +132,7 @@ CREATE TABLE Fav_note(
 );
 
 
--- コメント
+-- ノートにするコメント
 CREATE TABLE Note_comment(
     Note_ID INT NOT NULL,
     User_ID INT NOT NULL,
