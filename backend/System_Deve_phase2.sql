@@ -122,7 +122,6 @@ CREATE TABLE Fav_semi(
     FOREIGN KEY(Seminar_ID) REFERENCES Seminar(Seminar_ID) ON DELETE CASCADE
 );
 
-
 -- 高評価したノート
 CREATE TABLE Fav_note(
     User_ID INT NOT NULL,
