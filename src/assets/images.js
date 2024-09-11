@@ -56,6 +56,8 @@ const images = {
   Delete: require('./images/delete.png'),
   User: require('./images/user.png'),
   School: require('./images/school.png'),
+  Bublle: require('./images/Bubble.png'),
+  ShareContent: require('./images/ShareContact.png'),
 }
 
 export default images
