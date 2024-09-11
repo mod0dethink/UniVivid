@@ -57,7 +57,7 @@ function FirstWelcomPage() {
       </section>
       {/* 説明文1 */}
       <section>
-        <div className="w-dvw">
+        <div className="w-dvw flex">
           <div className="font-bold w-1/2 h-dvh content-center text-center">
             <p className="text-main mb-8">
               <span className="text-5xl">U</span>
@@ -74,6 +74,9 @@ function FirstWelcomPage() {
               を本質的に理解でき、
             </p>
             <p>第二のキャンパスライフを着実に計画できます</p>
+          </div>
+          <div className='w-[500px] content-center'>
+            <img src={images.Bubble} alt='bubble' />
           </div>
         </div>
       </section>
