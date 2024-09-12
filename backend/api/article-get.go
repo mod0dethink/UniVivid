@@ -22,6 +22,8 @@ func RegisterArticleGetRoutes(r *gin.Engine) {
 	r.GET("/api/get-approved-univ-comments", getApprovedUnivComments)     // 認証済み大学コメント取得API
 	r.GET("/api/get-seminar-videos/:id", getSeminarVideos)
 	r.GET("/api/get-all-seminar-videos", getAllSeminarVideos)
+	r.GET("/api/notes", getAllNotes)
+	r.GET("/api/user-notes", getUserNotes)
 }
 
 func getSeminars(c *gin.Context) {
@@ -390,4 +392,83 @@ func getAllSeminarVideos(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"videos": videos})
+}
+
+func getAllNotes(c *gin.Context) {
+	rows, err := db.Query(`
+        SELECT Note_ID, Seminar_ID, User_ID, Note, Upload_time, approve
+        FROM Note
+    `)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "ノートの取得に失敗しました", "details": err.Error()})
+		return
+	}
+	defer rows.Close()
+
+	var notes []models.Note
+	for rows.Next() {
+		var note models.Note
+		var uploadTime string
+		if err := rows.Scan(&note.NoteID, &note.SeminarID, &note.UserID, &note.Note, &uploadTime, &note.Approve); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "ノートの取得に失敗しました", "details": err.Error()})
+			return
+		}
+		note.UploadTime, err = time.Parse("2006-01-02 15:04:05", uploadTime)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "アップロード時間の変換に失敗しました", "details": err.Error()})
+			return
+		}
+		notes = append(notes, note)
+	}
+
+	if err := rows.Err(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "ノートの取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"notes": notes})
+}
+
+func getUserNotes(c *gin.Context) {
+	session := sessions.Default(c)
+	userID := session.Get("userid")
+
+	if userID == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
+		return
+	}
+
+	rows, err := db.Query(`
+        SELECT Note_ID, Seminar_ID, User_ID, Note, Upload_time, approve
+        FROM Note
+        WHERE User_ID = ?
+    `, userID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "ノートの取得に失敗しました", "details": err.Error()})
+		return
+	}
+	defer rows.Close()
+
+	var notes []models.Note
+	for rows.Next() {
+		var note models.Note
+		var uploadTime string
+		if err := rows.Scan(&note.NoteID, &note.SeminarID, &note.UserID, &note.Note, &uploadTime, &note.Approve); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "ノートの取得に失敗しました", "details": err.Error()})
+			return
+		}
+		note.UploadTime, err = time.Parse("2006-01-02 15:04:05", uploadTime)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "アップロード時間の変換に失敗しました", "details": err.Error()})
+			return
+		}
+		notes = append(notes, note)
+	}
+
+	if err := rows.Err(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "ノートの取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"notes": notes})
 }

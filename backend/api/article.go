@@ -87,6 +87,14 @@ func createSeminar(c *gin.Context) {
 		return
 	}
 
+	// StartDateを適切な形式に変換
+	parsedStartDate, err := time.Parse(time.RFC3339, seminar.StartDate)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "開始日の形式が不正です", "details": err.Error()})
+		return
+	}
+	formattedStartDate := parsedStartDate.Format("2006-01-02 15:04:05")
+
 	// Seminar テーブルに挿入
 	query := `INSERT INTO Seminar (Univ_ID, Category_ID) VALUES (?, ?)`
 	result, err := db.Exec(query, seminar.UnivID, seminar.CategoryID)
@@ -104,7 +112,7 @@ func createSeminar(c *gin.Context) {
 	// seminar_in_person テーブルに挿入
 	query = `INSERT INTO seminar_in_person (Seminar_ID, Semi_name, Prof_name, Start_Date, offer_URL, Category_ID, thema_color, Location, content, thumbnail) 
              VALUES (?, ?, ?, ?, ?, ?, '#FFFFFF', 'LOC', ?, ?)`
-	_, err = db.Exec(query, seminarID, seminar.SeminarName, seminar.ProfName, seminar.StartDate, seminar.OfferURL, seminar.CategoryID, seminar.Content, thumbnailBytes)
+	_, err = db.Exec(query, seminarID, seminar.SeminarName, seminar.ProfName, formattedStartDate, seminar.OfferURL, seminar.CategoryID, seminar.Content, thumbnailBytes)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "セミナーの詳細情報の作成に失敗しました", "details": err.Error()})
 		return
