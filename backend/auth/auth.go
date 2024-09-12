@@ -113,6 +113,7 @@ func loginHandler(c *gin.Context) {
 
 	// セッションの開始
 	session := sessions.Default(c)
+	session.Clear() // 既存のセッションをクリア
 	session.Set("mailaddress", request.MailAddress)
 	session.Set("username", userName)
 	if request.Type == "university" {

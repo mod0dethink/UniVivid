@@ -44,6 +44,7 @@ func RegisterArticleRoutes(r *gin.Engine) {
 	r.POST("/api/reject-note", rejectNote)
 	r.POST("/api/reject-note-comment", rejectNoteComment)
 	r.POST("/api/reject-univ-comment", rejectUnivComment)
+	r.POST("/api/upload-video", uploadVideo)
 }
 
 func createSeminar(c *gin.Context) {
@@ -571,4 +572,49 @@ func rejectUnivComment(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "大学コメントが正常に拒否されました"})
+}
+
+func uploadVideo(c *gin.Context) {
+	session := sessions.Default(c)
+	userID := session.Get("userid")
+
+	if userID == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
+		return
+	}
+
+	var video struct {
+		UnivID     int    `json:"univ_id"`
+		CategoryID int    `json:"category_id"`
+		URL        string `json:"url"`
+		UploadTime string `json:"upload_time"`
+	}
+	if err := c.ShouldBindJSON(&video); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
+		return
+	}
+
+	// Seminar テーブルに挿入
+	query := `INSERT INTO Seminar (Univ_ID, Category_ID) VALUES (?, ?)`
+	result, err := db.Exec(query, video.UnivID, video.CategoryID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "セミナーの作成に失敗しました", "details": err.Error()})
+		return
+	}
+
+	seminarID, err := result.LastInsertId()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "セミナーIDの取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	// Semi_videos テーブルに挿入
+	query = `INSERT INTO Semi_videos (Seminar_ID, URL, Upload_time) VALUES (?, ?, ?)`
+	_, err = db.Exec(query, seminarID, video.URL, video.UploadTime)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "動画のアップロードに失敗しました", "details": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "動画が正常にアップロードされました"})
 }
