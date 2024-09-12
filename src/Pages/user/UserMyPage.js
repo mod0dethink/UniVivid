@@ -35,7 +35,7 @@ function UserMyPage() {
             src={img}
             alt="U"
             width="300px"
-            className="border-solid border-[#9BBEC8] border-[5px] rounded-[20px]"
+            className="scale-hover-baw border-solid border-[#9BBEC8] border-[5px] rounded-[20px]"
           />
           <p>{text}</p>
         </Link>

@@ -1,32 +1,36 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
+import PropTypes from 'prop-types' // 追加
 import { useNavigate } from 'react-router-dom'
 import '../../assets/styles/styles.css'
 import images from '../../assets/images.js'
-import { UsernameContext } from '../../Contexts/UsernameContext.js'
-import Input from '../common/Input.js'
 
-const navItems = ['keyword', 'place', 'time', 'UserSetting', 'Logout']
-
-//const navPath = ['', '', '', '', '']
-
-const SearchBar = () => {
-  const searchValue = [
-    { name: 'place', Stext: '場所' },
-    { name: 'date', Stext: '日程' },
-    { name: 'time', Stext: '時間' },
-    { name: 'genre', Stext: 'ジャンル' },
-  ]
+const SearchBar = ({ onSearch }) => {
+  const [formData, setFormData] = useState({
+    seminar_name: '',
+    already: false,
+    date: '',
+    category_id: '',
+  })
 
   const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
 
-  const handleNavigation = (path) => {
-    navigate(path)
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value,
+    }))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    onSearch(formData)
   }
 
   return (
     <aside className={`Ssidebar ${isOpen ? 'open' : ''}`}>
-      <form className="Sinner w-[100%]">
+      <form className="Sinner w-[100%]" onSubmit={handleSubmit}>
         <header className="w-[100%]">
           <button
             type="button"
@@ -42,13 +46,17 @@ const SearchBar = () => {
             <input
               className="w-[500px] bg-transparent border-b-2 border-blue-500"
               type="text"
-              name="keyword"
+              name="seminar_name"
+              value={formData.seminar_name}
+              onChange={handleChange}
             />
             <div className="flex items-center">
               <input
                 className="rounded-[10px]"
                 type="checkbox"
                 name="already"
+                checked={formData.already}
+                onChange={handleChange}
               />
               <p className="w-[80px]">開講済</p>
             </div>
@@ -62,20 +70,35 @@ const SearchBar = () => {
           </div>
         </header>
         <nav className={`${isOpen ? '' : 'hidden'}`}>
-          {searchValue.map(({ name, Stext }) => (
-            <div key={name}>
-              <p className="text-[#427d9d] min-w-[200px]">{Stext}:</p>
-              <input
-                className="w-[500px] bg-transparent border-b-2 border-blue-500"
-                name={name}
-                type="text"
-              />
-            </div>
-          ))}
+          <div>
+            <p className="text-[#427d9d] min-w-[200px]">日時:</p>
+            <input
+              className="w-[500px] bg-transparent border-b-2 border-blue-500"
+              name="date"
+              type="text"
+              value={formData.date}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <p className="text-[#427d9d] min-w-[200px]">ジャンル:</p>
+            <input
+              className="w-[500px] bg-transparent border-b-2 border-blue-500"
+              name="category_id"
+              type="text"
+              value={formData.category_id}
+              onChange={handleChange}
+            />
+          </div>
         </nav>
       </form>
     </aside>
   )
+}
+
+// PropTypesを定義
+SearchBar.propTypes = {
+  onSearch: PropTypes.func.isRequired,
 }
 
 export default SearchBar

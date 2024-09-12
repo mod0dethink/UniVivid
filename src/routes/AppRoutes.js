@@ -374,6 +374,20 @@ const AppRoutes = () => {
               </motion.div>
             }
           />
+          <Route
+            path="/onelecturepage/:id"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <OneLecturePage />
+              </motion.div>
+            }
+          />
           {/*Uni*/}
           <Route
             path="/unihome"

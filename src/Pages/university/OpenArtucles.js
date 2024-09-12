@@ -84,7 +84,7 @@ function OpenArtucles() {
       <HeaderLogo />
       <p className="text-[50px]">公開記事一覧</p>
       <p className="text-[20px]">公開した記事の一覧が表示されます</p>
-      <div className="flex space-y-5 justify-center text-center">
+      <div className="flex flex-col space-y-5 justify-center text-center">
         {filteredSeminars.length > 0 ? (
           filteredSeminars.map((seminar) => (
             <ArticlePart
@@ -93,7 +93,7 @@ function OpenArtucles() {
               groupname={seminar.university_name}
               title={seminar.seminar_name}
               date={new Date(seminar.start_date).toLocaleString()}
-              link={`/editonelecture/${seminar.seminar_id}`}
+              link={`/onelecturepage/${seminar.seminar_id}`}
             />
           ))
         ) : (
