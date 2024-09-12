@@ -6,6 +6,11 @@ import UniSidebar from '../../components/common/UniSidebar.js'
 import HeaderLogo from '../../components/layout/layouts.js'
 import images from '../../assets/images.js'
 // 公開記事一覧
+function getCookie(name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
 function OpenArtucles() {
   const data = [
     {
@@ -16,6 +21,8 @@ function OpenArtucles() {
       date: '2002/06/24',
     },
   ]
+  const univId = getCookie('univid')
+  console.log('univid:', univId)
   return (
     <div className="flex flex-col justify-start items-center w-[100vw] h-screen text-center pt-[100px]">
       <UniSidebar />

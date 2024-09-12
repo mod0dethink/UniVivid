@@ -64,15 +64,15 @@ function CreateCheckedPage() {
       <UniSidebar />
       <HeaderLogo />
       <div>
-        <p className="">{formData.StartDate}</p>
+        <p className="">{formData.start_date}</p>
         <ADetail
-          title={formData.SeminarName}
-          imageUrl={formData.Thumbnai}
+          title={formData.seminar_name}
+          imageUrl={formData.thumbnail}
           uicon={images.user_icon}
           username={formData.upNote}
           good={''}
           themecolor={formData.themecolor}
-          date={formData.StartDate}
+          date={formData.start_date}
         />
       </div>
       <div className="font-bold flex space-x-[50px] mt-[600px]">
@@ -83,7 +83,7 @@ function CreateCheckedPage() {
           >
             講義
           </p>
-          <p>{formData.SeminarName}</p>
+          <p>{formData.seminar_name}</p>
         </div>
         <div className="flex space-x-[10px]">
           <p
@@ -92,7 +92,7 @@ function CreateCheckedPage() {
           >
             講師
           </p>
-          <p>{formData.ProfName}</p>
+          <p>{formData.prof_name}</p>
         </div>
         <div className="flex space-x-[10px]">
           <p
@@ -101,7 +101,7 @@ function CreateCheckedPage() {
           >
             講義内容
           </p>
-          <p>{formData.Content}</p>
+          <p>{formData.content}</p>
         </div>
       </div>
       <div className="pt-[100px]">

@@ -11,22 +11,23 @@ import FormButton from '../../components/common/formBotton'
 const CreateArticlePage = () => {
   const navigate = useNavigate()
   const inputValue = [
-    { type: 'text', name: 'SeminarName', label: '講義名' },
-    { type: 'text', name: 'ProfName', label: '講師' },
-    { type: 'date', name: 'StartDate', label: '日付' },
-    { type: 'url', name: 'OfferURL', label: '申込URL' },
-    { type: 'text', name: 'CategoryID', label: 'ジャンル' },
+    { type: 'text', name: 'seminar_name', label: '講義名' },
+    { type: 'text', name: 'prof_name', label: '講師' },
+    { type: 'datetime-local', name: 'start_date', label: '日付' },
+    { type: 'url', name: 'offer_url', label: '申込URL' },
+    { type: 'text', name: 'category_id', label: 'ジャンル' },
     { type: 'color', name: 'themecolor', label: 'テーマカラー' },
   ]
 
   const [formData, setFormData] = useState({
-    SeminarName: '',
-    ProfName: '',
-    StartDate: '',
-    OfferURL: '',
-    CategoryID: '1',
+    seminar_name: '',
+    prof_name: '',
+    start_date: '',
+    offer_url: '',
+    category_id: 1,
     themecolor: '#000000',
-    Content: '',
+    content: '',
+    thumbnail: '',
   })
 
   const handleChange = (e) => {
@@ -75,7 +76,7 @@ const CreateArticlePage = () => {
           <input
             className="hidden"
             type="file"
-            name="Thumbnai"
+            name="thumbnail"
             onChange={handleImageChange}
           />
         </label>
@@ -97,7 +98,7 @@ const CreateArticlePage = () => {
             <input
               className="bg-[#E4E4E4] h-[200px] w-[460px] rounded-[20px]"
               type="text"
-              name="Content"
+              name="content"
               onChange={handleChange}
               value={formData.otherText} // formDataの値をバインド
             />

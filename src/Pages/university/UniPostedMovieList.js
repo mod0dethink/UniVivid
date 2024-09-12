@@ -6,6 +6,12 @@ import images from '../../assets/images.js'
 import UniSidebar from '../../components/common/UniSidebar.js'
 import HeaderLogo from '../../components/layout/layouts'
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
 const UniPostedMovieList = () => {
   const searchedValue = [
     { img: images.WebImage4, title: 'test' },
@@ -19,6 +25,9 @@ const UniPostedMovieList = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
   }
+  const univId = getCookie('univ_id')
+  console.log('univ_id:', univId)
+
   return (
     <div className="flex flex-col justify-start items-center">
       <UniSidebar />
