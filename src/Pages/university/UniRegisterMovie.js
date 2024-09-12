@@ -14,12 +14,14 @@ const UniRegisterMovie = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [univid, setUnivid] = useState('')
-  const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ') // "YYYY-MM-DD HH:MM:SS" 形式に変換
+  const [thumbnail, setThumbnail] = useState('') // 画像のURLを状態として管理
+  const formattedDate = now.toISOString() // ISO 8601形式に変換
   const [formData, setFormData] = useState({
     univ_id: 1,
     category_id: 1,
     url: '',
     upload_time: formattedDate,
+    thumbnail: '', // 新しいフィールド
   })
   const [file, setFile] = useState(null)
 
@@ -32,7 +34,20 @@ const UniRegisterMovie = () => {
   }
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0])
+    const selectedFile = e.target.files[0]
+    if (selectedFile) {
+      setFile(selectedFile)
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const imageUrl = reader.result
+        setThumbnail(imageUrl) // 画像のURLを状態に設定
+        setFormData((prevData) => ({
+          ...prevData,
+          thumbnail: imageUrl.split(',')[1], // Base64エンコードされた画像データ
+        }))
+      }
+      reader.readAsDataURL(selectedFile) // Base64エンコード
+    }
   }
 
   useEffect(() => {
@@ -58,29 +73,11 @@ const UniRegisterMovie = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    formData.category_id = parseInt(formData.category_id, 10) // ここで整数に変換
+    formData.category_id = parseInt(formData.category_id, 10)
 
     console.log(formData)
 
-    fetch('http://localhost:8080/api/upload-video', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('アップロードに失敗しました')
-        }
-        alert('ファイルが正常にアップロードされました')
-        navigate('/uniconfirmmovie')
-      })
-      .catch((error) => {
-        console.error('アップロードエラー:', error)
-        alert('ファイルのアップロードに失敗しました')
-      })
+    navigate('/uniconfirmmovie', { state: { formData } })
   }
 
   return (
@@ -95,9 +92,13 @@ const UniRegisterMovie = () => {
         onSubmit={handleSubmit}
         className="flex flex-col justify-center items-center space-y-[30px]"
       >
-        <div className="w-[1030px] h-[360px] bg-[#f5f5f5]">
+        <div className="w-[1030px] h-[360px] bg-[#f5f5f5] flex flex-col justify-center items-center">
           <label className="flex flex-col justify-center items-center h-full">
-            <img src={images.ImportPng} alt="upfile" width="200px" />
+            {thumbnail ? (
+              <img src={thumbnail} alt="Selected thumbnail" width="200px" />
+            ) : (
+              <img src={images.ImportPng} alt="upfile" width="200px" />
+            )}
             <p className="text-[30px] font-bold text-[#b8b8b8]">
               画像をアップロード
             </p>
