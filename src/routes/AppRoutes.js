@@ -376,6 +376,20 @@ const AppRoutes = () => {
             }
           />
           <Route
+            path="/uregisternote/:id"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <URegisterNote />
+              </motion.div>
+            }
+          />
+          <Route
             path="/onelecturepage/:id"
             element={
               <motion.div

@@ -28,6 +28,28 @@ const Test = () => {
       })
   }, [])
 
+  useEffect(() => {
+    // ポート5000のエンドポイントからデータをフェッチ
+    fetch('http://localhost:8080/auth/univid', {
+      method: 'GET',
+      credentials: 'include', // クッキーを含める設定
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+        return response.json()
+      })
+      .then((data2) => {
+        setData2(data2) // フェッチしたデータを状態にセット
+        setLoading(false) // ローディング完了
+      })
+      .catch((error) => {
+        setError(error) // エラーをキャッチ
+        setLoading(false)
+      })
+  }, [])
+
   if (loading) {
     return <div className="text-black">Loading...</div>
   }
@@ -40,6 +62,8 @@ const Test = () => {
     <div className="text-black">
       <h1>Fetched Data:</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
+      <h1>Fetched Data2:</h1>
+      <pre>{JSON.stringify(data2, null, 2)}</pre>
     </div>
   )
 }

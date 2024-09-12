@@ -74,7 +74,7 @@ const OneLecturePage = () => {
         username={lecture.university_name}
         good={''}
       />
-      <div className="absolute top-[500px] h-screen w-[100vw] bg-main-bg font-bold">
+      <div className="absolute top-[500px] w-[100vw] bg-main-bg font-bold">
         <div className="flex">
           <button
             id={isFavorite ? 'favorite_star_on' : 'favorite'}
@@ -96,7 +96,7 @@ const OneLecturePage = () => {
             ))}
             <button
               type="submit"
-              className="bg-[#3BBC30] text-white text-xl px-10 py-1 rounded-md mt-8"
+              className="bg-[#3BBC30] text-white text-xl px-10 py-1 rounded-md "
             >
               この講義に申し込む
             </button>
@@ -106,7 +106,10 @@ const OneLecturePage = () => {
             {/*修正: link → offer_url*/}
           </div>
 
-          <Link className="flex items-center justify-center bg-[#4C4C4C] w-[330px] h-[60px] text-center text-white font-bold text-[30px]">
+          <Link
+            to={`/uregisternote/${id}`}
+            className="flex items-center justify-center bg-[#4C4C4C] w-[330px] h-[60px] text-center text-white font-bold text-[30px]"
+          >
             ノートを投稿する
           </Link>
         </div>
