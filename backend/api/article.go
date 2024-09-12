@@ -584,7 +584,8 @@ func uploadVideo(c *gin.Context) {
 	}
 
 	var video struct {
-		SeminarID  int    `json:"seminar_id"`
+		UnivID     int    `json:"univ_id"`
+		CategoryID int    `json:"category_id"`
 		URL        string `json:"url"`
 		UploadTime string `json:"upload_time"`
 	}
@@ -593,23 +594,23 @@ func uploadVideo(c *gin.Context) {
 		return
 	}
 
-	// Seminar_IDがSeminarテーブルに存在するか確認
-	var seminarExists bool
-	query := `SELECT EXISTS(SELECT 1 FROM Seminar WHERE Seminar_ID = ?)`
-	err := db.QueryRow(query, video.SeminarID).Scan(&seminarExists)
+	// Seminar テーブルに挿入
+	query := `INSERT INTO Seminar (Univ_ID, Category_ID) VALUES (?, ?)`
+	result, err := db.Exec(query, video.UnivID, video.CategoryID)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "セミナーの存在確認に失敗しました", "details": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "セミナーの作成に失敗しました", "details": err.Error()})
 		return
 	}
 
-	if !seminarExists {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "指定されたセミナーが存在しません"})
+	seminarID, err := result.LastInsertId()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "セミナーIDの取得に失敗しました", "details": err.Error()})
 		return
 	}
 
 	// Semi_videos テーブルに挿入
 	query = `INSERT INTO Semi_videos (Seminar_ID, URL, Upload_time) VALUES (?, ?, ?)`
-	_, err = db.Exec(query, video.SeminarID, video.URL, video.UploadTime)
+	_, err = db.Exec(query, seminarID, video.URL, video.UploadTime)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "動画のアップロードに失敗しました", "details": err.Error()})
 		return
