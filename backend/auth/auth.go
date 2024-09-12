@@ -2,6 +2,7 @@ package auth
 
 import (
 	"database/sql"
+	"encoding/base64"
 	"log"
 	"net/http"
 	"univivid/backend/models"
@@ -56,6 +57,7 @@ func RegisterRoutes(r *gin.Engine) {
 	r.GET("/auth/univid", getUnivIDHandler)
 	r.GET("/auth/univname-mail", getUnivNameAndMailHandler)
 	r.GET("/auth/username-mail", getUserNameAndMailHandler)
+	r.GET("/auth/profile-image", getProfileImageHandler)
 
 	defer DB.Close()
 	r.Run(":8080")
@@ -117,6 +119,7 @@ func loginHandler(c *gin.Context) {
 	session.Clear() // 既存のセッションをクリア
 	session.Set("mailaddress", request.MailAddress)
 	session.Set("username", userName)
+	session.Set("type", request.Type)
 	if request.Type == "university" {
 		session.Set("univid", univID)
 	} else {
@@ -246,12 +249,24 @@ func profileEditHandler(c *gin.Context) {
 		return
 	}
 
+	// 画像データの処理
+	var profileImage []byte
+	if request.ProfileImage != "" {
+		var err error
+		profileImage, err = base64.StdEncoding.DecodeString(request.ProfileImage)
+		if err != nil {
+			log.Println("画像デコードエラー:", err)
+			c.JSON(http.StatusBadRequest, gin.H{"error": "無効な画像データです"})
+			return
+		}
+	}
+
 	// ユーザータイプに基づいて更新クエリを実行
 	var err error
 	if request.Type == "user" {
-		_, err = DB.Exec("UPDATE USER SET User_Name = ?, Mail_Address = ?, Password = ? WHERE Mail_Address = ?", request.Username, request.MailAddress, string(hashedPassword), mailAddress)
+		_, err = DB.Exec("UPDATE USER SET User_Name = ?, Mail_Address = ?, Password = ?, profile_image = ? WHERE Mail_Address = ?", request.Username, request.MailAddress, string(hashedPassword), profileImage, mailAddress)
 	} else if request.Type == "university" {
-		_, err = DB.Exec("UPDATE UNIVERSITY SET Univ_Name = ?, info_name = ?, Univ_URL = ?, donate_URL = ?, Mail_Address = ? WHERE Mail_Address = ?", request.UnivName, request.InfoName, request.UnivURL, request.DonateURL, request.MailAddress, mailAddress)
+		_, err = DB.Exec("UPDATE UNIVERSITY SET Univ_Name = ?, info_name = ?, Univ_URL = ?, donate_URL = ?, Mail_Address = ?, profile_image = ? WHERE Mail_Address = ?", request.UnivName, request.InfoName, request.UnivURL, request.DonateURL, request.MailAddress, profileImage, mailAddress)
 	} else {
 		log.Println("無効なアカウントタイプ:", request.Type)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なアカウントタイプです"})
@@ -375,4 +390,39 @@ func getUserNameAndMailHandler(c *gin.Context) {
 		"user_name":   userName,
 		"mailaddress": mailAddress,
 	})
+}
+
+func getProfileImageHandler(c *gin.Context) {
+	session := sessions.Default(c)
+	mailAddress := session.Get("mailaddress")
+	userType := session.Get("type")
+
+	if mailAddress == nil || userType == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
+		return
+	}
+
+	var profileImage []byte
+	var query string
+
+	if userType == "user" {
+		query = "SELECT profile_image FROM USER WHERE Mail_Address = ?"
+	} else if userType == "university" {
+		query = "SELECT profile_image FROM UNIVERSITY WHERE Mail_Address = ?"
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なアカウントタイプです"})
+		return
+	}
+
+	err := DB.QueryRow(query, mailAddress).Scan(&profileImage)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			c.JSON(http.StatusNotFound, gin.H{"error": "プロフィール画像が見つかりません"})
+		} else {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "サーバー内部エラー"})
+		}
+		return
+	}
+
+	c.Data(http.StatusOK, "image/png", profileImage)
 }
