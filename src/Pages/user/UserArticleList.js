@@ -19,18 +19,9 @@ let ProImg = Imagepng //プロフィール画像
 
 // 記事一覧
 function UserArticleList() {
+  const [seminars, setSeminars] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [data, setData] = useState(null)
-  const articleData = [
-    {
-      bgimg: images.BgImg,
-      icon: images.Ticon2,
-      aName: 'ECC Artist',
-      pName: 'ポートレート講座',
-      date: '2002/06/24',
-    },
-  ]
 
   useEffect(() => {
     // ポート5000のエンドポイントからデータをフェッチ
@@ -45,8 +36,8 @@ function UserArticleList() {
         return response.json()
       })
       .then((data) => {
-        setData(data) // フェッチしたデータを状態にセット
-        console.log(data)
+        // データの形式に応じて修正が必要
+        setSeminars(data.seminars || data) // JSONデータの形式を確認
         setLoading(false) // ローディング完了
       })
       .catch((error) => {
@@ -60,16 +51,16 @@ function UserArticleList() {
       <SearchBar />
       <UniSidebar />
       <HeaderLogo />
-      <div>
-        {articleData.map(({ bgimg, icon, aName, pName, date, index }) => (
+      <div className="flex space-y-5 justify-center text-center">
+        {seminars.map((seminar) => (
           <ArticlePart
-            key={index}
-            BgImg={bgimg}
-            Ticon={icon}
-            groupname={aName}
-            title={pName}
-            date={date}
-            link={'/editonelecture'}
+            key={seminar.seminar_id}
+            BgImg={seminar.thumbnail || images.DefaultThumbnail} // サムネイルがない場合のデフォルト画像
+            groupname={seminar.university_name}
+            //icon = {}
+            title={seminar.seminar_name}
+            date={new Date(seminar.start_date).toLocaleString()}
+            link={`/editonelecture/${seminar.seminar_id}`} // 編集ページへのリンクにセミナーIDを追加
           />
         ))}
       </div>

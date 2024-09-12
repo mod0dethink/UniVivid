@@ -19,6 +19,7 @@ const UniPostedMovieList = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
   }
+
   return (
     <div className="flex flex-col justify-start items-center">
       <UniSidebar />
