@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import images from '../../assets/images.js'
 
@@ -7,6 +7,9 @@ import HeaderLogo from '../../components/layout/layouts'
 
 const UMovieList = () => {
   const [searched, setSearched] = useState(false)
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [movieList, setMovieList] = useState([])
 
   const faMovieValue = [
     { img: images.English, title: 'movie' },
@@ -26,6 +29,27 @@ const UMovieList = () => {
     { img: images.WebImage4, title: 'test' },
     { img: images.WebImage4, title: 'test' },
   ]
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/get-all-seminar-videos', {
+      method: 'GET',
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+        return response.json()
+      })
+      .then((data) => {
+        setMovieList(data.videos) // Store the fetched videos in state
+
+        setLoading(false)
+      })
+      .catch((error) => {
+        setError(error)
+        setLoading(false)
+      })
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -96,18 +120,18 @@ const UMovieList = () => {
           </>
         ) : (
           <div className="grid grid-cols-4 gap-4 ">
-            {searchedValue.map(({ img, title, index }) => (
+            {movieList.map((movie) => (
               <Link
                 to="/umoviedetail"
-                key={index}
+                key={movie.seminar_id}
                 className="flex flex-col justify-center items-center"
               >
                 <img
-                  src={img}
+                  src={`data:image/jpeg;base64,${movie.thumbnail}`}
                   alt=""
                   className="object-cover w-[355px] h-[200px] rounded-[10px]"
                 />
-                <p>{title}</p>
+                <p>{movie.seminar_id}</p>
               </Link>
             ))}
           </div>

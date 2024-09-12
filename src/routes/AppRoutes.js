@@ -33,6 +33,7 @@ import UMovieDetail from '../Pages/user/UMovieDetail'
 import UMovieList from '../Pages/user/UmovieList'
 import URegisterNote from '../Pages/user/URegisterNote'
 import OneLecturePage from '../Pages/user/OneLecturePage'
+import AddCommnet from '../Pages/user/AddComment'
 
 import UserHomePage from '../Pages/user/UserHomePage'
 import UserSettingsPage from '../Pages/user/UserSettingsPage'
@@ -400,6 +401,34 @@ const AppRoutes = () => {
                 transition={pageTransition}
               >
                 <OneLecturePage />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/addcomment"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <AddCommnet />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/addcomment/:id"
+            element={
+              <motion.div
+                initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <AddCommnet />
               </motion.div>
             }
           />

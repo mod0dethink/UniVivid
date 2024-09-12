@@ -1,74 +1,41 @@
-//インポート
 import React, { useState, useEffect } from 'react'
-//component
+// component
 import ArticlePart from '../../components/materialComponent/ArticlePart.js'
 
-//　テスト用
-
+// テスト用
 import images from '../../assets/images.js'
 import UniSidebar from '../../components/common/UniSidebar.js'
 import HeaderLogo from '../../components/layout/layouts.js'
 
 // 受講履歴一覧
 function ArticleHistoryPage() {
-  // ！テストデータ！
   const [seminars, setSeminars] = useState([])
-  const [history, setHistory] = useState('')
+  const [history, setHistory] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [filteredSeminars, setFilteredSeminars] = useState([])
-
-  const data = [
-    {
-      bgimg: images.BgImg,
-      icon: images.Ticon2,
-      aName: 'ECC Artist',
-      pName: 'ポートレート講座',
-      date: '2002/06/24',
-    },
-  ]
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/get-seminars', {
-      method: 'GET',
-      credentials: 'include', // クッキーを含める設定
-    })
-      .then((response) => {
+    const fetchHistory = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/get-history', {
+          method: 'GET',
+          credentials: 'include', // クッキーを含める設定
+        })
+
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
-        return response.json()
-      })
-      .then((data) => {
-        setSeminars(data.seminars || data)
-        setFilteredSeminars(data.seminars || data) // 初期表示はすべてのセミナー
-        setLoading(false)
-      })
-      .catch((error) => {
-        setError(error)
-        setLoading(false)
-      })
-  }, [])
 
-  useEffect(() => {
-    fetch('http://localhost:8080/api/add-history', {
-      method: 'GET',
-      credentials: 'include', // クッキーを含める設定
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
-        return response.json()
-      })
-      .then((history) => {
-        setHistory(history)
+        const data = await response.json()
+        setHistory(data.history) // 受講履歴を保存
+      } catch (error) {
+        setError(error.message)
+      } finally {
         setLoading(false)
-      })
-      .catch((error) => {
-        setError(error)
-        setLoading(false)
-      })
+      }
+    }
+
+    fetchHistory()
   }, [])
 
   return (
@@ -76,18 +43,21 @@ function ArticleHistoryPage() {
       <UniSidebar />
       <HeaderLogo />
       <p className="text-[50px]">受講履歴一覧</p>
-      <div className="flex space-y-5 justify-center text-center">
-        {data.map(({ bgimg, icon, aName, pName, date, index }) => (
-          <ArticlePart
-            key={index}
-            BgImg={bgimg}
-            Ticon={icon}
-            groupname={aName}
-            title={pName}
-            date={date}
-            link={`/onelecturepage/${seminars.seminar_id}`}
-          />
-        ))}
+      <div className="flex flex-col space-y-5 justify-center text-center">
+        {history.map((item) => {
+          console.log(item) // デバッグ用
+          return (
+            <ArticlePart
+              key={item.seminar_id}
+              BgImg={item.thumbnail || images.BgImg} // セミナー画像
+              Ticon={images.Ticon2} // アイコン
+              groupname={item.prof_name} // 講師名
+              title={item.seminar_name} // 講義名
+              date={item.start_date} // 開始日
+              link={`/onelecturepage/${item.seminar_id}`} // リンク
+            />
+          )
+        })}
       </div>
     </div>
   )

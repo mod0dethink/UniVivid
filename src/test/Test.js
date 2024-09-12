@@ -70,4 +70,4 @@ const Test = () => {
 
 export default Test
 
-//localhost:8080/api/create-seminar
+//localhost:8080/api/notes

@@ -105,13 +105,20 @@ const OneLecturePage = () => {
             <ConnectLink links={lecture.offer_url} />{' '}
             {/*修正: link → offer_url*/}
           </div>
-
-          <Link
-            to={`/uregisternote/${id}`}
-            className="flex items-center justify-center bg-[#4C4C4C] w-[330px] h-[60px] text-center text-white font-bold text-[30px]"
-          >
-            ノートを投稿する
-          </Link>
+          <div className="flex flex-col justify-center items-center space-y-[30px]">
+            <Link
+              to={`/uregisternote/${id}`}
+              className="flex items-center justify-center bg-[#4C4C4C] w-[330px] h-[60px] text-center text-white font-bold text-[30px]"
+            >
+              ノートを投稿する
+            </Link>
+            <Link
+              to={`/addcomment/${id}`}
+              className="flex items-center justify-center bg-[#4C4C4C] w-[330px] h-[60px] text-center text-white font-bold text-[30px]"
+            >
+              コメントを投稿する
+            </Link>
+          </div>
         </div>
       </div>
     </section>
