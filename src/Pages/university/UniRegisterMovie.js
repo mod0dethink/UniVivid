@@ -8,16 +8,18 @@ import Input from '../../components/common/Input'
 import FormButton from '../../components/common/formBotton'
 
 const UniRegisterMovie = () => {
+  const now = new Date()
   const navigate = useNavigate()
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [univid, setUnivid] = useState('')
+  const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ') // "YYYY-MM-DD HH:MM:SS" 形式に変換
   const [formData, setFormData] = useState({
     univ_id: 1,
     category_id: 1,
     url: '',
-    upload_time: '2023-10-01 10:00:00',
+    upload_time: formattedDate,
   })
   const [file, setFile] = useState(null)
 
@@ -59,20 +61,14 @@ const UniRegisterMovie = () => {
     formData.category_id = parseInt(formData.category_id, 10) // ここで整数に変換
 
     console.log(formData)
-    if (!file) {
-      alert('ファイルを選択してください')
-      return
-    }
-
-    const uploadData = new FormData()
-    uploadData.append('url', formData.url)
-    uploadData.append('category_id', formData.category_id)
-    uploadData.append('univ_id', univid)
 
     fetch('http://localhost:8080/api/upload-video', {
       method: 'POST',
-      body: uploadData,
       credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
     })
       .then((response) => {
         if (!response.ok) {
