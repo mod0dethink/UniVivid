@@ -58,6 +58,7 @@ const images = {
   School: require('./images/school.png'),
   Bubble: require('./images/Bubble.png'),
   ShareContent: require('./images/ShareContact.png'),
+  File: require('./images/file.png'),
 }
 
 export default images

@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import Imagepng from '../../assets/images/IMG_4007.jpg'
 import '../../assets/styles/Dimensions.css'
 import '../../assets/styles/bg-images.css'
 import SearchBar from '../../components/specific/SearchBar'
