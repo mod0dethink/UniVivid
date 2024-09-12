@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect, useContext } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import ConnectLink from '../../components/materialComponent/ConnectLink'
 import MovieDetail from '../../components/common/MovieDetail.js'
 import HeaderLogo from '../../components/layout/layouts.js'
 import UniSidebar from '../../components/common/UniSidebar.js'
+import { UsernameContext } from '../../Contexts/UsernameContext.js'
 
 const OneLecturePage = () => {
   const { id } = useParams() // URLからIDを取得
   const [lecture, setLecture] = useState('')
   const [isFavorite, setIsFavorite] = useState(false)
+
+  const { registerPath } = useContext(UsernameContext)
 
   let item = [
     { title: '講義', value: lecture.seminar_name },
@@ -75,7 +78,7 @@ const OneLecturePage = () => {
             onClick={() => setIsFavorite(!isFavorite)}
           ></button>
         </div>
-        <div className="flex justify-around items-start mt-[100px]">
+        <div className="flex justify-evenly items-start mt-[100px]">
           <div>
             {item.map(({ title, value }, index) => (
               <div
@@ -99,6 +102,10 @@ const OneLecturePage = () => {
             <ConnectLink links={lecture.offer_url} />{' '}
             {/*修正: link → offer_url*/}
           </div>
+
+          <Link className="flex items-center justify-center bg-[#4C4C4C] w-[330px] h-[60px] text-center text-white font-bold text-[30px]">
+            ノートを投稿する
+          </Link>
         </div>
       </div>
     </section>
