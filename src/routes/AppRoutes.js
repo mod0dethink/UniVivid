@@ -32,6 +32,7 @@ import EditOneLecture from '../Pages/university/EditOneLecture'
 import UMovieDetail from '../Pages/user/UMovieDetail'
 import UMovieList from '../Pages/user/UmovieList'
 import URegisterNote from '../Pages/user/URegisterNote'
+import OneLecturePage from '../Pages/user/OneLecturePage'
 
 import UserHomePage from '../Pages/user/UserHomePage'
 import UserSettingsPage from '../Pages/user/UserSettingsPage'

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ConnectLink from '../../components/materialComponent/ConnectLink'
 import MovieDetail from '../../components/common/MovieDetail.js'
-import images from '../../assets/images.js'
 import HeaderLogo from '../../components/layout/layouts.js'
 import UniSidebar from '../../components/common/UniSidebar.js'
 
