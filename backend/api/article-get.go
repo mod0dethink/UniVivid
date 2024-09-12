@@ -20,6 +20,8 @@ func RegisterArticleGetRoutes(r *gin.Engine) {
 	r.GET("/api/get-approved-comments", getApprovedComments)              // 認証済みコメント取得API
 	r.GET("/api/get-unapproved-univ-comments", getUnapprovedUnivComments) // 未認証大学コメント取得API
 	r.GET("/api/get-approved-univ-comments", getApprovedUnivComments)     // 認証済み大学コメント取得API
+	r.GET("/api/get-seminar-videos/:id", getSeminarVideos)
+	r.GET("/api/get-all-seminar-videos", getAllSeminarVideos)
 }
 
 func getSeminars(c *gin.Context) {
@@ -327,4 +329,65 @@ func getApprovedUnivComments(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"approved_univ_comments": comments})
+}
+
+func getSeminarVideos(c *gin.Context) {
+	seminarID := c.Param("id")
+
+	rows, err := db.Query(`
+        SELECT Seminar_ID, URL, Upload_time
+        FROM Semi_videos
+        WHERE Seminar_ID = ?
+    `, seminarID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "動画情報の取得に失敗しました", "details": err.Error()})
+		return
+	}
+	defer rows.Close()
+
+	var videos []models.SemiVideo
+	for rows.Next() {
+		var video models.SemiVideo
+		if err := rows.Scan(&video.SeminarID, &video.URL, &video.UploadTime); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "動画情報の取得に失敗しました", "details": err.Error()})
+			return
+		}
+		videos = append(videos, video)
+	}
+
+	if err := rows.Err(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "動画情報の取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"videos": videos})
+}
+
+func getAllSeminarVideos(c *gin.Context) {
+	rows, err := db.Query(`
+        SELECT Seminar_ID, URL, Upload_time
+        FROM Semi_videos
+    `)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "動画情報の取得に失敗しました", "details": err.Error()})
+		return
+	}
+	defer rows.Close()
+
+	var videos []models.SemiVideo
+	for rows.Next() {
+		var video models.SemiVideo
+		if err := rows.Scan(&video.SeminarID, &video.URL, &video.UploadTime); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "動画情報の取得に失敗しました", "details": err.Error()})
+			return
+		}
+		videos = append(videos, video)
+	}
+
+	if err := rows.Err(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "動画情報の取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"videos": videos})
 }
