@@ -584,9 +584,10 @@ func rejectUnivComment(c *gin.Context) {
 
 func uploadVideo(c *gin.Context) {
 	session := sessions.Default(c)
-	univID := session.Get("univid")
 
-	if univID == nil {
+	UnivID := session.Get("univid")
+
+	if UnivID == nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
 		return
 	}
