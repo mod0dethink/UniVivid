@@ -30,6 +30,7 @@ const OneLecturePage = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data), // データをJSONとして送信
+          credentials: 'include', // クッキー関連の処理を行うときはこの1行をレスポンスに含めないとクッキーが送信されない
         })
 
         if (response.ok) {
@@ -44,7 +45,9 @@ const OneLecturePage = () => {
 
     sendDataToBackend()
 
-    fetch('http://localhost:8080/api/get-seminars')
+    fetch('http://localhost:8080/api/get-seminars', {
+      credentials: 'include', // クッキーを含める
+    })
       .then((response) => response.json())
       .then((data) => {
         // data.seminarsが配列であると仮定
