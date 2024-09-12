@@ -11,4 +11,5 @@ type Seminar struct {
 	OfferURL       string `json:"offer_url"`
 	Content        string `json:"content"`
 	UniversityName string `json:"university_name"`
+	ThemeColor     string `json:"theme_color"` // 新しいフィールドを追加
 }

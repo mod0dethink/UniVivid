@@ -111,8 +111,8 @@ func createSeminar(c *gin.Context) {
 
 	// seminar_in_person テーブルに挿入
 	query = `INSERT INTO seminar_in_person (Seminar_ID, Semi_name, Prof_name, Start_Date, offer_URL, Category_ID, thema_color, Location, content, thumbnail) 
-             VALUES (?, ?, ?, ?, ?, ?, '#FFFFFF', 'LOC', ?, ?)`
-	_, err = db.Exec(query, seminarID, seminar.SeminarName, seminar.ProfName, formattedStartDate, seminar.OfferURL, seminar.CategoryID, seminar.Content, thumbnailBytes)
+             VALUES (?, ?, ?, ?, ?, ?, ?, 'LOC', ?, ?)`
+	_, err = db.Exec(query, seminarID, seminar.SeminarName, seminar.ProfName, formattedStartDate, seminar.OfferURL, seminar.CategoryID, seminar.ThemeColor, seminar.Content, thumbnailBytes)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "セミナーの詳細情報の作成に失敗しました", "details": err.Error()})
 		return
@@ -584,9 +584,9 @@ func rejectUnivComment(c *gin.Context) {
 
 func uploadVideo(c *gin.Context) {
 	session := sessions.Default(c)
-	userID := session.Get("userid")
+	univID := session.Get("univid")
 
-	if userID == nil {
+	if univID == nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
 		return
 	}
@@ -596,6 +596,7 @@ func uploadVideo(c *gin.Context) {
 		CategoryID int    `json:"category_id"`
 		URL        string `json:"url"`
 		UploadTime string `json:"upload_time"`
+		Thumbnail  string `json:"thumbnail"`
 	}
 	if err := c.ShouldBindJSON(&video); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "JSONのバインドに失敗しました: " + err.Error()})
@@ -616,9 +617,24 @@ func uploadVideo(c *gin.Context) {
 		return
 	}
 
+	// Thumbnail を base64 から []byte に変換
+	thumbnailBytes, err := base64.StdEncoding.DecodeString(video.Thumbnail)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "サムネイルのデコードに失敗しました", "details": err.Error()})
+		return
+	}
+
+	// UploadTimeを適切な形式に変換
+	parsedUploadTime, err := time.Parse(time.RFC3339, video.UploadTime)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "アップロード時間の形式が不正です", "details": err.Error()})
+		return
+	}
+	formattedUploadTime := parsedUploadTime.Format("2006-01-02 15:04:05")
+
 	// Semi_videos テーブルに挿入
-	query = `INSERT INTO Semi_videos (Seminar_ID, URL, Upload_time) VALUES (?, ?, ?)`
-	_, err = db.Exec(query, seminarID, video.URL, video.UploadTime)
+	query = `INSERT INTO Semi_videos (Seminar_ID, URL, Upload_time, thumbnail) VALUES (?, ?, ?, ?)`
+	_, err = db.Exec(query, seminarID, video.URL, formattedUploadTime, thumbnailBytes)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "動画のアップロードに失敗しました", "details": err.Error()})
 		return

@@ -337,7 +337,7 @@ func getSeminarVideos(c *gin.Context) {
 	seminarID := c.Param("id")
 
 	rows, err := db.Query(`
-        SELECT Seminar_ID, URL, Upload_time
+        SELECT Seminar_ID, URL, Upload_time, thumbnail
         FROM Semi_videos
         WHERE Seminar_ID = ?
     `, seminarID)
@@ -350,7 +350,7 @@ func getSeminarVideos(c *gin.Context) {
 	var videos []models.SemiVideo
 	for rows.Next() {
 		var video models.SemiVideo
-		if err := rows.Scan(&video.SeminarID, &video.URL, &video.UploadTime); err != nil {
+		if err := rows.Scan(&video.SeminarID, &video.URL, &video.UploadTime, &video.Thumbnail); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "動画情報の取得に失敗しました", "details": err.Error()})
 			return
 		}
@@ -367,7 +367,7 @@ func getSeminarVideos(c *gin.Context) {
 
 func getAllSeminarVideos(c *gin.Context) {
 	rows, err := db.Query(`
-        SELECT Seminar_ID, URL, Upload_time
+        SELECT Seminar_ID, URL, Upload_time, thumbnail
         FROM Semi_videos
     `)
 	if err != nil {
@@ -379,7 +379,7 @@ func getAllSeminarVideos(c *gin.Context) {
 	var videos []models.SemiVideo
 	for rows.Next() {
 		var video models.SemiVideo
-		if err := rows.Scan(&video.SeminarID, &video.URL, &video.UploadTime); err != nil {
+		if err := rows.Scan(&video.SeminarID, &video.URL, &video.UploadTime, &video.Thumbnail); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "動画情報の取得に失敗しました", "details": err.Error()})
 			return
 		}

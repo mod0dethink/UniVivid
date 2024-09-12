@@ -72,6 +72,7 @@ CREATE TABLE Semi_videos(
     Seminar_ID INT,
     URL VARCHAR(2083) NOT NULL,
     Upload_time DATETIME NOT NULL,
+    thumbnail MEDIUMBLOB NOT NULL,
 
     PRIMARY KEY(Seminar_ID),
     FOREIGN KEY(Seminar_ID) REFERENCES Seminar(Seminar_ID) ON DELETE CASCADE
