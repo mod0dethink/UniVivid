@@ -53,10 +53,11 @@ func RegisterRoutes(r *gin.Engine) {
 	r.PUT("/auth/profile", profileEditHandler)
 	r.GET("/auth/username", getUserNameHandler)
 	r.POST("/auth/interest", saveUserInterests)
-	r.GET("/auth/univid", getUnivIDHandler) // 新しいエンドポイントを追加
+	r.GET("/auth/univid", getUnivIDHandler)
+	r.GET("/auth/univname-mail", getUnivNameAndMailHandler)
+	r.GET("/auth/username-mail", getUserNameAndMailHandler)
 
 	defer DB.Close()
-
 	r.Run(":8080")
 }
 
@@ -328,4 +329,50 @@ func getUnivIDHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"univid": univID})
+}
+
+func getUnivNameAndMailHandler(c *gin.Context) {
+	session := sessions.Default(c)
+	mailAddress := session.Get("mailaddress")
+	univID := session.Get("univid")
+
+	if mailAddress == nil || univID == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
+		return
+	}
+
+	var univName string
+	err := DB.QueryRow("SELECT Univ_Name FROM UNIVERSITY WHERE Univ_ID = ?", univID).Scan(&univName)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "大学名の取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"univ_name":   univName,
+		"mailaddress": mailAddress,
+	})
+}
+
+func getUserNameAndMailHandler(c *gin.Context) {
+	session := sessions.Default(c)
+	mailAddress := session.Get("mailaddress")
+	userID := session.Get("userid")
+
+	if mailAddress == nil || userID == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "ログインが必要です"})
+		return
+	}
+
+	var userName string
+	err := DB.QueryRow("SELECT User_Name FROM USER WHERE User_ID = ?", userID).Scan(&userName)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "ユーザー名の取得に失敗しました", "details": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"user_name":   userName,
+		"mailaddress": mailAddress,
+	})
 }
