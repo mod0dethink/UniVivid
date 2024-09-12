@@ -1,7 +1,6 @@
 //インポート
 import React from 'react'
 //component
-import { UnivividHeader } from '../../components/LayoutComponent.js'
 import ArticlePart from '../../components/materialComponent/ArticlePart.js'
 
 //　テスト用

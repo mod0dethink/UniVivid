@@ -27,10 +27,8 @@ import UniSettingsPage from '../Pages/university/UniSettingsPage'
 import CreateArticlePage from '../Pages/university/CreateArticlePage'
 import CreateCheckedPage from '../Pages/university/CreateCheckedPage'
 import ApplicationListPage from '../Pages/university/ApplicationListPage'
-import ApprovalScreenPage from '../Pages/university/ApprovalScreenPage'
 import OpenArtucles from '../Pages/university/OpenArtucles'
 import EditOneLecture from '../Pages/university/EditOneLecture'
-import EditDetails from '../Pages/university/EditDetails'
 import UMovieDetail from '../Pages/user/UMovieDetail'
 import UMovieList from '../Pages/user/UmovieList'
 import URegisterNote from '../Pages/user/URegisterNote'
@@ -42,10 +40,6 @@ import UserMyPage from '../Pages/user/UserMyPage'
 import ArticleHistoryPage from '../Pages/user/ArticleHistoryPage'
 import UpNoteListPage from '../Pages/user/UpNoteListPage'
 import FavoriteListPage from '../Pages/user/FavoriteListPage'
-import OneLecturePage from '../Pages/user/OneLecturePage'
-import UnivercityPage from '../Pages/user/UnivercityPage'
-import OtherUserPage from '../Pages/user/OtherUserPage'
-import OtherUserNotePage from '../Pages/user/OtherUserNotePage'
 import UniRegisterMovie from '../Pages/university/UniRegisterMovie'
 import UniConfirmMovie from '../Pages/university/UniConfirmMovie'
 import UniPostedMovieList from '../Pages/university/UniPostedMovieList'
@@ -339,62 +333,6 @@ const AppRoutes = () => {
             }
           />
           <Route
-            path="/onelecturepage"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <OneLecturePage />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/univercitypage"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <UnivercityPage />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/otheruser"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <OtherUserPage />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/otherusernote"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <OtherUserNotePage />
-              </motion.div>
-            }
-          />
-          <Route
             path="/umovielist"
             element={
               <motion.div
@@ -408,7 +346,6 @@ const AppRoutes = () => {
               </motion.div>
             }
           />
-
           <Route
             path="/umoviedetail"
             element={
@@ -509,20 +446,6 @@ const AppRoutes = () => {
             }
           />
           <Route
-            path="/approvalscreen"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <ApprovalScreenPage />
-              </motion.div>
-            }
-          />
-          <Route
             path="/openarticles"
             element={
               <motion.div
@@ -547,20 +470,6 @@ const AppRoutes = () => {
                 transition={pageTransition}
               >
                 <EditOneLecture />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/editdetailes"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <EditDetails />
               </motion.div>
             }
           />

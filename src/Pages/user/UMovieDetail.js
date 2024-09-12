@@ -1,7 +1,5 @@
 //インポート
 import React, { useState } from 'react'
-import LectureDetails from '../../components/materialComponent/LectureDetails.js'
-import ConnectLink from '../../components/materialComponent/ConnectLink.js'
 
 import HeaderLogo from '../../components/layout/layouts.js'
 import UniSidebar from '../../components/common/UniSidebar.js'
