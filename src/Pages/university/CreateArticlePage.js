@@ -41,6 +41,7 @@ const CreateArticlePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     formData.category_id = parseInt(formData.category_id, 10) // ここで整数に変換
+    formData.start_date = `${formData.start_date}:00Z`
     console.log('Form Data:', formData)
 
     navigate('/createchecked', { state: { formData } })
